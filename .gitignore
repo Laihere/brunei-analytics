@@ -6,8 +6,8 @@ data/raw/*
 .cache/
 
 # Personal drafts (emails stay private)
+email_draft/
 email_draft*.txt
-docs/egnc_enquiry_draft.md
 
 # Python
 __pycache__/

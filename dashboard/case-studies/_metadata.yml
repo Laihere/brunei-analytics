@@ -1,0 +1,9 @@
+# Applies to every page in case-studies/.
+format:
+  html:
+    template-partials:
+      - ../_partials/title-block.html
+    # Plotly's basic bundle (line, bar, scatter, pie): 1.2 MB vs 4.8 MB for the full
+    # library (DESIGN.md §9). Version must match plotly.py's; tests/test_site.py checks it.
+    include-in-header:
+      text: <script src="https://cdn.plot.ly/plotly-basic-4.1.1.min.js" charset="utf-8"></script>

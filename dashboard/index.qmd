@@ -1,0 +1,48 @@
+---
+title: "Brunei, explained with public data"
+subtitle: "Independent case studies built from Brunei's open data, with every number credited to its source. By Muhd Lai Razi, with AI assistance."
+toc: false
+listing:
+  - id: featured
+    contents: "case-studies/[0-9]*.qmd"
+    template: _templates/featured.ejs
+    sort: "number desc"
+    max-items: 1
+    fields: [title, description, date, number, topic, read-time, data-period]
+    feed: false
+  - id: studies
+    contents:
+      - "case-studies/[0-9]*.qmd"
+      - case-studies/upcoming.yml
+    template: _templates/study-cards.ejs
+    sort: "number"
+    fields: [title, date, number, topic, status, data-period]
+    feed: false
+---
+
+<p class="section-label">Latest case study</p>
+
+::: {#featured}
+:::
+
+## Case studies
+
+::: {#studies}
+:::
+
+## How this works
+
+<ul class="points">
+<li>
+<h3>Open data</h3>
+Built only from published, free-to-use sources: data.gov.bn, the World Bank, FAOSTAT and ILOSTAT. [See sources](sources.qmd).
+</li>
+<li>
+<h3>Every number credited</h3>
+Each chart names the agency that published the data and the date it was accessed.
+</li>
+<li>
+<h3>Independent</h3>
+Independent analysis and transformations, not official statistics. [Data use policy](data-policy.qmd) · [How AI was used](about.qmd#how-ai-was-used).
+</li>
+</ul>

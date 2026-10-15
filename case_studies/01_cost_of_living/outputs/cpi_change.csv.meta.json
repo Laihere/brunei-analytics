@@ -1,0 +1,19 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Percentage Change in Customer Price Index 2025",
+      "page_url": "https://www.data.gov.bn/percentage-change-in-customer-price-index-2025/",
+      "accessed": "2026-10-15",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/Percentage-Change-in-Consumer-Price-Index-2025.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2016–2025",
+      "sha256": "20e2bc1005f78d338d3bdb010fe254ede2b473fc2c3e81bb136af97e1cdbc0d6",
+      "original_source": "",
+      "published": "2026-07-11"
+    }
+  ],
+  "notes": "Published annual % change by category, 2016–2025. Category names trimmed."
+}

@@ -1,0 +1,19 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Average Retail Price of Subsidised Items and under Price Control 2025",
+      "page_url": "https://www.data.gov.bn/average-retail-price-of-subsidised-items-and-under-price-control-2025/",
+      "accessed": "2026-10-15",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/Average-Retail-Price-of-Subsidised-Items-and-under-Price-Control-2025.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2015–2025",
+      "sha256": "44bcc2d575598f8c07dbb934ff719ca8434da78ac20b803c349c0b28059bddf2",
+      "original_source": "",
+      "published": "2026-07-13"
+    }
+  ],
+  "notes": "Average retail prices (BND), 2015–2025. 'Saloon Car (1,500cc)' excluded (no data after 2019). Sugar 2024 flagged as implausible. 'Laila Rice' (to 2019) and 'Local Rice' (from 2020) kept as separate series."
+}

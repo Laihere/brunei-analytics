@@ -1,0 +1,11 @@
+---
+title: "Data use policy"
+---
+
+```{python}
+#| output: asis
+from shared.paths import ROOT
+
+policy = (ROOT / "DATA_USE_POLICY.md").read_text().split("\n", 1)[1]
+print(policy)
+```

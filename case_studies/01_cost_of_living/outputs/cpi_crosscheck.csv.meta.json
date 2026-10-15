@@ -1,0 +1,61 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Consumer Price Index 2025",
+      "page_url": "https://www.data.gov.bn/consumer-price-index-2025/",
+      "accessed": "2026-10-15",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/Consumer-Price-Index-2025.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2015–2025",
+      "sha256": "9adcdb8bb81ef371522e48a91440d3f78f32dc05b67e259cfeb8891661c76c80",
+      "original_source": "",
+      "published": "2026-07-13"
+    },
+    {
+      "source": "datagovbn",
+      "title": "Percentage Change in Customer Price Index 2025",
+      "page_url": "https://www.data.gov.bn/percentage-change-in-customer-price-index-2025/",
+      "accessed": "2026-10-15",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/Percentage-Change-in-Consumer-Price-Index-2025.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2016–2025",
+      "sha256": "20e2bc1005f78d338d3bdb010fe254ede2b473fc2c3e81bb136af97e1cdbc0d6",
+      "original_source": "",
+      "published": "2026-07-11"
+    },
+    {
+      "source": "worldbank",
+      "title": "Consumer price index, Brunei Darussalam (FP.CPI.TOTL)",
+      "page_url": "https://data.worldbank.org/indicator/FP.CPI.TOTL?locations=BN",
+      "accessed": "2026-10-15",
+      "file_url": "",
+      "owner": "",
+      "licence": "CC BY 4.0",
+      "edition": "2026",
+      "coverage": "2010–2025",
+      "sha256": "ee8e94969148bf0cb1ca9c3c1a30e25f8c8f74d95afbed9cb0e3f64072c5d8eb",
+      "original_source": "IMF International Financial Statistics",
+      "published": ""
+    },
+    {
+      "source": "worldbank",
+      "title": "Inflation, consumer prices (annual %), Brunei Darussalam (FP.CPI.TOTL.ZG)",
+      "page_url": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=BN",
+      "accessed": "2026-10-15",
+      "file_url": "",
+      "owner": "",
+      "licence": "CC BY 4.0",
+      "edition": "2026",
+      "coverage": "2010–2025",
+      "sha256": "e76951853cb3d5adef0fd35a6aa99c3850ce88ad679e916343c767148eb8ba1e",
+      "original_source": "IMF International Financial Statistics",
+      "published": ""
+    }
+  ],
+  "notes": "Overall CPI from data.gov.bn (repaired) beside World Bank CPI and inflation (original source: IMF International Financial Statistics). Values unaltered."
+}

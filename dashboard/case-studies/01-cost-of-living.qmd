@@ -1,0 +1,271 @@
+---
+title: "Brunei's prices stopped rising by 2025, but stayed 7% above 2019"
+description: "Have prices recovered from the pandemic years, and have they stabilised?"
+number: "01"
+topic: "Economy"
+data-period: "2015–2025"
+read-time: "5-minute read"
+date: 2026-10-15
+---
+
+```{python}
+import sys
+
+from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+STUDY = CASE_STUDIES / "01_cost_of_living"
+sys.path.insert(0, str(STUDY / "analysis"))
+import figures as F  # noqa: E402
+
+change, prov_change, _ = read_output(STUDY / "outputs" / "cpi_change.csv")
+index, prov_index, notes_index = read_output(STUDY / "outputs" / "cpi_index.csv")
+summary, prov_summary, _ = read_output(STUDY / "outputs" / "cpi_summary_2025.csv")
+items, prov_items, notes_items = read_output(STUDY / "outputs" / "subsidised_prices.csv")
+check, prov_check, notes_check = read_output(STUDY / "outputs" / "cpi_crosscheck.csv")
+
+chg = change.pivot(index="year", columns="category", values="pct_change")
+since = summary.set_index("category")["change_since_2019_pct"]
+ALL, FOOD = "Overall CPI", "Food and Non-Alcoholic Beverages"
+
+
+def avg(cat, a, b):
+    return chg.loc[a:b, cat].mean()
+
+
+def pct(v, d=1):
+    return f"{v:+.{d}f}%".replace("-", "−")
+
+
+all_2025, food_2025 = chg.loc[2025, ALL], chg.loc[2025, FOOD]
+all_since, food_since = since[ALL], since[FOOD]
+before_avg, pandemic_avg, recent_avg = avg(ALL, 2016, 2019), avg(ALL, 2020, 2022), avg(ALL, 2023, 2025)
+recent_lo, recent_hi = chg.loc[2023:2025, ALL].min(), chg.loc[2023:2025, ALL].max()
+peak_2022, food_2023 = chg.loc[2022, ALL], chg.loc[2023, FOOD]
+cats_2025 = chg.loc[2025].drop(ALL)
+n_up, n_down = int((cats_2025 > 0).sum()), int((cats_2025 < 0).sum())
+w = items.pivot(index="item", columns="year", values="price_bnd")
+VEG = "Vegetable Oil (5 Kg Bottle)"
+veg_2019, veg_2022, veg_2025 = w.loc[VEG, 2019], w.loc[VEG, 2022], w.loc[VEG, 2025]
+THAI = "Ordinary Thai Rice (10 Kilogramme Bag)"
+rice = (w.loc[THAI, 2025] / w.loc[THAI, 2019] - 1) * 100
+veg_since = (veg_2025 / veg_2019 - 1) * 100
+by_cat = since.drop(ALL)
+n_within = int((by_cat.abs() <= 4).sum())
+ratio = food_since / all_since
+wb = check.dropna(subset=["worldbank_index"])
+gap_recent = (wb[wb.year >= 2018].datagovbn_index - wb[wb.year >= 2018].worldbank_index).abs().max()
+gap_early = (wb[wb.year < 2018].datagovbn_index - wb[wb.year < 2018].worldbank_index).abs().max()
+yr = wb[wb.year >= 2020]
+gap_change = (yr.datagovbn_change_pct - yr.worldbank_change_pct).abs().max()
+```
+
+::: {.study-intro}
+This case study looks at **how prices in Brunei changed from 2015 to 2025**, using the
+government's consumer price index (CPI) and average prices of subsidised and price-controlled
+items. It compares three periods: before the pandemic (2016–2019), the pandemic years and after
+(2020–2022), and the most recent years (2023–2025). It shows **when and what changed, not why**.
+
+It asks two questions, answered in the conclusion:
+
+1. **Have prices recovered from the pandemic years?**
+2. **Have they stabilised?**
+:::
+
+```{python}
+stat_tiles(
+    stat_tile("All items, 2024 → 2025", pct(all_2025), "", f"Pre-pandemic average: {pct(before_avg)} a year"),
+    stat_tile("All items, 2019 → 2025", pct(all_since), "", "Total change over six years"),
+    stat_tile("Food & drink, 2019 → 2025", pct(food_since), "", "Total change over six years"),
+)
+```
+
+::: {.callout-note appearance="simple" title="What “All items” means"}
+**All items** is the overall consumer price index. It is not a simple average of the
+categories: each category counts according to how much households typically spend on it. So a
+large rise in a category households spend little on moves "All items" less than a smaller rise
+in one they spend a lot on. The source doesn't publish these spending shares.
+:::
+
+```{python}
+fig, table = F.annual_change(change)
+chart_card(
+    fig,
+    title=f"Price rises peaked at {pct(peak_2022)} in 2022 and have been flat since 2023",
+    subtitle="Yearly change in consumer prices, all items (%) · 2016–2025",
+    alt=(
+        f"Bar chart of yearly price change. Small changes either side of zero from 2016 to 2019, "
+        f"rises of about 2% in 2020 and 2021 and {pct(peak_2022)} in 2022, then changes between "
+        f"{pct(recent_lo)} and {pct(recent_hi)} from 2023 to 2025."
+    ),
+    provenance=prov_change,
+    table=table,
+)
+```
+
+## Price growth and price levels, 2015–2025
+
+"Recovered" can mean two things, so both are measured here. **Price growth** is how fast prices
+are rising each year: from 2023 to 2025 it averaged `{python} pct(recent_avg)` a year, against
+`{python} pct(before_avg)` in 2016–2019 and `{python} pct(pandemic_avg)` in 2020–2022.
+
+**Price level** is how high prices are compared with 2019. From 2019 to 2025, all items rose
+`{python} pct(all_since)` and food and drink `{python} pct(food_since)`. The yearly decrease in
+2025 (`{python} pct(all_2025)`) is small next to those rises.
+
+```{python}
+fig, table = F.level_vs_base(index)
+chart_card(
+    fig,
+    title="Both lines levelled off above their 2019 level, food much higher",
+    subtitle="Consumer prices relative to 2019 (2019 = 100) · 2015–2025",
+    alt=(
+        f"Line chart. All items and food and drink both sit near 100 until 2019, rise through "
+        f"2022, then flatten. In 2025 all items are {pct(all_since)} and food and drink "
+        f"{pct(food_since)} above 2019."
+    ),
+    provenance=prov_index,
+    table=table,
+)
+```
+
+## Change by category, 2019 → 2025
+
+`{python} n_within` of the `{python} len(by_cat)` categories are within 4% of their 2019 level.
+Food and drink and miscellaneous goods and services stand out, while communication and clothing are slightly
+cheaper than in 2019.
+
+```{python}
+fig, table = F.since_base_by_category(summary)
+chart_card(
+    fig,
+    title=f"Food & drink rose {ratio:.1f}× as much as prices overall",
+    subtitle="Change in prices by category, 2019 → 2025 (%)",
+    alt=(
+        f"Horizontal bar chart of change since 2019 by category. Miscellaneous and food and "
+        f"drink rose most; communication and clothing fell. All items: {pct(all_since)}."
+    ),
+    provenance=prov_summary,
+    table=table,
+    height=420,
+)
+```
+
+### How each category moved over time
+
+Each panel shows one category (turquoise) against all items (grey), relative to 2019. The
+shaded band marks 2020–2022. Food rose steadily through the shaded years and kept rising in
+2023 (`{python} pct(food_2023)`) before levelling off, while transport rose sharply in 2021–2022
+and has fallen every year since.
+
+```{python}
+fig, table = F.category_timelines(index)
+chart_card(
+    fig,
+    title="Most categories levelled off after 2022; food was one of the last",
+    subtitle=(
+        "Consumer prices by category relative to 2019 (2019 = 100) · 2015–2025 · "
+        "each title shows the change 2019 → 2025"
+    ),
+    alt=(
+        "Eleven small line charts, one per category, each compared with all items. Food and "
+        "drink and miscellaneous rise furthest above 2019; communication and clothing end "
+        "below it."
+    ),
+    provenance=prov_index,
+    table=table,
+    height=640,
+    mobile_fig=F.category_timelines(index, cols=2)[0],
+    mobile_height=920,
+)
+```
+
+## Subsidised and price-controlled items, 2019 → 2025
+
+The government publishes average prices for subsidised and price-controlled staples.
+Vegetable oil rose from BND `{python} f"{veg_2019:.2f}"` for a 5 kg bottle in 2019 to
+`{python} f"{veg_2022:.2f}"` in 2022, and was still `{python} f"{veg_2025:.2f}"` in 2025. Rice
+prices, by contrast, moved very little: ordinary Thai rice was `{python} pct(rice)` over the
+same six years.
+
+```{python}
+fig, table = F.subsidised_since_base(items)
+chart_card(
+    fig,
+    title=f"Vegetable oil cost {veg_since:.0f}% more in 2025 than in 2019",
+    subtitle="Change in average retail price, 2019 → 2025 (%)",
+    alt=(
+        "Horizontal bar chart of price change since 2019 for subsidised items. Vegetable oil "
+        "rose most, then palm oil, infant formula and corn oil; rice changed little and sugar fell."
+    ),
+    provenance=prov_items,
+    table=table,
+    height=420,
+)
+```
+
+## How much prices moved in 2023–2025
+
+To judge stability, this section looks at the size of recent yearly changes. Overall price
+changes in 2023–2025 stayed between `{python} pct(recent_lo)` and `{python} pct(recent_hi)`,
+compared with `{python} pct(chg.loc[2016:2019, ALL].min())` to
+`{python} pct(chg.loc[2016:2019, ALL].max())` in 2016–2019. In 2025, `{python} n_up` categories
+rose and `{python} n_down` fell, and none moved by more than about 1%. Food and drink rose
+`{python} pct(food_2023)` in 2023, then `{python} pct(chg.loc[2024, FOOD])` in 2024 and
+`{python} pct(food_2025)` in 2025, its first yearly decrease since 2019.
+
+## Conclusion
+
+- **Have prices recovered from the pandemic years?** Price *growth* has: from 2023 to 2025 prices changed by an average
+  of `{python} pct(recent_avg)` a year, back near the pre-pandemic `{python} pct(before_avg)`.
+  Price *levels* haven't: from 2019 to 2025, all items rose `{python} pct(all_since)` and food
+  and drink `{python} pct(food_since)`, and they have not come back down.
+- **Have they stabilised?** Yes. Overall yearly changes in 2023–2025 stayed between
+  `{python} pct(recent_lo)` and `{python} pct(recent_hi)`, a narrower range than before the
+  pandemic. Food settled last, with its first yearly decrease in 2025.
+- **At the shop:** cooking oils are still well above 2019 (vegetable oil
+  `{python} pct(veg_since, 0)`, 2019 → 2025), while rice prices barely changed
+  (ordinary Thai rice `{python} pct(rice)`).
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+<!-- Side note: required on every case study (DESIGN.md §4.1). -->
+- **Why prices moved.** The 2020–2022 rises line up in time with the pandemic and with
+  worldwide price rises in 2022, but this data can't separate causes.
+- **What households paid.** These are national annual averages. They don't show differences
+  between districts, households or months.
+- **Two published values were repaired.** The source CPI table had its 2023 categories shifted
+  by one row and a wrong 2022 overall figure. Both were rebuilt from the publisher's own yearly
+  % changes and agree closely with World Bank figures (see Method).
+- **Base year.** The source doesn't state the CPI base year, so results are shown as changes
+  and relative to 2019.
+- **Gaps in the item list.** Sugar's 2024 price (BND 1.73, against 1.30 in other years) looks
+  implausible and isn't used. "Local Rice" replaced "Laila Rice" in 2020, so neither is
+  compared with 2019.
+:::
+
+```{python}
+method_and_sources(
+    prov_change + prov_index + prov_items + prov_check[2:],
+    notes=f"{notes_index} {notes_items} {notes_check}",
+    steps=[
+        "Downloaded the 2025 editions of the CPI, CPI % change and subsidised item prices from "
+        "data.gov.bn, and World Bank CPI and inflation for a cross-check.",
+        "Found the CPI table's 2023 categories shifted one row down and its 2022 overall value "
+        "wrong. Rebuilt both as previous year × (1 + published % change); the build stops if "
+        "any year still disagrees with the published changes by more than 0.25 points.",
+        f"Checked the repaired overall CPI against the World Bank series (original source: "
+        f"IMF): within {gap_recent:.2f} points every year from 2018 to 2025 (up to "
+        f"{gap_early:.1f} in 2015–2017), and yearly changes for 2020–2025 within "
+        f"{gap_change:.2f} points.",
+        "Rebased all categories to 2019 = 100 and compared 2016–2019, 2020–2022 and 2023–2025.",
+        "Subsidised items: excluded the saloon car (no data after 2019), set aside sugar 2024, "
+        "and kept Laila and Local rice as separate series.",
+    ],
+    code_url=f"{REPO_URL}/tree/main/case_studies/01_cost_of_living",
+)
+```
+
+```{python}
+prev_next("01-cost-of-living.qmd", ROOT / "dashboard" / "case-studies")
+```

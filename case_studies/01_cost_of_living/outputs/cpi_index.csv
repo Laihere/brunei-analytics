@@ -1,0 +1,133 @@
+year,category,index,repaired,index_vs_base
+2015,Clothing and Footwear,104.4,False,106.07
+2016,Clothing and Footwear,103.7,False,105.36
+2017,Clothing and Footwear,102.1,False,103.74
+2018,Clothing and Footwear,99.3,False,100.89
+2019,Clothing and Footwear,98.421,False,100.0
+2020,Clothing and Footwear,100.0,False,101.6
+2021,Clothing and Footwear,99.5,False,101.1
+2022,Clothing and Footwear,100.705,False,102.32
+2023,Clothing and Footwear,100.259,True,101.87
+2024,Clothing and Footwear,97.0,False,98.56
+2025,Clothing and Footwear,97.35,False,98.91
+2015,Communication,100.0,False,100.61
+2016,Communication,99.7,False,100.31
+2017,Communication,99.5,False,100.11
+2018,Communication,99.4,False,100.01
+2019,Communication,99.394,False,100.0
+2020,Communication,99.5,False,100.11
+2021,Communication,100.1,False,100.71
+2022,Communication,99.022,False,99.63
+2023,Communication,95.991,True,96.58
+2024,Communication,94.0,False,94.57
+2025,Communication,93.632,False,94.2
+2015,Education,100.5,False,97.47
+2016,Education,102.4,False,99.31
+2017,Education,102.4,False,99.31
+2018,Education,102.9,False,99.79
+2019,Education,103.113,False,100.0
+2020,Education,105.1,False,101.93
+2021,Education,105.3,False,102.12
+2022,Education,105.3,False,102.12
+2023,Education,106.108,True,102.9
+2024,Education,106.3,False,103.09
+2025,Education,106.619,False,103.4
+2015,Food and Non-Alcoholic Beverages,100.8,False,99.09
+2016,Food and Non-Alcoholic Beverages,100.3,False,98.6
+2017,Food and Non-Alcoholic Beverages,100.5,False,98.79
+2018,Food and Non-Alcoholic Beverages,102.5,False,100.76
+2019,Food and Non-Alcoholic Beverages,101.729,False,100.0
+2020,Food and Non-Alcoholic Beverages,104.3,False,102.53
+2021,Food and Non-Alcoholic Beverages,106.8,False,104.98
+2022,Food and Non-Alcoholic Beverages,112.258,False,110.35
+2023,Food and Non-Alcoholic Beverages,115.314,True,113.35
+2024,Food and Non-Alcoholic Beverages,115.9,False,113.93
+2025,Food and Non-Alcoholic Beverages,115.631,False,113.67
+2015,"Furnishing, Household Equipment and Routine Household Maintenance",101.5,False,101.69
+2016,"Furnishing, Household Equipment and Routine Household Maintenance",101.8,False,101.99
+2017,"Furnishing, Household Equipment and Routine Household Maintenance",101.3,False,101.49
+2018,"Furnishing, Household Equipment and Routine Household Maintenance",100.4,False,100.59
+2019,"Furnishing, Household Equipment and Routine Household Maintenance",99.814,False,100.0
+2020,"Furnishing, Household Equipment and Routine Household Maintenance",101.6,False,101.79
+2021,"Furnishing, Household Equipment and Routine Household Maintenance",100.5,False,100.69
+2022,"Furnishing, Household Equipment and Routine Household Maintenance",101.4,False,101.59
+2023,"Furnishing, Household Equipment and Routine Household Maintenance",101.605,True,101.79
+2024,"Furnishing, Household Equipment and Routine Household Maintenance",101.0,False,101.19
+2025,"Furnishing, Household Equipment and Routine Household Maintenance",100.643,False,100.83
+2015,Health,101.7,False,100.64
+2016,Health,98.4,False,97.38
+2017,Health,100.0,False,98.96
+2018,Health,100.5,False,99.45
+2019,Health,101.051,False,100.0
+2020,Health,101.6,False,100.54
+2021,Health,102.5,False,101.43
+2022,Health,102.659,False,101.59
+2023,Health,103.526,True,102.45
+2024,Health,103.7,False,102.62
+2025,Health,104.466,False,103.38
+2015,"Housing, Water, Electricity, Gas and Other Fuels",99.7,False,106.68
+2016,"Housing, Water, Electricity, Gas and Other Fuels",95.4,False,102.07
+2017,"Housing, Water, Electricity, Gas and Other Fuels",95.3,False,101.97
+2018,"Housing, Water, Electricity, Gas and Other Fuels",95.0,False,101.65
+2019,"Housing, Water, Electricity, Gas and Other Fuels",93.461,False,100.0
+2020,"Housing, Water, Electricity, Gas and Other Fuels",93.2,False,99.72
+2021,"Housing, Water, Electricity, Gas and Other Fuels",93.0,False,99.51
+2022,"Housing, Water, Electricity, Gas and Other Fuels",94.843,False,101.48
+2023,"Housing, Water, Electricity, Gas and Other Fuels",95.14,True,101.8
+2024,"Housing, Water, Electricity, Gas and Other Fuels",94.2,False,100.79
+2025,"Housing, Water, Electricity, Gas and Other Fuels",94.035,False,100.61
+2015,Miscellaneous Goods and Services,100.2,False,100.93
+2016,Miscellaneous Goods and Services,100.1,False,100.83
+2017,Miscellaneous Goods and Services,87.6,False,88.24
+2018,Miscellaneous Goods and Services,99.5,False,100.22
+2019,Miscellaneous Goods and Services,99.28,False,100.0
+2020,Miscellaneous Goods and Services,110.1,False,110.9
+2021,Miscellaneous Goods and Services,110.5,False,111.3
+2022,Miscellaneous Goods and Services,126.003,False,126.92
+2023,Miscellaneous Goods and Services,126.389,True,127.31
+2024,Miscellaneous Goods and Services,126.6,False,127.52
+2025,Miscellaneous Goods and Services,125.914,False,126.83
+2015,Overall CPI,99.9,False,100.93
+2016,Overall CPI,99.6,False,100.62
+2017,Overall CPI,98.4,False,99.41
+2018,Overall CPI,99.4,False,100.42
+2019,Overall CPI,98.981,False,100.0
+2020,Overall CPI,100.9,False,101.94
+2021,Overall CPI,102.7,False,103.76
+2022,Overall CPI,106.482,True,107.58
+2023,Overall CPI,106.811,False,107.91
+2024,Overall CPI,106.4,False,107.49
+2025,Overall CPI,106.073,False,107.16
+2015,Recreation and Culture,100.3,False,97.04
+2016,Recreation and Culture,100.1,False,96.85
+2017,Recreation and Culture,100.4,False,97.14
+2018,Recreation and Culture,101.3,False,98.01
+2019,Recreation and Culture,103.361,False,100.0
+2020,Recreation and Culture,103.4,False,100.04
+2021,Recreation and Culture,103.7,False,100.33
+2022,Recreation and Culture,105.245,False,101.82
+2023,Recreation and Culture,106.847,True,103.37
+2024,Recreation and Culture,106.9,False,103.42
+2025,Recreation and Culture,105.824,False,102.38
+2015,Restaurants and Hotels,100.0,False,97.0
+2016,Restaurants and Hotels,99.8,False,96.81
+2017,Restaurants and Hotels,99.7,False,96.71
+2018,Restaurants and Hotels,99.6,False,96.61
+2019,Restaurants and Hotels,103.092,False,100.0
+2020,Restaurants and Hotels,103.7,False,100.59
+2021,Restaurants and Hotels,104.5,False,101.37
+2022,Restaurants and Hotels,106.76,False,103.56
+2023,Restaurants and Hotels,109.573,True,106.29
+2024,Restaurants and Hotels,110.3,False,106.99
+2025,Restaurants and Hotels,110.657,False,107.34
+2015,Transport,97.1,False,103.38
+2016,Transport,98.5,False,104.87
+2017,Transport,97.2,False,103.49
+2018,Transport,96.5,False,102.74
+2019,Transport,93.927,False,100.0
+2020,Transport,95.0,False,101.14
+2021,Transport,101.3,False,107.85
+2022,Transport,106.102,False,112.96
+2023,Transport,103.312,True,109.99
+2024,Transport,102.1,False,108.7
+2025,Transport,101.29,False,107.84

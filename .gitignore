@@ -1,0 +1,22 @@
+# Raw downloads stay local (see DATA_USE_POLICY.md, SOP rule 3)
+data/raw/*
+!data/raw/.gitkeep
+
+# Local cache used by catalogue/build_catalogue.py
+.cache/
+
+# Personal drafts (emails stay private)
+email_draft*.txt
+docs/egnc_enquiry_draft.md
+
+# Python
+__pycache__/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Quarto
+dashboard/_site/
+dashboard/.quarto/
+**/*.quarto_ipynb

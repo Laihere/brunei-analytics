@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mock-up — Home · Brunei Analytics</title>
+<link rel="stylesheet" href="wireframe.css">
+<link rel="stylesheet" href="theme.css" id="theme">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="mock-banner" role="note">
+  <span><strong data-fidelity-label>STYLED</strong> · Home (DESIGN.md §4.2) · sample content, not real findings</span>
+  <span class="mock-actions">
+    <button type="button" data-toggle-theme aria-pressed="true">Styled</button>
+    <button type="button" data-toggle-notes aria-pressed="false">Design notes</button>
+  </span>
+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html" aria-current="page">Brunei Analytics</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav aria-label="Main">
+      <ul id="nav-links">
+        <li><a href="home.html" aria-current="page">Home</a></li>
+        <li><a href="#studies">Case studies</a></li>
+        <li><a href="#">Data sources</a></li>
+        <li><a href="#">Data use policy</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="stack">
+
+  <header class="prose" data-block>
+    <span class="n">① What the site is, in one line (Jakob's Law, Paradox of the Active User)</span>
+    <h1>[Tagline, e.g. Brunei, explained with public data]</h1>
+    <p class="subtitle">Independent case studies built from Brunei's open data, with every number credited to its source. By Muhd Lai Razi, with AI assistance.</p>
+  </header>
+
+  <section aria-labelledby="latest" data-block>
+    <span class="n">② Latest study shows its finding, not just its topic (Serial Position, Von Restorff)</span>
+    <h2 id="latest" class="ph" style="font-size:0.875rem;font-style:normal;text-transform:uppercase;letter-spacing:.04em">Latest case study</h2>
+    <a class="link-card" href="case-study.html">
+      <div class="feature">
+        <div>
+          <div class="kicker">01 · Economy</div>
+          <div class="title" style="font-size:1.4rem;line-height:1.3">[Finding as one sentence]</div>
+          <p class="ph" style="margin:var(--s2) 0">[One line of context]</p>
+          <div class="date">Oct 2026 · 4-minute read</div>
+          <span class="n">Thumbnail charts carry the credit too (policy M1)</span>
+        </div>
+        <svg class="chart" viewBox="0 0 320 140" role="img" aria-label="[Mini chart summary]">
+          <polyline class="ctx" points="10,100 80,98 150,92 220,88 310,82"/>
+          <polyline class="ctx" points="10,100 80,104 150,99 220,96 310,94"/>
+          <polyline class="hi" points="10,100 80,88 150,70 220,52 310,30"/>
+          <circle class="hi-dot" cx="310" cy="30" r="5"/>
+        </svg>
+        <p class="credit" style="grid-column:1/-1;margin:0">Source: [Data Source Owner] via data.gov.bn (accessed 14 Oct 2026). Analysis by Muhd Lai Razi with AI assistance (Claude); not an official government publication.</p>
+      </div>
+    </a>
+  </section>
+
+  <section id="studies" aria-labelledby="studies-h" data-block>
+    <span class="n">③ Study cards: same shape everywhere (Similarity, Uniform Connectedness); whole card clickable (Fitts's Law)</span>
+    <h2 id="studies-h">Case studies</h2>
+    <span class="n">Theme filter: ≤ 5 chips, added once there are 5+ studies (Hick's Law, open decision §12)</span>
+    <ul class="chips" aria-label="Filter by theme">
+      <li><button type="button" aria-pressed="true">All</button></li>
+      <li><button type="button" aria-pressed="false">Economy</button></li>
+      <li><button type="button" aria-pressed="false">Population</button></li>
+      <li><button type="button" aria-pressed="false">Social</button></li>
+      <li><button type="button" aria-pressed="false">Sectoral</button></li>
+    </ul>
+    <div class="link-cards">
+      <a class="link-card" href="case-study.html">
+        <div class="kicker">01 · Economy</div>
+        <div class="title">[Finding as one sentence]</div>
+        <div class="date">Oct 2026</div>
+      </a>
+      <a class="link-card" href="#">
+        <div class="kicker">02 · Sectoral</div>
+        <div class="title">[Finding as one sentence]</div>
+        <div class="date">Nov 2026</div>
+      </a>
+      <div class="link-card soon">
+        <div class="kicker">03 · Coming soon</div>
+        <div class="title">[Topic being worked on]</div>
+        <span class="n">Zeigarnik: the series continues</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="how" data-block>
+    <span class="n">④ Trust in three points, linking to the policy (Chunking, Aesthetic-Usability)</span>
+    <h2 id="how">How this works</h2>
+    <ul class="points">
+      <li><h3>Open data</h3><p class="ph" style="margin:0">[Built only from published, free-to-use sources.]</p></li>
+      <li><h3>Every number credited</h3><p class="ph" style="margin:0">[Each chart names its source and access date.]</p></li>
+      <li><h3>Independent</h3><p class="ph" style="margin:0">[Independent analysis, not official statistics.] <a href="#">Data use policy</a></p></li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="inner">
+    Independent analysis by Muhd Lai Razi, built with AI assistance (Claude by Anthropic). Not an official publication of the Government of Brunei Darussalam. ·
+    <a href="#">Data use policy</a>
+  </div>
+</footer>
+<script src="wireframe.js"></script>
+</body>
+</html>

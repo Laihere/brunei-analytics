@@ -1,0 +1,86 @@
+---
+# Copy to NN-name.qmd (e.g. 01-cost-of-living.qmd). Files starting with "_" are not published.
+title: "{Finding as one sentence: what changed, by how much, over when — include the data year, e.g. 2025}"
+description: "{The question this study answers}"
+number: "NN"
+topic: "{Economy | Population | Social | Sectoral | International}"
+data-period: "{Year(s) the data covers, e.g. 2025 or 2020–2025. Shown on cards and the page header}"
+read-time: "{4}-minute read"
+date: 2026-01-01
+---
+
+```{python}
+from shared.charts import highlight
+from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+OUT = CASE_STUDIES / "{NN_name}" / "outputs"
+df, provenance, notes = read_output(OUT / "{name}.csv")
+```
+
+::: {.study-intro}
+{Introduction, 2–3 sentences: what this study looks at, which data and years, and its scope,
+e.g. "It shows when and what changed, not why".}
+
+It asks {one or two} questions, answered in the conclusion:
+
+1. **{Question 1?}**
+:::
+
+```{python}
+# Layer 1: at most 3 tiles, each with a comparison.
+stat_tiles(
+    stat_tile("{Main measure}", "{+4.1%}", "{1.3 pts}", "vs {2024}", "up-bad"),
+    stat_tile("{Comparison measure}", "{+1.3%}", "{0.4 pts}", "vs {2024}", "down-good"),
+)
+```
+
+```{python}
+# Layer 1: hero chart. One series in teal, the rest grey.
+import plotly.express as px
+
+fig = highlight(px.line(df, x="year", y="value", color="series"), focus="{series}")
+chart_card(
+    fig,
+    title="{Chart takeaway: what to notice}",
+    subtitle="{Measure, unit} · {2020–2025}",
+    alt="{One-sentence summary of what the chart shows}",
+    provenance=provenance,
+    table=df,
+)
+```
+
+## {What is examined, e.g. "Change by category, 2019 → 2025" (evidence, no verdict)}
+
+{2–4 short paragraphs.}
+
+## {Next thing examined}
+
+{2–4 short paragraphs.}
+
+::: {.callout-note appearance="simple"}
+{Context the reader needs to read a number correctly, placed beside that number.}
+:::
+
+## Conclusion
+
+- **{Question 1?}** {The answer, using the same numbers as the body.}
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+{Limitations in plain words: gaps, estimates, what the data can't show.}
+:::
+
+```{python}
+# Layer 4: method and sources, collapsed but always present.
+method_and_sources(
+    provenance,
+    notes,
+    steps=["{Download}", "{Cleaning and transformations}", "{Analysis}"],
+    code_url=f"{REPO_URL}/tree/main/case_studies/{NN_name}",
+)
+```
+
+```{python}
+prev_next("{NN-name}.qmd", ROOT / "dashboard" / "case-studies")
+```

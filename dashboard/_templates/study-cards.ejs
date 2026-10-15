@@ -1,0 +1,19 @@
+```{=html}
+<div class="link-cards">
+<% for (const item of items) { %>
+<% if (item.status === "coming-soon") { %>
+  <div class="link-card soon" <%= metadataAttrs(item) %>>
+    <div class="kicker"><%= item.number %> · Coming soon</div>
+    <div class="title"><%= item.title %></div>
+    <% if (item["data-period"]) { %><div class="date">Data: <%= item["data-period"] %></div><% } %>
+  </div>
+<% } else { %>
+  <a class="link-card" href="<%- item.path %>" <%= metadataAttrs(item) %>>
+    <div class="kicker"><%= item.number %> · <%= item.topic %></div>
+    <div class="title"><%= item.title %></div>
+    <div class="date"><% if (item["data-period"]) { %>Data: <%= item["data-period"] %> · <% } %>Published <%= item.date %></div>
+  </a>
+<% } %>
+<% } %>
+</div>
+```

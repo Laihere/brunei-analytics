@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Consumer Price Index 2025",
+      "page_url": "https://www.data.gov.bn/consumer-price-index-2025/",
+      "accessed": "2026-10-15",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/Consumer-Price-Index-2025.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2015–2025",
+      "sha256": "9adcdb8bb81ef371522e48a91440d3f78f32dc05b67e259cfeb8891661c76c80",
+      "original_source": "",
+      "published": "2026-07-13"
+    },
+    {
+      "source": "datagovbn",
+      "title": "Percentage Change in Customer Price Index 2025",
+      "page_url": "https://www.data.gov.bn/percentage-change-in-customer-price-index-2025/",
+      "accessed": "2026-10-15",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/Percentage-Change-in-Consumer-Price-Index-2025.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2016–2025",
+      "sha256": "20e2bc1005f78d338d3bdb010fe254ede2b473fc2c3e81bb136af97e1cdbc0d6",
+      "original_source": "",
+      "published": "2026-07-11"
+    }
+  ],
+  "notes": "Annual CPI by category, 2015–2025. Column 'Weight' renamed to 'index'. 2023 categories and 2022 overall rebuilt as previous year × (1 + published % change) to fix a one-row shift in the source (flagged 'repaired'). 'index_vs_base' rebased to 2019 = 100."
+}

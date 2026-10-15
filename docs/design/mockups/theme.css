@@ -1,0 +1,113 @@
+/* Styled theme: turquoise. Loads after wireframe.css and only changes the look;
+   layout and behaviour stay identical. Tokens become the Quarto SCSS theme later.
+   Every text/background pair below was checked for WCAG 2.2 AA (≥ 4.5:1 text, ≥ 3:1 marks). */
+
+:root {
+  /* Turquoise ramp */
+  --teal-50: #e6f6f4;   /* tinted backgrounds */
+  --teal-100: #ccefea;
+  --teal-300: #5ec4b8;  /* lightest data step */
+  --teal-500: #0d9488;  /* brand mark: chart highlight, accents (3.65:1) */
+  --teal-700: #0f766e;  /* text-safe: links, active states (5.33:1) */
+  --teal-800: #115e59;
+  --teal-900: #134e4a;  /* footer, strong text on tints */
+
+  /* Neutrals */
+  --page: #f4f5f3;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #6b6863;     /* small text, credits (5.40:1) */
+  --line: #e1e0d9;
+  --context: #c3c2b7;   /* non-highlighted chart series */
+
+  /* Status (stat tile changes; always with ▲/▼ and a label) */
+  --good: #006300;
+  --bad: #b42318;
+  --caution-bg: #fdf6e3;
+  --caution: #8a5a00;
+
+  /* Chart sketch tokens used by wireframe.css */
+  --emph: var(--teal-500);
+  --fill: var(--line);
+  --fill-2: var(--context);
+
+  --shadow: 0 1px 2px rgb(11 11 11 / 0.04), 0 2px 8px rgb(11 11 11 / 0.04);
+}
+
+a { color: var(--teal-700); text-underline-offset: 3px; }
+a:hover { color: var(--teal-900); }
+:focus-visible { outline-color: var(--teal-700); }
+
+/* Navigation */
+.nav { border-bottom: 1px solid var(--line); box-shadow: var(--shadow); background: var(--surface); }
+.brand { display: inline-flex; align-items: center; gap: var(--s2); color: var(--ink); }
+.brand::before {
+  content: ""; width: 20px; height: 20px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--teal-300), var(--teal-700));
+}
+.nav ul a:hover { color: var(--teal-800); background: var(--teal-50); }
+.nav ul a[aria-current="page"] { color: var(--teal-900); background: var(--teal-50); }
+
+/* Headings and page header */
+h1, h2, h3 { color: var(--ink); letter-spacing: -0.01em; }
+.breadcrumb, .breadcrumb a { color: var(--muted); }
+.meta { color: var(--muted); }
+
+/* Cards */
+.tile, .card, .link-card, .points li, .detail-group, .toc-mobile {
+  border-color: var(--line); box-shadow: var(--shadow);
+}
+.tile .value { color: var(--ink); }
+.tile .delta b { font-weight: 600; }
+.tile .delta .up-bad { color: var(--bad); }
+.tile .delta .down-good { color: var(--good); }
+
+.card .chart-sub, .credit { color: var(--muted); }
+summary { color: var(--teal-800); }
+summary:hover { color: var(--teal-900); }
+details th { color: var(--ink-2); font-weight: 600; }
+
+/* Charts: one turquoise series, everything else recedes */
+.chart .ctx { stroke: var(--context); }
+.chart .hi { stroke: var(--teal-500); stroke-width: 2; }
+.chart .hi-label { fill: var(--ink); }
+
+/* Callouts: note (turquoise) vs caveat (amber) */
+.callout { border-left-width: 4px; box-shadow: none; }
+.callout:not(.caveat) { background: var(--teal-50); border-color: var(--teal-100); border-left-color: var(--teal-500); }
+.callout:not(.caveat) .icon { color: var(--teal-800); }
+.callout.caveat { background: var(--caution-bg); border-color: #f1e3bb; border-left-color: var(--caution); }
+.callout.caveat .icon { color: var(--caution); }
+
+/* Link cards */
+.link-card { transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; }
+.link-card:hover { border-color: var(--teal-500); box-shadow: 0 4px 16px rgb(13 148 136 / 0.12); transform: translateY(-1px); }
+.link-card .kicker { color: var(--teal-700); font-weight: 600; }
+.link-card .title { color: var(--ink); }
+.link-card.soon { background: transparent; box-shadow: none; border-color: var(--context); }
+.link-card.soon:hover { transform: none; box-shadow: none; }
+.link-card.soon .kicker { color: var(--muted); }
+
+.chips button { border-color: var(--line); color: var(--ink-2); }
+.chips button:hover { border-color: var(--teal-500); color: var(--teal-800); }
+.chips button[aria-pressed="true"] { background: var(--teal-700); border-color: var(--teal-700); color: #fff; }
+
+.points h3::before {
+  content: ""; display: block; width: 28px; height: 4px; border-radius: 2px;
+  background: var(--teal-500); margin-bottom: var(--s3);
+}
+
+/* Contents list */
+.toc ol { border-left-color: var(--line); }
+.toc a:hover { color: var(--teal-800); }
+.toc li:first-child a { color: var(--teal-800); font-weight: 600; box-shadow: inset 2px 0 0 var(--teal-500); margin-left: -2px; }
+
+/* Footer: the one dark turquoise band anchors the page */
+footer { background: var(--teal-900); border-top: 0; }
+footer .inner { color: var(--teal-100); }
+footer a { color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .link-card:hover { transform: none; }
+}

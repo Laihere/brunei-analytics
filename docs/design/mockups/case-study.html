@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mock-up — Case study page · Brunei Analytics</title>
+<link rel="stylesheet" href="wireframe.css">
+<link rel="stylesheet" href="theme.css" id="theme">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="mock-banner" role="note">
+  <span><strong data-fidelity-label>STYLED</strong> · Case study page (DESIGN.md §4.1) · sample content, not real findings</span>
+  <span class="mock-actions">
+    <button type="button" data-toggle-theme aria-pressed="true">Styled</button>
+    <button type="button" data-toggle-notes aria-pressed="false">Design notes</button>
+  </span>
+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html">Brunei Analytics</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav aria-label="Main">
+      <ul id="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="home.html#studies" aria-current="page">Case studies</a></li>
+        <li><a href="#">Data sources</a></li>
+        <li><a href="#">Data use policy</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="with-toc">
+    <article class="stack">
+
+      <!-- ① Answer: layer 1 -->
+      <header data-block>
+        <span class="n">① Layer 1 · Headline = the finding (Serial Position, Von Restorff)</span>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="home.html#studies">Case studies</a> › 01</nav>
+        <h1>[Finding as one sentence: what changed, by how much, over when]</h1>
+        <p class="subtitle">[The question this study answers] · Data: Jan 2020 – Dec 2025</p>
+        <p class="meta">4-minute read · Updated 15 Oct 2026</p>
+      </header>
+
+      <!-- Mobile contents -->
+      <nav class="toc-mobile" aria-label="On this page (mobile)">
+        <details>
+          <summary>On this page</summary>
+          <ol>
+            <li><a href="#s1">[Takeaway 1]</a></li>
+            <li><a href="#s2">[Takeaway 2]</a></li>
+            <li><a href="#caveats">What this doesn't tell us</a></li>
+            <li><a href="#method">Method and sources</a></li>
+          </ol>
+        </details>
+      </nav>
+
+      <!-- ② Key numbers -->
+      <section aria-label="Key numbers" data-block>
+        <span class="n">② ≤ 3 stat tiles, each with a comparison (Hick's Law, Miller's Law)</span>
+        <div class="tiles">
+          <div class="tile">
+            <div class="label">[Main measure]</div>
+            <div class="value">+0.0%</div>
+            <div class="delta"><b class="up-bad">▲ 0.0 pts</b> vs 2024</div>
+          </div>
+          <div class="tile">
+            <div class="label">[Comparison measure]</div>
+            <div class="value">+0.0%</div>
+            <div class="delta"><b class="down-good">▼ 0.0 pts</b> vs 2024</div>
+          </div>
+          <div class="tile">
+            <div class="label">[Count or share]</div>
+            <div class="value">00 of 00</div>
+            <div class="delta">[items] rose in 2025</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ③ Hero chart -->
+      <figure class="card" data-block>
+        <span class="n">③ Hero chart: one highlighted series, the rest grey (Von Restorff, Selective Attention). Card groups chart + credit + table (Common Region, Proximity)</span>
+        <h2>[Chart takeaway: what to notice]</h2>
+        <p class="chart-sub">[Measure, unit] · 2020–2025</p>
+        <svg class="chart" viewBox="0 0 640 260" role="img" aria-labelledby="hero-alt">
+          <title id="hero-alt">[One-sentence text summary of the chart's takeaway for screen readers]</title>
+          <g class="grid">
+            <line x1="40" y1="30" x2="600" y2="30"/><line x1="40" y1="90" x2="600" y2="90"/>
+            <line x1="40" y1="150" x2="600" y2="150"/><line x1="40" y1="210" x2="600" y2="210"/>
+          </g>
+          <text x="32" y="34" text-anchor="end">150</text><text x="32" y="94" text-anchor="end">125</text>
+          <text x="32" y="154" text-anchor="end">100</text><text x="32" y="214" text-anchor="end">75</text>
+          <text x="40" y="240">2020</text><text x="300" y="240" text-anchor="middle">2023</text><text x="600" y="240" text-anchor="end">2025</text>
+          <polyline class="ctx" points="40,150 150,148 260,140 370,138 480,132 600,128"/>
+          <polyline class="ctx" points="40,150 150,155 260,150 370,146 480,148 600,144"/>
+          <polyline class="ctx" points="40,150 150,140 260,136 370,130 480,126 600,120"/>
+          <polyline class="hi" points="40,150 150,138 260,118 370,96 480,80 600,62"/>
+          <circle class="hi-dot" cx="600" cy="62" r="5"/>
+          <text class="hi-label" x="596" y="50" text-anchor="end">[Highlighted series] +0%</text>
+        </svg>
+        <figcaption class="credit">Source: [Data Source Owner] via data.gov.bn (accessed 14 Oct 2026). Analysis by Muhd Lai Razi with AI assistance (Claude); not an official government publication.</figcaption>
+        <details>
+          <summary>Show data table</summary>
+          <table>
+            <caption class="ph" style="text-align:left">[Measure, unit]</caption>
+            <thead><tr><th>Year</th><th class="num">[Highlighted]</th><th class="num">[Series B]</th><th class="num">[Series C]</th></tr></thead>
+            <tbody>
+              <tr><td>2020</td><td class="num">100.0</td><td class="num">100.0</td><td class="num">100.0</td></tr>
+              <tr><td>2025</td><td class="num">000.0</td><td class="num">000.0</td><td class="num">000.0</td></tr>
+            </tbody>
+          </table>
+        </details>
+      </figure>
+
+      <!-- ④ Supporting sections: layers 2–3 -->
+      <section id="s1" data-block>
+        <span class="n">④ Layer 2 · Heading states the takeaway; 2–4 short paragraphs (Chunking, Cognitive Load)</span>
+        <h2>[Takeaway 1: the breakdown, e.g. where or for whom]</h2>
+        <div class="prose lines" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+        <figure class="card" style="margin:var(--s4) 0 0">
+          <h3>[Chart takeaway]</h3>
+          <p class="chart-sub">[Measure, unit] by [group], 2025</p>
+          <svg class="chart" viewBox="0 0 640 200" role="img" aria-label="[Text summary]">
+            <g class="grid"><line x1="140" y1="10" x2="140" y2="190"/></g>
+            <rect class="bar-hi" x="140" y="20" width="380" height="22" rx="4"/>
+            <rect class="bar-ctx" x="140" y="58" width="300" height="22" rx="4"/>
+            <rect class="bar-ctx" x="140" y="96" width="240" height="22" rx="4"/>
+            <rect class="bar-ctx" x="140" y="134" width="160" height="22" rx="4"/>
+            <text x="130" y="36" text-anchor="end">[Group A]</text><text x="130" y="74" text-anchor="end">[Group B]</text>
+            <text x="130" y="112" text-anchor="end">[Group C]</text><text x="130" y="150" text-anchor="end">[Group D]</text>
+            <text class="hi-label" x="528" y="36">0.0</text><text x="448" y="74">0.0</text>
+            <text x="388" y="112">0.0</text><text x="308" y="150">0.0</text>
+          </svg>
+          <figcaption class="credit">Source: [Data Source Owner] via data.gov.bn (accessed 14 Oct 2026). Analysis by Muhd Lai Razi with AI assistance (Claude); not an official government publication.</figcaption>
+          <details><summary>Show data table</summary><p class="ph">[Table]</p></details>
+        </figure>
+      </section>
+
+      <section id="s2" data-block>
+        <span class="n">④ Layer 3 · Why, and how sure? Caveat sits beside the claim it qualifies</span>
+        <h2>[Takeaway 2: the explanation or comparison]</h2>
+        <div class="prose lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <aside class="callout" style="margin-top:var(--s4)">
+          <span class="icon" aria-hidden="true">ⓘ</span>
+          <p><strong>Note:</strong> [Context the reader needs to read this number correctly, e.g. a change in base year.]</p>
+        </aside>
+      </section>
+
+      <!-- ⑤ Caveats -->
+      <section id="caveats" data-block>
+        <span class="n">⑤ Caveats always visible (Cognitive Bias, policy M5)</span>
+        <aside class="callout caveat">
+          <span class="icon" aria-hidden="true">⚠</span>
+          <div>
+            <h2 style="font-size:1.05rem;margin:0 0 var(--s1)">What this doesn't tell us</h2>
+            <p>[Limitations in plain words: gaps, estimates, what the data can't show.]</p>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ⑥ Method: layer 4 -->
+      <section id="method" class="detail-group" aria-label="Method and sources" data-block>
+        <span class="n" style="margin-top:var(--s3)">⑥ Layer 4 · Method and sources collapsed but always present (Chunking, Tesler's Law)</span>
+        <details>
+          <summary>Method</summary>
+          <div><ol class="ph"><li>[Download]</li><li>[Cleaning and transformations]</li><li>[Analysis]</li></ol></div>
+        </details>
+        <details>
+          <summary>Sources and full attributions</summary>
+          <div><p class="ph">[Data Source Owner], "[Dataset title]", Brunei Open Data (data.gov.bn), [URL], accessed 14 Oct 2026.</p></div>
+        </details>
+        <details>
+          <summary>Code on GitHub</summary>
+          <div><p class="ph">[Link to case_studies/01_…]</p></div>
+        </details>
+      </section>
+
+      <!-- ⑦ What next -->
+      <nav class="prevnext" aria-label="More case studies" data-block>
+        <span class="n" style="grid-column:1/-1">⑦ Clear ending with next step (Peak-End, Fitts's Law: whole card clickable)</span>
+        <a class="link-card" href="home.html#studies">
+          <div class="kicker">← All case studies</div>
+          <div class="title">Back to the list</div>
+        </a>
+        <a class="link-card next" href="#">
+          <div class="kicker">Next →</div>
+          <div class="title">[02 · Next study's headline finding]</div>
+        </a>
+      </nav>
+    </article>
+
+    <!-- Desktop contents -->
+    <nav class="toc" aria-label="On this page" data-block>
+      <span class="n">Goal-Gradient: progress through the page</span>
+      <ol>
+        <li><a href="#s1">[Takeaway 1]</a></li>
+        <li><a href="#s2">[Takeaway 2]</a></li>
+        <li><a href="#caveats">What this doesn't tell us</a></li>
+        <li><a href="#method">Method and sources</a></li>
+      </ol>
+    </nav>
+  </div>
+</main>
+
+<footer>
+  <div class="inner">
+    Independent analysis by Muhd Lai Razi, built with AI assistance (Claude by Anthropic). Not an official publication of the Government of Brunei Darussalam. ·
+    <a href="#">Data use policy</a>
+  </div>
+</footer>
+<script src="wireframe.js"></script>
+</body>
+</html>

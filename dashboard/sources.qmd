@@ -1,0 +1,23 @@
+---
+title: "Data sources"
+---
+
+Only these sources are used. Each dataset is credited with its owner and the
+date it was downloaded, as set out in the [data use policy](data-policy.qmd).
+
+```{python}
+from IPython.display import HTML
+
+from shared.sources import SOURCES
+
+rows = "".join(
+    f"<tr><td>{s.name}</td>"
+    f'<td><a href="{s.licence_url}">{s.licence}</a></td>'
+    f'<td><a href="{s.terms_url}">Terms</a></td></tr>'
+    for s in SOURCES.values()
+)
+HTML(
+    '<table class="table"><thead><tr><th>Source</th><th>Licence</th><th>Terms</th></tr>'
+    f"</thead><tbody>{rows}</tbody></table>"
+)
+```

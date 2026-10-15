@@ -1,0 +1,41 @@
+---
+title: "About this site"
+---
+
+Brunei Analytics is a personal, non-commercial project by **Muhd Lai Razi**, a Computer
+Science graduate with an interest in data analytics. Each case study asks one question about Brunei and answers it
+with published open data.
+
+## How the pages are designed
+
+Every case study reads from the answer down to the detail:
+
+1. **What happened?** The finding, key numbers and main chart.
+2. **Where, when, for whom?** Breakdowns.
+3. **Why, and how sure?** Explanations and caveats.
+4. **How do we know?** Method, sources and code.
+
+You can stop reading at any layer and still leave with a complete, correct takeaway.
+Charts highlight one series in turquoise and keep the rest grey, every chart has a
+data table, and the site is built to work on phones, keyboards and screen readers.
+The full design brief is the project's [DESIGN.md](https://github.com/Laihere/brunei-analytics/blob/main/DESIGN.md), and all code is on [GitHub](https://github.com/Laihere/brunei-analytics).
+
+## How AI was used {#how-ai-was-used}
+
+This site is built with **Claude**, an AI assistant made by Anthropic. Every byline and
+chart credit says so, because readers should know how the work was made.
+
+| Claude helped with | My part |
+|---|---|
+| Researching the terms of use of each data source and summarising them | Choosing which sources to use and which risks to accept |
+| Writing the code: downloads, provenance records, charts and this site | Setting the requirements, reviewing and approving each change |
+| Drafting the design brief, mock-ups and visual theme | Choosing the direction and judging what reads clearly |
+| Drafting text | Reviewing and editing it |
+
+**Where the numbers come from:** every figure is calculated by code from the cited datasets,
+not from the AI's memory. Before a case study is published, I check its findings against the
+source data. I am responsible for what is published, including any errors.
+
+## Contact
+
+See my [portfolio](https://laihere.github.io/laihere281-portfolio/).

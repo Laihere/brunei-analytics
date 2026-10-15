@@ -1,0 +1,17 @@
+---
+title: "Case studies"
+subtitle: "One question per study, answered with Brunei's public data."
+toc: false
+listing:
+  id: studies
+  contents:
+    - "[0-9]*.qmd"
+    - upcoming.yml
+  template: ../_templates/study-cards.ejs
+  sort: "number"
+  fields: [title, date, number, topic, status, data-period]
+  feed: false
+---
+
+::: {#studies}
+:::

@@ -1,0 +1,44 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Brunei Analytics"
+  description: "Case studies on Brunei public data by Muhd Lai Razi, with AI assistance"
+  site-url: https://laihere.github.io/brunei-analytics/
+  repo-url: https://github.com/Laihere/brunei-analytics
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: case-studies/index.qmd
+        text: Case studies
+      - href: sources.qmd
+        text: Data sources
+      - href: data-policy.qmd
+        text: Data use policy
+      - href: about.qmd
+        text: About
+    right:
+      - icon: person-circle
+        href: https://laihere.github.io/laihere281-portfolio/
+        aria-label: Portfolio of Muhd Lai Razi
+  page-footer:
+    center: >
+      Independent analysis by Muhd Lai Razi, built with AI assistance (Claude by Anthropic).
+      Not an official publication of the Government of Brunei Darussalam.
+      [Data use policy](/data-policy.qmd) · [How AI was used](/about.qmd#how-ai-was-used)
+
+format:
+  html:
+    theme: [cosmo, theme.scss]
+    toc: true
+    toc-depth: 2
+    toc-expand: true
+    toc-title: On this page
+    date-format: "D MMM YYYY"
+    anchor-sections: false
+
+execute:
+  echo: false
+  warning: false

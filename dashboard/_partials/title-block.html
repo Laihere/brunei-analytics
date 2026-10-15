@@ -1,0 +1,19 @@
+$if(number)$
+<header id="title-block-header" class="quarto-title-block study-header">
+<nav class="study-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Case studies</a> › $number$$if(topic)$ · $topic$$endif$</nav>
+<h1 class="title">$title$</h1>
+$if(description)$
+<p class="subtitle">$description$$if(data-period)$ · Data: $data-period$$endif$</p>
+$endif$
+<p class="meta">$if(read-time)$$read-time$ · $endif$Updated $date$</p>
+</header>
+$else$
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">$title$</h1>
+$if(subtitle)$
+<p class="subtitle lead">$subtitle$</p>
+$endif$
+</div>
+</header>
+$endif$

@@ -1,0 +1,16 @@
+```{=html}
+<% if (items.length === 0) { %>
+<div class="link-card soon featured">
+  <div class="kicker">Case study 01 · In progress</div>
+  <div class="title">The first case study is being written.</div>
+</div>
+<% } %>
+<% for (const item of items) { %>
+<a class="link-card featured" href="<%- item.path %>" <%= metadataAttrs(item) %>>
+  <div class="kicker"><%= item.number %> · <%= item.topic %></div>
+  <div class="title"><%= item.title %></div>
+  <p class="desc"><%= item.description %></p>
+  <div class="date"><% if (item["data-period"]) { %>Data: <%= item["data-period"] %> · <% } %>Published <%= item.date %><% if (item["read-time"]) { %> · <%= item["read-time"] %><% } %></div>
+</a>
+<% } %>
+```

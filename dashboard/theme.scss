@@ -1,0 +1,184 @@
+/*-- scss:defaults --*/
+// Turquoise theme (DESIGN.md §7). Ported from docs/design/mockups/theme.css.
+
+$teal-50: #e6f6f4;
+$teal-100: #ccefea;
+$teal-300: #5ec4b8;
+$teal-500: #0d9488;   // brand mark, chart highlight (3.65:1)
+$teal-700: #0f766e;   // text-safe: links, buttons (5.33:1)
+$teal-800: #115e59;
+$teal-900: #134e4a;
+
+$page: #f4f5f3;
+$surface: #fcfcfb;
+$ink: #0b0b0b;
+$ink-2: #52514e;
+$muted: #6b6863;      // captions, credits (5.40:1)
+$line: #e1e0d9;
+$context: #c3c2b7;
+$good: #006300;
+$bad: #b42318;
+$caution: #8a5a00;
+$caution-bg: #fdf6e3;
+
+$s1: 4px; $s2: 8px; $s3: 12px; $s4: 16px; $s5: 24px; $s6: 32px; $s7: 48px; $s8: 64px;
+$radius: 8px;
+$shadow: 0 1px 2px rgba(11, 11, 11, 0.04), 0 2px 8px rgba(11, 11, 11, 0.04);
+
+// Bootstrap / Quarto
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", sans-serif;
+$font-size-root: 17px;
+$line-height-base: 1.6;
+$body-bg: $page;
+$body-color: $ink;
+$primary: $teal-700;
+$link-color: $teal-700;
+$link-hover-color: $teal-900;
+$headings-color: $ink;
+$headings-font-weight: 700;
+$border-color: $line;
+$border-radius: $radius;
+$text-muted: $muted;
+
+$navbar-bg: $surface;
+$navbar-fg: $ink-2;
+$navbar-hl: $teal-900;
+$footer-bg: $teal-900;
+$footer-fg: $teal-100;
+
+$callout-color-note: $teal-500;
+$callout-color-caution: $caution;
+$callout-color-tip: $teal-500;
+
+$toc-color: $ink-2;
+$toc-active-border: $teal-500;
+
+/*-- scss:rules --*/
+
+:focus-visible { outline: 3px solid $teal-700; outline-offset: 2px; }
+a { text-underline-offset: 3px; }
+
+h1.title, h1 { font-size: 2rem; line-height: 1.25; letter-spacing: -0.01em; }
+main h2:not(#toc-title) { border-bottom: 0; padding-bottom: 0; }
+h2 { font-size: 1.4rem; line-height: 1.3; font-weight: 650; letter-spacing: -0.01em; margin-top: $s7; }
+main p, main li { max-width: 70ch; }
+
+// Navigation
+.navbar { border-bottom: 1px solid $line; box-shadow: $shadow; }
+.navbar-brand { font-weight: 700; color: $ink !important; display: inline-flex; align-items: center; gap: $s2; }
+.navbar-brand::before {
+  content: ""; width: 20px; height: 20px; border-radius: 6px;
+  background: linear-gradient(135deg, $teal-300, $teal-700);
+}
+.navbar .nav-link { min-height: 44px; display: flex; align-items: center; padding: 0 $s3 !important; border-radius: $radius; }
+.navbar .nav-link:hover { background: $teal-50; color: $teal-800; }
+.navbar .nav-link.active { background: $teal-50; color: $teal-900 !important; font-weight: 600; }
+
+// Case study title block (partial: _partials/title-block.html)
+.study-header { margin-bottom: $s6; }
+.study-breadcrumb { font-size: 0.875rem; color: $muted; margin-bottom: $s2; }
+.study-breadcrumb a { color: $muted; }
+.study-header .subtitle { color: $ink-2; margin: $s3 0 0; font-size: 1.05rem; }
+.study-header .meta { color: $muted; font-size: 0.875rem; margin-top: $s2; }
+
+// Introduction (lede) under the title block
+.study-intro p { font-size: 1.1rem; line-height: 1.65; }
+
+// Stat tiles
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: $s4; margin: $s6 0; }
+.tile { background: $surface; border: 1px solid $line; border-radius: $radius; padding: $s4; box-shadow: $shadow; }
+.tile .label { font-size: 0.875rem; color: $ink-2; }
+.tile .value { font-size: 2.25rem; font-weight: 600; line-height: 1.2; margin: $s1 0; }
+.tile .delta { font-size: 0.875rem; color: $ink-2; }
+.tile .delta b { font-weight: 600; color: $ink; }
+.tile .delta .up-bad, .tile .delta .down-bad { color: $bad; }
+.tile .delta .up-good, .tile .delta .down-good { color: $good; }
+
+// Chart card
+.chart-card { background: $surface; border: 1px solid $line; border-radius: $radius; padding: $s4; margin: $s5 0; box-shadow: $shadow; }
+.chart-card .chart-title { font-size: 1.15rem; font-weight: 650; margin: 0 0 $s1; max-width: none; }
+.chart-card .chart-sub { color: $muted; font-size: 0.875rem; margin: 0 0 $s3; }
+.chart-card .credit { color: $muted; font-size: 0.8rem; line-height: 1.5; margin-top: $s3; }
+.chart-card details { border-top: 1px solid $line; margin-top: $s3; }
+.chart-card table { font-size: 0.875rem; font-variant-numeric: tabular-nums; margin: 0 0 $s2; }
+.chart-card summary, .detail-group summary {
+  display: flex; align-items: center; min-height: 44px; cursor: pointer;
+  font-size: 0.9rem; font-weight: 600; color: $teal-800;
+}
+.chart-card summary:hover, .detail-group summary:hover { color: $teal-900; }
+
+.chart-narrow { display: none; }
+
+// Data table in its own scroll box: wide or long tables scroll here, not the card
+.table-box {
+  max-height: 320px; overflow: auto; margin: 0 0 $s3;
+  border: 1px solid $line; border-radius: $radius; background: $surface;
+}
+.table-box table { margin: 0; }
+.table-box thead th { position: sticky; top: 0; background: $surface; box-shadow: inset 0 -1px 0 $line; }
+.table-box td, .table-box th { white-space: nowrap; }
+
+// APA reference list: hanging indent
+ul.references { list-style: none; padding-left: 0; }
+ul.references li { padding-left: 2em; text-indent: -2em; margin-bottom: $s2; max-width: none; }
+
+// Callouts: note (turquoise) and caveat (amber)
+.callout { border-radius: $radius; box-shadow: none; }
+.callout.callout-style-simple { padding: $s4; }
+.callout-note { background: $teal-50; border-color: $teal-100 !important; border-left-color: $teal-500 !important; }
+.callout-caution { background: $caution-bg; border-color: #f1e3bb !important; border-left-color: $caution !important; }
+
+// Method and sources (layer 4)
+.detail-group { background: $surface; border: 1px solid $line; border-radius: $radius; padding: 0 $s4; margin: $s6 0; box-shadow: $shadow; }
+.detail-group details + details { border-top: 1px solid $line; }
+.detail-group details > div { padding-bottom: $s4; }
+
+// Link cards: study cards and prev/next
+.link-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: $s4; }
+.link-card {
+  display: block; text-decoration: none; color: inherit; background: $surface;
+  border: 1px solid $line; border-radius: $radius; padding: $s4; min-height: 44px; box-shadow: $shadow;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+a.link-card:hover { border-color: $teal-500; box-shadow: 0 4px 16px rgba(13, 148, 136, 0.12); transform: translateY(-1px); color: inherit; }
+.link-card .kicker { font-size: 0.8rem; color: $teal-700; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.link-card .title { font-weight: 600; margin: $s1 0; color: $ink; }
+.link-card .desc { color: $ink-2; margin: $s1 0; }
+.link-card .date { font-size: 0.8rem; color: $muted; }
+.link-card.soon { background: transparent; box-shadow: none; border-style: dashed; border-color: $context; }
+.link-card.soon .kicker { color: $muted; }
+.link-card.featured .title { font-size: 1.4rem; line-height: 1.3; }
+.link-card.next { text-align: right; }
+.prevnext { display: grid; grid-template-columns: 1fr 1fr; gap: $s4; margin-top: $s7; }
+.section-label { font-size: 0.875rem; font-weight: 600; color: $muted; text-transform: uppercase; letter-spacing: 0.04em; margin: $s6 0 $s3; }
+
+// "How this works" points
+.points { display: grid; grid-template-columns: repeat(3, 1fr); gap: $s4; list-style: none; padding: 0; }
+.points > li { background: $surface; border: 1px solid $line; border-radius: $radius; padding: $s4; box-shadow: $shadow; max-width: none; }
+.points h3 { font-size: 1.05rem; margin-top: 0; }
+.points h3::before { content: ""; display: block; width: 28px; height: 4px; border-radius: 2px; background: $teal-500; margin-bottom: $s3; }
+
+// Contents list
+nav#TOC a.nav-link.active { color: $teal-800; font-weight: 600; border-left-color: $teal-500; }
+nav#TOC a.nav-link:hover { color: $teal-800; }
+
+// Footer: the one dark turquoise band
+.nav-footer { background: $teal-900; color: $teal-100; border-top: 0; }
+.nav-footer a { color: #fff; }
+
+// Phone (DESIGN.md §4.1 "On a phone")
+@media (max-width: 720px) {
+  h1.title, h1 { font-size: 1.6rem; }
+  .tiles { grid-template-columns: 1fr; gap: $s3; }
+  .tile { display: grid; grid-template-columns: 1fr auto; align-items: baseline; column-gap: $s3; padding: $s3; }
+  .tile .value { font-size: 1.75rem; grid-row: span 2; grid-column: 2; margin: 0; }
+  .chart-card { padding: $s3; }
+  .chart-wide { display: none; }
+  .chart-narrow { display: block; }
+  .prevnext, .points { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-card { transition: none; }
+  a.link-card:hover { transform: none; }
+}

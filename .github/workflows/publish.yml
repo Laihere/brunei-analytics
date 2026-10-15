@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.3.0  # this action publishes exact tags only, no "v10"
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: 1.10.19

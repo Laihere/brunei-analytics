@@ -77,9 +77,9 @@ def chart_card(
 
     def render(f: go.Figure, h: int) -> str:
         # The subtitle carries the measure and unit, so axis titles would only repeat it.
-        f.update_layout(height=h)
-        f.update_xaxes(title=None)
-        f.update_yaxes(title=None)
+        f.update_layout(height=h, dragmode=False)
+        f.update_xaxes(title=None, fixedrange=True)  # every subplot axis: no zoom or pan
+        f.update_yaxes(title=None, fixedrange=True)
         return f.to_html(full_html=False, include_plotlyjs=False, config=CONFIG)
 
     plot = render(fig, height)

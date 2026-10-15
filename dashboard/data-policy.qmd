@@ -4,8 +4,9 @@ title: "Data use policy"
 
 ```{python}
 #| output: asis
-from shared.paths import ROOT
+from shared.paths import REPO_URL, ROOT
+from shared.policy import public_policy
 
-policy = (ROOT / "DATA_USE_POLICY.md").read_text().split("\n", 1)[1]
-print(policy)
+text = (ROOT / "DATA_USE_POLICY.md").read_text()
+print(public_policy(text, REPO_URL))
 ```

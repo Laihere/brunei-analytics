@@ -20,6 +20,9 @@ website:
       - href: about.qmd
         text: About
     right:
+      - icon: github
+        href: https://github.com/Laihere/brunei-analytics
+        aria-label: Code and documentation on GitHub
       - icon: person-circle
         href: https://laihere.github.io/laihere281-portfolio/
         aria-label: Portfolio of Muhd Lai Razi

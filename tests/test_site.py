@@ -66,6 +66,7 @@ def test_chart_card_has_credit_table_and_alt_text():
     assert "Show data table" in html and "<table" in html
     assert 'aria-label="A rose, B flat"' in html
     assert "plotly.js v" not in html  # library loaded once per page, not embedded
+    assert '"fixedrange":true' in html and '"dragmode":false' in html  # no accidental zoom
 
 
 def test_chart_card_requires_alt_text():
@@ -87,3 +88,19 @@ def test_prev_next_links_to_following_study(tmp_path):
     html = prev_next("01-a.qmd", tmp_path).data
     assert 'href="02-b.html"' in html and "02 · Study 02" in html
     assert 'href="02' not in prev_next("02-b.qmd", tmp_path).data
+
+
+def test_public_policy_hides_internal_sections():
+    from shared.policy import public_policy
+
+    text = public_policy((ROOT / "DATA_USE_POLICY.md").read_text(), "https://example.org/repo")
+    assert "Open questions for EGNC" not in text
+    assert "Our working rules" not in text
+    assert "How the code applies this policy" not in text
+    assert "(§4)" not in text
+    headings = re.findall(r"(?m)^## (\d+)\.", text)
+    assert headings == ["1", "2", "3", "4"]
+    assert "Approved sources" in text
+    assert "[full policy](https://example.org/repo/blob/main/DATA_USE_POLICY.md)" in text
+    assert "[DATA_SOURCES.md](https://example.org/repo/blob/main/DATA_SOURCES.md)" in text
+    assert "`brunei_analytics`" not in text

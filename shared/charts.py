@@ -28,7 +28,15 @@ GRID = "#e1e0d9"
 BASELINE = "#c3c2b7"
 FONT = 'system-ui, -apple-system, "Segoe UI", sans-serif'
 
-CONFIG = {"displayModeBar": False, "responsive": True}
+# Read-only charts: hover/tap tooltips stay, but no zoom, pan or double-tap reset, which
+# were easy to trigger by accident on phones.
+CONFIG = {
+    "displayModeBar": False,
+    "responsive": True,
+    "scrollZoom": False,
+    "doubleClick": False,
+    "showAxisDragHandles": False,
+}
 
 _axis = dict(
     automargin=True,

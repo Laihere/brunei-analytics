@@ -1,0 +1,222 @@
+---
+title: "Brunei's road injuries and deaths fell by about a quarter in 2009–2017, while accidents held steady"
+description: "Did road accidents, injuries and deaths go up or down from 2009 to 2017?"
+number: "03"
+topic: "Social"
+data-period: "2009–2017"
+read-time: "4-minute read"
+date: 2026-10-16
+---
+
+```{python}
+import sys
+
+from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+STUDY = CASE_STUDIES / "03_road_casualties"
+sys.path.insert(0, str(STUDY / "analysis"))
+import figures as F  # noqa: E402
+
+roads, prov_roads, notes_roads = read_output(STUDY / "outputs" / "road_casualties.csv")
+avg, prov_avg, notes_avg = read_output(STUDY / "outputs" / "road_periods.csv")
+check, prov_check, notes_check = read_output(STUDY / "outputs" / "road_crosscheck.csv")
+
+FIRST, LAST = int(roads.year.min()), int(roads.year.max())
+y = roads.set_index("year")
+# Period figures from the counts, not the rounded averages, to avoid double rounding.
+P1, P2, P3 = avg.period.tolist()
+
+
+def period(p, col):
+    a, b = (int(v) for v in p.split("–"))
+    return y.loc[a:b, col].mean()
+
+
+def per(p, col, unit):
+    a, b = (int(v) for v in p.split("–"))
+    return y.loc[a:b, col].sum() / y.loc[a:b, "accidents"].sum() * unit
+
+
+def num(v):
+    return f"{v:,.0f}"
+
+
+def signed(v, d=0):
+    return f"{v:+.{d}f}%".replace("-", "−")
+
+
+def size(v, d=0):
+    """Size of a rise or fall for prose ("fell 27%"), where the verb carries the sign."""
+    return f"{abs(v):.{d}f}%"
+
+
+def change(a, b):
+    return (b / a - 1) * 100
+
+
+acc1, acc2, acc3 = (period(p, "accidents") for p in (P1, P2, P3))
+inj1, inj2, inj3 = (period(p, "injuries") for p in (P1, P2, P3))
+dth1, dth2, dth3 = (period(p, "deaths") for p in (P1, P2, P3))
+ipa1, ipa3 = per(P1, "injuries", 100), per(P3, "injuries", 100)
+dpa1, dpa2, dpa3 = (per(p, "deaths", 1000) for p in (P1, P2, P3))
+step = {c: change(y.loc[2011, c], y.loc[2012, c]) for c in ("accidents", "injuries", "deaths")}
+dmin, dmax = y.deaths.min(), y.deaths.max()
+dmin_year, dmax_year = y.deaths.idxmin(), y.deaths.idxmax()
+inj_2017_high = y.loc[2012:2017, "injuries"].idxmax() == 2017
+```
+
+::: {.study-intro}
+This case study looks at **road accidents recorded by the Royal Brunei Police Force from
+2009 to 2017**, and the people injured and killed in them. Because single years swing a lot,
+it compares three 3-year periods: 2009–2011, 2012–2014 and 2015–2017. The data ends in 2017,
+although it was published in 2025. It shows **what changed and when, not why**.
+
+It asks two questions, answered in the conclusion:
+
+1. **Did road accidents, injuries and deaths go up or down from 2009 to 2017?**
+2. **Did accidents become less likely to injure or kill?**
+:::
+
+```{python}
+stat_tiles(
+    stat_tile(f"People killed a year, {P3}", num(dth3), signed(change(dth1, dth3)), f"vs {P1} ({num(dth1)} a year)"),
+    stat_tile(f"People injured a year, {P3}", num(inj3), signed(change(inj1, inj3)), f"vs {P1} ({num(inj1)} a year)"),
+    stat_tile(f"Accidents a year, {P3}", num(acc3), signed(change(acc1, acc3)), f"vs {P1} ({num(acc1)} a year)"),
+)
+```
+
+```{python}
+fig, table = F.overview(roads, avg)
+chart_card(
+    fig,
+    title="Accidents held steady while injuries and deaths stepped down after 2011",
+    subtitle=f"Accidents, people injured and people killed per year · {FIRST}–{LAST} · dotted lines: 3-year averages",
+    alt=(
+        f"Three line charts. Accidents stay between {num(y.accidents.min())} and "
+        f"{num(y.accidents.max())} a year. People injured average {num(inj1)} a year in {P1}, "
+        f"then {num(inj2)} and {num(inj3)}. People killed average {num(dth1)}, then "
+        f"{num(dth2)} and {num(dth3)}."
+    ),
+    provenance=prov_roads,
+    table=table,
+    height=340,
+    mobile_fig=F.overview(roads, avg, cols=1)[0],
+    mobile_height=760,
+)
+```
+
+## Accidents, injuries and deaths, 2009–2017
+
+The police recorded between `{python} num(y.accidents.min())` and
+`{python} num(y.accidents.max())` road accidents a year. The 3-year averages barely moved:
+`{python} num(acc1)`, `{python} num(acc2)` and `{python} num(acc3)` a year.
+
+The number of people hurt did change. People injured averaged `{python} num(inj1)` a year in
+`{python} P1`, then `{python} num(inj2)` and `{python} num(inj3)`. People killed averaged
+`{python} num(dth1)` a year, then `{python} num(dth2)` and `{python} num(dth3)`.
+
+## The step down in 2012
+
+Most of the fall happened in a single year. From 2011 to 2012, injuries fell
+`{python} size(step["injuries"])` and deaths `{python} size(step["deaths"])`, while accidents
+fell `{python} size(step["accidents"])`. Both then stayed near their new level.
+
+::: {.callout-note appearance="simple" title="Why the step isn't explained here"}
+The source doesn't say why injuries and deaths dropped in 2012. It could be a real fall in
+serious accidents, or a change in how injuries and deaths were recorded. Fire and Rescue's
+figures, used here as a check, only start in 2012, so they can't confirm it either way.
+:::
+
+## Deaths year by year, 2009–2017
+
+Road deaths varied from `{python} num(dmin)` (`{python} dmin_year`) to `{python} num(dmax)`
+(`{python} dmax_year`) a year. With numbers this small, one year's change says little: a
+single serious crash can move the total. The 3-year averages give a steadier picture.
+
+```{python}
+fig, table = F.deaths(roads, avg)
+chart_card(
+    fig,
+    title=f"Road deaths ranged from {num(dmin)} to {num(dmax)} a year; the 3-year average fell from {num(dth1)} to {num(dth3)}",
+    subtitle=f"People killed in road accidents per year · {FIRST}–{LAST} · lines: 3-year averages",
+    alt=(
+        f"Bar chart of road deaths per year, from {num(dmin)} in {dmin_year} to {num(dmax)} in "
+        f"{dmax_year}, with 3-year averages of {num(dth1)}, {num(dth2)} and {num(dth3)}."
+    ),
+    provenance=prov_roads,
+    table=table,
+)
+```
+
+## Injuries and deaths per accident, 2009–2017
+
+Because accidents held steady while injuries fell, each accident injured fewer people on
+average: `{python} f"{ipa1:.1f}"` people per 100 accidents in `{python} P1`, against
+`{python} f"{ipa3:.1f}"` in `{python} P3`. Deaths per 1,000 accidents fell from
+`{python} f"{dpa1:.1f}"` to `{python} f"{dpa2:.1f}"` and `{python} f"{dpa3:.1f}"`.
+
+```{python}
+fig, table = F.per_accident(roads, avg)
+chart_card(
+    fig,
+    title=f"About {ipa3:.0f} people were injured per 100 accidents after 2011, down from about {ipa1:.0f}",
+    subtitle=f"People injured per 100 recorded accidents · {FIRST}–{LAST} · dotted lines: 3-year averages",
+    alt=(
+        f"Line chart of people injured per 100 accidents: about 20 from {FIRST} to 2011, then "
+        f"between {y.loc[2012:, 'injuries_per_100_accidents'].min():.0f} and "
+        f"{y.loc[2012:, 'injuries_per_100_accidents'].max():.0f} from 2012 to {LAST}."
+    ),
+    provenance=prov_roads,
+    table=table,
+)
+```
+
+## Conclusion
+
+- **Did road accidents, injuries and deaths go up or down from 2009 to 2017?** Accidents held
+  steady (`{python} num(acc1)` a year in `{python} P1`, `{python} num(acc3)` in
+  `{python} P3`). Injuries and deaths fell by about a quarter between the same periods
+  (`{python} signed(change(inj1, inj3))` and `{python} signed(change(dth1, dth3))`), mostly in
+  one step in 2012. After that they stayed near the same level`{python} ", and 2017 had the most injuries since 2011" if inj_2017_high else ""`.
+- **Did accidents become less likely to injure or kill?** As recorded, yes: people injured per
+  100 accidents fell from `{python} f"{ipa1:.1f}"` to `{python} f"{ipa3:.1f}"`, and people
+  killed per 1,000 accidents from `{python} f"{dpa1:.1f}"` to `{python} f"{dpa3:.1f}"`.
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+<!-- Side note: required on every case study (DESIGN.md §4.1). -->
+- **Road safety today.** The latest year published is `{python} LAST`.
+- **Why.** The source doesn't explain the 2012 step. It may be a real change or a change in
+  recording.
+- **How serious.** The source doesn't define an injury (serious or slight) or a road death
+  (for example, within 30 days of the crash).
+- **Who and where.** There are no districts, road users (drivers, passengers, pedestrians,
+  motorcyclists), ages or times of day.
+- **Rates per person or vehicle.** These are counts. Brunei's population and number of
+  vehicles changed over these years, and the counts aren't adjusted for that.
+:::
+
+```{python}
+method_and_sources(
+    prov_roads + prov_check,
+    notes=f"{notes_roads} {notes_avg} {notes_check}",
+    steps=[
+        "Downloaded the Royal Brunei Police Force road casualties table from data.gov.bn "
+        f"({FIRST}–{LAST}), and Fire and Rescue's road traffic accident table for a check.",
+        "Reshaped the police table to one row per year, checking that every year has "
+        "accidents, injuries and deaths and that no year is missing.",
+        "Computed people injured per 100 accidents and people killed per 1,000 accidents, and "
+        "averages over three 3-year periods (period ratios use the period totals).",
+        "Checked against Fire and Rescue, which counts only accidents its crews attended: its "
+        "deaths and injuries are below the police totals in every year from 2012 to "
+        f"{int(check.year.max())}, as expected for a subset. Its figures aren't charted, "
+        "because they measure something narrower.",
+    ],
+    code_url=f"{REPO_URL}/tree/main/case_studies/03_road_casualties",
+)
+```
+
+```{python}
+prev_next("03-road-casualties.qmd", ROOT / "dashboard" / "case-studies")
+```

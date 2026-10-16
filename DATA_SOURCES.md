@@ -23,6 +23,8 @@ Use `shared.fetch.download` (or `shared.fetch.adopt` for files downloaded by han
 | Consumer price index, Brunei (FP.CPI.TOTL) | World Bank WDI, original source IMF International Financial Statistics | — | CC BY 4.0 (per indicator metadata) | 2026 (pulled) | 2010–2025 | [link](https://data.worldbank.org/indicator/FP.CPI.TOTL?locations=BN) | `FP_CPI_TOTL.csv` | 15 Oct 2026 | None. Cross-check only | 01 (cross-check) |
 | Crime Statistics (2012 file) | data.gov.bn | Royal Brunei Police Force | Data.gov.bn Data Policy | 2012 | 2012, annual | [link](https://www.data.gov.bn/crime-statistics-2/) | `2-Crime-Statistics-2012.xlsx` (sha256 `16391d55…`) | 16 Oct 2026 | Read by label; "-" as missing; Acts with < 5 cases merged into "Other Acts" | 02 Crime statistics, 2012–2013 |
 | Crime Statistics (2013 file) | data.gov.bn | Royal Brunei Police Force | Data.gov.bn Data Policy | 2013 | 2013, annual | [link](https://www.data.gov.bn/crime-statistics/) | `3-Crime-Statistics-2013.xlsx` (sha256 `9aa72ec8…`) | 16 Oct 2026 | Read by label; "-" as missing; Acts with < 5 cases merged into "Other Acts" | 02 Crime statistics, 2012–2013 |
+| Road Casualties | data.gov.bn | Royal Brunei Police Force | Data.gov.bn Data Policy | 2025 (no year in title) | 2009–2017, annual | [link](https://www.data.gov.bn/road-casualties/) | `1-Road-Casualities.xlsx` (sha256 `ff7161aa…`) | 16 Oct 2026 | Reshaped to one row per year; ratios and 3-year averages computed | 03 Road casualties |
+| Statistics of Road Traffic Accidents | data.gov.bn | Fire and Rescue Department Brunei Darussalam | Data.gov.bn Data Policy | 2025 (no year in title) | 2012–2021, annual | [link](https://www.data.gov.bn/statistics-of-road-traffic-accidents/) | `STATISTIC-OF-ROAD-TRAFFIC-ACCIDENTS-FROM-2012-TO-2021.xlsx` (sha256 `10d61f0d…`) + `Data-Definition-of-Road-Traffic-Accidents.xlsx` (`23e0d54a…`) | 16 Oct 2026 | Two call types summed per year. Cross-check only | 03 (cross-check) |
 
 ## Known issues in source data
 
@@ -70,3 +72,24 @@ of the rows in both years.
 | 4 | Same Act named differently | "Akta KDN" (2012) vs "Akta Keselamatan Dalam Negeri" (2013), both "Internal Security Act" | Match on the English name |
 | 5 | Very small counts (1–3 cases or arrests) for several Acts | e.g. Internal Security Act 2013: 1 case, 1 arrest | SOP 7: merge Acts with fewer than 5 cases into "Other Acts" |
 | 6 | Arrests can exceed cases | e.g. Various Acts 2012: 136 cases, 283 persons arrested | Not an error: arrests count persons. Don't compute arrests ÷ cases as a rate |
+
+### Road Casualties (checked 16 Oct 2026)
+
+Tidy long table (Year, Type, Amount), newest year first. Published 2025 but ends in 2017.
+
+| # | Issue | Evidence | Status |
+|---|---|---|---|
+| 1 | Data ends in 2017 | Last year in the file; no later Royal Brunei Police Force table in the catalogue | Open: state the period on every title and card |
+| 2 | One column mixes units | "Accidents" counts events; "Injuries" and "Deaths" count people | Reshape so each measure is its own column |
+| 3 | Injuries fell 30% and deaths 40% from 2011 to 2012, accidents only 8%; both stay at the lower level after | 699 → 489 injuries; 47 → 28 deaths | Open: not explained (could be a real change or a change in recording). Report as a step and say the cause isn't known |
+| 4 | Terms not defined | No definition of an injury (serious or slight) or a road death (e.g. within 30 days) | State in limitations |
+| 5 | Deaths vary a lot from year to year | 17 (2016) to 47 (2011) | Compare 3-year averages, not single years |
+| 6 | File name misspelt ("Casualities") | — | Cosmetic. Cite the dataset title, which is spelt correctly |
+
+### Statistics of Road Traffic Accidents (checked 16 Oct 2026)
+
+| # | Issue | Evidence | Status |
+|---|---|---|---|
+| 1 | Covers only accidents attended by Fire and Rescue | Data definition: "road traffics accidents attended by Fire and Rescue Department" | A subset, not comparable with police totals. Used only as a check: its deaths and injuries must not exceed the police figures |
+| 2 | Header on the second row; year in merged cells | Year cell spans the two call-type rows | Forward-fill the year; sum the two call types |
+| 3 | Small counts by call type (0–2) | "Car accident involving fire": 0–2 dead a year | Not published by call type; only yearly sums are used |

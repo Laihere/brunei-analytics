@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Road Casualties",
+      "page_url": "https://www.data.gov.bn/road-casualties/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/1-Road-Casualities.xlsx",
+      "owner": "Royal Brunei Police Force",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2009–2017, annual",
+      "sha256": "ff7161aa18151ba4c25ad2323c43dcd0db1c64dc441abd5f782dd79232e75ea6",
+      "original_source": "",
+      "published": "2025-12-17"
+    },
+    {
+      "source": "datagovbn",
+      "title": "Statistics of Road Traffic Accidents",
+      "page_url": "https://www.data.gov.bn/statistics-of-road-traffic-accidents/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/STATISTIC-OF-ROAD-TRAFFIC-ACCIDENTS-FROM-2012-TO-2021.xlsx",
+      "owner": "Fire and Rescue Department Brunei Darussalam",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2012–2021, annual",
+      "sha256": "10d61f0d38ac132d041ba359cfac47609fe3c6ab802328f45264907172a24dac",
+      "original_source": "",
+      "published": "2025-12-09"
+    }
+  ],
+  "notes": "Police deaths and injuries beside Fire and Rescue's (accidents its crews attended, both call types summed), for the overlapping years. Fire and Rescue's counts are a subset, so they must not exceed the police totals."
+}

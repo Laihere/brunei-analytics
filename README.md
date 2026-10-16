@@ -6,6 +6,9 @@ built with AI assistance (Claude by Anthropic). See [DATA_USE_POLICY.md](DATA_US
 Every dataset is used under its published terms. See [DATA_USE_POLICY.md](DATA_USE_POLICY.md).
 Independent analysis, not an official publication of the Government of Brunei Darussalam.
 
+Personal project: contributions are not accepted, and no licence is granted for reuse.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Sources
 
 data.gov.bn, World Bank WDI, FAOSTAT and ILOSTAT only (policy §6). Raw files are not

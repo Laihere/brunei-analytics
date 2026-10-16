@@ -1,0 +1,19 @@
+year,handled_by,offence,offence_ms,cases,solved,arrests,complete,share_of_cases_pct,solved_pct
+2012,police,Against Human Body,Terhadap Tubuh Manusia,607,452,150,True,12.05,74.46
+2012,police,Against Property,Terhadap Harta Benda,3152,423,363,True,62.58,13.42
+2012,police,Other Offences Against Penal Code,Lain-lain Kesalahan Kanun Hukuman Jenayah,1142,159,129,True,22.67,13.92
+2012,police,Against Various Acts,Melanggar Pelbagai Akta-Akta,136,99,283,True,2.7,72.79
+2012,other agencies,Against Immigration Act,Terhadap Akta Imigresen,107,107,149,True,12.56,100.0
+2012,other agencies,Against Misuses of Drug Act,Terhadap Akta Penyalahgunaan Dadah,283,282,403,True,33.22,99.65
+2012,other agencies,Against Customs & Excise Act,Terhadap Akta Kastam & Eksais,366,351,541,True,42.96,95.9
+2012,other agencies,Other Acts,Akta-akta lain,9,7,8,False,1.06,77.78
+2012,other agencies,Against Labour Act,Terhadap Akta Buruh,87,,,False,10.21,
+2013,police,Against Human Body,Terhadap Tubuh Manusia,601,491,253,True,10.92,81.7
+2013,police,Against Property,Terhadap Harta Benda,3545,480,362,True,64.42,13.54
+2013,police,Other Offences Against Penal Code,Lain-lain Kesalahan Kanun Hukuman Jenayah,1189,138,136,True,21.61,11.61
+2013,police,Against Various Acts,Melanggar Pelbagai Akta-Akta,168,116,391,True,3.05,69.05
+2013,other agencies,Against Immigration Act,Terhadap Akta Imigresen,122,122,200,True,12.99,100.0
+2013,other agencies,Against Misuses of Drug Act,Terhadap Akta Penyalahgunaan Dadah,360,360,559,True,38.34,100.0
+2013,other agencies,Against Customs & Excise Act,Terhadap Akta Kastam & Eksais,356,340,499,True,37.91,95.51
+2013,other agencies,Other Acts,Akta-akta lain,16,14,19,False,1.7,87.5
+2013,other agencies,Against Labour Act,Terhadap Akta Buruh,85,,,False,9.05,

@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Crime Statistics",
+      "page_url": "https://www.data.gov.bn/crime-statistics-2/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/2-Crime-Statistics-2012.xlsx",
+      "owner": "Royal Brunei Police Force",
+      "licence": "",
+      "edition": "2012",
+      "coverage": "2012",
+      "sha256": "16391d550eefc6fbf8c47f05ce7eb23c75be5f5e789b248dc6b05841024081ab",
+      "original_source": "",
+      "published": "2025-12-17"
+    },
+    {
+      "source": "datagovbn",
+      "title": "Crime Statistics",
+      "page_url": "https://www.data.gov.bn/crime-statistics/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/3-Crime-Statistics-2013.xlsx",
+      "owner": "Royal Brunei Police Force",
+      "licence": "",
+      "edition": "2013",
+      "coverage": "2013",
+      "sha256": "9aa72ec881126a9109022b6ab8c0949a3e56f2e9c531a08efe6fa6d947488638",
+      "original_source": "",
+      "published": "2025-12-17"
+    }
+  ],
+  "notes": "Cases, cases solved and persons arrested by type of offence, 2012–2013, read from the stored values of the yearbook tables; rows checked against the published totals. Other-agency Acts with fewer than 5 cases in any year merged into 'Other Acts'. '-' cells read as missing, so 'complete' is False where a solved or arrest count is a lower bound. Share and solved % computed by the author."
+}

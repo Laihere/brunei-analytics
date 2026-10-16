@@ -1,0 +1,250 @@
+---
+title: "Property offences made up nearly two-thirds of police cases in Brunei in 2012–2013"
+description: "What kinds of offences did the police handle in 2012 and 2013, and how many were solved?"
+number: "02"
+topic: "Social"
+data-period: "2012–2013"
+read-time: "3-minute read"
+date: 2026-10-16
+---
+
+```{python}
+import sys
+
+from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+STUDY = CASE_STUDIES / "02_crime_statistics"
+sys.path.insert(0, str(STUDY / "analysis"))
+import figures as F  # noqa: E402
+
+rows, prov_rows, notes_rows = read_output(STUDY / "outputs" / "crime_offences.csv")
+totals, prov_totals, notes_totals = read_output(STUDY / "outputs" / "crime_totals.csv")
+
+FIRST, LAST = int(rows.year.min()), int(rows.year.max())
+PROPERTY, BODY = "Against Property", "Against Human Body"
+PENAL, VARIOUS = "Other Offences Against Penal Code", "Against Various Acts"
+DRUGS, CUSTOMS = "Against Misuses of Drug Act", "Against Customs & Excise Act"
+IMMIGRATION, LABOUR = "Against Immigration Act", "Against Labour Act"
+
+t = totals.set_index(["handled_by", "year"])
+r = rows.set_index(["handled_by", "offence", "year"])
+
+
+def num(v):
+    return f"{v:,.0f}"
+
+
+def pct(v, d=0):
+    return f"{v:.{d}f}%"
+
+
+def rise(v, d=1):
+    """Size of a rise or fall for prose ("rose 9.3%"), where the verb carries the sign."""
+    return f"{abs(v):.{d}f}%"
+
+
+def signed(v, d=1):
+    return f"{v:+.{d}f}%".replace("-", "−")
+
+
+def change(handled_by, offence):
+    a, b = r.loc[(handled_by, offence, FIRST), "cases"], r.loc[(handled_by, offence, LAST), "cases"]
+    return (b / a - 1) * 100
+
+
+def share(handled_by, offence, year=LAST):
+    """Share of cases from the counts, not the rounded share column, to avoid double rounding."""
+    return r.loc[(handled_by, offence, year), "cases"] / t.loc[(handled_by, year), "cases"] * 100
+
+
+def police(offence, col, year=LAST):
+    return r.loc[("police", offence, year), col]
+
+
+def other(offence, col, year=LAST):
+    return r.loc[("other agencies", offence, year), col]
+
+
+cases_first, cases_last = t.loc[("police", FIRST), "cases"], t.loc[("police", LAST), "cases"]
+cases_change = (cases_last / cases_first - 1) * 100
+prop_share_first = share("police", PROPERTY, FIRST)
+prop_share_last = share("police", PROPERTY)
+penal_share = share("police", PROPERTY) + share("police", PENAL)
+solved_first = t.loc[("police", FIRST), "solved"] / cases_first * 100
+solved_last = t.loc[("police", LAST), "solved"] / cases_last * 100
+prop_extra = police(PROPERTY, "cases") - police(PROPERTY, "cases", FIRST)
+police_extra = cases_last - cases_first
+other_first, other_last = t.loc[("other agencies", FIRST), "cases"], t.loc[("other agencies", LAST), "cases"]
+drug_share_last = share("other agencies", DRUGS)
+customs_share_last = share("other agencies", CUSTOMS)
+```
+
+::: {.study-intro}
+This case study looks at the **crime statistics published by the Royal Brunei Police Force
+for 2012 and 2013**: how many cases were recorded, what kinds of offences they were, how many
+were solved and how many people were arrested. These are the only two years available on
+data.gov.bn, so this is **a snapshot from over a decade ago, not a picture of crime today**. It
+shows what was recorded, not why.
+
+It asks two questions, answered in the conclusion:
+
+1. **What kinds of offences made up police cases, and how many were solved?**
+2. **What changed from 2012 to 2013?**
+:::
+
+```{python}
+stat_tiles(
+    stat_tile(f"Police cases, {LAST}", num(cases_last), signed(cases_change), f"vs {FIRST} ({num(cases_first)})"),
+    stat_tile(f"Against property, {LAST}", pct(prop_share_last), "", f"of police cases ({FIRST}: {pct(prop_share_first)})"),
+    stat_tile(f"Police cases solved, {LAST}", pct(solved_last), "", f"{FIRST}: {pct(solved_first)}"),
+)
+```
+
+```{python}
+fig, table = F.police_cases(rows)
+chart_card(
+    fig,
+    title="Nearly two in three police cases were offences against property",
+    subtitle=f"Cases handled by police, by type of offence · {FIRST} and {LAST}",
+    alt=(
+        f"Bar chart of police cases by type of offence. Offences against property are the "
+        f"largest group in both years ({num(police(PROPERTY, 'cases', FIRST))} in {FIRST}, "
+        f"{num(police(PROPERTY, 'cases'))} in {LAST}), followed by other Penal Code offences, "
+        f"offences against the human body and various Acts."
+    ),
+    provenance=prov_rows,
+    table=table,
+    height=380,
+)
+```
+
+## Cases handled by police, 2012–2013
+
+The police table groups cases into four types. Offences against property were the largest:
+`{python} pct(prop_share_first)` of police cases in `{python} FIRST` and
+`{python} pct(prop_share_last)` in `{python} LAST`. Together with other Penal Code offences,
+they made up `{python} pct(penal_share)` of police cases in `{python} LAST`. Offences against
+the human body were about one in ten (`{python} num(police(BODY, "cases"))` cases in
+`{python} LAST`).
+
+### Cases solved
+
+The share of cases solved differed widely by type of offence. In `{python} LAST`, about
+`{python} pct(police(BODY, "solved_pct"))` of offences against the human body were recorded as
+solved, against `{python} pct(police(PROPERTY, "solved_pct"))` of offences against property.
+Because property offences were the largest group, the share solved across all police cases
+was `{python} pct(solved_last)`.
+
+::: {.callout-note appearance="simple" title="What “solved” means here"}
+The source counts cases as **solved** but doesn't define the term or say when it was counted,
+for example whether a case reported in December and solved the next year counts as solved.
+Read these shares as published figures, not as a measure of how well any agency performs.
+:::
+
+```{python}
+fig, table = F.police_solved(rows)
+chart_card(
+    fig,
+    title="Most offences against the human body were solved; about one in seven property offences were",
+    subtitle=f"Share of police cases recorded as solved, by type of offence (%) · {FIRST} and {LAST}",
+    alt=(
+        f"Bar chart of the share of police cases solved. In {LAST}: against the human body "
+        f"{pct(police(BODY, 'solved_pct'))}, various Acts {pct(police(VARIOUS, 'solved_pct'))}, "
+        f"against property {pct(police(PROPERTY, 'solved_pct'))}, other Penal Code offences "
+        f"{pct(police(PENAL, 'solved_pct'))}."
+    ),
+    provenance=prov_rows,
+    table=table,
+    height=380,
+)
+```
+
+## Cases handled by other agencies, 2012–2013
+
+A second table lists cases handled by other agencies under specific Acts:
+`{python} num(other_first)` in `{python} FIRST` and `{python} num(other_last)` in
+`{python} LAST`. Drug cases and customs and excise cases were the two largest groups,
+together `{python} pct(drug_share_last + customs_share_last)` of the `{python} LAST` total. Almost all of these cases were recorded as solved, but the two tables count different
+kinds of cases, so their solved shares shouldn't be compared.
+
+Acts with fewer than 5 cases in either year are merged into "Other Acts" to protect privacy.
+For the Labour Act, the source doesn't publish solved cases or arrests.
+
+```{python}
+fig, table = F.other_agency_cases(rows)
+chart_card(
+    fig,
+    title=f"Drug cases rose from {num(other(DRUGS, 'cases', FIRST))} to {num(other(DRUGS, 'cases'))}; customs cases changed little",
+    subtitle=f"Cases handled by other agencies, by Act · {FIRST} and {LAST}",
+    alt=(
+        f"Bar chart of cases handled by other agencies. Customs and excise: "
+        f"{num(other(CUSTOMS, 'cases', FIRST))} then {num(other(CUSTOMS, 'cases'))}. Misuse of "
+        f"drugs: {num(other(DRUGS, 'cases', FIRST))} then {num(other(DRUGS, 'cases'))}. "
+        f"Immigration: {num(other(IMMIGRATION, 'cases', FIRST))} then "
+        f"{num(other(IMMIGRATION, 'cases'))}. Labour: {num(other(LABOUR, 'cases', FIRST))} then "
+        f"{num(other(LABOUR, 'cases'))}. Other Acts are small."
+    ),
+    provenance=prov_rows,
+    table=table,
+    height=420,
+)
+```
+
+## What changed from 2012 to 2013
+
+Police cases rose `{python} rise(cases_change)`, from `{python} num(cases_first)` to
+`{python} num(cases_last)`. Offences against property account for
+`{python} num(prop_extra)` of the `{python} num(police_extra)` extra cases
+(`{python} signed(change("police", PROPERTY))`). Offences against the human body changed little
+(`{python} signed(change("police", BODY))`). Among other agencies, drug cases rose
+`{python} rise(change("other agencies", DRUGS))`, while customs and excise cases changed
+little (`{python} signed(change("other agencies", CUSTOMS))`).
+
+With only two years, these are changes between two single years, not trends.
+
+## Conclusion
+
+- **What kinds of offences made up police cases, and how many were solved?** Offences against
+  property: `{python} pct(prop_share_last)` of police cases in `{python} LAST`. About
+  `{python} pct(solved_last)` of all police cases were recorded as solved in both years, from
+  about `{python} pct(police(BODY, "solved_pct"))` of offences against the human body to
+  `{python} pct(police(PROPERTY, "solved_pct"))` of property offences.
+- **What changed from 2012 to 2013?** Police cases rose `{python} rise(cases_change)`, mostly
+  from property offences. The mix of offences and the overall share solved stayed much the
+  same. Among other agencies, drug cases rose the most in number.
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+<!-- Side note: required on every case study (DESIGN.md §4.1). -->
+- **Crime today.** The latest published year is `{python} LAST`. Much may have changed since.
+- **Trends.** Two years can't show a trend. A rise from one year to the next may not continue.
+- **All crime.** These are cases recorded by the police and other agencies. Offences that
+  weren't reported or detected aren't counted, and more cases can mean more reporting or
+  enforcement as well as more offences.
+- **Detail.** There are no districts, months or specific offences (such as theft or assault)
+  inside the four police groups, and no population figures to turn counts into rates.
+- **Missing values.** Some cells are "-" in the source, which isn't explained. They are
+  treated as missing, so solved counts for the Labour Act and "Other Acts" are incomplete.
+:::
+
+```{python}
+method_and_sources(
+    prov_rows,
+    notes=f"{notes_rows} {notes_totals}",
+    steps=[
+        f"Downloaded the Royal Brunei Police Force crime statistics tables for {FIRST} and "
+        f"{LAST} from data.gov.bn, the only years available.",
+        "Read the cases, solved cases and arrests for each type of offence, and checked that "
+        "they add up to the published totals in both years.",
+        "Treated \"-\" cells as missing, and merged Acts with fewer than 5 cases in either "
+        "year into \"Other Acts\" (privacy).",
+        "Computed each type's share of cases and the share solved, and compared the two years.",
+    ],
+    code_url=f"{REPO_URL}/tree/main/case_studies/02_crime_statistics",
+)
+```
+
+```{python}
+prev_next("02-crime-statistics.qmd", ROOT / "dashboard" / "case-studies")
+```

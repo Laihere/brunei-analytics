@@ -21,6 +21,8 @@ Use `shared.fetch.download` (or `shared.fetch.adopt` for files downloaded by han
 | Consumer Price Index 2024 | data.gov.bn | Department of Economic Planning and Statistics | Data.gov.bn Data Policy | 2024 | 2015–2024, annual | [link](https://www.data.gov.bn/consumer-price-index-2024/) | `Consumer-Price-Index-2024.xlsx` (sha256 `cc04ffd6…`) | 15 Oct 2026 | None. Cross-check only | 01 (cross-check) |
 | Inflation, consumer prices (annual %), Brunei (FP.CPI.TOTL.ZG) | World Bank WDI, original source IMF International Financial Statistics | — | CC BY 4.0 (per indicator metadata) | 2026 (pulled) | 2010–2025 | [link](https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=BN) | `FP_CPI_TOTL_ZG.csv` | 15 Oct 2026 | None. Cross-check only | 01 (cross-check) |
 | Consumer price index, Brunei (FP.CPI.TOTL) | World Bank WDI, original source IMF International Financial Statistics | — | CC BY 4.0 (per indicator metadata) | 2026 (pulled) | 2010–2025 | [link](https://data.worldbank.org/indicator/FP.CPI.TOTL?locations=BN) | `FP_CPI_TOTL.csv` | 15 Oct 2026 | None. Cross-check only | 01 (cross-check) |
+| Crime Statistics (2012 file) | data.gov.bn | Royal Brunei Police Force | Data.gov.bn Data Policy | 2012 | 2012, annual | [link](https://www.data.gov.bn/crime-statistics-2/) | `2-Crime-Statistics-2012.xlsx` (sha256 `16391d55…`) | 16 Oct 2026 | Read by label; "-" as missing; Acts with < 5 cases merged into "Other Acts" | 02 Crime statistics, 2012–2013 |
+| Crime Statistics (2013 file) | data.gov.bn | Royal Brunei Police Force | Data.gov.bn Data Policy | 2013 | 2013, annual | [link](https://www.data.gov.bn/crime-statistics/) | `3-Crime-Statistics-2013.xlsx` (sha256 `9aa72ec8…`) | 16 Oct 2026 | Read by label; "-" as missing; Acts with < 5 cases merged into "Other Acts" | 02 Crime statistics, 2012–2013 |
 
 ## Known issues in source data
 
@@ -53,3 +55,18 @@ After repairs, every year's implied change matches the published % change within
 | 2 | "Laila Rice" (2015–2019) replaced by "Local Rice" (2020–2025) | Different item names, no overlap year | Treat as a series break. Don't join the two without confirmation |
 | 3 | "Saloon Car (1,500cc)" listed 2015–2019 only | Dropped from 2020 | Exclude (not a household staple, and no recent data) |
 | 4 | Header cell has leading spaces; prices in BND | — | Strip whitespace when cleaning |
+
+### Crime Statistics, 2012 and 2013 files (checked 16 Oct 2026)
+
+Both portal pages are titled "Crime Statistics"; the files are yearbook tables 14.2 (2012) and
+14.3 (2013), bilingual Malay/English. Totals are Excel formulas; the stored values match the sum
+of the rows in both years.
+
+| # | Issue | Evidence | Status |
+|---|---|---|---|
+| 1 | Only two single-year files on the portal | No other Royal Brunei Police Force crime table in the catalogue | Open: limits the study to 2012–2013 |
+| 2 | "-" used for some cells | e.g. Labour Act: 87 cases, solved "-", arrests "-". Could mean nil or not recorded | Treat as missing, not zero. The published totals count it as zero, so "solved %" for other agencies is a lower bound |
+| 3 | The list of Acts in "Cases handled by other agencies" differs by year | 2012 has Telecommunication and Halal Meat Acts; 2013 has Electricity, Agricultural, and Religious Council & Kadis Courts Acts | Compare the totals and the Acts present in both years only |
+| 4 | Same Act named differently | "Akta KDN" (2012) vs "Akta Keselamatan Dalam Negeri" (2013), both "Internal Security Act" | Match on the English name |
+| 5 | Very small counts (1–3 cases or arrests) for several Acts | e.g. Internal Security Act 2013: 1 case, 1 arrest | SOP 7: merge Acts with fewer than 5 cases into "Other Acts" |
+| 6 | Arrests can exceed cases | e.g. Various Acts 2012: 136 cases, 283 persons arrested | Not an error: arrests count persons. Don't compute arrests ÷ cases as a rate |

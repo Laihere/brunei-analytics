@@ -180,6 +180,31 @@ a.link-card:hover { border-color: $teal-500; box-shadow: 0 4px 16px rgba(13, 148
 }
 .chip:hover { border-color: $teal-500; }
 .chip[aria-pressed="true"] { background: $teal-700; border-color: $teal-700; color: #fff; font-weight: 600; }
+// Glossary terms (shared/glossary.py): dotted underline, pop-up next to the term
+span.term, button.term {
+  font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: help;
+  text-decoration: underline dotted $teal-700; text-decoration-thickness: 2px; text-underline-offset: 3px;
+}
+button.term:hover, button.term:focus-visible { color: $teal-800; background: $teal-50; border-radius: 3px; }
+button.term:focus-visible { outline: 2px solid $teal-500; outline-offset: 2px; }
+.term-pops { display: contents; }
+.term-pop {
+  position: fixed; inset: auto; margin: 0; max-width: min(360px, calc(100vw - 16px));
+  background: $surface; color: $ink; border: 1px solid $line; border-top: 3px solid $teal-500;
+  border-radius: $radius; padding: $s3 $s4; box-shadow: 0 8px 24px rgba(11, 11, 11, 0.16);
+  font-size: 0.925rem; line-height: 1.5;
+}
+.term-pop p { margin: 0 0 $s2; }
+.term-pop .term-name { font-weight: 700; }
+.term-pop .term-vs { font-size: 0.8rem; font-weight: 600; color: $muted; text-transform: uppercase; letter-spacing: 0.04em; margin-top: $s3; }
+.term-pop ul { padding-left: 1.1em; margin: 0 0 $s2; }
+.term-pop li { margin-bottom: $s1; }
+.term-pop a { font-size: 0.875rem; }
+dl.glossary dt { font-weight: 700; margin-top: $s5; scroll-margin-top: 80px; }
+dl.glossary dd { margin: $s1 0 0; }
+dl.glossary dd p { margin-bottom: $s1; }
+.term-vs-line { font-size: 0.875rem; color: $muted; }
+
 .filter-count { font-size: 0.875rem; color: $muted; margin: $s2 0 $s4; min-height: 1.4em; }
 .prevnext { display: grid; grid-template-columns: 1fr 1fr; gap: $s4; margin-top: $s7; }
 .section-label { font-size: 0.875rem; font-weight: 600; color: $muted; text-transform: uppercase; letter-spacing: 0.04em; margin: $s6 0 $s3; }

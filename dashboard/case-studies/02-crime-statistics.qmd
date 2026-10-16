@@ -11,6 +11,7 @@ date: 2026-10-16
 ```{python}
 import sys
 
+from shared.glossary import glossary_popovers
 from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
 from shared.outputs import read_output
 from shared.paths import CASE_STUDIES, REPO_URL, ROOT
@@ -131,7 +132,7 @@ the human body were about one in ten (`{python} num(police(BODY, "cases"))` case
 
 ### Cases solved
 
-The share of cases solved differed widely by type of offence. In `{python} LAST`, about
+The share of cases [solved]{.term term="solved-case"} differed widely by type of offence. In `{python} LAST`, about
 `{python} pct(police(BODY, "solved_pct"))` of offences against the human body were recorded as
 solved, against `{python} pct(police(PROPERTY, "solved_pct"))` of offences against property.
 Because property offences were the largest group, the share solved across all police cases
@@ -247,4 +248,8 @@ method_and_sources(
 
 ```{python}
 prev_next("02-crime-statistics.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+glossary_popovers("02-crime-statistics.qmd", ROOT / "dashboard" / "case-studies")
 ```

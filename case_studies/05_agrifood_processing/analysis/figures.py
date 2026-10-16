@@ -1,14 +1,23 @@
 """Charts for case study 05. Each builder returns (figure, table for the data-table view).
 
-Values are shown in B$ million. The category first counted in 2013 is always grey, so it never
-reads as growth of the categories that were already counted.
+Values are shown in B$ million. Item status (shared.charts): the category first counted in 2013
+is striped grey, and a category that stops being counted would be an outline, so neither reads
+as growth or decline of the categories counted every year.
 """
 
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-from shared.charts import CONTEXT, INK, TEAL_500
+from shared.charts import (
+    CONTEXT,
+    INK,
+    NEW_PATTERN,
+    TEAL_500,
+    item_status,
+    status_label,
+    status_marker,
+)
 
 NEW = "Fast or instant food"
 COLUMNS = {
@@ -48,8 +57,8 @@ def series_chart(series: pd.DataFrame) -> tuple[go.Figure, pd.DataFrame]:
     fig.add_bar(
         x=series.year,
         y=series.new_category_bnd / 1e6,
-        name=f"{NEW} (first counted in 2013)",
-        marker_color=CONTEXT,
+        name=f"{NEW} (new in 2013)",
+        marker=status_marker("new"),
         hovertemplate="%{x}: B$%{y:.1f}m<extra>" + NEW + "</extra>",
     )
     last = series.iloc[-1]
@@ -72,31 +81,63 @@ def series_chart(series: pd.DataFrame) -> tuple[go.Figure, pd.DataFrame]:
 
 
 def categories_chart(trend: pd.DataFrame, a: int, b: int) -> tuple[go.Figure, pd.DataFrame]:
-    """Chart 2: market value by category in year a (grey) and year b (teal)."""
+    """Chart 2: market value by category in year a (grey) and year b (teal), with each
+    category's status between the two years (continued, new or discontinued)."""
     d = trend[trend.year.isin([a, b])]
-    order = d[d.year == b].sort_values("value_bnd", ascending=False).category.tolist()
+    status = item_status(d, "category", "year", "value_bnd", a, b)
+    d = d.assign(status=d.category.map(status))
+    order = (
+        d.pivot(index="category", columns="year", values="value_bnd")
+        .assign(key=lambda x: x[b].where(x[b] > 0, x[a]))  # discontinued: sort by year a
+        .sort_values("key", ascending=False)
+        .index.tolist()
+    )
+    labels = [status_label(c, status[c], b) for c in order]
     fig = go.Figure()
     for year, colour in ((a, CONTEXT), (b, TEAL_500)):
         y = d[d.year == year].set_index("category").reindex(order)
+        if year == b:  # the later year carries the status pattern
+            marks = [status_marker(status[c], colour) for c in order]
+            marker = dict(
+                color=[m["color"] for m in marks],
+                pattern={
+                    **NEW_PATTERN,
+                    "shape": ["/" if status[c] == "new" else "" for c in order],
+                },
+                line=dict(
+                    color=[m.get("line", {}).get("color", colour) for m in marks],
+                    width=[m.get("line", {}).get("width", 0) for m in marks],
+                ),
+            )
+        else:
+            marker = dict(color=colour)
         fig.add_bar(
             name=str(year),
             orientation="h",
-            y=order,
+            y=labels,
             x=y.value_bnd / 1e6,
-            marker_color=colour,
+            marker=marker,
             text=[f"{v / 1e6:.1f}" for v in y.value_bnd],
             textposition="outside",
             cliponaxis=False,
             hovertemplate=f"%{{y}}, {year}: B$%{{x:.2f}}m<extra></extra>",
+            showlegend=False,  # the legend uses plain swatches below, not the first bar's pattern
         )
+        fig.add_bar(name=str(year), x=[None], y=[None], marker_color=colour, hoverinfo="skip")
     fig.update_layout(barmode="group", bargap=0.25, bargroupgap=0.05, hovermode="closest")
     fig.update_yaxes(autorange="reversed")
     fig.update_xaxes(
         showticklabels=False, showgrid=False, range=[0, d.value_bnd.max() / 1e6 * 1.15]
     )
-    table = d.pivot(index=["category", "category_ms"], columns="year", values="value_bnd")
+    table = d.pivot(index=["category", "category_ms", "status"], columns="year", values="value_bnd")
     table = table.reindex(order, level=0).reset_index()
-    table.columns = ["Product category", "Kategori (Malay)", f"{a} (B$)", f"{b} (B$)"]
+    table.columns = [
+        "Product category",
+        "Kategori (Malay)",
+        f"Status, {a} → {b}",
+        f"{a} (B$)",
+        f"{b} (B$)",
+    ]
     return fig, table.round(0)
 
 

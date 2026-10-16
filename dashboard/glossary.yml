@@ -1,0 +1,130 @@
+# Glossary for the site (DESIGN.md §5, "Glossary terms"). Each entry:
+#   key: used on pages as [shown text]{.term term="key"}
+#   term: the name shown in the pop-up and on the Glossary page
+#   definition: one or two plain sentences
+#   compare: keys of terms that are easy to confuse with this one; their definitions are shown
+#            beside it in the pop-up ("Not the same as")
+# Keep definitions neutral and true for every case study that uses the term.
+
+- key: share-of-businesses
+  term: Share of businesses
+  definition: >
+    The percentage of all businesses that are in a group (a product category or a district).
+    It counts businesses, whatever their size, so it says nothing about how much they sell.
+  compare: [share-of-market-value, share-of-employees]
+
+- key: share-of-employees
+  term: Share of employees
+  definition: >
+    The percentage of all people employed in the industry who work in a group, such as a
+    district.
+  compare: [share-of-businesses, share-of-market-value]
+
+- key: share-of-market-value
+  term: Share of market value
+  definition: >
+    The percentage of the industry's total market value that comes from a group. A few large
+    businesses can have a big share of the value even if they are a small share of businesses.
+  compare: [share-of-businesses, share-of-employees]
+
+- key: market-value
+  term: Market value
+  definition: >
+    The value of the products made, in Brunei dollars, as reported by the publisher. It is not
+    profit, and it is not adjusted for inflation.
+  compare: [current-prices]
+
+- key: current-prices
+  term: Current prices
+  definition: >
+    Values in the dollars of each year, not adjusted for inflation. A rise in value can come
+    from higher prices as well as from making more.
+  compare: [market-value]
+
+- key: continued-item
+  term: Continued item
+  definition: >
+    An item (such as a product category) that appears in both the first and the last year
+    being compared, so the two years can be compared like for like. Shown in solid colour.
+  compare: [new-item, discontinued-item]
+
+- key: new-item
+  term: New item
+  definition: >
+    An item that appears in the later year but not the earlier one, often because the
+    publisher started counting it. Its value is not growth of the items that were already
+    counted. Shown with diagonal stripes.
+  compare: [continued-item, discontinued-item]
+
+- key: discontinued-item
+  term: Discontinued item
+  definition: >
+    An item that appears in the earlier year but not the later one, because it stopped being
+    counted or was renamed or replaced. Shown as an outline only.
+  compare: [continued-item, new-item]
+
+- key: livestock-based
+  term: Livestock-based products
+  definition: >
+    The Ministry of Industry and Primary Resources' group for processed foods made from
+    animals: meat products, and from 2013 fast or instant food.
+  compare: [crop-based]
+
+- key: crop-based
+  term: Crop-based products
+  definition: >
+    The Ministry of Industry and Primary Resources' group for all other processed foods, such
+    as bakery, drinks, snacks and spices. It also includes fish products.
+  compare: [livestock-based]
+
+- key: median
+  term: Median (typical year)
+  definition: >
+    The middle value when the years are put in order: half the years are above it and half
+    below. Unlike the average, one extreme year barely moves it.
+  compare: [average]
+
+- key: average
+  term: Average (mean)
+  definition: >
+    The total divided by the number of years. One very high or low year can pull it a long way.
+  compare: [median, three-year-average]
+
+- key: three-year-average
+  term: Three-year average
+  definition: >
+    The average of three consecutive years. It smooths out single-year swings, which matter
+    when the numbers are small.
+  compare: [average]
+
+- key: correlation
+  term: Correlation
+  definition: >
+    A number from −1 to 1 showing how closely two measures rise and fall together. 1 means
+    they move perfectly together and 0 means no link. It doesn't show that one causes the other.
+
+- key: per-100-accidents
+  term: Per 100 accidents
+  definition: >
+    A count divided by the number of accidents, times 100. It shows how many people were
+    affected for every 100 accidents, so years with more or fewer accidents can be compared.
+
+- key: solved-case
+  term: Solved case (as published)
+  definition: >
+    A case the source records as solved. The source doesn't define the term or say when a case
+    was counted as solved, so the figures are shown as published.
+
+- key: cpi
+  term: Consumer price index (CPI)
+  definition: >
+    A measure of the average price of a fixed basket of goods and services that households
+    buy, compared with a base period. A rise means prices went up on average.
+  compare: [index-rebased]
+
+- key: index-rebased
+  term: Index (2019 = 100)
+  definition: >
+    Values rescaled so that 2019 equals 100. A value of 107 means 7% above 2019. It changes the
+    starting point, not the pattern.
+  compare: [cpi]

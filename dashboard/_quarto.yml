@@ -17,6 +17,8 @@ website:
         text: Data sources
       - href: data-policy.qmd
         text: Data use policy
+      - href: glossary.qmd
+        text: Glossary
       - href: about.qmd
         text: About
     right:

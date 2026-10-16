@@ -194,3 +194,7 @@ Context sources go in the same reference list as the datasets, for example:
 
 Each source is logged in `CONTEXT_SOURCES.md` with its URL, archive link, access date and the
 case study it supports.
+
+**Names.** Author names are written exactly as published, including honorifics such as
+"Hajah", "Haji", "Dato" or "Pengiran" (author's decision, 16 Oct 2026). Malay names usually
+have no family name, so the full name stands in the author position and the in-text citation.

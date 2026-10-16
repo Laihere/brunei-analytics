@@ -110,6 +110,48 @@ def highlight(fig: go.Figure, focus: str, label: str | None = None) -> go.Figure
     return fig
 
 
+# Item status (DESIGN.md §8): when a list of items changes between the years compared, items
+# in both years are "continued", items only in the later year "new", items only in the earlier
+# year "discontinued". Each status has a pattern as well as a colour, so it never relies on
+# colour alone; the glossary explains all three (continued-item, new-item, discontinued-item).
+NEW_PATTERN = dict(shape="/", fillmode="overlay", fgcolor=SURFACE, solidity=0.3)
+STATUS_LABEL = {"continued": "", "new": "new in {last}", "discontinued": "not counted in {last}"}
+
+
+def item_status(
+    df: pd.DataFrame, item: str, year: str, value: str, first: int, last: int
+) -> pd.Series:
+    """Status of each item between two years. An item counts as present in a year when it has
+    a value above zero (publishers often list a 0 for an item they don't yet count)."""
+    present = df[df[value].fillna(0) > 0].groupby(item)[year].agg(set)
+    items = df[item].unique()
+    had = {i: first in present.get(i, set()) for i in items}
+    has = {i: last in present.get(i, set()) for i in items}
+    return pd.Series(
+        {
+            i: "continued" if had[i] and has[i] else "new" if has[i] else "discontinued"
+            for i in items
+        },
+        name="status",
+    )
+
+
+def status_marker(status: str, colour: str = TEAL_500) -> dict:
+    """Bar marker for a status: solid (continued), striped grey (new), outline (discontinued)."""
+    if status == "new":
+        # "overlay" keeps the grey fill under the stripes; the default makes the bar transparent.
+        return dict(color=CONTEXT, pattern=NEW_PATTERN)
+    if status == "discontinued":
+        return dict(color=SURFACE, line=dict(color=MUTED, width=1.5))
+    return dict(color=colour)
+
+
+def status_label(name: str, status: str, last: int) -> str:
+    """Item name with its status, e.g. "Fast or instant food (new in 2013)"."""
+    note = STATUS_LABEL[status].format(last=last)
+    return f"{name} ({note})" if note else name
+
+
 def add_credit(fig: go.Figure, provenance: list[Provenance], width: int = 120) -> go.Figure:
     """Credit line inside the image, for static exports only. On the site the chart card
     prints the credit as real text instead (shared.components.chart_card)."""

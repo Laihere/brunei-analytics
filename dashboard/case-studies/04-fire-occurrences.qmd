@@ -12,6 +12,7 @@ date: 2026-10-16
 import sys
 from decimal import ROUND_HALF_UP, Decimal
 
+from shared.glossary import glossary_popovers
 from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
 from shared.context import load_context
 from shared.outputs import read_output
@@ -99,7 +100,7 @@ chart_card(
 
 ## Fires per year, 2009–2020
 
-In a typical year, `{python} num(median)` fires were recorded across Brunei. The totals jump
+In a [typical year]{.term term="median"}, `{python} num(median)` fires were recorded across Brunei. The totals jump
 from year to year rather than following a steady line: from `{python} num(t.loc[low_year, "fires"])`
 in `{python} low_year` to `{python} num(t.loc[top, "fires"])` in `{python} top`. Three years
 stand out: **`{python} top`** (`{python} times(t.loc[top, "vs_median"])` the typical year),
@@ -119,7 +120,7 @@ two rise and fall together. The two years with the most fires in this period,
 the most land burned.
 
 ::: {.callout-note appearance="simple" title="How closely they move together"}
-**The yearly fire count and the area burned are very closely linked: a correlation of
+**The yearly fire count and the area burned are very closely linked: a [correlation]{.term term="correlation"} of
 `{python} f"{corr:.2f}"`** over `{python} len(area)` years, where 1 would mean they move
 perfectly together. This suggests many recorded fires are outdoor vegetation fires, but the
 fire count doesn't say what burned, so it can't confirm that.
@@ -239,4 +240,8 @@ method_and_sources(
 
 ```{python}
 prev_next("04-fire-occurrences.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+glossary_popovers("04-fire-occurrences.qmd", ROOT / "dashboard" / "case-studies")
 ```

@@ -17,6 +17,7 @@ REQUIRED = {
     "side note": r"callout-caution[^}]*title=\"What this doesn't tell us\"",
     "method and references": r"method_and_sources\(",
     "next study": r"prev_next\(",
+    "glossary pop-ups": r"glossary_popovers\(",
 }
 
 
@@ -52,3 +53,11 @@ def test_no_wrapped_line_starts_like_a_numbered_list(page):
     # Also inline code at a line start: "`{python} LAST`. …" becomes "2013. …" once rendered.
     bad = re.findall(r"(?m)^[ \t]+(?:\d{3,}|`\{python\}[^`]*`)\. .*$", page.read_text())
     assert not bad, f"{page.name}: rewrap these lines: {bad}"
+
+
+@pytest.mark.parametrize("page", PAGES, ids=lambda p: p.stem)
+def test_every_marked_term_is_in_the_glossary(page):
+    from shared.glossary import load_glossary, terms_used
+
+    missing = [k for k in terms_used(page.read_text()) if k not in load_glossary()]
+    assert not missing, f"{page.name}: add {missing} to dashboard/glossary.yml"

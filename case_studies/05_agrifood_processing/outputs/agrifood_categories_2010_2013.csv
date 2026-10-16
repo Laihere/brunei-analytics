@@ -1,53 +1,53 @@
-year,category_ms,category,value_bnd
-2010,Air Mineral & Minuman Ringan,Mineral water & soft drinks,13100000.0
-2010,Aiskrim,Ice cream,4560000.0
-2010,Biskut & Bakeri,Biscuits & bakery,18420000.0
-2010,Lain-lain,Other,1070000.0
-2010,Makanan Segera,Fast or instant food,0.0
-2010,Makanan Tradisi,Traditional foods,1520000.0
-2010,Mi,Noodles,1460000.0
-2010,Produk Hasilan Daging,Meat products,9330000.0
-2010,Produk Hasilan Ikan,Fish products,800000.0
-2010,Produk Kacang Soya,Soya bean products,620000.0
-2010,Rempah Ratus,Spices,640000.0
-2010,Snek,Snacks,1440000.0
-2010,Sos & Perisa,Sauces & flavourings,790000.0
-2011,Air Mineral & Minuman Ringan,Mineral water & soft drinks,10616485.0
-2011,Aiskrim,Ice cream,1416133.0
-2011,Biskut & Bakeri,Biscuits & bakery,27390954.0
-2011,Lain-lain,Other,1637685.0
-2011,Makanan Segera,Fast or instant food,0.0
-2011,Makanan Tradisi,Traditional foods,1324961.0
-2011,Mi,Noodles,569148.0
-2011,Produk Hasilan Daging,Meat products,10249959.0
-2011,Produk Hasilan Ikan,Fish products,862590.0
-2011,Produk Kacang Soya,Soya bean products,394942.0
-2011,Rempah Ratus,Spices,742983.0
-2011,Snek,Snacks,1272584.0
-2011,Sos & Perisa,Sauces & flavourings,726592.0
-2012,Air Mineral & Minuman Ringan,Mineral water & soft drinks,11124995.0
-2012,Aiskrim,Ice cream,1503993.0
-2012,Biskut & Bakeri,Biscuits & bakery,30027009.34
-2012,Lain-lain,Other,925784.0
-2012,Makanan Segera,Fast or instant food,0.0
-2012,Makanan Tradisi,Traditional foods,1284659.0
-2012,Mi,Noodles,510078.0
-2012,Produk Hasilan Daging,Meat products,13310075.78
-2012,Produk Hasilan Ikan,Fish products,854392.0
-2012,Produk Kacang Soya,Soya bean products,482900.0
-2012,Rempah Ratus,Spices,762554.0
-2012,Snek,Snacks,1313549.0
-2012,Sos & Perisa,Sauces & flavourings,727364.8
-2013,Air Mineral & Minuman Ringan,Mineral water & soft drinks,10614252.76
-2013,Aiskrim,Ice cream,1131299.33
-2013,Biskut & Bakeri,Biscuits & bakery,22991052.56
-2013,Lain-lain,Other,355413.3
-2013,Makanan Segera,Fast or instant food,34536147.02
-2013,Makanan Tradisi,Traditional foods,2087719.75
-2013,Mi,Noodles,391873.48
-2013,Produk Hasilan Daging,Meat products,9668257.89
-2013,Produk Hasilan Ikan,Fish products,716369.7
-2013,Produk Kacang Soya,Soya bean products,623177.52
-2013,Rempah Ratus,Spices,931908.77
-2013,Snek,Snacks,1450508.34
-2013,Sos & Perisa,Sauces & flavourings,738395.94
+year,category_ms,category,value_bnd,status
+2010,Air Mineral & Minuman Ringan,Mineral water & soft drinks,13100000.0,continued
+2010,Aiskrim,Ice cream,4560000.0,continued
+2010,Biskut & Bakeri,Biscuits & bakery,18420000.0,continued
+2010,Lain-lain,Other,1070000.0,continued
+2010,Makanan Segera,Fast or instant food,0.0,new
+2010,Makanan Tradisi,Traditional foods,1520000.0,continued
+2010,Mi,Noodles,1460000.0,continued
+2010,Produk Hasilan Daging,Meat products,9330000.0,continued
+2010,Produk Hasilan Ikan,Fish products,800000.0,continued
+2010,Produk Kacang Soya,Soya bean products,620000.0,continued
+2010,Rempah Ratus,Spices,640000.0,continued
+2010,Snek,Snacks,1440000.0,continued
+2010,Sos & Perisa,Sauces & flavourings,790000.0,continued
+2011,Air Mineral & Minuman Ringan,Mineral water & soft drinks,10616485.0,continued
+2011,Aiskrim,Ice cream,1416133.0,continued
+2011,Biskut & Bakeri,Biscuits & bakery,27390954.0,continued
+2011,Lain-lain,Other,1637685.0,continued
+2011,Makanan Segera,Fast or instant food,0.0,new
+2011,Makanan Tradisi,Traditional foods,1324961.0,continued
+2011,Mi,Noodles,569148.0,continued
+2011,Produk Hasilan Daging,Meat products,10249959.0,continued
+2011,Produk Hasilan Ikan,Fish products,862590.0,continued
+2011,Produk Kacang Soya,Soya bean products,394942.0,continued
+2011,Rempah Ratus,Spices,742983.0,continued
+2011,Snek,Snacks,1272584.0,continued
+2011,Sos & Perisa,Sauces & flavourings,726592.0,continued
+2012,Air Mineral & Minuman Ringan,Mineral water & soft drinks,11124995.0,continued
+2012,Aiskrim,Ice cream,1503993.0,continued
+2012,Biskut & Bakeri,Biscuits & bakery,30027009.34,continued
+2012,Lain-lain,Other,925784.0,continued
+2012,Makanan Segera,Fast or instant food,0.0,new
+2012,Makanan Tradisi,Traditional foods,1284659.0,continued
+2012,Mi,Noodles,510078.0,continued
+2012,Produk Hasilan Daging,Meat products,13310075.78,continued
+2012,Produk Hasilan Ikan,Fish products,854392.0,continued
+2012,Produk Kacang Soya,Soya bean products,482900.0,continued
+2012,Rempah Ratus,Spices,762554.0,continued
+2012,Snek,Snacks,1313549.0,continued
+2012,Sos & Perisa,Sauces & flavourings,727364.8,continued
+2013,Air Mineral & Minuman Ringan,Mineral water & soft drinks,10614252.76,continued
+2013,Aiskrim,Ice cream,1131299.33,continued
+2013,Biskut & Bakeri,Biscuits & bakery,22991052.56,continued
+2013,Lain-lain,Other,355413.3,continued
+2013,Makanan Segera,Fast or instant food,34536147.02,new
+2013,Makanan Tradisi,Traditional foods,2087719.75,continued
+2013,Mi,Noodles,391873.48,continued
+2013,Produk Hasilan Daging,Meat products,9668257.89,continued
+2013,Produk Hasilan Ikan,Fish products,716369.7,continued
+2013,Produk Kacang Soya,Soya bean products,623177.52,continued
+2013,Rempah Ratus,Spices,931908.77,continued
+2013,Snek,Snacks,1450508.34,continued
+2013,Sos & Perisa,Sauces & flavourings,738395.94,continued

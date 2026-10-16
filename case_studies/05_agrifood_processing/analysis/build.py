@@ -18,6 +18,7 @@ from clean import (  # noqa: E402
     load_trend,
 )
 
+from shared.charts import item_status  # noqa: E402
 from shared.fetch import download  # noqa: E402
 from shared.outputs import write_output  # noqa: E402
 from shared.provenance import read_meta  # noqa: E402
@@ -126,6 +127,10 @@ def main():
         ),
     )
 
+    t0, t1 = trend.year.min(), trend.year.max()
+    trend["status"] = trend.category.map(
+        item_status(trend, "category", "year", "value_bnd", t0, t1)
+    )
     write_output(
         trend.round(2),
         OUT / "agrifood_categories_2010_2013.csv",
@@ -133,7 +138,8 @@ def main():
         notes=(
             "Market value by product category, 2010–2013, converted from B$ million to B$. "
             "Malay names standardised and translated by the author; 'Acar & Jeruk' (pickles) "
-            "merged into Other."
+            "merged into Other. 'status' compares 2010 with 2013: continued, new (0 in 2010) or "
+            "discontinued (0 in 2013)."
         ),
     )
 

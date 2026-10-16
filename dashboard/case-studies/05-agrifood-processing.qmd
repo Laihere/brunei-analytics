@@ -11,6 +11,7 @@ date: 2026-10-16
 ```{python}
 import sys
 
+from shared.glossary import glossary_popovers
 from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
 from shared.context import load_context
 from shared.outputs import read_output
@@ -79,7 +80,7 @@ fig, table = F.series_chart(series)
 chart_card(
     fig,
     title=f"Market value rose every year to {PREV}; in {LAST}, a newly counted category hid a fall",
-    subtitle=f"Market value of processed agrifood products, B$ million, current prices · {FIRST}–{LAST} · grey: fast or instant food, first counted in {LAST}",
+    subtitle=f"Market value of processed agrifood products, B$ million, current prices · {FIRST}–{LAST} · striped: fast or instant food, new in {LAST}",
     alt=(
         f"Stacked bar chart. Market value rises from {m(s.loc[FIRST, 'comparable_bnd'])} in "
         f"{FIRST} to {m(s.loc[PREV, 'comparable_bnd'])} in {PREV}. In {LAST}, the categories "
@@ -93,20 +94,20 @@ chart_card(
 
 ## Market value, 2004–2013
 
-The industry's market value rose every year from `{python} FIRST` to `{python} PREV`, from
+The industry's [market value]{.term term="market-value"} rose every year from `{python} FIRST` to `{python} PREV`, from
 `{python} m(s.loc[FIRST, "comparable_bnd"])` to `{python} m(s.loc[PREV, "comparable_bnd"])`,
 `{python} f"{growth:.1f}×"` as much. The biggest rise came in 2007–2008, when crop-based
 products went from `{python} m(crop_06)` (2006) to `{python} m(crop_08)` (2008).
 
 **In `{python} LAST`, the total jumped to `{python} m(s.loc[LAST, "total_bnd"])`, but
 `{python} pct(new_share)` of that came from "Makanan Segera" (fast or instant food), a category
-that appears for the first time that year.** Without it, the categories counted every year
+that [appears for the first time]{.term term="new-item"} that year.** Without it, the [categories counted every year]{.term term="continued-item"}
 fell `{python} size(fall)`, to `{python} m(s.loc[LAST, "comparable_bnd"])`.
 
 ::: {.callout-note appearance="simple" title="Livestock-based and crop-based"}
-The Ministry splits the industry into **livestock-based** products (meat products, and from
-2013 fast or instant food) and **crop-based** products (everything else, including fish
-products). Values are in current Brunei dollars, not adjusted for inflation.
+The Ministry splits the industry into **[livestock-based]{.term term="livestock-based"}** products (meat products, and from
+2013 fast or instant food) and **[crop-based]{.term term="crop-based"}** products (everything else, including fish
+products). Values are in [current Brunei dollars]{.term term="current-prices"}, not adjusted for inflation.
 :::
 
 ## What was made, 2012–2013
@@ -116,7 +117,7 @@ fig, table = F.categories_chart(trend, PREV, LAST)
 chart_card(
     fig,
     title=f"Biscuits & bakery fell from {m(t.loc[BAKERY, PREV])} to {m(t.loc[BAKERY, LAST])} in {LAST}",
-    subtitle=f"Market value by product category, B$ million · {PREV} and {LAST}",
+    subtitle=f"Market value by product category, B$ million · {PREV} and {LAST} · striped: new in {LAST}",
     alt=(
         f"Bar chart of market value by category for {PREV} and {LAST}. Biscuits and bakery fall "
         f"from {m(t.loc[BAKERY, PREV])} to {m(t.loc[BAKERY, LAST])}; meat products from "
@@ -155,7 +156,8 @@ chart_card(
 )
 ```
 
-Market value was concentrated in a few categories. In `{python} LAST`,
+Chart 3 compares each category's [share of businesses]{.term term="share-of-businesses"} with its
+[share of market value]{.term term="share-of-market-value"}. Market value was concentrated in a few categories. In `{python} LAST`,
 `{python} int(c.loc[TRAD, "businesses"])` businesses made traditional foods, the most of any
 category, but they produced `{python} pct(c.loc[TRAD, "share_pct"], 1)` of the market value.
 `{python} int(c.loc[F.NEW, "businesses"])` businesses made fast or instant food, which was
@@ -268,4 +270,8 @@ method_and_sources(
 
 ```{python}
 prev_next("05-agrifood-processing.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+glossary_popovers("05-agrifood-processing.qmd", ROOT / "dashboard" / "case-studies")
 ```

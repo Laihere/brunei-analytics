@@ -129,7 +129,9 @@ total is treated as "categories counted every year".
 | 3 · Businesses vs value | categories 2013 | Two share panels side by side (stacked on phones), traditional foods teal | The gap between "how many make it" and "how much it's worth" |
 | 4 · Districts | districts 2013 | Three share panels (businesses, employees, value), Brunei-Muara teal | The same district concentrates more at each step |
 
-QA fixes: shares under 1% showed as "0%" and now show one decimal; a wrapped line starting with
+QA fixes (16 Oct 2026, second pass): striped bars rendered transparent until Plotly's
+`fillmode="overlay"` was set; the 2013 legend swatch took the first bar's stripes, so the legend
+now uses plain swatches. Earlier: shares under 1% showed as "0%" and now show one decimal; a wrapped line starting with
 inline code ("`{python} LAST`. The…") rendered as a numbered list, so it was rewrapped and the
 format test now catches inline code too; an ambiguous "(31)" was reworded.
 
@@ -137,7 +139,7 @@ format test now catches inline code too; an ambiguous "(31)" was reworded.
 
 | Key | Source | Tier (1 journal · 2 official · 3 news) | Supports | Checked how |
 |---|---|---|---|---|
-| `searca2016` | Aidah binti Haji Mohd Hanifah et al. (2016), SEARCA primer | 2 | 2008–2013 plan; SMEs; Small Entrepreneurs Food Incubator Centre; Brunei Halal Brand | Full abstract via RePEc; series/number/year from its record |
+| `searca2016` | Hajah Aidah binti Haji Mohd Hanifah et al. (2016), SEARCA primer | 2 | 2008–2013 plan; SMEs; Small Entrepreneurs Food Incubator Centre; Brunei Halal Brand | Full abstract via RePEc; series/number/year from its record |
 | `khut2026` | Khut (2026), AMRO annual consultation report, Selected Issue 3 | 2 | Processing output 2015 → 2024; imports > 70% of food; weak linkages | Full PDF read |
 
 No peer-reviewed study of the industry for 2004–2013 was found; the page says so. Looked at,
@@ -145,8 +147,8 @@ not used: a 2025 Springer chapter on halal food security (Universiti Brunei Daru
 topic for these years), and a Universiti Brunei Darussalam journal article (site blocks
 automated access, so it couldn't be checked).
 
-The author names in `searca2016` are given as published, without honorifics ("Hajah"); Malay
-names have no family name, so APA uses the full name. The author may prefer another form.
+The author names in `searca2016` are given exactly as published, including "Hajah" (the
+author's preference, 16 Oct 2026). Malay names have no family name, so APA uses the full name.
 
 ## 7. Post-process
 
@@ -156,6 +158,8 @@ names have no family name, so APA uses the full name. The author may prefer anot
 - [x] Neutral wording: "counted", "recorded"; the 2013 fall and the new category stated side by side; no comment on policy success
 - [x] Context: two institutional reports in a separate callout, which says their figures can't be joined to ours
 - [x] Data period on title, cards and every subtitle
+- [x] Glossary terms marked: market-value, new-item, continued-item, livestock-based, crop-based, current-prices, share-of-businesses, share-of-market-value
+- [x] Item status: fast or instant food is "new" (striped, labelled "new in 2013") in charts 1 and 2; `status` column in `agrifood_categories_2010_2013.csv`
 - [ ] Translations: not enabled (Malay names kept in every output for later)
 - [x] Phone and desktop screenshots checked (390 px and 1280 px)
 - [x] `uv run pytest` passes (73 tests)

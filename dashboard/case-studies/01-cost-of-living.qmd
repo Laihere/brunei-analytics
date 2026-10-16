@@ -11,6 +11,7 @@ date: 2026-10-15
 ```{python}
 import sys
 
+from shared.glossary import glossary_popovers
 from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
 from shared.outputs import read_output
 from shared.paths import CASE_STUDIES, REPO_URL, ROOT
@@ -63,7 +64,7 @@ gap_change = (yr.datagovbn_change_pct - yr.worldbank_change_pct).abs().max()
 
 ::: {.study-intro}
 This case study looks at **how prices in Brunei changed from 2015 to 2025**, using the
-government's consumer price index (CPI) and average prices of subsidised and price-controlled
+government's [consumer price index (CPI)]{.term term="cpi"} and average prices of subsidised and price-controlled
 items. It compares three periods: before the pandemic (2016–2019), the pandemic years and after
 (2020–2022), and the most recent years (2023–2025). It shows **when and what changed, not why**.
 
@@ -154,7 +155,7 @@ chart_card(
 
 ### How each category moved over time
 
-Each panel shows one category (turquoise) against all items (grey), relative to 2019. The
+Each panel shows one category (turquoise) against all items (grey), [relative to 2019]{.term term="index-rebased"}. The
 shaded band marks 2020–2022. Food rose steadily through the shaded years and kept rising in
 2023 (`{python} pct(food_2023)`) before levelling off, while transport rose sharply in 2021–2022
 and has fallen every year since.
@@ -268,4 +269,8 @@ method_and_sources(
 
 ```{python}
 prev_next("01-cost-of-living.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+glossary_popovers("01-cost-of-living.qmd", ROOT / "dashboard" / "case-studies")
 ```

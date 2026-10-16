@@ -47,7 +47,7 @@ back to inspection (we misunderstood the data), not forward with a workaround.
 |---|---|---|---|---|
 | 0 | Discover | catalogue → chosen datasets and one question | `catalogue/datagovbn_catalogue.csv` | Terms page re-checked (SOP 1). Question written in README |
 | 1 | Acquire | dataset URL → raw file + `.meta.json` | `shared.fetch.download` in `build.py` | Logged in `DATA_SOURCES.md` with download date (SOP 2). Raw stays local (SOP 3) |
-| 2 | Inspect | raw file → notes on its shape and quirks | PROCESS.md §2 | Problems go into DATA_SOURCES.md "Known issues" **before** any fix |
+| 2 | Inspect | raw file → notes on its shape and quirks | PROCESS.md §2 | Problems go into DATA_SOURCES.md "Known issues" **before** any fix. List items that are new, discontinued or renamed between years (item status) |
 | 3 | Clean | raw → tidy long table (one row per observation) | `analysis/clean.py` | Every step has a *why* in PROCESS.md §3. Doubtful values are flagged, not silently dropped |
 | 4 | Validate | tidy table → pass / fail | pandera schemas in `build.py`, unit tests in `tests/` | Ranges, uniqueness, totals, cross-check with a second table or approved source |
 | 5 | Process | tidy table → small derived CSVs | `analysis/build.py` → `outputs/` | `write_output(notes=…)` states what changed (SOP 4). Only `outputs/` reaches CI |
@@ -64,6 +64,8 @@ back to inspection (we misunderstood the data), not forward with a workaround.
 - [ ] Neutral wording: what changed and when, not judgements on performance (SOP 8)
 - [ ] Context sources (if any): in their own callout, reported not concluded, logged in `CONTEXT_SOURCES.md` (policy §7)
 - [ ] Data year/period on the title and every card
+- [ ] Terms readers may confuse are marked once as glossary terms, and are in `dashboard/glossary.yml`
+- [ ] Items added or dropped between years are shown with their status (continued / new / discontinued), never as growth or decline
 - [ ] Translations (when enabled): labels from the shared dictionary; English is the reference version
 - [ ] Screenshot check on phone and desktop widths (headless Firefox)
 - [ ] `uv run pytest` passes (page structure, provenance, site build)

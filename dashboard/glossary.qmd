@@ -1,0 +1,11 @@
+---
+title: "Glossary"
+subtitle: "Terms used in the case studies, in plain words. On a case study page, select a term with a dotted underline to see its meaning."
+toc: false
+---
+
+```{python}
+from shared.glossary import glossary_page
+
+glossary_page()
+```

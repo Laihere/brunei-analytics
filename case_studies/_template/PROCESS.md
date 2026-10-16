@@ -86,6 +86,8 @@ Listed in `context.yml` and logged in `CONTEXT_SOURCES.md` (policy §7). Backgro
 - [ ] Neutral wording checked
 - [ ] Context sources: in their own callout, reported not concluded (or "none")
 - [ ] Data period on title and cards
+- [ ] Glossary terms marked (list): {keys, or "none"}
+- [ ] Item status shown where items change between years: {where, or "not applicable"}
 - [ ] Translations: {not enabled / Malay / Chinese}
 - [ ] Phone and desktop screenshots checked
 - [ ] `uv run pytest` passes

@@ -11,6 +11,7 @@ date: 2026-10-16
 ```{python}
 import sys
 
+from shared.glossary import glossary_popovers
 from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
 from shared.context import load_context
 from shared.outputs import read_output
@@ -112,7 +113,7 @@ chart_card(
 ## Accidents, injuries and deaths, 2009–2017
 
 The police recorded between `{python} num(y.accidents.min())` and
-`{python} num(y.accidents.max())` road accidents a year. The 3-year averages barely moved:
+`{python} num(y.accidents.max())` road accidents a year. The [3-year averages]{.term term="three-year-average"} barely moved:
 `{python} num(acc1)`, `{python} num(acc2)` and `{python} num(acc3)` a year.
 
 The number of people hurt did change. People injured averaged `{python} num(inj1)` a year in
@@ -173,7 +174,7 @@ chart_card(
 ## Injuries and deaths per accident, 2009–2017
 
 Because accidents held steady while injuries fell, each accident injured fewer people on
-average: `{python} f"{ipa1:.1f}"` people per 100 accidents in `{python} P1`, against
+average: `{python} f"{ipa1:.1f}"` people [per 100 accidents]{.term term="per-100-accidents"} in `{python} P1`, against
 `{python} f"{ipa3:.1f}"` in `{python} P3`. Deaths per 1,000 accidents fell from
 `{python} f"{dpa1:.1f}"` to `{python} f"{dpa2:.1f}"` and `{python} f"{dpa3:.1f}"`.
 
@@ -244,4 +245,8 @@ method_and_sources(
 
 ```{python}
 prev_next("03-road-casualties.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+glossary_popovers("03-road-casualties.qmd", ROOT / "dashboard" / "case-studies")
 ```

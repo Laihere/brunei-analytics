@@ -1,0 +1,37 @@
+# Context sources for case study 03 (DATA_USE_POLICY.md §7). Background only: no numbers from
+# these are charted. Each entry was opened and checked on the access date; see CONTEXT_SOURCES.md.
+
+- key: haque2011
+  kind: journal
+  authors: ["Haque, M. O."]
+  published: "2011"
+  title: Road fatalities in Brunei
+  container: Journal of the Australasian College of Road Safety
+  volume: "22"
+  issue: "2"
+  pages: 48–56
+  url: https://journalofroadsafety.org/article/32820-road-fatalities-in-brunei
+  accessed: "2026-10-16"
+
+- key: mohamad2011
+  kind: news
+  authors: ["Mohamad, L."]
+  published: "2011-05-27"
+  title: Royalty launches Blueprint Decade of Action for Road Safety
+  container: Borneo Bulletin
+  url: https://www.sultanate.com/news_server/2011/27_may_5.html
+  archive_url: https://web.archive.org/web/20250715111912/https://www.sultanate.com/news_server/2011/27_may_5.html
+  note: Reprinted by Sultanate.com.
+  accessed: "2026-10-16"
+
+- key: haque2018
+  kind: journal
+  authors: ["Haque, M. O.", "Haque, T. H."]
+  published: "2018"
+  title: Evaluating the effects of the road safety system approach in Brunei
+  container: "Transportation Research Part A: Policy and Practice"
+  volume: "118"
+  pages: 594–607
+  doi: 10.1016/j.tra.2018.08.017
+  url: https://doi.org/10.1016/j.tra.2018.08.017
+  accessed: "2026-10-16"

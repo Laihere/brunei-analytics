@@ -4,6 +4,7 @@ Each helper returns an IPython HTML object, so a cell that ends with one renders
 as-is. Text arguments are escaped; only `fig` and `df` produce markup of their own.
 """
 
+import re
 from html import escape
 from pathlib import Path
 from typing import Literal
@@ -14,6 +15,7 @@ import yaml
 from IPython.display import HTML
 
 from shared.charts import CONFIG, data_table
+from shared.context import ContextSource, apa_context_reference
 from shared.provenance import BYLINE, Provenance, apa_reference, apa_year_labels, short_credit
 
 Change = Literal["up-good", "up-bad", "down-good", "down-bad"]
@@ -104,13 +106,22 @@ def chart_card(
 
 
 def method_and_sources(
-    provenance: list[Provenance], notes: str, steps: list[str], code_url: str = ""
+    provenance: list[Provenance],
+    notes: str,
+    steps: list[str],
+    code_url: str = "",
+    context: list[ContextSource] = (),
 ) -> HTML:
-    """Layer 4: method, full attributions and code, collapsed but always present."""
+    """Layer 4: method, full attributions and code, collapsed but always present.
+
+    `context` adds news, journal and official sources (policy §7) to the same APA list.
+    """
     items = "".join(f"<li>{escape(s)}</li>" for s in steps)
     unique = list(dict.fromkeys(provenance))  # same dataset may back several outputs
     years = apa_year_labels(unique)  # same author and year: 2026a, 2026b…
-    refs = sorted(apa_reference(p, html=True, year=years[p]) for p in unique)  # APA: alphabetical
+    refs = [apa_reference(p, html=True, year=years[p]) for p in unique]
+    refs += [apa_context_reference(c, html=True) for c in dict.fromkeys(context)]
+    refs.sort(key=lambda r: re.sub(r"<[^>]+>", "", r).lower())  # APA: alphabetical
     credits = "".join(f"<li>{r}</li>" for r in refs)
     code = (
         f'<details><summary>Code on GitHub</summary><div><a href="{escape(code_url)}">'

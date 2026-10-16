@@ -123,11 +123,26 @@ avoid double rounding (the lesson from case study 02).
 Dropped during QA: value labels on the dotted lines in charts 1 and 3 overlapped the data
 points. The values are already in the text, the tiles and the hover, so only chart 2 keeps them.
 
+## Context sources
+
+Added 16 Oct 2026, the first use of policy §7. Shown in a "What was reported at the time"
+callout in the "step down in 2012" section, and in the reference list.
+
+| Key | Source | Tier | Supports | Checked how |
+|---|---|---|---|---|
+| `haque2011` | Haque (2011), *Journal of the Australasian College of Road Safety* 22(2) | 2 | Deaths rising since 2003; author links it to lax enforcement, young drivers, new vehicles; recommends Safe System | Full text read |
+| `mohamad2011` | Mohamad (2011, May 27), *Borneo Bulletin* (Sultanate.com reprint) | 3 | Blueprint Decade of Action for Road Safety 2011–2020 launched May 2011 | Full article read; archived copy; no victims named |
+| `haque2018` | Haque & Haque (2018), *Transportation Research Part A* 118 | 2 | 30% fall in serious casualties in 12 months after the Road Safety System Approach | Abstract only (paywalled); start date not given, so not linked to 2012 |
+
+Searched but not used: a Ministry of Transport and Infocommunications speech page (404, no
+archive). Details in `CONTEXT_SOURCES.md`.
+
 ## 7. Post-process
 
 - [x] Small counts: not applicable to the police data (national yearly totals, at least 17). Fire and Rescue's 0–2 counts by call type are summed and not published
 - [x] Source + retrieval date on every chart; APA references in method (both datasets)
 - [x] Disclaimer and AI-assistance byline
+- [x] Context: three sources in their own callout, which says they don't show a cause; conclusion answers from the data only
 - [x] Neutral wording: "recorded", "as recorded, yes"; the 2012 step is described with both possible causes and no claim about either; no comment on road safety policy
 - [x] Data period on title, cards and every subtitle; intro says the data ends in 2017 though published in 2025
 - [ ] Translations: not enabled
@@ -142,6 +157,7 @@ points. The values are already in the text, the tiles and the hover, so only cha
 | 16 Oct 2026 | Use Fire and Rescue as a cross-check | Ignore it | A subset gives a cheap plausibility check (never above the police totals) |
 | 16 Oct 2026 | Compare 3-year averages | Single years; 2009 vs 2017 | Deaths vary 17–47 a year. Single-year comparisons could show almost any change |
 | 16 Oct 2026 | Report the 2012 step without a cause | Explain it | The source gives no reason. Recording changes are as possible as a real fall |
+| 16 Oct 2026 | Add context: the May 2011 road safety blueprint and two studies, in a separate callout | Leave the step unexplained; claim the blueprint caused it | Policy §7. Timing is reported, cause is not claimed. The 2018 study's start date is unknown, so it isn't tied to 2012 |
 | 16 Oct 2026 | No rates per population or vehicle | Add population from data.gov.bn or World Bank | Keeps the study to one source and its questions. Noted as a limitation; could be added later |
 | 16 Oct 2026 | No "good"/"bad" colour on the tiles | Mark falls as improvements | Consistent with case study 02; the tiles state changes and the reader judges them |
 

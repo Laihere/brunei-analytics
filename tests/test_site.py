@@ -99,7 +99,8 @@ def test_public_policy_hides_internal_sections():
     assert "How the code applies this policy" not in text
     assert "(§4)" not in text
     headings = re.findall(r"(?m)^## (\d+)\.", text)
-    assert headings == ["1", "2", "3", "4"]
+    assert headings == ["1", "2", "3", "4", "5"]
+    assert "Context sources" in text
     assert "Approved sources" in text
     assert "[full policy](https://example.org/repo/blob/main/DATA_USE_POLICY.md)" in text
     assert "[DATA_SOURCES.md](https://example.org/repo/blob/main/DATA_SOURCES.md)" in text

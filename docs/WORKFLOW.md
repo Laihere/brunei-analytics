@@ -51,6 +51,7 @@ back to inspection (we misunderstood the data), not forward with a workaround.
 | 3 | Clean | raw → tidy long table (one row per observation) | `analysis/clean.py` | Every step has a *why* in PROCESS.md §3. Doubtful values are flagged, not silently dropped |
 | 4 | Validate | tidy table → pass / fail | pandera schemas in `build.py`, unit tests in `tests/` | Ranges, uniqueness, totals, cross-check with a second table or approved source |
 | 5 | Process | tidy table → small derived CSVs | `analysis/build.py` → `outputs/` | `write_output(notes=…)` states what changed (SOP 4). Only `outputs/` reaches CI |
+| 6b | Context (optional) | news, journals, official sources → "What was reported at the time" | `case_studies/NN/context.yml`, `CONTEXT_SOURCES.md` | Policy §7: opened and checked, archived if news, no numbers charted, no individuals named |
 | 6 | Visualise | outputs → charts, each with its data table | `analysis/figures.py`, `shared/charts.py` | One message per chart. Data period in every title |
 | 7 | Post-process | page → publishable page | `dashboard/case-studies/NN-name.qmd` | Checklist below |
 | 8 | Publish | commit → live site | GitHub Actions | `uv run pytest` passes; the author pushes from their own terminal |
@@ -61,6 +62,7 @@ back to inspection (we misunderstood the data), not forward with a workaround.
 - [ ] Every chart has the source + retrieval date line; APA references in the method section (SOP 5)
 - [ ] "Not an official publication" disclaimer and AI-assistance byline (SOP 6, 10)
 - [ ] Neutral wording: what changed and when, not judgements on performance (SOP 8)
+- [ ] Context sources (if any): in their own callout, reported not concluded, logged in `CONTEXT_SOURCES.md` (policy §7)
 - [ ] Data year/period on the title and every card
 - [ ] Translations (when enabled): labels from the shared dictionary; English is the reference version
 - [ ] Screenshot check on phone and desktop widths (headless Firefox)
@@ -73,6 +75,7 @@ back to inspection (we misunderstood the data), not forward with a workaround.
 | `README.md` (per study) | repo readers | question, sources, short method, findings, limitations |
 | `PROCESS.md` (per study) | author / reviewers | full record of stages 1–7: what was done, how, and **why**; decision log |
 | `DATA_SOURCES.md` | compliance | every download and known issue in source data |
+| `CONTEXT_SOURCES.md` | compliance | every news, journal or official source cited for background, and how it was checked |
 | `outputs/*.meta.json` | machines + site | provenance and change notes carried into the page |
 | `dashboard/case-studies/*.qmd` | site visitors | the story; method summarised, not the full process |
 

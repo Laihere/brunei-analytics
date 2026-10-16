@@ -70,12 +70,21 @@ Values flagged rather than removed: {list, or "none"}.
 |---|---|---|---|
 | 1 | | | |
 
+## Context sources (optional)
+
+| Key | Source | Tier | Supports | Checked how |
+|---|---|---|---|---|
+| | | | | |
+
+Listed in `context.yml` and logged in `CONTEXT_SOURCES.md` (policy §7). Background only.
+
 ## 7. Post-process
 
 - [ ] Small counts (< 5) suppressed or merged: {where, or "not applicable: national totals only"}
 - [ ] Source + retrieval date on every chart; APA references in method
 - [ ] Disclaimer and AI-assistance byline
 - [ ] Neutral wording checked
+- [ ] Context sources: in their own callout, reported not concluded (or "none")
 - [ ] Data period on title and cards
 - [ ] Translations: {not enabled / Malay / Chinese}
 - [ ] Phone and desktop screenshots checked

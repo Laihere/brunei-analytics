@@ -12,6 +12,7 @@ date: 2026-10-16
 import sys
 
 from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.context import load_context
 from shared.outputs import read_output
 from shared.paths import CASE_STUDIES, REPO_URL, ROOT
 
@@ -22,6 +23,7 @@ import figures as F  # noqa: E402
 roads, prov_roads, notes_roads = read_output(STUDY / "outputs" / "road_casualties.csv")
 avg, prov_avg, notes_avg = read_output(STUDY / "outputs" / "road_periods.csv")
 check, prov_check, notes_check = read_output(STUDY / "outputs" / "road_crosscheck.csv")
+ctx = load_context(STUDY / "context.yml")  # news and journals, background only (policy §7)
 
 FIRST, LAST = int(roads.year.min()), int(roads.year.max())
 y = roads.set_index("year")
@@ -123,10 +125,25 @@ Most of the fall happened in a single year. From 2011 to 2012, injuries fell
 `{python} size(step["injuries"])` and deaths `{python} size(step["deaths"])`, while accidents
 fell `{python} size(step["accidents"])`. Both then stayed near their new level.
 
-::: {.callout-note appearance="simple" title="Why the step isn't explained here"}
-The source doesn't say why injuries and deaths dropped in 2012. It could be a real fall in
-serious accidents, or a change in how injuries and deaths were recorded. Fire and Rescue's
-figures, used here as a check, only start in 2012, so they can't confirm it either way.
+::: {.callout-note appearance="simple" title="What was reported at the time"}
+These come from published articles and studies, not from the data above.
+
+- **Before the step.** A 2011 study reported that road deaths in Brunei had been rising
+  since 2003. It linked this to lax enforcement of traffic laws, more young drivers and more
+  new vehicles, and recommended the "Safe System" approach to road safety
+  (`{python} ctx["haque2011"].cite()`).
+- **May 2011.** The Brunei Darussalam Road Safety Council launched a ten-year *Blueprint Decade
+  of Action for Road Safety 2011–2020*, with programmes to run with other agencies
+  (`{python} ctx["mohamad2011"].cite()`).
+- **A later evaluation.** A 2018 study reported a 30% fall in deaths and serious injuries in
+  the first 12 months after Brunei introduced reformed road safety initiatives, which it calls
+  the Road Safety System Approach. Its summary doesn't give the start date
+  (`{python} ctx["haque2018"].cite()`).
+
+These reports come from around the time of the step, but they don't show that any of them
+caused it. The data doesn't say why the step happened, and a change in how injuries and deaths
+were recorded is also possible. Fire and Rescue's figures, used here as a check, only start in
+2012, so they can't confirm it either way.
 :::
 
 ## Deaths year by year, 2009–2017
@@ -187,8 +204,9 @@ chart_card(
 ::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
 <!-- Side note: required on every case study (DESIGN.md §4.1). -->
 - **Road safety today.** The latest year published is `{python} LAST`.
-- **Why.** The source doesn't explain the 2012 step. It may be a real change or a change in
-  recording.
+- **Why.** Road safety initiatives were reported around 2011 (see "What was reported at the
+  time"), but neither they nor the data show what caused the 2012 step. It may also be a change
+  in recording.
 - **How serious.** The source doesn't define an injury (serious or slight) or a road death
   (for example, within 30 days of the crash).
 - **Who and where.** There are no districts, road users (drivers, passengers, pedestrians,
@@ -208,12 +226,15 @@ method_and_sources(
         "accidents, injuries and deaths and that no year is missing.",
         "Computed people injured per 100 accidents and people killed per 1,000 accidents, and "
         "averages over three 3-year periods (period ratios use the period totals).",
+        "Read published articles and studies for background on the 2012 step (shown separately "
+        "and not used in any number or chart).",
         "Checked against Fire and Rescue, which counts only accidents its crews attended: its "
         "deaths and injuries are below the police totals in every year from 2012 to "
         f"{int(check.year.max())}, as expected for a subset. Its figures aren't charted, "
         "because they measure something narrower.",
     ],
     code_url=f"{REPO_URL}/tree/main/case_studies/03_road_casualties",
+    context=list(ctx.values()),
 )
 ```
 

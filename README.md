@@ -19,6 +19,7 @@ included in this repo. Each case study links to the original datasets.
 ```
 DATA_USE_POLICY.md    how data is credited and handled
 DATA_SOURCES.md       log of every download
+CONTEXT_SOURCES.md    news, journals and official sources cited for background (policy §7)
 catalogue/            index of all data.gov.bn datasets (metadata only)
 shared/               approved sources, cached downloads, provenance, chart style
 case_studies/NN_*/    one folder per study: analysis/, outputs/ and PROCESS.md

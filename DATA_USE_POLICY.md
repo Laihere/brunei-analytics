@@ -143,3 +143,49 @@ candidates to add if a case study needs weather history or maps.
 - `shared/charts.py` adds the footer to every chart and provides the table view.
 - Case study outputs (small processed CSVs and their `.meta.json` files) are committed.
   Raw downloads are not.
+
+---
+
+## 7. Context sources (news, articles, journals)
+
+Agreed 16 Oct 2026. Context sources help explain *what was happening* around a finding. They are
+not data sources: §6 still decides where every charted number comes from.
+
+### Rules
+
+1. **No numbers from context sources in charts, tiles or calculations.** A figure quoted in a
+   news article may be mentioned in the text, attributed to that article, but it never replaces
+   or adds to the data.
+2. **Never name or point to individuals.** Cite articles about policies, laws, campaigns and
+   official statements, not reports of specific crimes, crashes or victims (Personal Data Protection Order 2025).
+3. **Use the most authoritative source available**, in this order:
+   1. Official publications and press releases: ministries, departments, the Royal Brunei
+      Police Force, the Government Gazette, official agency websites (`*.gov.bn`).
+   2. Peer-reviewed journals and university publications (e.g. Universiti Brunei Darussalam).
+   3. Established news outlets, e.g. Borneo Bulletin, Pelita Brunei, RTB News, The Scoop.
+
+   Not used: blogs, social media, forums, or anything without a named publisher.
+4. **Report, don't conclude.** Write "In 2012, X was reported (Source, 2012)", not "the fall was
+   caused by X". The data still can't show causes, and the page says so.
+5. **Every source is opened and checked** before it is cited, including the date and that it
+   says what we report. Nothing is cited from memory, including by the AI assistant. Important
+   points need two independent sources, or are marked as reported by one.
+6. **Paraphrase; quote little.** At most a short quote in quotation marks. No copied images,
+   tables or long passages.
+7. **Keep it findable.** Record the access date, and save an archived copy (Internet Archive,
+   web.archive.org) for news pages, since Brunei news links often move or disappear.
+8. **Separate from findings on the page.** Context appears in a callout titled "What was
+   reported at the time", never in the stat tiles or the conclusion's answers.
+
+### References (APA 7)
+
+Context sources go in the same reference list as the datasets, for example:
+
+> Author, A. (2012, March 5). Title of the article in sentence case. *Borneo Bulletin*. URL
+
+> Royal Brunei Police Force. (2012, March 5). *Title of the press release* [Press release]. URL
+
+> Author, A., & Author, B. (2015). Title of the article. *Journal Name, 12*(3), 45–67. https://doi.org/…
+
+Each source is logged in `CONTEXT_SOURCES.md` with its URL, archive link, access date and the
+case study it supports.

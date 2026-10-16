@@ -44,3 +44,10 @@ def test_standard_sections_in_order(page):
     )
     body = re.findall(r"^## (?!Conclusion)", text, re.MULTILINE)
     assert 2 <= len(body) <= 4, f"{page.name}: use 2–4 body sections (found {len(body)})"
+
+
+@pytest.mark.parametrize("page", PAGES, ids=lambda p: p.stem)
+def test_no_wrapped_line_starts_like_a_numbered_list(page):
+    """A wrapped line starting "2003. …" turns into a numbered list item in Markdown."""
+    bad = re.findall(r"(?m)^[ \t]+\d{3,}\. .*$", page.read_text())
+    assert not bad, f"{page.name}: rewrap these lines: {bad}"

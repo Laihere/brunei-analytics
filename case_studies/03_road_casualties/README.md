@@ -10,7 +10,9 @@ accidents become less likely to injure or kill?
 | Road Casualties | data.gov.bn | Royal Brunei Police Force | Data.gov.bn Data Policy | 16 Oct 2026 |
 | Statistics of Road Traffic Accidents (cross-check only) | data.gov.bn | Fire and Rescue Department Brunei Darussalam | Data.gov.bn Data Policy | 16 Oct 2026 |
 
-Full attributions are generated from `outputs/*.meta.json`.
+Full attributions are generated from `outputs/*.meta.json`. Background sources (two journal
+articles and a Borneo Bulletin report) are in `context.yml` and `CONTEXT_SOURCES.md`; they
+supply no charted numbers.
 
 ## Method
 

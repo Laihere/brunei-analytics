@@ -98,17 +98,39 @@ def apa_year(p: Provenance) -> str:
     return p.published[:4] if p.published else "n.d."
 
 
-def apa_reference(p: Provenance, html: bool = False) -> str:
+def _apa_author(p: Provenance) -> str:
+    return p.owner if p.has_owner else get_source(p.source).apa_author
+
+
+def apa_year_labels(provenance: list[Provenance]) -> dict[Provenance, str]:
+    """Year labels for one reference list. APA 7 gives works by the same author in the same
+    year a suffix in title order: 2026a, 2026b, n.d.-a. Identical titles (e.g. yearly
+    editions of one table) are ordered by edition."""
+    groups: dict[tuple[str, str], list[Provenance]] = {}
+    for p in dict.fromkeys(provenance):
+        groups.setdefault((_apa_author(p) or sentence_case(p.title), apa_year(p)), []).append(p)
+    labels = {}
+    for (_, year), ps in groups.items():
+        ps.sort(key=lambda p: (sentence_case(p.title).lower(), p.edition, p.page_url))
+        for i, p in enumerate(ps):
+            suffix = ("-" if year == "n.d." else "") + "abcdefghijklmnopqrstuvwxyz"[i]
+            labels[p] = year + suffix if len(ps) > 1 else year
+    return labels
+
+
+def apa_reference(p: Provenance, html: bool = False, year: str = "") -> str:
     """APA 7 reference for a dataset, with the retrieval date the data.gov.bn terms require (M1).
 
     Department of Statistics, JPES. (2026). *Consumer price index 2025* [Data set].
     Brunei Open Data. Retrieved October 15, 2026, from https://...
+
+    `year` overrides the year label, e.g. "2026a" from `apa_year_labels`.
     """
     src = get_source(p.source)
     title = sentence_case(p.title)
     title = f"<em>{escape(title)}</em>" if html else title
-    author = p.owner if p.has_owner else src.apa_author
-    year = f"({apa_year(p)})."
+    author = _apa_author(p)
+    year = f"({year or apa_year(p)})."
     head = (
         f"{author.rstrip('.')}. {year} {title} [Data set]."
         if author

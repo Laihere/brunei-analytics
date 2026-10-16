@@ -14,7 +14,7 @@ import yaml
 from IPython.display import HTML
 
 from shared.charts import CONFIG, data_table
-from shared.provenance import BYLINE, Provenance, apa_reference, short_credit
+from shared.provenance import BYLINE, Provenance, apa_reference, apa_year_labels, short_credit
 
 Change = Literal["up-good", "up-bad", "down-good", "down-bad"]
 _ARROW = {"up": "▲", "down": "▼"}
@@ -109,7 +109,8 @@ def method_and_sources(
     """Layer 4: method, full attributions and code, collapsed but always present."""
     items = "".join(f"<li>{escape(s)}</li>" for s in steps)
     unique = list(dict.fromkeys(provenance))  # same dataset may back several outputs
-    refs = sorted(apa_reference(p, html=True) for p in unique)  # APA: alphabetical
+    years = apa_year_labels(unique)  # same author and year: 2026a, 2026b…
+    refs = sorted(apa_reference(p, html=True, year=years[p]) for p in unique)  # APA: alphabetical
     credits = "".join(f"<li>{r}</li>" for r in refs)
     code = (
         f'<details><summary>Code on GitHub</summary><div><a href="{escape(code_url)}">'

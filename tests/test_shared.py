@@ -3,7 +3,13 @@ import pytest
 
 from shared.fetch import cached_frame
 from shared.outputs import credit_for, read_output, write_output
-from shared.provenance import OWNER_MISSING, Provenance, attribution, short_credit
+from shared.provenance import (
+    OWNER_MISSING,
+    Provenance,
+    apa_year_labels,
+    attribution,
+    short_credit,
+)
 from shared.sources import get_source
 
 CPI = Provenance(
@@ -68,6 +74,40 @@ def test_cc_by_reference_names_publisher_and_licence():
     text = attribution(WDI)
     assert text.startswith("World Bank. (n.d.). Inflation, consumer prices (annual %) [Data set].")
     assert "World Development Indicators. Licensed under CC BY 4.0." in text
+
+
+def test_same_author_and_year_get_apa_suffixes_in_title_order():
+    pct = Provenance(
+        source="datagovbn",
+        title="Percentage Change in Customer Price Index 2025",
+        page_url="https://www.data.gov.bn/pct/",
+        accessed="2026-10-14",
+        owner="Department of Statistics, JPES",
+        published="2026-07-11",
+    )
+    labels = apa_year_labels([pct, CPI, GDP])
+    assert labels == {CPI: "2026a", pct: "2026b", GDP: "n.d."}
+    assert attribution(pct, year=labels[pct]).startswith("Department of Statistics, JPES. (2026b).")
+
+
+def test_identical_titles_are_ordered_by_edition_and_undated_get_hyphen():
+    def crime(edition):
+        return Provenance(
+            source="datagovbn",
+            title="Crime Statistics",
+            page_url=f"https://www.data.gov.bn/crime-{edition}/",
+            accessed="2026-10-16",
+            owner="Royal Brunei Police Force",
+            edition=edition,
+            published="2025-12-17",
+        )
+
+    c13, c12 = crime("2013"), crime("2012")
+    assert apa_year_labels([c13, c12, c13]) == {c12: "2025a", c13: "2025b"}
+    wdi2 = Provenance(
+        source="worldbank", title="Consumer price index", page_url="x", accessed="2026-10-09"
+    )
+    assert apa_year_labels([WDI, wdi2]) == {wdi2: "n.d.-a", WDI: "n.d.-b"}
 
 
 def test_short_credit_has_year_retrieval_date_and_disclaimer():

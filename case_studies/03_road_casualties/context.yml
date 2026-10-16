@@ -35,3 +35,25 @@
   doi: 10.1016/j.tra.2018.08.017
   url: https://doi.org/10.1016/j.tra.2018.08.017
   accessed: "2026-10-16"
+
+- key: asean2016
+  kind: official
+  authors: ["ASEAN Secretariat"]
+  published: "2016"
+  title: ASEAN Regional Road Safety Strategy
+  container: ASEAN Secretariat
+  url: https://asean.org/wp-content/uploads/2021/08/ASEAN-Road-Safety-Strategy_full_24Oct16_rev_clean-1.pdf
+  accessed: "2026-10-16"
+
+- key: yusof2019
+  kind: journal
+  authors: ["Yusof, N. B.", "Hoque, M. A.", "Steele, M. C.", "Yong, S. Y."]
+  published: "2019"
+  title: Extended investigation on road fatality in Brunei
+  container: International Journal of Injury Control and Safety Promotion
+  volume: "26"
+  issue: "1"
+  pages: 21–29
+  doi: 10.1080/17457300.2018.1476381
+  url: https://doi.org/10.1080/17457300.2018.1476381
+  accessed: "2026-10-16"

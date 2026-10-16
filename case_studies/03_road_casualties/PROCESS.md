@@ -128,11 +128,13 @@ points. The values are already in the text, the tiles and the hover, so only cha
 Added 16 Oct 2026, the first use of policy §7. Shown in a "What was reported at the time"
 callout in the "step down in 2012" section, and in the reference list.
 
-| Key | Source | Tier | Supports | Checked how |
+| Key | Source | Tier (1 journal · 2 official · 3 news) | Supports | Checked how |
 |---|---|---|---|---|
-| `haque2011` | Haque (2011), *Journal of the Australasian College of Road Safety* 22(2) | 2 | Deaths rising since 2003; author links it to lax enforcement, young drivers, new vehicles; recommends Safe System | Full text read |
+| `haque2011` | Haque (2011), *Journal of the Australasian College of Road Safety* 22(2) | 1 | Deaths rising since 2003; author links it to lax enforcement, young drivers, new vehicles; recommends Safe System | Full text read |
 | `mohamad2011` | Mohamad (2011, May 27), *Borneo Bulletin* (Sultanate.com reprint) | 3 | Blueprint Decade of Action for Road Safety 2011–2020 launched May 2011 | Full article read; archived copy; no victims named |
-| `haque2018` | Haque & Haque (2018), *Transportation Research Part A* 118 | 2 | 30% fall in serious casualties in 12 months after the Road Safety System Approach | Abstract only (paywalled); start date not given, so not linked to 2012 |
+| `haque2018` | Haque & Haque (2018), *Transportation Research Part A* 118 | 1 | 30% fall in serious casualties in 12 months after the Road Safety System Approach | Abstract only (paywalled); start date not given, so not linked to 2012 |
+| `yusof2019` | Yusof, Hoque, Steele & Yong (2019), *Int. J. Injury Control and Safety Promotion* 26(1) | 1 | Government reduced deaths through new traffic measures; yearly deaths fluctuate, declining overall. Universiti Brunei Darussalam authors | Abstract via PubMed |
+| `asean2016` | ASEAN Secretariat (2016), *ASEAN Regional Road Safety Strategy* | 2 | Blueprint launched February 2011 with a Road Safety Research Centre. Its 2011–2015 road deaths match the police table exactly (extra plausibility check) | Brunei section read in full |
 
 Searched but not used: a Ministry of Transport and Infocommunications speech page (404, no
 archive). Details in `CONTEXT_SOURCES.md`.

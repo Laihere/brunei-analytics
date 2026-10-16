@@ -126,24 +126,27 @@ Most of the fall happened in a single year. From 2011 to 2012, injuries fell
 fell `{python} size(step["accidents"])`. Both then stayed near their new level.
 
 ::: {.callout-note appearance="simple" title="What was reported at the time"}
-These come from published articles and studies, not from the data above.
+These come from published studies and reports, not from the data above.
 
 - **Before the step.** A 2011 study reported that road deaths in Brunei had been rising
   since 2003. It linked this to lax enforcement of traffic laws, more young drivers and more
   new vehicles, and recommended the "Safe System" approach to road safety
   (`{python} ctx["haque2011"].cite()`).
-- **May 2011.** The Brunei Darussalam Road Safety Council launched a ten-year *Blueprint Decade
-  of Action for Road Safety 2011–2020*, with programmes to run with other agencies
-  (`{python} ctx["mohamad2011"].cite()`).
-- **A later evaluation.** A 2018 study reported a 30% fall in deaths and serious injuries in
-  the first 12 months after Brunei introduced reformed road safety initiatives, which it calls
-  the Road Safety System Approach. Its summary doesn't give the start date
-  (`{python} ctx["haque2018"].cite()`).
+- **2011.** Brunei launched a ten-year *Blueprint Decade of Action for Road Safety
+  2011–2020*, together with a Road Safety Research Centre (`{python} ctx["asean2016"].cite()`).
+  Its official launch by the patron of the Brunei Darussalam Road Safety Council was reported
+  in May 2011 (`{python} ctx["mohamad2011"].cite()`).
+- **Later studies.** A 2018 study reported a 30% fall in deaths and serious injuries in the
+  first 12 months after Brunei introduced reformed road safety initiatives, which it calls the
+  Road Safety System Approach; its summary doesn't give the start date
+  (`{python} ctx["haque2018"].cite()`). Researchers at Universiti Brunei Darussalam described
+  the government as reducing road deaths through new traffic measures, and noted that yearly
+  deaths fluctuate but have tended to decline (`{python} ctx["yusof2019"].cite()`).
 
-These reports come from around the time of the step, but they don't show that any of them
-caused it. The data doesn't say why the step happened, and a change in how injuries and deaths
-were recorded is also possible. Fire and Rescue's figures, used here as a check, only start in
-2012, so they can't confirm it either way.
+**These reports come from around the time of the step, but they don't show that any of them
+caused it.** The data doesn't say why the step happened, and a change in how injuries and
+deaths were recorded is also possible. Fire and Rescue's figures, used here as a check, only
+start in 2012, so they can't confirm it either way.
 :::
 
 ## Deaths year by year, 2009–2017
@@ -226,8 +229,9 @@ method_and_sources(
         "accidents, injuries and deaths and that no year is missing.",
         "Computed people injured per 100 accidents and people killed per 1,000 accidents, and "
         "averages over three 3-year periods (period ratios use the period totals).",
-        "Read published articles and studies for background on the 2012 step (shown separately "
-        "and not used in any number or chart).",
+        "Read published studies and reports for background on the 2012 step (shown separately "
+        "and not used in any number or chart). The ASEAN Regional Road Safety Strategy (2016) "
+        "lists the same road deaths for 2011–2015 as the police table.",
         "Checked against Fire and Rescue, which counts only accidents its crews attended: its "
         "deaths and injuries are below the police totals in every year from 2012 to "
         f"{int(check.year.max())}, as expected for a subset. Its figures aren't charted, "

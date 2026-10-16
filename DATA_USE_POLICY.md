@@ -158,11 +158,16 @@ not data sources: §6 still decides where every charted number comes from.
    or adds to the data.
 2. **Never name or point to individuals.** Cite articles about policies, laws, campaigns and
    official statements, not reports of specific crimes, crashes or victims (Personal Data Protection Order 2025).
-3. **Use the most authoritative source available**, in this order:
-   1. Official publications and press releases: ministries, departments, the Royal Brunei
-      Police Force, the Government Gazette, official agency websites (`*.gov.bn`).
-   2. Peer-reviewed journals and university publications (e.g. Universiti Brunei Darussalam).
+3. **Use the most authoritative source available**, in this order (updated 16 Oct 2026: the
+   author prefers peer-reviewed sources):
+   1. Peer-reviewed journals and university publications, preferably including Brunei-based
+      scholars (e.g. Universiti Brunei Darussalam, Universiti Teknologi Brunei).
+   2. Official publications and press releases: ministries, departments, the Royal Brunei
+      Police Force, the Government Gazette, official agency websites (`*.gov.bn`), and
+      intergovernmental bodies such as ASEAN. Best for facts about what the government did
+      (dates, launches, laws).
    3. Established news outlets, e.g. Borneo Bulletin, Pelita Brunei, RTB News, The Scoop.
+      Used when neither of the above covers the point, ideally alongside one that does.
 
    Not used: blogs, social media, forums, or anything without a named publisher.
 4. **Report, don't conclude.** Write "In 2012, X was reported (Source, 2012)", not "the fall was

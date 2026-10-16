@@ -1,0 +1,35 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Statistik Industri Agrimakanan",
+      "page_url": "https://www.data.gov.bn/statistik-industri-agrimakanan/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/STATISTIK-INDUSTRI-AGRIMAKANAN-2013.xlsx",
+      "owner": "Ministry of Industry and Primary Resources",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2013",
+      "sha256": "41996ad2a686025fc170865d1ab8849553b131135b8cb5ebf177484ffca2eb17",
+      "original_source": "",
+      "published": "2025-12-22",
+      "title_translation": "Agrifood industry statistics"
+    },
+    {
+      "source": "datagovbn",
+      "title": "Statistik Industri Agrimakanan Mengikut Daerah Dan Kategori Produck",
+      "page_url": "https://www.data.gov.bn/statistik-industri-agrimakanan-mengikut-daerah-dan-kategori-produck/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/STATISTIK-INDUSTRI-AGRIMAKANAN-MENGIKUT-DAERAH-DAN-KATEGORI-PRODUK-2013.xlsx",
+      "owner": "Ministry of Industry and Primary Resources",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2013",
+      "sha256": "68e895b19c5393793009fbcb71734dcec7a241195ec76b0e4eda2a16d8ea5620",
+      "original_source": "",
+      "published": "2025-12-22",
+      "title_translation": "Agrifood industry statistics by district and product category"
+    }
+  ],
+  "notes": "2013 market value by product category, with the number of businesses making each product (summed from the category × district table, which counts a business once per category it makes). The category × district cells themselves are not published, because many rest on fewer than 5 businesses."
+}

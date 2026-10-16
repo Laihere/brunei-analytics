@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Tren Pengeluaran Agrimakanan Mengikut Kategori Produk",
+      "page_url": "https://www.data.gov.bn/tren-pengeluaran-agrimakanan-mengikut-kategori-produk/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/TREN-PENGELUARAN-AGRIMAKANAN-MENGIKUT-KATEGORI-PRODUK-2010-2013.xlsx",
+      "owner": "Ministry of Industry and Primary Resources",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2010–2013, annual",
+      "sha256": "07f5f9fd279d09a5225b86a31beca3469aa58481848aef2755785d5f0a6a08e8",
+      "original_source": "",
+      "published": "2025-12-22",
+      "title_translation": "Agrifood production trends by product category"
+    }
+  ],
+  "notes": "Market value by product category, 2010–2013, converted from B$ million to B$. Malay names standardised and translated by the author; 'Acar & Jeruk' (pickles) merged into Other."
+}

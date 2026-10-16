@@ -1,0 +1,24 @@
+# Context sources for case study 05 (DATA_USE_POLICY.md §7). Background only: no numbers from
+# these are charted. Each entry was opened and checked on the access date; see CONTEXT_SOURCES.md.
+# No peer-reviewed study of Brunei's food processing industry in 2004–2013 was found (searched
+# 16 Oct 2026); both sources are institutional reports (tier 2).
+
+- key: searca2016
+  kind: official
+  authors: ["Aidah binti Haji Mohd Hanifah", "Fuziah binti Haji Hamdan", "Thippeswamy, H. M."]
+  published: "2016"
+  title: "Agricultural policy and institutional reforms in Brunei Darussalam: Experiences, impacts, and lessons"
+  container: Southeast Asian Regional Center for Graduate Study and Research in Agriculture (SEARCA)
+  url: https://ideas.repec.org/b/sag/primr2/2016308.html
+  note: Southeast Asian Agriculture and Development Primer Series (2nd ed.), No. 2016:308.
+  accessed: "2026-10-16"
+
+- key: khut2026
+  kind: official
+  authors: ["Khut, V."]
+  published: "2026"
+  title: Developing Brunei's agri-food sector to strengthen food security and economic diversification
+  container: ASEAN+3 Macroeconomic Research Office (AMRO)
+  url: https://www.amro-asia.org/wp-content/uploads/2026/10/3_Developing-Bruneis-Agri-Food-Sector.pdf
+  note: "Selected Issue 3 in Annual consultation report: Brunei Darussalam 2026."
+  accessed: "2026-10-16"

@@ -1,0 +1,271 @@
+---
+title: "Brunei's food processing grew 2.6× in 2004–2012; most of 2013's jump came from a newly counted category"
+description: "How did Brunei's food processing industry change from 2004 to 2013, and what did it make?"
+number: "05"
+topic: "Sectoral"
+data-period: "2004–2013"
+read-time: "5-minute read"
+date: 2026-10-16
+---
+
+```{python}
+import sys
+
+from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.context import load_context
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+STUDY = CASE_STUDIES / "05_agrifood_processing"
+sys.path.insert(0, str(STUDY / "analysis"))
+import figures as F  # noqa: E402
+
+series, prov_series, notes_series = read_output(STUDY / "outputs" / "agrifood_series.csv")
+trend, prov_trend, notes_trend = read_output(STUDY / "outputs" / "agrifood_categories_2010_2013.csv")
+cats, prov_cats, notes_cats = read_output(STUDY / "outputs" / "agrifood_categories_2013.csv")
+dist, prov_dist, notes_dist = read_output(STUDY / "outputs" / "agrifood_districts_2013.csv")
+ctx = load_context(STUDY / "context.yml")  # institutional reports, background only (policy §7)
+
+FIRST, LAST = int(series.year.min()), int(series.year.max())
+PREV = LAST - 1
+s = series.set_index("year")
+m = F.millions
+growth = s.loc[PREV, "comparable_bnd"] / s.loc[FIRST, "comparable_bnd"]
+# The text says value rose every year to PREV; stop the build rather than publish it if not.
+assert s.loc[:PREV, "comparable_bnd"].is_monotonic_increasing, "Rewrite 'rose every year'."
+fall = (s.loc[LAST, "comparable_bnd"] / s.loc[PREV, "comparable_bnd"] - 1) * 100
+new_share = s.loc[LAST, "new_category_bnd"] / s.loc[LAST, "total_bnd"] * 100
+crop_06, crop_08 = s.loc[2006, "crop_bnd"], s.loc[2008, "crop_bnd"]
+t = trend.pivot(index="category", columns="year", values="value_bnd")
+BAKERY, MEAT, DRINKS, TRAD = "Biscuits & bakery", "Meat products", "Mineral water & soft drinks", "Traditional foods"
+c = cats.set_index("category")
+biz_share = c.businesses / c.businesses.sum() * 100
+d = dist.set_index("district")
+bm = d.loc["Brunei-Muara"]
+
+
+def pct(v, digits=0):
+    return f"{v:.{digits}f}%"
+
+
+def size(v, digits=0):
+    """Size of a rise or fall for prose ("fell 18%"), where the verb carries the sign."""
+    return f"{abs(v):.{digits}f}%"
+```
+
+::: {.study-intro}
+This case study looks at Brunei's **agrifood processing industry**, the businesses that turn
+farm and fishery produce into food products such as bread, biscuits, drinks and meat products.
+It uses the Ministry of Industry and Primary Resources' *agrimakanan* (agrifood) tables, which
+cover **2004 to 2013**. Although published in 2025, the data ends in 2013. It shows **what
+changed, not why**.
+
+It asks two questions, answered in the conclusion:
+
+1. **How did the industry's market value change from 2004 to 2013?**
+2. **What did it make in 2013, and where was it based?**
+:::
+
+```{python}
+stat_tiles(
+    stat_tile(f"Market value, {FIRST} → {PREV}", f"{growth:.1f}×", "", f"{m(s.loc[FIRST, 'comparable_bnd'])} → {m(s.loc[PREV, 'comparable_bnd'])}"),
+    stat_tile(f"Market value, {LAST}", m(s.loc[LAST, "total_bnd"]), "", f"incl. {m(s.loc[LAST, 'new_category_bnd'])} from a category first counted in {LAST}"),
+    stat_tile(f"Without that category, {PREV} → {LAST}", f"−{size(fall)}", "", f"{m(s.loc[PREV, 'comparable_bnd'])} → {m(s.loc[LAST, 'comparable_bnd'])}"),
+)
+```
+
+```{python}
+fig, table = F.series_chart(series)
+chart_card(
+    fig,
+    title=f"Market value rose every year to {PREV}; in {LAST}, a newly counted category hid a fall",
+    subtitle=f"Market value of processed agrifood products, B$ million, current prices · {FIRST}–{LAST} · grey: fast or instant food, first counted in {LAST}",
+    alt=(
+        f"Stacked bar chart. Market value rises from {m(s.loc[FIRST, 'comparable_bnd'])} in "
+        f"{FIRST} to {m(s.loc[PREV, 'comparable_bnd'])} in {PREV}. In {LAST}, the categories "
+        f"counted every year fall to {m(s.loc[LAST, 'comparable_bnd'])}, and a new grey segment "
+        f"of {m(s.loc[LAST, 'new_category_bnd'])} brings the total to {m(s.loc[LAST, 'total_bnd'])}."
+    ),
+    provenance=prov_series,
+    table=table,
+)
+```
+
+## Market value, 2004–2013
+
+The industry's market value rose every year from `{python} FIRST` to `{python} PREV`, from
+`{python} m(s.loc[FIRST, "comparable_bnd"])` to `{python} m(s.loc[PREV, "comparable_bnd"])`,
+`{python} f"{growth:.1f}×"` as much. The biggest rise came in 2007–2008, when crop-based
+products went from `{python} m(crop_06)` (2006) to `{python} m(crop_08)` (2008).
+
+**In `{python} LAST`, the total jumped to `{python} m(s.loc[LAST, "total_bnd"])`, but
+`{python} pct(new_share)` of that came from "Makanan Segera" (fast or instant food), a category
+that appears for the first time that year.** Without it, the categories counted every year
+fell `{python} size(fall)`, to `{python} m(s.loc[LAST, "comparable_bnd"])`.
+
+::: {.callout-note appearance="simple" title="Livestock-based and crop-based"}
+The Ministry splits the industry into **livestock-based** products (meat products, and from
+2013 fast or instant food) and **crop-based** products (everything else, including fish
+products). Values are in current Brunei dollars, not adjusted for inflation.
+:::
+
+## What was made, 2012–2013
+
+```{python}
+fig, table = F.categories_chart(trend, PREV, LAST)
+chart_card(
+    fig,
+    title=f"Biscuits & bakery fell from {m(t.loc[BAKERY, PREV])} to {m(t.loc[BAKERY, LAST])} in {LAST}",
+    subtitle=f"Market value by product category, B$ million · {PREV} and {LAST}",
+    alt=(
+        f"Bar chart of market value by category for {PREV} and {LAST}. Biscuits and bakery fall "
+        f"from {m(t.loc[BAKERY, PREV])} to {m(t.loc[BAKERY, LAST])}; meat products from "
+        f"{m(t.loc[MEAT, PREV])} to {m(t.loc[MEAT, LAST])}; fast or instant food appears at "
+        f"{m(t.loc[F.NEW, LAST])}. Most other categories are under B$3 million."
+    ),
+    provenance=prov_trend,
+    table=table,
+    height=520,
+)
+```
+
+Biscuits & bakery was the largest category counted every year, but fell from
+`{python} m(t.loc[BAKERY, PREV])` to `{python} m(t.loc[BAKERY, LAST])`. Meat products also fell,
+from `{python} m(t.loc[MEAT, PREV])` to `{python} m(t.loc[MEAT, LAST])`. Mineral water & soft
+drinks held at about `{python} m(t.loc[DRINKS, LAST], 0)`.
+
+## Many small producers, 2013
+
+```{python}
+fig, table = F.producers_chart(cats)
+chart_card(
+    fig,
+    title=f"Traditional foods had the most businesses but {pct(c.loc[TRAD, 'share_pct'], 1)} of the market value",
+    subtitle=f"Each product category's share of businesses* and of market value (%) · {LAST}",
+    alt=(
+        f"Two bar charts by category. Traditional foods have {pct(biz_share[TRAD])} of businesses "
+        f"but {pct(c.loc[TRAD, 'share_pct'], 1)} of market value. Fast or instant food has "
+        f"{pct(biz_share[F.NEW])} of businesses and {pct(c.loc[F.NEW, 'share_pct'])} of value."
+    ),
+    provenance=prov_cats,
+    table=table,
+    height=520,
+    mobile_fig=F.producers_chart(cats, cols=1)[0],
+    mobile_height=900,
+)
+```
+
+Market value was concentrated in a few categories. In `{python} LAST`,
+`{python} int(c.loc[TRAD, "businesses"])` businesses made traditional foods, the most of any
+category, but they produced `{python} pct(c.loc[TRAD, "share_pct"], 1)` of the market value.
+`{python} int(c.loc[F.NEW, "businesses"])` businesses made fast or instant food, which was
+`{python} pct(c.loc[F.NEW, "share_pct"])` of the value.
+
+::: {.callout-note appearance="simple" title="*How businesses are counted"}
+**A business that makes several kinds of product is counted once in each category**, so the
+category counts add up to more than the number of businesses (the district table gives
+`{python} int(d.businesses.sum())` in total). Values for a single district and category aren't
+shown, because many rest on fewer than 5 businesses and could reveal one firm's sales.
+:::
+
+## Where the industry was, 2013
+
+```{python}
+fig, table = F.districts_chart(dist)
+chart_card(
+    fig,
+    title=f"Brunei-Muara had {pct(bm.businesses_share_pct)} of businesses but {pct(bm.value_bnd_share_pct)} of the market value",
+    subtitle=f"Each district's share of agrifood businesses, employees and market value (%) · {LAST}",
+    alt=(
+        f"Three bar charts by district. Brunei-Muara: {pct(bm.businesses_share_pct)} of businesses, "
+        f"{pct(bm.employees_share_pct)} of employees, {pct(bm.value_bnd_share_pct)} of market value. "
+        f"Temburong: {pct(d.loc['Temburong', 'businesses_share_pct'])} of businesses but "
+        f"{pct(d.loc['Temburong', 'value_bnd_share_pct'], 1)} of value."
+    ),
+    provenance=prov_dist,
+    table=table,
+    height=260,
+    mobile_fig=F.districts_chart(dist, cols=1)[0],
+    mobile_height=620,
+)
+```
+
+**Brunei-Muara accounted for `{python} pct(bm.value_bnd_share_pct)` of the industry's market
+value in `{python} LAST`**, with `{python} pct(bm.businesses_share_pct)` of its businesses and
+`{python} pct(bm.employees_share_pct)` of its employees. Temburong had
+`{python} int(d.loc["Temburong", "businesses"])` businesses, more than Tutong or Belait, but the
+smallest share of the value.
+
+::: {.callout-note appearance="simple" title="What was reported at the time, and since"}
+These come from institutional reports, not from the data above. No peer-reviewed study of the
+industry in these years was found.
+
+- **Policy at the time.** Officials of the Department of Agriculture and Agrifood described the
+  agrifood industry as developing with small and medium enterprises during the department's
+  2008–2013 Medium-Term Strategic Plan. A Small Entrepreneurs Food Incubator Centre supported
+  processing, food safety and quality, and the Brunei Halal Brand was set up to reach local and
+  overseas markets (`{python} ctx["searca2016"].cite()`).
+- **Since 2013.** A 2026 regional report put agri-food processing output at B$110.5 million in
+  2015 and about B$172.5 million in 2024. It also found that imported food met over 70% of
+  Brunei's food needs in 2024, and that the sector had limited links to the rest of the economy
+  (`{python} ctx["khut2026"].cite()`).
+
+**The 2026 report may measure output differently from the Ministry tables used here, so its
+figures can't be joined to the chart above.**
+:::
+
+## Conclusion
+
+- **How did the industry's market value change from 2004 to 2013?** It rose every year to
+  `{python} PREV`, from `{python} m(s.loc[FIRST, "comparable_bnd"])` to
+  `{python} m(s.loc[PREV, "comparable_bnd"])` (`{python} f"{growth:.1f}×"`). In
+  `{python} LAST`, the published total rose to `{python} m(s.loc[LAST, "total_bnd"])`, but only
+  because a new category was counted; the categories counted every year fell
+  `{python} size(fall)`, led by biscuits & bakery.
+- **What did it make in 2013, and where was it based?** Mostly fast or instant food, biscuits &
+  bakery, drinks and meat products, which together made up
+  `{python} pct(c.loc[[F.NEW, BAKERY, DRINKS, MEAT], "share_pct"].sum())` of the value. Many
+  businesses made traditional foods (`{python} int(c.loc[TRAD, "businesses"])`) and snacks
+  (`{python} int(c.loc["Snacks", "businesses"])`), but on a small scale. Almost all of the
+  value (`{python} pct(bm.value_bnd_share_pct)`) came from Brunei-Muara.
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+<!-- Side note: required on every case study (DESIGN.md §4.1). -->
+- **Why.** The data doesn't explain the 2007–2008 rise or the `{python} LAST` fall.
+- **Whether `{python} LAST` was real growth.** Fast or instant food may have been made before
+  `{python} LAST` without being counted; the source doesn't say.
+- **Prices.** Values are in current Brunei dollars, not adjusted for inflation.
+- **After `{python} LAST`.** The Ministry tables end in `{python} LAST`. Later figures from
+  other reports may use different definitions.
+- **Head-counts.** Two published tables give different numbers of businesses and employees
+  for `{python} LAST`. The district table is used for totals.
+- **Farming.** This is about processed food, not about crops, livestock or fish produced on
+  farms.
+:::
+
+```{python}
+method_and_sources(
+    prov_series + prov_trend + prov_cats + prov_dist,
+    notes=f"{notes_series} {notes_trend} {notes_cats} {notes_dist}",
+    steps=[
+        "Downloaded the five agrimakanan (agrifood) tables of the Ministry of Industry and "
+        "Primary Resources from data.gov.bn, and translated their Malay names.",
+        f"Checked that market values agree across all five tables: the {LAST} total is "
+        f"identical in each, and the category table matches the yearly series for 2010–{LAST}.",
+        "Dropped 2003 (crop-based value not available) and recomputed yearly changes instead of "
+        "using the published change column, which treats that missing value as zero.",
+        f"Separated fast or instant food, first counted in {LAST}, from the categories counted "
+        "every year.",
+        "Published category and district totals only; values for a single district and "
+        "category are not shown (privacy and business confidentiality).",
+        "Read institutional reports for background (shown separately, not used in any number or "
+        "chart).",
+    ],
+    code_url=f"{REPO_URL}/tree/main/case_studies/05_agrifood_processing",
+    context=list(ctx.values()),
+)
+```
+
+```{python}
+prev_next("05-agrifood-processing.qmd", ROOT / "dashboard" / "case-studies")
+```

@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Status Pengeluaran Agrimakanan Mengikut Daerah",
+      "page_url": "https://www.data.gov.bn/status-pengeluaran-agrimakanan-mengikut-daerah/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/STATUS-PENGELUARAN-AGRIMAKANAN-MENGIKUT-DAERAH-2013.xlsx",
+      "owner": "Ministry of Industry and Primary Resources",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2013",
+      "sha256": "d3092853fcd10f3e90aeca51b003ce0702fb90df69f34bdc0ed1fb13003bdad4",
+      "original_source": "",
+      "published": "2025-12-22",
+      "title_translation": "Status of agrifood production by district"
+    }
+  ],
+  "notes": "2013 businesses, employees and market value by district, from the district table ('Brunei/Muara' written as Brunei-Muara). Shares computed by the author."
+}

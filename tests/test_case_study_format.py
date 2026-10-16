@@ -49,5 +49,6 @@ def test_standard_sections_in_order(page):
 @pytest.mark.parametrize("page", PAGES, ids=lambda p: p.stem)
 def test_no_wrapped_line_starts_like_a_numbered_list(page):
     """A wrapped line starting "2003. …" turns into a numbered list item in Markdown."""
-    bad = re.findall(r"(?m)^[ \t]+\d{3,}\. .*$", page.read_text())
+    # Also inline code at a line start: "`{python} LAST`. …" becomes "2013. …" once rendered.
+    bad = re.findall(r"(?m)^[ \t]+(?:\d{3,}|`\{python\}[^`]*`)\. .*$", page.read_text())
     assert not bad, f"{page.name}: rewrap these lines: {bad}"

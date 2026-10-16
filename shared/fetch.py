@@ -68,6 +68,7 @@ def download(
     licence: str = "",
     published: str = "",
     raw_dir: Path = RAW,
+    title_translation: str = "",
 ) -> Path:
     """Download a file once and record where it came from."""
     folder = dataset_dir(source, edition, title, raw_dir)
@@ -91,6 +92,7 @@ def download(
         coverage=coverage,
         sha256=sha256_of(dest),
         published=published,
+        title_translation=title_translation,
     )
     write_meta(dest, [prov])
     time.sleep(DELAY_S)

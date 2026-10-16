@@ -1,0 +1,35 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Status Pengeluaran Produck Agrimakanan",
+      "page_url": "https://www.data.gov.bn/status-pengeluaran-produck-agrimakanan/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/STATUS-PENGELUARAN-PRODUK-AGRIMAKANAN-2003-2012.xlsx",
+      "owner": "Ministry of Industry and Primary Resources",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2003–2013, annual",
+      "sha256": "1d8c394f1a2ffb5ef1e05e099be2591a67e11e98440b8a05fcb86457e719035a",
+      "original_source": "",
+      "published": "2025-12-22",
+      "title_translation": "Status of agrifood product production"
+    },
+    {
+      "source": "datagovbn",
+      "title": "Tren Pengeluaran Agrimakanan Mengikut Kategori Produk",
+      "page_url": "https://www.data.gov.bn/tren-pengeluaran-agrimakanan-mengikut-kategori-produk/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/TREN-PENGELUARAN-AGRIMAKANAN-MENGIKUT-KATEGORI-PRODUK-2010-2013.xlsx",
+      "owner": "Ministry of Industry and Primary Resources",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2010–2013, annual",
+      "sha256": "07f5f9fd279d09a5225b86a31beca3469aa58481848aef2755785d5f0a6a08e8",
+      "original_source": "",
+      "published": "2025-12-22",
+      "title_translation": "Agrifood production trends by product category"
+    }
+  ],
+  "notes": "Market value of processed agrifood products, 2004–2013, current Brunei dollars. 2003 dropped (crop-based value not available). Totals recomputed; the published change column was not used. 'new_category_bnd' is 'Makanan Segera' (fast or instant food), first counted in 2013 (0 in 2010–2012 in the category table, which starts in 2010); 'comparable_bnd' leaves it out."
+}

@@ -28,6 +28,11 @@ Use `shared.fetch.download` (or `shared.fetch.adopt` for files downloaded by han
 | Fire Occurances By Districts (owner listed: Brunei Darussalam Central Bank) | data.gov.bn | Brunei Darussalam Central Bank | Data.gov.bn Data Policy | 2025 (no year in title) | 2009–2020, annual | [link](https://www.data.gov.bn/fire-occurances-by-districts/) | `Fire-Occurances-By-Districts.xlsx` (sha256 `0fab54b8…`) | 16 Oct 2026 | Reshaped; yearly totals, district shares | 04 Fire occurrences |
 | Fire Occurances By Districts (owner listed: Brunei Fire and Rescue Department) | data.gov.bn | Brunei Fire and Rescue Department | Data.gov.bn Data Policy | 2025 (no year in title) | 2009–2013, annual | [link](https://www.data.gov.bn/fire-occurances-by-districts-2/) | `4-Fire-Occurances-By-Districts.xlsx` (sha256 `c4dd8b52…`) | 16 Oct 2026 | None. Cross-check only | 04 (cross-check) |
 | Statistic of Forest and Grass/Peat Fire | data.gov.bn | Fire and Rescue Department Brunei Darussalam | Data.gov.bn Data Policy | 2025 (no year in title) | 2012–2021, annual | [link](https://www.data.gov.bn/statistic-of-forest-and-grass-peat-fire/) | `STATISTIC-OF-FOREST-AND-GRASS-FIRE-FROM-2012-TO-2021.xlsx` (sha256 `47692985…`) | 16 Oct 2026 | Type labels trimmed; hectares summed per year | 04 Fire occurrences |
+| Status Pengeluaran Produck Agrimakanan [Status of agrifood product production] | data.gov.bn | Ministry of Industry and Primary Resources | Data.gov.bn Data Policy | 2025 (file names say 2013 or 2003–2012) | 2003–2013, annual | [link](https://www.data.gov.bn/status-pengeluaran-produck-agrimakanan/) | `STATUS-PENGELUARAN-PRODUK-AGRIMAKANAN-2003-2012.xlsx` (sha256 `1d8c394f…`) | 16 Oct 2026 | Totals recomputed; 2003 dropped (crop value n/a); published change column not used | 05 Agrifood processing |
+| Statistik Industri Agrimakanan [Agrifood industry statistics] | data.gov.bn | Ministry of Industry and Primary Resources | Data.gov.bn Data Policy | 2025 (file names say 2013 or 2003–2012) | 2013 | [link](https://www.data.gov.bn/statistik-industri-agrimakanan/) | `STATISTIK-INDUSTRI-AGRIMAKANAN-2013.xlsx` (sha256 `41996ad2…`) | 16 Oct 2026 | Category names trimmed and translated; pickles merged into Other | 05 Agrifood processing |
+| Tren Pengeluaran Agrimakanan Mengikut Kategori Produk [Agrifood production trends by product category] | data.gov.bn | Ministry of Industry and Primary Resources | Data.gov.bn Data Policy | 2025 (file names say 2013 or 2003–2012) | 2010–2013, annual | [link](https://www.data.gov.bn/tren-pengeluaran-agrimakanan-mengikut-kategori-produk/) | `TREN-PENGELUARAN-AGRIMAKANAN-MENGIKUT-KATEGORI-PRODUK-2010-2013.xlsx` (sha256 `07f5f9fd…`) | 16 Oct 2026 | Category names translated; B$ million | 05 Agrifood processing |
+| Status Pengeluaran Agrimakanan Mengikut Daerah [Status of agrifood production by district] | data.gov.bn | Ministry of Industry and Primary Resources | Data.gov.bn Data Policy | 2025 (file names say 2013 or 2003–2012) | 2013 | [link](https://www.data.gov.bn/status-pengeluaran-agrimakanan-mengikut-daerah/) | `STATUS-PENGELUARAN-AGRIMAKANAN-MENGIKUT-DAERAH-2013.xlsx` (sha256 `d3092853…`) | 16 Oct 2026 | District names standardised; shares computed | 05 Agrifood processing |
+| Statistik Industri Agrimakanan Mengikut Daerah Dan Kategori Produck [Agrifood industry statistics by district and product category] | data.gov.bn | Ministry of Industry and Primary Resources | Data.gov.bn Data Policy | 2025 (file names say 2013 or 2003–2012) | 2013 | [link](https://www.data.gov.bn/statistik-industri-agrimakanan-mengikut-daerah-dan-kategori-produck/) | `STATISTIK-INDUSTRI-AGRIMAKANAN-MENGIKUT-DAERAH-DAN-KATEGORI-PRODUK-2013.xlsx` (sha256 `68e895b1…`) | 16 Oct 2026 | Not published (small cells). Cross-check only; category entrepreneur counts used | 05 (cross-check) |
 
 ## Known issues in source data
 
@@ -116,3 +121,20 @@ this way in the published title.
 |---|---|---|---|
 | 1 | Measures area burned (hectares), not the number of fires | Column "HECTRES" | Use only to compare the year pattern with fire counts, never added to them |
 | 2 | "FOREST FIRE " has a trailing space; column header misspelt | — | Trim labels |
+
+### Agrimakanan (agrifood processing) tables, Ministry of Industry and Primary Resources (checked 16 Oct 2026)
+
+Five related tables about **food processing** (manufactured food products), not farming.
+Market values agree across all five to the dollar (2013 total B$86,236,376; 2010–2012 totals
+match between the time series and the category table).
+
+| # | Issue | Evidence | Status |
+|---|---|---|---|
+| 1 | "Makanan Segera" (fast or instant food) appears in 2013 only | B$34.5m in 2013, 0 in 2010–2012; 40% of 2013's total | Treat as a coverage change, not growth: show it separately and compare years without it. Without it, 2013 = B$51.7m vs B$62.8m in 2012 |
+| 2 | Head-counts differ between tables | Category × district table sums to 548 entrepreneurs and 3,495 employees; district table: 225 and 1,739. Market values match exactly | Likely one business counted in each category it makes (not stated). Use the district table for head-counts; category counts only as "businesses making this product" |
+| 3 | 2003 crop-based value is "n/a" | The published 2004 change (+B$16.5m) treats it as zero | Start the series in 2004; recompute changes, don't use the published column |
+| 4 | Small cells in the category × district table | 17 of 52 cells have 1–4 entrepreneurs; a market value there can reveal one business's sales | SOP 7: publish category totals and district totals only, never the cross-tab |
+| 5 | Implausible cells | Makanan Segera: 11 entrepreneurs, 0 employees, B$34.5m; Mi (noodles) in Temburong: 1 entrepreneur, 34 employees, B$0 | Can't be checked; employee counts by category not charted |
+| 6 | Livestock-based vs crop-based split | 2013 livestock-based = meat products + Makanan Segera; fish products are counted as crop-based | Keep the publisher's split; explain it in a note |
+| 7 | Labels | Malay category names with trailing spaces; "Mi"/"Mee", "Produk Kacang Soya"/"Produk Hasilan Kacang Soya", "Brunei/Muara"/"Brunei Muara"; "Acar & Jeruk" separate in one table, inside "Lain-lain" in another | Trim, standardise, translate; merge pickles into Other |
+| 8 | Values in current Brunei dollars | No price adjustment | State it in the limitations |

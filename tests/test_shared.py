@@ -168,3 +168,22 @@ def test_original_source_is_named_in_every_credit():
     )
     assert "Original data from IMF International Financial Statistics." in attribution(wb)
     assert "original data from IMF International Financial Statistics" in short_credit([wb])
+
+
+def test_non_english_title_gets_bracketed_translation():
+    p = Provenance(
+        source="datagovbn",
+        title="Statistik Industri Agrimakanan",
+        page_url="https://www.data.gov.bn/statistik-industri-agrimakanan/",
+        accessed="2026-10-16",
+        owner="Ministry of Industry and Primary Resources",
+        published="2025-12-22",
+        title_translation="Agrifood industry statistics",
+    )
+    assert attribution(p).startswith(
+        "Ministry of Industry and Primary Resources. (2025). Statistik industri agrimakanan "
+        "[Agrifood industry statistics] [Data set]."
+    )
+    assert "<em>Statistik industri agrimakanan</em> [Agrifood industry statistics]" in attribution(
+        p, html=True
+    )

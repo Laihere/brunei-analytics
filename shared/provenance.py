@@ -30,6 +30,7 @@ class Provenance:
     sha256: str = ""  # checksum of the downloaded file
     original_source: str = ""  # when the publisher redistributes another body's data
     published: str = ""  # ISO date the publisher released it (APA year); "" = n.d.
+    title_translation: str = ""  # English translation of a non-English title, in APA [brackets]
 
     def __post_init__(self):
         get_source(self.source)
@@ -129,6 +130,8 @@ def apa_reference(p: Provenance, html: bool = False, year: str = "") -> str:
     src = get_source(p.source)
     title = sentence_case(p.title)
     title = f"<em>{escape(title)}</em>" if html else title
+    if p.title_translation:  # APA 7: translation in square brackets, not italic
+        title += f" [{escape(p.title_translation) if html else p.title_translation}]"
     author = _apa_author(p)
     year = f"({year or apa_year(p)})."
     head = (

@@ -1,0 +1,286 @@
+---
+title: "By 2020, Brunei produced 97% of its chicken and nearly all its eggs, but under 2% of its beef"
+description: "How much of Brunei's chicken, eggs and beef was produced locally from 1992 to 2020?"
+number: "06"
+topic: "Sectoral"
+data-period: "1992–2020"
+read-time: "5-minute read"
+date: 2026-10-16
+---
+
+```{python}
+import sys
+
+from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.context import load_context
+from shared.glossary import glossary_popovers
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+STUDY = CASE_STUDIES / "06_livestock_supply"
+sys.path.insert(0, str(STUDY / "analysis"))
+import figures as F  # noqa: E402
+
+data, prov_data, notes_data = read_output(STUDY / "outputs" / "livestock_supply.csv")
+check, prov_check, notes_check = read_output(STUDY / "outputs" / "chicken_slaughter_check.csv")
+rev, prov_rev, notes_rev = read_output(STUDY / "outputs" / "edition_revisions.csv")
+ctx = load_context(STUDY / "context.yml")  # studies and reports, background only (policy §7)
+
+v = data.set_index(["product", "year"])
+LAST = int(data.year.max())
+C0, E0 = int(data[data["product"] == "chicken"].year.min()), int(data[data["product"] == "eggs"].year.min())
+B0 = int(data[data["product"] == "beef"].year.min())
+A = 2010  # comparison year for the chain chart
+
+
+def share(p, y=LAST):
+    return v.loc[(p, y), "local_share_pct"]
+
+
+def pct(x):
+    return f"{x:.0f}%" if x >= 10 else f"{x:.1f}%"
+
+
+def num(x):
+    return f"{x:,.0f}"
+
+
+chick = data[data["product"] == "chicken"].set_index("year")
+first_90 = int(chick[chick.local_share_pct >= 90].index.min())
+low_after = int(chick.loc[first_90:LAST - 1, "local_share_pct"].idxmin())
+imp_prev, imp_last = chick.loc[LAST - 1, "imports"], chick.loc[LAST, "imports"]
+loc_prev, loc_last = chick.loc[LAST - 1, "local"], chick.loc[LAST, "local"]
+eggs = data[data["product"] == "eggs"].set_index("year")
+egg_min = eggs.local_share_pct.min()
+beef = data[data["product"] == "beef"].set_index("year")
+beef_total = beef.local + beef.imports
+cf_first = int(beef[beef.imports_chilled_frozen > 0].index.min())
+kg = check.kg_per_bird.round(3).unique()
+band = chick.loc[first_90 : LAST - 1, "local_share_pct"]
+beef_max = beef.local_share_pct.max()
+# Stated in the text below; stop the build rather than publish them if the data changes.
+assert share("chicks") < share("chicks", A) and share("hatching_eggs") < share("hatching_eggs", A)
+assert len(kg) == 1, "Chicken tonnes no longer use one weight per bird."
+```
+
+::: {.study-intro}
+This case study looks at **how much of Brunei's chicken, eggs and beef was produced in the
+country**, using the Agriculture and Agrifood Department's yearly figures for local production
+and imports from 1992 to 2020. It also follows chicken back through its supply chain, to the
+chicks and the eggs they hatch from. The data ends in 2020, although it was published in 2025.
+It shows **what changed, not why**.
+
+It asks two questions, answered in the conclusion:
+
+1. **How much of Brunei's chicken, eggs and beef was produced locally from 1992 to 2020?**
+2. **How local is the chicken supply chain, from hatching eggs to meat?**
+:::
+
+```{python}
+stat_tiles(
+    stat_tile(f"Chicken meat produced locally, {LAST}", pct(share("chicken")), "", f"of supply ({C0}: {pct(share('chicken', C0))})"),
+    stat_tile(f"Eggs produced locally, {LAST}", pct(share("eggs")), "", f"of supply (never below {pct(egg_min)} since {E0})"),
+    stat_tile(f"Beef produced locally, {LAST}", pct(share("beef")), "", f"of supply ({B0}: {pct(share('beef', B0))})"),
+)
+```
+
+```{python}
+fig, table = F.shares(data)
+chart_card(
+    fig,
+    title=f"Chicken went from about a third local to almost all local; eggs stayed local; beef stayed imported",
+    subtitle=f"Local share of supply: local production ÷ (local production + imports), % · {C0}–{LAST} (beef from {B0})",
+    alt=(
+        f"Three area charts. Chicken meat rises from {pct(share('chicken', C0))} local in {C0} to "
+        f"over 90% from {first_90}, ending at {pct(share('chicken'))} in {LAST}. Eggs stay close "
+        f"to 100% throughout. Beef never goes above {pct(beef_max)} and is {pct(share('beef'))} in {LAST}."
+    ),
+    provenance=prov_data,
+    table=table,
+    height=300,
+    mobile_fig=F.shares(data, cols=1)[0],
+    mobile_height=760,
+)
+```
+
+## Chicken meat, 1992–2020
+
+In `{python} C0`, about `{python} pct(share("chicken", C0))` of the chicken meat in Brunei
+was produced locally. Local production then grew quickly, and the
+[local share of supply]{.term term="local-share-of-supply"} passed 90% in
+`{python} first_90`. It stayed between `{python} pct(band.min())` and `{python} pct(band.max())`
+until `{python} LAST - 1`, with its lowest point in `{python} low_after`.
+
+**In `{python} LAST`, imports fell from `{python} num(imp_prev)` to `{python} num(imp_last)`
+tonnes while local production rose to `{python} num(loc_last)` tonnes**, so the local share
+reached `{python} pct(share("chicken"))`.
+
+```{python}
+fig, table = F.chicken_volumes(data)
+chart_card(
+    fig,
+    title=f"Local chicken production grew {loc_last / chick.loc[C0, 'local']:.1f}× while imports shrank",
+    subtitle=f"Chicken meat supply, thousand tonnes · {C0}–{LAST} · teal: produced locally · grey: imported",
+    alt=(
+        f"Stacked bar chart. In {C0}, {num(chick.loc[C0, 'local'])} t were produced locally and "
+        f"{num(chick.loc[C0, 'imports'])} t imported. By {LAST}, {num(loc_last)} t were local "
+        f"and {num(imp_last)} t imported."
+    ),
+    provenance=prov_data,
+    table=table,
+)
+```
+
+::: {.callout-note appearance="simple" title="How local chicken is measured"}
+**The Department's local chicken figures are calculated from the number of birds slaughtered,
+at `{python} f"{kg[0]:g}"` kg per bird.** In every year from 2011 to `{python} LAST`, the
+tonnes equal the birds slaughtered × `{python} f"{kg[0]:g}"` kg exactly, so they are an estimate
+rather than a weighed total. This measure is not the official
+[self-sufficiency ratio]{.term term="self-sufficiency-ratio"}, which also subtracts exports and
+can go above 100%.
+:::
+
+## The chicken supply chain, 2010 and 2020
+
+Broiler farms raise [day-old chicks]{.term term="day-old-chick"}, which hatch from
+[fertilized (hatching) eggs]{.term term="hatching-egg"}. The further back along this chain,
+the more of the supply was imported. In `{python} LAST`, `{python} pct(share("chicken"))` of
+chicken meat was local, against `{python} pct(share("chicks"))` of day-old chicks and
+`{python} pct(share("hatching_eggs"))` of hatching eggs.
+
+```{python}
+fig, table = F.chain(data, A, LAST)
+chart_card(
+    fig,
+    title=f"Only {pct(share('hatching_eggs'))} of hatching eggs were local in {LAST}, against {pct(share('chicken'))} of chicken meat",
+    subtitle=f"Local share of supply at each step of the chicken chain, % · {A} and {LAST}",
+    alt=(
+        f"Bar chart. Hatching eggs: {pct(share('hatching_eggs', A))} local in {A}, "
+        f"{pct(share('hatching_eggs'))} in {LAST}. Day-old chicks: {pct(share('chicks', A))}, then "
+        f"{pct(share('chicks'))}. Chicken meat: {pct(share('chicken', A))}, then {pct(share('chicken'))}."
+    ),
+    provenance=prov_data,
+    table=table,
+    height=300,
+)
+```
+
+Between `{python} A` and `{python} LAST`, the local share of day-old chicks fell from
+`{python} pct(share("chicks", A))` to `{python} pct(share("chicks"))`, and of hatching eggs from
+`{python} pct(share("hatching_eggs", A))` to `{python} pct(share("hatching_eggs"))`, while
+chicken meat rose.
+
+::: {.callout-note appearance="simple" title="What was reported in studies"}
+These come from published studies and reports, not from the data above.
+
+- **Which farms competed best.** A study of Brunei's livestock industry found it was heavily
+  protected, and that only very large farms producing poultry meat and eggs had a comparative
+  advantage; beef cattle did not, despite protection (`{python} ctx["mohamed2004"].cite()`).
+- **Before and during COVID-19.** Researchers at Universiti Brunei Darussalam reported that
+  before the pandemic, poultry met close to 100% of local demand for eggs and chicken, but that
+  there were shortages of chicken and other meat during it, linked to higher demand and the
+  cost of logistics and feed (`{python} ctx["musa2021"].cite()`).
+- **An earlier claim.** Officials described poultry and eggs as nearly self-sufficient since
+  1994 (`{python} ctx["searca2016"].cite()`). In the Department's own figures this holds for
+  eggs; for chicken meat, the local share passed 90% only in `{python} first_90`.
+- **Since `{python} LAST`.** A 2026 regional report put Brunei's self-sufficiency ratios for
+  chicken meat and eggs above 100%, with beef substantially lower
+  (`{python} ctx["khut2026"].cite()`).
+
+**None of these explains the year-to-year changes in the data above.** The 2026 report uses a
+self-sufficiency ratio, which is measured differently from the local share used here.
+:::
+
+## Eggs and beef, 1992–2020
+
+**Eggs were almost entirely local throughout**: the local share never fell below
+`{python} pct(egg_min)`, and production grew from `{python} f"{eggs.loc[E0, 'local']:.0f}"`
+million eggs in `{python} E0` to `{python} f"{eggs.loc[LAST, 'local']:.0f}"` million in
+`{python} LAST`.
+
+**Beef was mostly imported.** Local production was `{python} num(beef.loc[LAST, "local"])`
+tonnes in `{python} LAST`, `{python} pct(share("beef"))` of a supply of
+`{python} num(beef_total[LAST])` tonnes. Imports came as live animals, slaughtered in Brunei,
+and, from `{python} cf_first`, as chilled and frozen beef, which was the larger of the two in
+most years since.
+
+```{python}
+fig, table = F.beef_volumes(data)
+chart_card(
+    fig,
+    title=f"Local beef was a sliver of supply in every year from {B0} to {LAST}",
+    subtitle=f"Beef supply by source, tonnes · {B0}–{LAST} · teal: produced locally · chilled & frozen imports first recorded in {cf_first}",
+    alt=(
+        f"Stacked bar chart of beef supply. Live imports make up most of it in the early 2000s; "
+        f"chilled and frozen imports appear from {cf_first} and grow. Local production is a thin "
+        f"band, {num(beef.loc[LAST, 'local'])} t in {LAST}."
+    ),
+    provenance=prov_data,
+    table=table,
+)
+```
+
+::: {.callout-note appearance="simple" title="What was reported about beef"}
+A historical study describes Brunei's beef production today as **importing live animals and
+slaughtering them in domestic halal-certified abattoirs** (`{python} ctx["takami2023"].cite()`).
+That fits the large "imported live" share above: those animals are slaughtered in Brunei but
+counted as imports, not local production.
+:::
+
+## Conclusion
+
+- **How much of Brunei's chicken, eggs and beef was produced locally from 1992 to 2020?**
+  Chicken meat went from about `{python} pct(share("chicken", C0))` local in `{python} C0` to
+  `{python} pct(share("chicken"))` in `{python} LAST`, passing 90% in `{python} first_90`. Eggs
+  stayed almost entirely local. Beef stayed mostly imported: `{python} pct(share("beef"))` local
+  in `{python} LAST`.
+- **How local is the chicken supply chain, from hatching eggs to meat?** Less local the further
+  back it goes: in `{python} LAST`, `{python} pct(share("chicken"))` of chicken meat,
+  `{python} pct(share("chicks"))` of day-old chicks and `{python} pct(share("hatching_eggs"))`
+  of hatching eggs were local, and the earlier steps became less local after `{python} A`.
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+<!-- Side note: required on every case study (DESIGN.md §4.1). -->
+- **Why.** The data doesn't explain the changes, including the drop in chicken imports
+  in `{python} LAST`.
+- **Exports and stocks.** No export or stock figures are published, so the local share is not a
+  full self-sufficiency ratio.
+- **Exact chicken weights.** Local chicken tonnes are estimated at `{python} f"{kg[0]:g}"` kg
+  per bird.
+- **Other inputs.** Feed, medicines and breeding stock aren't covered.
+- **Beef before `{python} cf_first`.** Chilled and frozen beef imports are 0 until
+  `{python} cf_first`, probably because they weren't recorded, so earlier local shares may be
+  too high.
+- **After `{python} LAST`.** The Department's tables end in `{python} LAST`.
+:::
+
+```{python}
+r15 = rev.iloc[0]
+method_and_sources(
+    prov_data + prov_check,
+    notes=f"{notes_data} {notes_check} {notes_rev}",
+    steps=[
+        "Downloaded the Agriculture and Agrifood Department's 2020 tables for broiler, egg, "
+        "beef, day-old chick and fertilized egg production and imports, and the monthly "
+        "slaughtered broiler counts, from data.gov.bn.",
+        f"Compared them with the 2015 editions: identical in every shared year except "
+        f"{int(r15.year)} chicken imports ({num(r15.new_edition)} t, against "
+        f"{num(r15.old_edition)} t before); the later edition is used.",
+        "Computed the local share of supply: local production ÷ (local production + imports).",
+        "Checked local chicken tonnes against birds slaughtered (1.5 kg per bird in every year), "
+        "and used the published yearly slaughter totals where a month looked copied.",
+        "Read peer-reviewed studies and institutional reports for background (shown separately, "
+        "not used in any number or chart).",
+    ],
+    code_url=f"{REPO_URL}/tree/main/case_studies/06_livestock_supply",
+    context=list(ctx.values()),
+)
+```
+
+```{python}
+prev_next("06-livestock-supply.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+glossary_popovers("06-livestock-supply.qmd", ROOT / "dashboard" / "case-studies")
+```

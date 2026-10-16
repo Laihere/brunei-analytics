@@ -51,7 +51,7 @@ def test_standard_sections_in_order(page):
 def test_no_wrapped_line_starts_like_a_numbered_list(page):
     """A wrapped line starting "2003. …" turns into a numbered list item in Markdown."""
     # Also inline code at a line start: "`{python} LAST`. …" becomes "2013. …" once rendered.
-    bad = re.findall(r"(?m)^[ \t]+(?:\d{3,}|`\{python\}[^`]*`)\. .*$", page.read_text())
+    bad = re.findall(r"(?m)^[ \t]+(?:\d{3,}|`\{python\}[^`]*`)\.(?: .*)?$", page.read_text())
     assert not bad, f"{page.name}: rewrap these lines: {bad}"
 
 

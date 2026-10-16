@@ -1,0 +1,35 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Number Of Slaughtered Broilers, 2011-2020",
+      "page_url": "https://www.data.gov.bn/number-of-slaughtered-broilers-2011-2020/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/Number-of-Slaughtered-Broilers-2011-2020.xlsx",
+      "owner": "Agriculture and Agrifood Department",
+      "licence": "",
+      "edition": "2020",
+      "coverage": "2011–2020, monthly",
+      "sha256": "d315618366e57e0139b43d1662a7dfe9aca32d38ecb049d4c55a918f73a4b1b9",
+      "original_source": "",
+      "published": "2025-12-04",
+      "title_translation": ""
+    },
+    {
+      "source": "datagovbn",
+      "title": "BROILER INDUSTRY YEAR 1992-2020",
+      "page_url": "https://www.data.gov.bn/broiler-industry-year-1992-2020/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/Broiler-Industry-1992-2020.xlsx",
+      "owner": "Agriculture and Agrifood Department",
+      "licence": "",
+      "edition": "2020",
+      "coverage": "1992–2020, annual",
+      "sha256": "4d30764f618577695619f991e057468a093045e993238c6693e2ec888d2ba00f",
+      "original_source": "",
+      "published": "2025-12-04",
+      "title_translation": ""
+    }
+  ],
+  "notes": "Birds slaughtered per year (published totals) beside local chicken meat. Tonnes equal birds × 1.5 kg in every year, so local chicken meat is estimated from bird counts. 2018's months sum to 9,608 birds less than the total (October repeats September); the total is used."
+}

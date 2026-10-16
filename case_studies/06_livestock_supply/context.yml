@@ -1,0 +1,62 @@
+# Context sources for case study 06 (DATA_USE_POLICY.md §7). Background only: no numbers from
+# these are charted. Each entry was opened and checked on the access date; see CONTEXT_SOURCES.md.
+# Names are written as published (policy §7); Malay names in full.
+
+- key: musa2021
+  kind: journal
+  authors: ["Siti Fatimahwati Pehin Dato Musa", "Khairul Hidayatullah Basir"]
+  published: "2021"
+  title: "Livestock shortage amidst COVID-19: A case of Brunei Darussalam"
+  container: "IOP Conference Series: Earth and Environmental Science"
+  volume: "756"
+  issue: "1"
+  pages: "012013"
+  doi: 10.1088/1755-1315/756/1/012013
+  url: https://doi.org/10.1088/1755-1315/756/1/012013
+  accessed: "2026-10-16"
+
+- key: mohamed2004
+  kind: journal
+  authors: ["Zainal Abidin Mohamed", "Mad Nasir Shamsudin", "Anjah Amzah Bin Abdul Rahman"]
+  published: "2004"
+  title: Comparative advantage indices of selected livestock production sectors in Brunei Darussalam
+  container: Journal of International Food & Agribusiness Marketing
+  volume: "15"
+  issue: "1–2"
+  pages: 77–92
+  doi: 10.1300/J047v15n01_05
+  url: https://doi.org/10.1300/J047v15n01_05
+  accessed: "2026-10-16"
+
+- key: takami2023
+  kind: journal
+  authors: ["Takami, K.", "Aghwan, Z. A."]
+  published: "2023"
+  title: "Changes in cattle rearing in Brunei Darussalam: From the description of the Brunei Annual Report, 1900–1970"
+  container: "Southeast Asia: History and Culture"
+  volume: "2023"
+  issue: "52"
+  pages: 28–39
+  doi: 10.5512/sea.2023.52_28
+  url: https://doi.org/10.5512/sea.2023.52_28
+  accessed: "2026-10-16"
+
+- key: searca2016
+  kind: official
+  authors: ["Hajah Aidah binti Haji Mohd Hanifah", "Fuziah binti Haji Hamdan", "Thippeswamy, H. M."]
+  published: "2016"
+  title: "Agricultural policy and institutional reforms in Brunei Darussalam: Experiences, impacts, and lessons"
+  container: Southeast Asian Regional Center for Graduate Study and Research in Agriculture (SEARCA)
+  url: https://ideas.repec.org/b/sag/primr2/2016308.html
+  note: Southeast Asian Agriculture and Development Primer Series (2nd ed.), No. 2016:308.
+  accessed: "2026-10-16"
+
+- key: khut2026
+  kind: official
+  authors: ["Khut, V."]
+  published: "2026"
+  title: Developing Brunei's agri-food sector to strengthen food security and economic diversification
+  container: ASEAN+3 Macroeconomic Research Office (AMRO)
+  url: https://www.amro-asia.org/wp-content/uploads/2026/10/3_Developing-Bruneis-Agri-Food-Sector.pdf
+  note: "Selected Issue 3 in Annual consultation report: Brunei Darussalam 2026."
+  accessed: "2026-10-16"

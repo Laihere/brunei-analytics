@@ -128,3 +128,30 @@
     Values rescaled so that 2019 equals 100. A value of 107 means 7% above 2019. It changes the
     starting point, not the pattern.
   compare: [cpi]
+
+- key: local-share-of-supply
+  term: Local share of supply
+  definition: >
+    Local production divided by local production plus imports. It shows how much of what
+    reached the market was produced in Brunei. It can't go above 100%.
+  compare: [self-sufficiency-ratio]
+
+- key: self-sufficiency-ratio
+  term: Self-sufficiency ratio
+  definition: >
+    Local production divided by what the country uses (production plus imports, minus exports
+    and changes in stocks). It can go above 100% when a country produces more than it uses.
+  compare: [local-share-of-supply]
+
+- key: day-old-chick
+  term: Day-old chick
+  definition: >
+    A chick sold or moved to a farm on the day it hatches. Broiler farms raise day-old chicks
+    into chickens for meat.
+  compare: [hatching-egg]
+
+- key: hatching-egg
+  term: Fertilized (hatching) egg
+  definition: >
+    An egg laid by a breeding hen to be hatched into a chick, not sold for eating.
+  compare: [day-old-chick]

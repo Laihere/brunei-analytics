@@ -1,0 +1,28 @@
+# Context sources for case study 04 (DATA_USE_POLICY.md §7). Background only: no numbers from
+# these are charted. Each entry was opened and checked on the access date; see CONTEXT_SOURCES.md.
+
+- key: langner2009
+  kind: journal
+  authors: ["Langner, A.", "Siegert, F."]
+  published: "2009"
+  title: Spatiotemporal fire occurrence in Borneo over a period of 10 years
+  container: Global Change Biology
+  volume: "15"
+  issue: "1"
+  pages: 48–62
+  doi: 10.1111/j.1365-2486.2008.01828.x
+  url: https://doi.org/10.1111/j.1365-2486.2008.01828.x
+  accessed: "2026-10-16"
+
+- key: varkkey2024
+  kind: journal
+  authors: ["Varkkey, H.", "Lupascu, M."]
+  published: "2024"
+  title: "Peat fires in Brunei Darussalam: Considerations for ASEAN haze cooperation and emerging regional infrastructure development"
+  container: Singapore Journal of Tropical Geography
+  volume: "45"
+  issue: "1"
+  pages: 129–141
+  doi: 10.1111/sjtg.12514
+  url: https://doi.org/10.1111/sjtg.12514
+  accessed: "2026-10-16"

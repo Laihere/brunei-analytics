@@ -25,6 +25,9 @@ Use `shared.fetch.download` (or `shared.fetch.adopt` for files downloaded by han
 | Crime Statistics (2013 file) | data.gov.bn | Royal Brunei Police Force | Data.gov.bn Data Policy | 2013 | 2013, annual | [link](https://www.data.gov.bn/crime-statistics/) | `3-Crime-Statistics-2013.xlsx` (sha256 `9aa72ec8…`) | 16 Oct 2026 | Read by label; "-" as missing; Acts with < 5 cases merged into "Other Acts" | 02 Crime statistics, 2012–2013 |
 | Road Casualties | data.gov.bn | Royal Brunei Police Force | Data.gov.bn Data Policy | 2025 (no year in title) | 2009–2017, annual | [link](https://www.data.gov.bn/road-casualties/) | `1-Road-Casualities.xlsx` (sha256 `ff7161aa…`) | 16 Oct 2026 | Reshaped to one row per year; ratios and 3-year averages computed | 03 Road casualties |
 | Statistics of Road Traffic Accidents | data.gov.bn | Fire and Rescue Department Brunei Darussalam | Data.gov.bn Data Policy | 2025 (no year in title) | 2012–2021, annual | [link](https://www.data.gov.bn/statistics-of-road-traffic-accidents/) | `STATISTIC-OF-ROAD-TRAFFIC-ACCIDENTS-FROM-2012-TO-2021.xlsx` (sha256 `10d61f0d…`) + `Data-Definition-of-Road-Traffic-Accidents.xlsx` (`23e0d54a…`) | 16 Oct 2026 | Two call types summed per year. Cross-check only | 03 (cross-check) |
+| Fire Occurances By Districts (owner listed: Brunei Darussalam Central Bank) | data.gov.bn | Brunei Darussalam Central Bank | Data.gov.bn Data Policy | 2025 (no year in title) | 2009–2020, annual | [link](https://www.data.gov.bn/fire-occurances-by-districts/) | `Fire-Occurances-By-Districts.xlsx` (sha256 `0fab54b8…`) | 16 Oct 2026 | Reshaped; yearly totals, district shares | 04 Fire occurrences |
+| Fire Occurances By Districts (owner listed: Brunei Fire and Rescue Department) | data.gov.bn | Brunei Fire and Rescue Department | Data.gov.bn Data Policy | 2025 (no year in title) | 2009–2013, annual | [link](https://www.data.gov.bn/fire-occurances-by-districts-2/) | `4-Fire-Occurances-By-Districts.xlsx` (sha256 `c4dd8b52…`) | 16 Oct 2026 | None. Cross-check only | 04 (cross-check) |
+| Statistic of Forest and Grass/Peat Fire | data.gov.bn | Fire and Rescue Department Brunei Darussalam | Data.gov.bn Data Policy | 2025 (no year in title) | 2012–2021, annual | [link](https://www.data.gov.bn/statistic-of-forest-and-grass-peat-fire/) | `STATISTIC-OF-FOREST-AND-GRASS-FIRE-FROM-2012-TO-2021.xlsx` (sha256 `47692985…`) | 16 Oct 2026 | Type labels trimmed; hectares summed per year | 04 Fire occurrences |
 
 ## Known issues in source data
 
@@ -93,3 +96,23 @@ Tidy long table (Year, Type, Amount), newest year first. Published 2025 but ends
 | 1 | Covers only accidents attended by Fire and Rescue | Data definition: "road traffics accidents attended by Fire and Rescue Department" | A subset, not comparable with police totals. Used only as a check: its deaths and injuries must not exceed the police figures |
 | 2 | Header on the second row; year in merged cells | Year cell spans the two call-type rows | Forward-fill the year; sum the two call types |
 | 3 | Small counts by call type (0–2) | "Car accident involving fire": 0–2 dead a year | Not published by call type; only yearly sums are used |
+
+### Fire Occurances By Districts, two editions (checked 16 Oct 2026)
+
+Both are tidy long tables (Year, District, Amount), newest year first. "Occurances" is spelt
+this way in the published title.
+
+| # | Issue | Evidence | Status |
+|---|---|---|---|
+| 1 | The longer edition (2009–2020) lists the Brunei Darussalam Central Bank as owner | The other edition, with identical 2009–2012 values, lists the Brunei Fire and Rescue Department | Credit the owner exactly as listed on each page (policy). Noted in the method. One of the EGNC email's questions covers owner names |
+| 2 | 2013 differs between editions | Fire and Rescue edition: 265 fires (167, 57, 38, 3); Central Bank edition: 791 (350, 267, 168, 6). 2009–2012 are identical | Open: use the longer, later edition; show both 2013 totals in the cross-check. The shorter file may be a part-year or provisional count, but this isn't stated |
+| 3 | 2010 is far above other years | 4,299 fires, against 1,274 (2009) and 651 (2011); high in all four districts | Keep: both editions agree, so not a typing error. Report as the peak without a cause |
+| 4 | "Fire occurrence" isn't defined | No data definition file | Could include building, vehicle and vegetation fires. State in limitations |
+| 5 | Data ends in 2020 | Published 2025 | State the period on titles and cards |
+
+### Statistic of Forest and Grass/Peat Fire (checked 16 Oct 2026)
+
+| # | Issue | Evidence | Status |
+|---|---|---|---|
+| 1 | Measures area burned (hectares), not the number of fires | Column "HECTRES" | Use only to compare the year pattern with fire counts, never added to them |
+| 2 | "FOREST FIRE " has a trailing space; column header misspelt | — | Trim labels |

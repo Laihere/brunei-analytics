@@ -1,0 +1,242 @@
+---
+title: "Brunei's fire peaks in 2009–2020 hit all four districts in the same years"
+description: "How did the number of fires change from 2009 to 2020, and where did they happen?"
+number: "04"
+topic: "Social"
+data-period: "2009–2020"
+read-time: "4-minute read"
+date: 2026-10-16
+---
+
+```{python}
+import sys
+from decimal import ROUND_HALF_UP, Decimal
+
+from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.context import load_context
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+STUDY = CASE_STUDIES / "04_fire_occurrences"
+sys.path.insert(0, str(STUDY / "analysis"))
+import figures as F  # noqa: E402
+
+fires, prov_fires, notes_fires = read_output(STUDY / "outputs" / "fire_by_district.csv")
+totals, prov_totals, notes_totals = read_output(STUDY / "outputs" / "fire_totals.csv")
+check, prov_check, notes_check = read_output(STUDY / "outputs" / "fire_crosscheck.csv")
+ctx = load_context(STUDY / "context.yml")  # journals, background only (policy §7)
+
+FIRST, LAST = int(totals.year.min()), int(totals.year.max())
+t = totals.set_index("year")
+median = t.fires.median()
+peaks = F.peak_years(totals)  # most fires first
+top, second, third = peaks
+low_year = t.fires.idxmin()
+area = totals.dropna(subset=["total_ha"])
+A_FIRST, A_LAST = int(area.year.min()), int(area.year.max())
+corr = area.fires.corr(area.total_ha)
+top_area = area.nlargest(2, "total_ha").year.tolist()
+top_fires_in_area = area.nlargest(2, "fires").year.tolist()
+share = fires.groupby("district").fires.sum() / fires.fires.sum() * 100
+bm = fires[fires.district == "Brunei-Muara"].share_pct
+same_peaks = all(
+    set(g.nlargest(3, "fires").year) == set(peaks) for _, g in fires.groupby("district")
+)
+# The text below states this as a finding; stop the build rather than publish it if it changes.
+assert same_peaks, "Peak years differ between districts: rewrite 'Fires by district'."
+early, late = t.loc[FIRST : FIRST + 5, "fires"].median(), t.loc[LAST - 5 : LAST, "fires"].median()
+c13 = check.set_index("year").loc[2013]
+
+
+def num(v):
+    """Whole number, halves rounded up as readers expect (1,186.5 → 1,187)."""
+    return f"{int(Decimal(str(v)).quantize(Decimal(1), rounding=ROUND_HALF_UP)):,}"
+
+
+def pct(v):
+    return f"{v:.0f}%"
+
+
+def times(v):
+    return f"{v:.1f}×"
+```
+
+::: {.study-intro}
+This case study looks at **fires recorded in Brunei's four districts from 2009 to 2020**,
+and compares them with the area of forest and grass burned. The data ends in 2020, although it
+was published in 2025. It shows **when and where fires were recorded, not why**.
+
+It asks two questions, answered in the conclusion:
+
+1. **How did the number of fires change from 2009 to 2020, and which years stood out?**
+2. **Where did the fires happen, and did the peak years affect every district?**
+:::
+
+```{python}
+stat_tiles(
+    stat_tile(f"Fires in a typical year, {FIRST}–{LAST}", num(median), "", "median year"),
+    stat_tile(f"Fires in {top}, the highest year", num(t.loc[top, "fires"]), times(t.loc[top, "vs_median"]), "the typical year"),
+    stat_tile(f"Brunei-Muara's share, {FIRST}–{LAST}", pct(share["Brunei-Muara"]), "", "of all fires recorded"),
+)
+```
+
+```{python}
+fig, table = F.yearly(totals)
+chart_card(
+    fig,
+    title=f"{top} had {times(t.loc[top, 'vs_median'])} the fires of a typical year; {second} and {third} were the next highest",
+    subtitle=f"Fires recorded per year, all districts · {FIRST}–{LAST} · teal: the three highest years",
+    alt=(
+        f"Bar chart of fires per year. Most years are between {num(t.fires.nsmallest(2).iloc[-1])} "
+        f"and {num(t.fires.nlargest(4).iloc[-1])}. {top} stands far above with "
+        f"{num(t.loc[top, 'fires'])}; {second} ({num(t.loc[second, 'fires'])}) and {third} "
+        f"({num(t.loc[third, 'fires'])}) are the next highest. The median year is {num(median)}."
+    ),
+    provenance=prov_fires,
+    table=table,
+)
+```
+
+## Fires per year, 2009–2020
+
+In a typical year, `{python} num(median)` fires were recorded across Brunei. The totals jump
+from year to year rather than following a steady line: from `{python} num(t.loc[low_year, "fires"])`
+in `{python} low_year` to `{python} num(t.loc[top, "fires"])` in `{python} top`. Three years
+stand out: **`{python} top`** (`{python} times(t.loc[top, "vs_median"])` the typical year),
+**`{python} second`** (`{python} times(t.loc[second, "vs_median"])`) and **`{python} third`**
+(`{python} times(t.loc[third, "vs_median"])`).
+
+The typical year was higher in `{python} LAST - 5`–`{python} LAST` (`{python} num(late)`
+fires) than in `{python} FIRST`–`{python} FIRST + 5` (`{python} num(early)`), but with totals
+this uneven, two 6-year periods aren't enough to call it a trend.
+
+## Fires and land burned, 2012–2020
+
+A separate Fire and Rescue table records the area of forest and grass/peat land burned each
+year from `{python} A_FIRST`. It measures something different (hectares, not fires), but the
+two rise and fall together. The two years with the most fires in this period,
+`{python} top_fires_in_area[0]` and `{python} top_fires_in_area[1]`, were also the two with
+the most land burned.
+
+::: {.callout-note appearance="simple" title="How closely they move together"}
+**The yearly fire count and the area burned are very closely linked: a correlation of
+`{python} f"{corr:.2f}"`** over `{python} len(area)` years, where 1 would mean they move
+perfectly together. This suggests many recorded fires are outdoor vegetation fires, but the
+fire count doesn't say what burned, so it can't confirm that.
+:::
+
+```{python}
+fig, table = F.fires_and_area(totals)
+chart_card(
+    fig,
+    title="Years with more fires also had more forest and grass burned",
+    subtitle=f"Fires recorded and hectares of forest and grass/peat burned · {A_FIRST}–{A_LAST} · teal: the three highest fire years",
+    alt=(
+        f"Two bar charts side by side for {A_FIRST} to {A_LAST}: fires per year and hectares "
+        f"burned. Both are highest in {top_area[0]} and {top_area[1]} and lowest in 2013 and 2017."
+    ),
+    provenance=prov_totals,
+    table=table,
+    height=320,
+    mobile_fig=F.fires_and_area(totals, cols=1)[0],
+    mobile_height=560,
+)
+```
+
+::: {.callout-note appearance="simple" title="What was reported in studies"}
+These come from peer-reviewed studies, not from the data above.
+
+- **Drought and fire on Borneo.** A satellite study of fires across Borneo over ten years
+  found the area affected by fire was on average three times larger in El Niño drought years.
+  **But that increase was in Kalimantan (Indonesia), not in Brunei or Malaysia**, which the
+  authors took as a sign that drought alone doesn't explain more fires
+  (`{python} ctx["langner2009"].cite()`).
+- **Peat fires in Brunei.** A study of Brunei's peatlands found its peat fires occur in
+  disturbed peatland and have their roots in infrastructure development, unlike the
+  agriculture-driven peat fires elsewhere in the region (`{python} ctx["varkkey2024"].cite()`).
+
+**Neither study covers Brunei's fire counts for these years, so they don't explain why 2010,
+2016 or 2019 stood out.**
+:::
+
+## Fires by district, 2009–2020
+
+Brunei-Muara recorded the most fires every year, between `{python} pct(bm.min())` and
+`{python} pct(bm.max())` of the yearly total (`{python} pct(share["Brunei-Muara"])` over the
+whole period). Belait had `{python} pct(share["Belait"])`, Tutong `{python} pct(share["Tutong"])`
+and Temburong `{python} pct(share["Temburong"])`.
+
+**In every district, the three highest years were the same: `{python} top`,
+`{python} second` and `{python} third`.** The peaks weren't confined to one area: when fires rose, they rose across the country.
+
+```{python}
+fig, table = F.districts(fires, totals)
+chart_card(
+    fig,
+    title=f"{top}, {second} and {third} were the three highest years in every district",
+    subtitle=f"Fires recorded per year by district · {FIRST}–{LAST} · each panel has its own scale · teal: the three highest years nationally",
+    alt=(
+        f"Four bar charts, one per district. In Brunei-Muara, Belait, Tutong and Temburong alike, "
+        f"the tallest bars are {top}, {second} and {third}. Brunei-Muara's bars are the largest; "
+        f"Temburong's are small, never above {num(fires[fires.district == 'Temburong'].fires.max())}."
+    ),
+    provenance=prov_fires,
+    table=table,
+    height=300,
+    mobile_fig=F.districts(fires, totals, cols=2)[0],
+    mobile_height=520,
+)
+```
+
+## Conclusion
+
+- **How did the number of fires change from 2009 to 2020, and which years stood out?** There
+  was no steady rise or fall. A typical year had about `{python} num(median)` fires, but
+  `{python} top` had `{python} num(t.loc[top, "fires"])`, and `{python} second` and
+  `{python} third` were also well above typical. Years with more fires also had more forest and
+  grass burned.
+- **Where did the fires happen, and did the peak years affect every district?** Brunei-Muara
+  recorded `{python} pct(share["Brunei-Muara"])` of all fires. The peak years were the same in
+  all four districts, so the rises were nationwide rather than local.
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+<!-- Side note: required on every case study (DESIGN.md §4.1). -->
+- **Why.** The data doesn't explain the peaks. Studies of Borneo link fire to drought, but also
+  found drought alone doesn't explain it for Brunei.
+- **What burned.** "Fire occurrence" isn't defined. It may include building, vehicle and
+  vegetation fires, and the counts don't say which.
+- **Fires per person or per area.** The districts differ in population and land area, and
+  these counts aren't adjusted for either, so a larger count doesn't mean a higher risk.
+- **Damage and harm.** There are no figures here for losses, injuries or deaths.
+- **After 2020.** The latest year published is `{python} LAST`.
+- **Two editions.** A second published edition (2009–2013) matches exactly for 2009–2012 but
+  gives `{python} num(c13.fires_other)` fires for 2013, against `{python} num(c13.fires_main)`
+  in the edition used here. The source doesn't say why.
+:::
+
+```{python}
+method_and_sources(
+    prov_fires + prov_totals + prov_check,
+    notes=f"{notes_fires} {notes_totals} {notes_check}",
+    steps=[
+        f"Downloaded both published editions of Fire Occurances By Districts ({FIRST}–{LAST} and "
+        "2009–2013) and Fire and Rescue's forest and grass/peat fire table from data.gov.bn. The "
+        "longer edition lists the Brunei Darussalam Central Bank as its owner, and is credited "
+        "that way; the shorter one lists the Brunei Fire and Rescue Department.",
+        "Checked that every year has all four districts once, then added districts into yearly "
+        "totals and computed each district's share.",
+        "Compared the two editions: identical by district for 2009–2012; 2013 differs, and the "
+        "longer, later edition is used.",
+        f"Compared yearly fires with hectares burned ({A_FIRST}–{A_LAST}) by correlation. The two "
+        "measures are never added together.",
+        "Read peer-reviewed studies for background (shown separately, not used in any number "
+        "or chart).",
+    ],
+    code_url=f"{REPO_URL}/tree/main/case_studies/04_fire_occurrences",
+    context=list(ctx.values()),
+)
+```
+
+```{python}
+prev_next("04-fire-occurrences.qmd", ROOT / "dashboard" / "case-studies")
+```

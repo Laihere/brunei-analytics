@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Fire Occurances By Districts",
+      "page_url": "https://www.data.gov.bn/fire-occurances-by-districts/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/Fire-Occurances-By-Districts.xlsx",
+      "owner": "Brunei Darussalam Central Bank",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2009–2020, annual",
+      "sha256": "0fab54b82efe6ec07036853e36c8b079695a64e6fc611479bf97dc84b5526ac2",
+      "original_source": "",
+      "published": "2025-12-03"
+    },
+    {
+      "source": "datagovbn",
+      "title": "Statistic of Forest and Grass/Peat Fire",
+      "page_url": "https://www.data.gov.bn/statistic-of-forest-and-grass-peat-fire/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/STATISTIC-OF-FOREST-AND-GRASS-FIRE-FROM-2012-TO-2021.xlsx",
+      "owner": "Fire and Rescue Department Brunei Darussalam",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2012–2021, annual",
+      "sha256": "476929852fd9d402ab620673638e0b976841f14ef1455d567b24ecf745c3feb8",
+      "original_source": "",
+      "published": "2025-12-09"
+    }
+  ],
+  "notes": "Yearly fire occurrences (sum of districts) and each year ÷ the median year. Area of forest and grass/peat burned (hectares, 2012 onwards) from a separate Fire and Rescue table, shown beside the counts; the two measures are never added."
+}

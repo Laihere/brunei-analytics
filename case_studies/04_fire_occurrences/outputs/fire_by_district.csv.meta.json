@@ -1,0 +1,19 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Fire Occurances By Districts",
+      "page_url": "https://www.data.gov.bn/fire-occurances-by-districts/",
+      "accessed": "2026-10-16",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/Fire-Occurances-By-Districts.xlsx",
+      "owner": "Brunei Darussalam Central Bank",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2009–2020, annual",
+      "sha256": "0fab54b82efe6ec07036853e36c8b079695a64e6fc611479bf97dc84b5526ac2",
+      "original_source": "",
+      "published": "2025-12-03"
+    }
+  ],
+  "notes": "Fire occurrences by district, 2009–2020, from the 2009–2020 edition (owner as listed: Brunei Darussalam Central Bank). 'Brunei Muara' written as Brunei-Muara. District share of each year's total computed by the author."
+}

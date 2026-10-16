@@ -1,0 +1,6 @@
+year,fires_main,fires_other,same_by_district
+2009,1274,1274,True
+2010,4299,4299,True
+2011,651,651,True
+2012,1070,1070,True
+2013,791,265,False

@@ -8,10 +8,31 @@ listing:
     - "[0-9]*.qmd"
     - upcoming.yml
   template: ../_templates/study-cards.ejs
-  sort: "number"
-  fields: [title, date, number, topic, status, data-period]
+  sort: "number desc"
+  fields: [title, description, date, number, topic, status, data-period]
   feed: false
+include-after-body: _study-filters.html
 ---
+
+```{=html}
+<!-- Hidden until the script runs, so visitors without JavaScript don't see controls that do nothing. -->
+<div class="study-filters" role="search" hidden>
+  <label for="study-search" class="visually-hidden">Search case studies</label>
+  <input id="study-search" type="search" placeholder="Search case studies" autocomplete="off">
+  <div class="filter-row">
+    <div class="chips" role="group" aria-label="Filter by topic"></div>
+    <div class="sort">
+      <label for="study-sort">Sort by</label>
+      <select id="study-sort">
+        <option value="published">Newest published</option>
+        <option value="data">Latest data</option>
+        <option value="number">Study number</option>
+      </select>
+    </div>
+  </div>
+</div>
+<p class="filter-count" aria-live="polite"></p>
+```
 
 ::: {#studies}
 :::

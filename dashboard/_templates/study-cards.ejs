@@ -1,14 +1,21 @@
 ```{=html}
-<div class="link-cards">
+<div class="link-cards study-list">
 <% for (const item of items) { %>
+<%
+  // Attributes for the search, topic chips and sort on the case studies page (_study-filters.html).
+  const years = String(item["data-period"] || "").match(/\d{4}/g) || [];
+  const dataEnd = years.length ? years[years.length - 1] : "";
+  const text = [item.number, item.title, item.description, item.topic, item["data-period"]]
+    .filter(Boolean).join(" ").toLowerCase();
+%>
 <% if (item.status === "coming-soon") { %>
-  <div class="link-card soon" <%= metadataAttrs(item) %>>
+  <div class="link-card soon" data-soon="true" data-number="<%= item.number %>" data-text="<%= text %>" <%= metadataAttrs(item) %>>
     <div class="kicker"><%= item.number %> · Coming soon</div>
     <div class="title"><%= item.title %></div>
     <% if (item["data-period"]) { %><div class="date">Data: <%= item["data-period"] %></div><% } %>
   </div>
 <% } else { %>
-  <a class="link-card" href="<%- item.path %>" <%= metadataAttrs(item) %>>
+  <a class="link-card" href="<%- item.path %>" data-topic="<%= item.topic %>" data-number="<%= item.number %>" data-data-end="<%= dataEnd %>" data-text="<%= text %>" <%= metadataAttrs(item) %>>
     <div class="kicker"><%= item.number %> · <%= item.topic %></div>
     <div class="title"><%= item.title %></div>
     <div class="date"><% if (item["data-period"]) { %>Data: <%= item["data-period"] %> · <% } %>Published <%= item.date %></div>

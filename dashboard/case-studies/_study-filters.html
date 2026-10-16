@@ -1,0 +1,59 @@
+<script>
+// Search, topic chips and sort for the case studies list. Works on the cards' data-*
+// attributes (see _templates/study-cards.ejs); without JavaScript the full list still shows.
+(() => {
+  const list = document.querySelector(".study-list");
+  const box = document.querySelector(".study-filters");
+  if (!list || !box) return;
+  const cards = [...list.children];
+  const search = box.querySelector("#study-search");
+  const sort = box.querySelector("#study-sort");
+  const chips = box.querySelector(".chips");
+  const count = document.querySelector(".filter-count");
+  let topic = "";
+
+  const topics = [...new Set(cards.map((c) => c.dataset.topic).filter(Boolean))].sort();
+  for (const t of ["", ...topics]) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = t || "All topics";
+    b.setAttribute("aria-pressed", String(t === topic));
+    b.addEventListener("click", () => {
+      topic = t;
+      chips.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", String(c === b)));
+      update();
+    });
+    chips.appendChild(b);
+  }
+
+  const num = (c, key) => Number(c.dataset[key]) || 0;
+  const order = {
+    published: (a, b) => num(b, "listingDateSort") - num(a, "listingDateSort") || num(b, "number") - num(a, "number"),
+    data: (a, b) => num(b, "dataEnd") - num(a, "dataEnd") || num(b, "number") - num(a, "number"),
+    number: (a, b) => num(a, "number") - num(b, "number"),
+  };
+
+  function update() {
+    const words = search.value.toLowerCase().split(/\s+/).filter(Boolean);
+    let shown = 0;
+    const sorted = cards.filter((c) => !c.dataset.soon).sort(order[sort.value]);
+    for (const c of [...sorted, ...cards.filter((c) => c.dataset.soon)]) {
+      const match =
+        (!topic || c.dataset.topic === topic) && words.every((w) => c.dataset.text.includes(w));
+      c.hidden = !match;
+      if (match && !c.dataset.soon) shown += 1;
+      list.appendChild(c);
+    }
+    count.textContent =
+      shown === 0
+        ? "No case studies match. Try another word or topic."
+        : `Showing ${shown} of ${sorted.length} case ${sorted.length === 1 ? "study" : "studies"}`;
+  }
+
+  search.addEventListener("input", update);
+  sort.addEventListener("change", update);
+  box.hidden = false;
+  update();
+})();
+</script>

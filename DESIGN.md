@@ -164,25 +164,32 @@ Comparisons always name their range ("2019 → 2025"), never just "since 2019".
 HEADLINE   Brunei, explained with public data
 One sentence: what the site is, who made it, that it's independent.
 
-[ Latest case study — large card: headline finding + mini chart ]
-
-Case studies (cards, newest first)
-┌────────────┐ ┌────────────┐ ┌────────────┐
-│ 01 Theme   │ │ 02 Theme   │ │ 03 …       │   card: number, theme tag,
-│ Headline   │ │ Headline   │ │ coming soon│   headline finding, date
-│ finding    │ │ finding    │ │            │
-└────────────┘ └────────────┘ └────────────┘
+LATEST CASE STUDIES (5 newest)
+[ Newest study — large card: headline finding, question, data period, read time ]
+┌────────────┐ ┌────────────┐
+│ 02 Theme   │ │ 01 Theme   │   next 4 newest: number, theme tag,
+│ Headline   │ │ Headline   │   headline finding, data period, date
+│ finding    │ │ finding    │
+└────────────┘ └────────────┘
+[ See all case studies → ]   (button to the case study list)
 
 How this works: 3 short points (open data · credited · independent) → policy link
 ```
 
 - Cards show the **finding**, not just the topic, so the home page is useful on its own.
-- One "coming soon" card at most, to show the series is ongoing (Zeigarnik Effect).
+- The home page shows only the 5 newest studies (Hick's Law); the full list is one click away.
+- "Coming soon" cards (one at most, Zeigarnik Effect) appear on the case study list, not the home page.
 
 ### 4.3 Case study list
 
-The same cards as the home page, in a grid with a theme filter: one row of 5 or fewer theme chips
-(Economy, Population, Social, Sectoral, International). No search box until there are 10+ studies.
+The same cards as the home page, newest first, with (`case-studies/_study-filters.html`):
+
+- **Search box** over number, title, question, theme and data period.
+- **Theme chips** built from the themes in use, "All topics" first. One active at a time
+  (`aria-pressed`).
+- **Sort:** newest published (default), latest data (last year of the data period), study number.
+- A live count ("Showing 2 of 3 case studies") for screen readers.
+- Controls stay hidden without JavaScript, so the plain list still works.
 
 ### 4.4 Sources, Policy, About
 
@@ -395,3 +402,4 @@ Findings and fixes go into a changelog at the end of this file. That log becomes
 | 15 Oct 2026 | First case study page. Added the intro (lede, §4.1 ①b), small multiples on one shared scale, a phone variant for charts that need one, and negative bar labels placed right of zero. | The user asked for a category timeline and a short introduction. Screenshot checks at 390px found overlapping titles and labels. |
 | 15 Oct 2026 | Standard case study structure (§4.1) with a test. APA 7 references (publication year + retrieval date). Explicit ranges ("2019 → 2025"). Data tables scroll in their own box. "All items" explained where first used. | User review of case study 01. |
 | 15 Oct 2026 | Questions in the introduction, evidence in the body, answers in the conclusion. | User's review: keeps verdicts in one place and makes the body an investigation. |
+| 16 Oct 2026 | Home shows the 5 newest studies (1 large + 4 cards) and a "See all case studies" button. Case study list gets search, theme chips and sort (newest published, latest data, number). | User request. Search added before 10 studies by the user's choice; "latest data" sort because some datasets end years before they were published. |

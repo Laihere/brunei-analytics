@@ -149,6 +149,38 @@ a.link-card:hover { border-color: $teal-500; box-shadow: 0 4px 16px rgba(13, 148
 .link-card.soon .kicker { color: $muted; }
 .link-card.featured .title { font-size: 1.4rem; line-height: 1.3; }
 .link-card.next { text-align: right; }
+.latest-more { margin-top: $s4; }
+.see-all { margin: $s5 0 0; }
+.btn-primary {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 $s5;
+  background: $teal-700; color: #fff; border-radius: $radius; font-weight: 600; text-decoration: none;
+}
+.btn-primary:hover, .btn-primary:focus-visible { background: $teal-800; color: #fff; }
+
+// Case studies page: search, sort and topic chips (_study-filters.html)
+.link-card[hidden], .study-filters[hidden] { display: none; }
+.study-filters { margin: 0 0 $s3; }
+.study-filters input[type="search"] {
+  width: 100%; min-height: 44px; padding: 0 $s3; border: 1px solid $line;
+  border-radius: $radius; background: $surface; color: $ink;
+}
+.filter-row { display: flex; flex-wrap: wrap; gap: $s3; align-items: center; justify-content: space-between; margin-top: $s3; }
+.sort { display: flex; align-items: center; gap: $s2; font-size: 0.875rem; color: $muted; }
+.sort select {
+  min-height: 44px; padding: 0 $s3; border: 1px solid $line; border-radius: $radius;
+  background: $surface; color: $ink; font-size: 1rem;
+}
+.study-filters input:focus-visible, .sort select:focus-visible, .chip:focus-visible {
+  outline: 2px solid $teal-500; outline-offset: 2px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: $s2; }
+.chip {
+  min-height: 36px; padding: 0 $s4; border: 1px solid $line; border-radius: 999px;
+  background: $surface; color: $ink-2; font-size: 0.875rem; cursor: pointer;
+}
+.chip:hover { border-color: $teal-500; }
+.chip[aria-pressed="true"] { background: $teal-700; border-color: $teal-700; color: #fff; font-weight: 600; }
+.filter-count { font-size: 0.875rem; color: $muted; margin: $s2 0 $s4; min-height: 1.4em; }
 .prevnext { display: grid; grid-template-columns: 1fr 1fr; gap: $s4; margin-top: $s7; }
 .section-label { font-size: 0.875rem; font-weight: 600; color: $muted; text-transform: uppercase; letter-spacing: 0.04em; margin: $s6 0 $s3; }
 

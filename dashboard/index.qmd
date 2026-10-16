@@ -3,32 +3,23 @@ title: "Brunei, explained with public data"
 subtitle: "Independent case studies built from Brunei's open data, with every number credited to its source. By Muhd Lai Razi, with AI assistance."
 toc: false
 listing:
-  - id: featured
-    contents: "case-studies/[0-9]*.qmd"
-    template: _templates/featured.ejs
-    sort: "number desc"
-    max-items: 1
-    fields: [title, description, date, number, topic, read-time, data-period]
-    feed: false
-  - id: studies
-    contents:
-      - "case-studies/[0-9]*.qmd"
-      - case-studies/upcoming.yml
-    template: _templates/study-cards.ejs
-    sort: "number"
-    fields: [title, date, number, topic, status, data-period]
-    feed: false
+  # Home shows the 5 newest studies: the first as a large card, the next 4 as small cards
+  # (Hick's Law). The full list, with search and filters, is on the case studies page.
+  id: latest
+  contents: "case-studies/[0-9]*.qmd"
+  template: _templates/latest.ejs
+  sort: "number desc"
+  max-items: 5
+  fields: [title, description, date, number, topic, read-time, data-period]
+  feed: false
 ---
 
-<p class="section-label">Latest case study</p>
+<p class="section-label">Latest case studies</p>
 
-::: {#featured}
+::: {#latest}
 :::
 
-## Case studies
-
-::: {#studies}
-:::
+<p class="see-all"><a class="btn-primary" href="case-studies/index.html">See all case studies →</a></p>
 
 ## How this works
 

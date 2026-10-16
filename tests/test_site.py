@@ -104,3 +104,25 @@ def test_public_policy_hides_internal_sections():
     assert "[full policy](https://example.org/repo/blob/main/DATA_USE_POLICY.md)" in text
     assert "[DATA_SOURCES.md](https://example.org/repo/blob/main/DATA_SOURCES.md)" in text
     assert "`brunei_analytics`" not in text
+
+
+def test_home_shows_five_latest_and_links_to_all():
+    home = (ROOT / "dashboard" / "index.qmd").read_text()
+    assert re.search(r"max-items:\s*5\b", home)
+    assert 'sort: "number desc"' in home
+    assert 'href="case-studies/index.html"' in home
+    assert "upcoming.yml" not in home  # "Coming soon" cards live on the case studies page only
+
+
+def test_case_study_filters_match_card_attributes():
+    pages = ROOT / "dashboard" / "case-studies"
+    script = (pages / "_study-filters.html").read_text()
+    index = (pages / "index.qmd").read_text()
+    cards = (ROOT / "dashboard" / "_templates" / "study-cards.ejs").read_text()
+    assert "include-after-body: _study-filters.html" in index
+    for control in ("study-search", "study-sort"):
+        assert f'id="{control}"' in index and f"#{control}" in script
+    # Every data-* attribute the script reads must be written by the card template.
+    for attr in re.findall(r"dataset\.(\w+)", script):
+        kebab = re.sub(r"([A-Z])", lambda m: "-" + m.group(1).lower(), attr)
+        assert f"data-{kebab}" in cards or attr == "listingDateSort", attr

@@ -27,6 +27,8 @@ Full attributions are generated from `outputs/*.meta.json`.
 
 Run: `uv run python case_studies/01_cost_of_living/analysis/build.py`
 
+The full record (each step, why it was done, and the decision log) is in [PROCESS.md](PROCESS.md).
+
 ## Findings
 
 Published as *"Brunei's prices stopped rising by 2025, but stayed 7% above 2019"*

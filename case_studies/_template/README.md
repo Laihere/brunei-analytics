@@ -16,6 +16,8 @@ Full attributions are generated from `outputs/*.meta.json`.
 2. {cleaning and transformations, stated plainly (policy M2)}
 3. {analysis}
 
+The full record (each step, why it was done, and the decision log) is in [PROCESS.md](PROCESS.md).
+
 ## Findings
 
 - {finding, with the chart it comes from}

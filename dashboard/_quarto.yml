@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    - assets/js/*.js
 
 website:
   title: "Brunei Analytics"
@@ -43,6 +45,9 @@ format:
     toc-title: On this page
     date-format: "D MMM YYYY"
     anchor-sections: false
+    # No maths on the site; "plain" stops Quarto loading MathJax from a CDN on pages
+    # that contain "$" (e.g. B$ prices).
+    html-math-method: plain
 
 execute:
   echo: false

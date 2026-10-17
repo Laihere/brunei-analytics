@@ -19,9 +19,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10.3.0  # this action publishes exact tags only, no "v10"
-      - uses: quarto-dev/quarto-actions/setup@v2
+      # Actions are pinned to commit SHAs (tag in the comment); Dependabot proposes updates.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884  # v10.3.0
+      - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b  # v2
         with:
           version: 1.10.19
       - run: uv sync --locked
@@ -29,7 +30,9 @@ jobs:
       - run: uv run pytest -q
       # Renders from committed case study outputs only; raw data is never fetched here.
       - run: uv run quarto render dashboard
-      - uses: actions/upload-pages-artifact@v5
+      # No scripts, styles or fonts from other sites (DATA_USE_POLICY.md §8).
+      - run: uv run python -m shared.site_check dashboard/_site
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5
         with:
           path: dashboard/_site
 
@@ -42,4 +45,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346  # v5

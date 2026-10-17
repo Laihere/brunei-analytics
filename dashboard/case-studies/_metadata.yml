@@ -5,5 +5,7 @@ format:
       - ../_partials/title-block.html
     # Plotly's basic bundle (line, bar, scatter, pie): 1.2 MB vs 4.8 MB for the full
     # library (DESIGN.md §9). Version must match plotly.py's; tests/test_site.py checks it.
+    # Served from this site, not a CDN (DATA_USE_POLICY.md §8). The file is Plotly's own
+    # (MIT licence, header kept); sha256 is in tests/test_site.py.
     include-in-header:
-      text: <script src="https://cdn.plot.ly/plotly-basic-4.1.1.min.js" charset="utf-8"></script>
+      text: <script src="../assets/js/plotly-basic-4.1.1.min.js" charset="utf-8"></script>

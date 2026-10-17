@@ -1,6 +1,6 @@
 """Page components for case studies (DESIGN.md §5), returned as HTML for Quarto cells.
 
-Each helper returns an IPython HTML object, so a cell that ends with one renders it
+Each helper returns a RawHTML object (shared/html.py), so a cell that ends with one renders it
 as-is. Text arguments are escaped; only `fig` and `df` produce markup of their own.
 """
 
@@ -12,10 +12,10 @@ from typing import Literal
 import pandas as pd
 import plotly.graph_objects as go
 import yaml
-from IPython.display import HTML
 
 from shared.charts import CONFIG, data_table
 from shared.context import ContextSource, apa_context_reference
+from shared.html import RawHTML as HTML
 from shared.provenance import BYLINE, Provenance, apa_reference, apa_year_labels, short_credit
 
 Change = Literal["up-good", "up-bad", "down-good", "down-bad"]

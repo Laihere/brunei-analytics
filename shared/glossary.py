@@ -12,8 +12,8 @@ from html import escape
 from pathlib import Path
 
 import yaml
-from IPython.display import HTML
 
+from shared.html import RawHTML as HTML
 from shared.paths import ROOT
 
 GLOSSARY = ROOT / "dashboard" / "glossary.yml"

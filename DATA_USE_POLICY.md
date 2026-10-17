@@ -65,7 +65,7 @@ Each dataset page names its owner under **Data Source Owner**. That owner is the
 4. **Mark every transformation.** Steps live in code, with a plain-language summary in each output.
 5. **Attribute every output** using the template below.
 6. **Add the disclaimer to every output**, including dashboards, the portfolio case studies and the README.
-7. **Protect privacy.** Brunei's Personal Data Protection Order 2025 (fully in force 1 Jan 2026) applies to personal data. Published sets are aggregates, but we do not try to re-identify individuals or join datasets in ways that could. We suppress or merge very small cells (e.g. counts below 5) when cross-tabulating.
+7. **Protect privacy.** Brunei's Personal Data Protection Order 2025 (fully in force 1 Jan 2026) applies to personal data. Published sets are aggregates, but we do not try to re-identify individuals or join datasets in ways that could. We merge or suppress small cells (counts of 1 to 5) in breakdowns by place, year or category; see §8.
 8. **Stay neutral.** Present findings factually and avoid political commentary or claims about government performance that the data does not support.
 9. **Respect the server.** Fetch the catalogue through the site's public API, add delays between requests, and download each file once.
 10. **Disclose AI assistance.** This project is built with an AI assistant (Claude, by Anthropic).
@@ -198,3 +198,37 @@ case study it supports.
 **Names.** Author names are written exactly as published, including honorifics such as
 "Hajah", "Haji", "Dato" or "Pengiran" (author's decision, 16 Oct 2026). Malay names usually
 have no family name, so the full name stands in the author position and the in-text citation.
+
+---
+
+## 8. Privacy and security
+
+Agreed 17 Oct 2026. The site is read-only: it has no forms, accounts, comments or search box
+that sends anything anywhere (the site search runs in the browser).
+
+1. **The site collects nothing.** No cookies, analytics, tracking pixels, ads or embedded
+   social media. The site is hosted on GitHub Pages, and GitHub may log visitors' IP addresses
+   for security, as described in the
+   [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
+   If analytics are ever added, a privacy notice comes first (Personal Data Protection Order 2025).
+2. **No scripts from other sites.** Every script, style and font is served from this site
+   (Plotly is a copy of the official file, checked by its SHA-256 hash), so no other server
+   learns who reads which page, and a compromised CDN cannot change the pages.
+3. **No small counts.** Counts of people, incidents or businesses between 1 and 5 are not
+   published in a breakdown by place, year or category, because a small number can point to a
+   real person or business. Such cells are merged (e.g. into "Other" or a longer period) or
+   shown as "5 or fewer". Totals for the whole country are not affected. Zero is shown as zero.
+4. **No personal data from any source.** We use published aggregates only, never try to
+   re-identify anyone, and never name or point to individuals (§7, rule 2).
+
+### How the code applies this policy
+
+- `tests/test_privacy.py` fails if a committed output has a count between 1 and 5, unless the
+  cell is listed there with a reason.
+- `shared/html.py` keeps page components from pulling in RequireJS and jQuery from a CDN.
+- The GitHub Actions workflow fails the build if any rendered page loads a script, style or
+  font from another site. Workflow actions are pinned to commit SHAs and kept up to date by
+  Dependabot (`.github/dependabot.yml`).
+- Raw downloads (`data/raw/`) and full cleaned tables (`data/clean/`) stay local and are
+  gitignored. Keep a private backup of `data/` (an encrypted drive or private cloud folder,
+  not a GitHub repository).

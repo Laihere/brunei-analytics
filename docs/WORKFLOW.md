@@ -58,7 +58,7 @@ back to inspection (we misunderstood the data), not forward with a workaround.
 
 ## Stage 7 checklist
 
-- [ ] Counts below 5 suppressed or merged in any cross-tab (SOP 7, PDPO 2025)
+- [ ] Counts of 1 to 5 merged or suppressed in any breakdown (SOP 7, policy §8, PDPO 2025); new count columns added to `COUNTS` in `tests/test_privacy.py`
 - [ ] Every chart has the source + retrieval date line; APA references in the method section (SOP 5)
 - [ ] "Not an official publication" disclaimer and AI-assistance byline (SOP 6, 10)
 - [ ] Neutral wording: what changed and when, not judgements on performance (SOP 8)

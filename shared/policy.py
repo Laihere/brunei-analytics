@@ -6,7 +6,8 @@ SOP, open questions for EGNC, code notes) stay in the full policy on GitHub.
 
 import re
 
-PUBLIC_SECTIONS = [1, 2, 3, 6, 7]  # free for all? · must do · accept · approved · context
+# free for all? · must do · accept · approved · context · privacy
+PUBLIC_SECTIONS = [1, 2, 3, 6, 7, 8]
 INTERNAL_SUBSECTIONS = ["### How the code applies this policy"]
 INTERNAL_REFS = [  # point to notes that aren't on the site
     " (§4)",
@@ -41,6 +42,16 @@ def public_policy(text: str, repo_url: str) -> str:
     out = head + "".join(kept)
     for ref in INTERNAL_REFS:
         out = out.replace(ref, "")
+    # Sections are renumbered on the site, so cross-references follow them.
+    out = re.sub(
+        r"§(\d+)",
+        lambda m: (
+            f"§{PUBLIC_SECTIONS.index(n) + 1}"
+            if (n := int(m.group(1))) in PUBLIC_SECTIONS
+            else m.group(0)
+        ),
+        out,
+    )
     out = _link_repo_files(out, repo_url)
     return (
         out.rstrip()

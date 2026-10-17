@@ -6,7 +6,7 @@ Only these sources are used. Each dataset is credited with its owner and the
 date it was downloaded, as set out in the [data use policy](data-policy.qmd).
 
 ```{python}
-from IPython.display import HTML
+from shared.html import RawHTML as HTML
 
 from shared.sources import SOURCES
 

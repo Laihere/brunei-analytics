@@ -1,3 +1,4 @@
+import hashlib
 import re
 from html import unescape
 
@@ -28,7 +29,28 @@ DF = pd.DataFrame(
 def test_plotly_bundle_matches_installed_version():
     meta = (ROOT / "dashboard" / "case-studies" / "_metadata.yml").read_text()
     pinned = re.search(r"plotly-basic-([\d.]+)\.min\.js", meta).group(1)
+    # A plotly.py update (e.g. from Dependabot) needs the new bundle copied into
+    # dashboard/assets/js/, checked against npm, and the paths and hash below updated.
     assert pinned == plotly.offline.get_plotlyjs_version()
+
+
+PLOTLY_BASIC_SHA256 = "99784e3abfb07b142a15e521a439e6d9addceadb3f79553fd24c72774f0649ba"
+
+
+def test_plotly_bundle_is_served_locally_and_unchanged():
+    """Same file as on cdn.plot.ly and in npm plotly.js-basic-dist-min (checked 17 Oct 2026)."""
+    meta = (ROOT / "dashboard" / "case-studies" / "_metadata.yml").read_text()
+    assert "cdn.plot.ly" not in meta
+    name = re.search(r"plotly-basic-[\d.]+\.min\.js", meta).group(0)
+    bundle = ROOT / "dashboard" / "assets" / "js" / name
+    assert hashlib.sha256(bundle.read_bytes()).hexdigest() == PLOTLY_BASIC_SHA256
+
+
+def test_components_render_as_raw_html_not_text_html():
+    """text/html outputs make Quarto add RequireJS and jQuery from a CDN (shared/html.py)."""
+    card = stat_tiles(stat_tile("A", "1"))
+    assert not hasattr(card, "_repr_html_")
+    assert card._repr_markdown_().strip().startswith("```{=html}")
 
 
 def test_highlight_colours_one_series_and_draws_it_last():
@@ -99,8 +121,12 @@ def test_public_policy_hides_internal_sections():
     assert "How the code applies this policy" not in text
     assert "(§4)" not in text
     headings = re.findall(r"(?m)^## (\d+)\.", text)
-    assert headings == ["1", "2", "3", "4", "5"]
+    assert headings == ["1", "2", "3", "4", "5", "6"]
     assert "Context sources" in text
+    assert "## 6. Privacy and security" in text
+    # cross-references follow the renumbering: §6 → §4, §7 → §5; none point to hidden sections
+    assert "not data sources: §4 still decides" in " ".join(text.split())
+    assert {int(n) for n in re.findall(r"§(\d+)", text)} <= set(range(1, 7))
     assert "Approved sources" in text
     assert "[full policy](https://example.org/repo/blob/main/DATA_USE_POLICY.md)" in text
     assert "[DATA_SOURCES.md](https://example.org/repo/blob/main/DATA_SOURCES.md)" in text

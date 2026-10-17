@@ -8,7 +8,14 @@ import plotly.offline
 import pytest
 
 from shared.charts import CONTEXT, TEAL_500, highlight
-from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.components import (
+    chart_card,
+    method_and_sources,
+    prev_next,
+    related_studies,
+    stat_tile,
+    stat_tiles,
+)
 from shared.paths import ROOT
 from shared.provenance import Provenance
 
@@ -110,6 +117,53 @@ def test_prev_next_links_to_following_study(tmp_path):
     html = prev_next("01-a.qmd", tmp_path).data
     assert 'href="02-b.html"' in html and "02 · Study 02" in html
     assert 'href="02' not in prev_next("02-b.qmd", tmp_path).data
+
+
+def _pages(tmp_path, related_for_03: str):
+    for n, stem in [("01", "01-a"), ("02", "02-b"), ("03", "03-c")]:
+        extra = related_for_03 if n == "03" else ""
+        (tmp_path / f"{stem}.qmd").write_text(
+            f'---\ntitle: "Study {n}"\nnumber: "{n}"\ndata-period: "20{n}"\n{extra}---\n'
+        )
+    (tmp_path / "_template.qmd").write_text('---\nnumber: "NN"\n---\n')
+
+
+LINKS_03 = """related:
+  - study: "02"
+    kind: follow-up
+    why: "Same question, newer edition."
+  - study: "01"
+    kind: same-source
+    why: "Both use one table."
+"""
+
+
+def test_related_studies_link_both_ways(tmp_path):
+    _pages(tmp_path, LINKS_03)
+    newer = related_studies("03-c.qmd", tmp_path).data
+    assert newer.index("01 · Study 01") < newer.index("02 · Study 02")  # by number
+    assert "Builds on" in newer and "Same source" in newer and "Data: 2002" in newer
+    older = related_studies("02-b.qmd", tmp_path).data
+    assert 'href="03-c.html"' in older and "Followed up in" in older
+    assert "Same question, newer edition." in older
+    _pages(tmp_path, "")
+    assert related_studies("02-b.qmd", tmp_path).data == ""  # no links, no box
+
+
+@pytest.mark.parametrize(
+    "entry",
+    [
+        '  - study: "09"\n    kind: same-topic\n    why: "x"\n',  # no such study
+        '  - study: "03"\n    kind: same-topic\n    why: "x"\n',  # itself, not earlier
+        '  - study: "01"\n    kind: similar\n    why: "x"\n',  # unknown kind
+        '  - study: "01"\n    kind: same-topic\n    why: ""\n',  # no reason given
+        '  - study: "01"\n    kind: same-topic\n    why: "X here, Y in 01."\n',  # one-sided
+    ],
+)
+def test_related_studies_reject_bad_links(tmp_path, entry):
+    _pages(tmp_path, "related:\n" + entry)
+    with pytest.raises(ValueError):
+        related_studies("01-a.qmd", tmp_path)
 
 
 def test_public_policy_hides_internal_sections():

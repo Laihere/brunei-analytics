@@ -7,11 +7,26 @@ topic: "{Economy | Population | Social | Sectoral | International}"
 data-period: "{Year(s) the data covers, e.g. 2025 or 2020–2025. Shown on cards and the page header}"
 read-time: "{4}-minute read"
 date: 2026-01-01
+# Earlier studies this one connects to (optional; delete if none). They link back
+# automatically. kind: follow-up (newer data or a deeper look at the same question),
+# same-source, or same-topic. why: one line shown on BOTH pages, so name both studies
+# by number and never say "here" or "this study".
+related:
+  - study: "{NN of an earlier study}"
+    kind: "{follow-up | same-source | same-topic}"
+    why: "{How the two connect, e.g. Both use Royal Brunei Police Force tables: X in NN, Y in NN.}"
 ---
 
 ```{python}
 from shared.charts import highlight
-from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.components import (
+    chart_card,
+    method_and_sources,
+    prev_next,
+    related_studies,
+    stat_tile,
+    stat_tiles,
+)
 from shared.outputs import read_output
 from shared.paths import CASE_STUDIES, REPO_URL, ROOT
 
@@ -70,6 +85,11 @@ chart_card(
 ::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
 {Limitations in plain words: gaps, estimates, what the data can't show.}
 :::
+
+```{python}
+# Earlier studies from `related:` and later ones that link here (nothing if none).
+related_studies("{NN-name}.qmd", ROOT / "dashboard" / "case-studies")
+```
 
 ```{python}
 # Layer 4: method and sources, collapsed but always present.

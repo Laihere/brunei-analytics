@@ -6,6 +6,10 @@ topic: "Social"
 data-period: "2009–2020"
 read-time: "4-minute read"
 date: 2026-10-16
+related:
+  - study: "03"
+    kind: same-source
+    why: "Both use Fire and Rescue Department tables: fire occurrences in 04, and road accidents attended (a cross-check) in 03."
 ---
 
 ```{python}
@@ -13,7 +17,14 @@ import sys
 from decimal import ROUND_HALF_UP, Decimal
 
 from shared.glossary import glossary_popovers
-from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.components import (
+    chart_card,
+    method_and_sources,
+    prev_next,
+    related_studies,
+    stat_tile,
+    stat_tiles,
+)
 from shared.context import load_context
 from shared.outputs import read_output
 from shared.paths import CASE_STUDIES, REPO_URL, ROOT
@@ -214,6 +225,10 @@ chart_card(
   gives `{python} num(c13.fires_other)` fires for 2013, against `{python} num(c13.fires_main)`
   in the edition used here. The source doesn't say why.
 :::
+
+```{python}
+related_studies("04-fire-occurrences.qmd", ROOT / "dashboard" / "case-studies")
+```
 
 ```{python}
 method_and_sources(

@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from shared.components import _front_matter
+from shared.components import _front_matter, related_links
 from shared.paths import ROOT
 
 PAGES = sorted((ROOT / "dashboard" / "case-studies").glob("[0-9]*.qmd"))
@@ -15,6 +15,7 @@ REQUIRED = {
     "main chart": r"chart_card\(",
     "conclusion": r"^## Conclusion$",
     "side note": r"callout-caution[^}]*title=\"What this doesn't tell us\"",
+    "related studies": r"related_studies\(",
     "method and references": r"method_and_sources\(",
     "next study": r"prev_next\(",
     "glossary pop-ups": r"glossary_popovers\(",
@@ -61,3 +62,8 @@ def test_every_marked_term_is_in_the_glossary(page):
 
     missing = [k for k in terms_used(page.read_text()) if k not in load_glossary()]
     assert not missing, f"{page.name}: add {missing} to dashboard/glossary.yml"
+
+
+def test_related_links_point_to_earlier_studies_that_exist():
+    links = related_links(ROOT / "dashboard" / "case-studies")  # raises if any is invalid
+    assert links, "expected at least one related link"

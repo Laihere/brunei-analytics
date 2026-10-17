@@ -6,13 +6,24 @@ topic: "Social"
 data-period: "2009–2017"
 read-time: "4-minute read"
 date: 2026-10-16
+related:
+  - study: "02"
+    kind: same-source
+    why: "Both use Royal Brunei Police Force tables: road casualties in 03, crime cases in 02."
 ---
 
 ```{python}
 import sys
 
 from shared.glossary import glossary_popovers
-from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.components import (
+    chart_card,
+    method_and_sources,
+    prev_next,
+    related_studies,
+    stat_tile,
+    stat_tiles,
+)
 from shared.context import load_context
 from shared.outputs import read_output
 from shared.paths import CASE_STUDIES, REPO_URL, ROOT
@@ -218,6 +229,10 @@ chart_card(
 - **Rates per person or vehicle.** These are counts. Brunei's population and number of
   vehicles changed over these years, and the counts aren't adjusted for that.
 :::
+
+```{python}
+related_studies("03-road-casualties.qmd", ROOT / "dashboard" / "case-studies")
+```
 
 ```{python}
 method_and_sources(

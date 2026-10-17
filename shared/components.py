@@ -148,6 +148,81 @@ def _front_matter(path: Path) -> dict:
     return yaml.safe_load(text.split("---", 2)[1]) or {}
 
 
+# How two case studies connect (front matter `related:`). Only the newer study declares the
+# link; the older one shows it automatically, so published pages never need editing for it.
+RELATION_LABELS = {
+    "follow-up": ("Builds on", "Followed up in"),  # newer data or a deeper look, same question
+    "same-source": ("Same source", "Same source"),
+    "same-topic": ("Related topic", "Related topic"),
+}
+
+
+def _studies(pages_dir: Path) -> dict[str, tuple[str, dict]]:
+    """Case study number → (page stem, front matter)."""
+    return {
+        str(meta["number"]): (p.stem, meta)
+        for p in sorted(pages_dir.glob("*.qmd"))
+        if not p.name.startswith("_") and "number" in (meta := _front_matter(p))
+    }
+
+
+def related_links(pages_dir: Path) -> list[tuple[str, str, str, str]]:
+    """Every declared link as (from number, to number, kind, why), checked."""
+    studies = _studies(pages_dir)
+    links = []
+    for num, (stem, meta) in studies.items():
+        seen = set()
+        for r in meta.get("related") or []:
+            to, kind, why = str(r.get("study", "")), r.get("kind", ""), r.get("why", "").strip()
+            if to not in studies:
+                raise ValueError(f"{stem}: related study {to!r} does not exist.")
+            if int(to) >= int(num):
+                raise ValueError(f"{stem}: only link to earlier studies ({to}); it shows on both.")
+            if kind not in RELATION_LABELS:
+                raise ValueError(f"{stem}: related kind {kind!r}; use {list(RELATION_LABELS)}.")
+            if not why:
+                raise ValueError(f"{stem}: say how it relates to {to} ('why').")
+            if re.search(r"\b(here|this study)\b", why, re.IGNORECASE):
+                raise ValueError(f"{stem}: 'why' shows on both pages; name studies by number.")
+            if to in seen:
+                raise ValueError(f"{stem}: {to} is listed twice.")
+            seen.add(to)
+            links.append((num, to, kind, why))
+    return links
+
+
+def related_studies(current: str, pages_dir: Path) -> HTML:
+    """ "Related case studies" box after the conclusion: earlier studies this one links to, and
+    later ones that link back (nothing if there are none)."""
+    studies = _studies(pages_dir)
+    here = str(_front_matter(pages_dir / current)["number"])
+    cards = []
+    for frm, to, kind, why in related_links(pages_dir):
+        if here not in (frm, to):
+            continue
+        to_earlier, from_later = RELATION_LABELS[kind]
+        other, label = (to, to_earlier) if frm == here else (frm, from_later)
+        stem, meta = studies[other]
+        cards.append(
+            (
+                int(other),
+                f'<a class="link-card" href="{stem}.html">'
+                f'<div class="kicker">{escape(label)}</div>'
+                f'<div class="title">{int(other):02d} · {escape(meta["title"])}</div>'
+                f'<p class="desc">{escape(why)}</p>'
+                f'<div class="date">Data: {escape(str(meta.get("data-period", "")))}</div></a>',
+            )
+        )
+    if not cards:
+        return HTML("")
+    body = "".join(card for _, card in sorted(cards))
+    return HTML(
+        '<section class="related" aria-labelledby="related-heading">'
+        '<h2 id="related-heading" class="related-heading">Related case studies</h2>'
+        f'<div class="link-cards">{body}</div></section>'
+    )
+
+
 def prev_next(current: str, pages_dir: Path) -> HTML:
     """Back-to-list and next-study cards at the end of a case study (Peak-End)."""
     pages = sorted(

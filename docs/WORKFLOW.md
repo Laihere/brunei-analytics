@@ -71,8 +71,36 @@ back to inspection (we misunderstood the data), not forward with a workaround.
 - [ ] Terms readers may confuse are marked once as glossary terms, and are in `dashboard/glossary.yml`
 - [ ] Items added or dropped between years are shown with their status (continued / new / discontinued), never as growth or decline
 - [ ] Translations (when enabled): labels from the shared dictionary; English is the reference version
+- [ ] Earlier studies on the same source, topic or question listed under `related:` (see below)
 - [ ] Screenshot check on phone and desktop widths (headless Firefox)
 - [ ] `uv run pytest` passes (page structure, provenance, site build)
+
+## Linking and updating earlier case studies
+
+Agreed 17 Oct 2026. A new study that builds on an earlier one says so, so readers can go
+back to what was found before.
+
+- **Declare links in the newer study only**, in its front matter:
+
+  ```yaml
+  related:
+    - study: "02"
+      kind: same-source   # follow-up | same-source | same-topic
+      why: "Both use Royal Brunei Police Force tables: road casualties in 03, crime cases in 02."
+  ```
+
+  `follow-up` means newer data or a deeper look at the same question; the older page then
+  says "Followed up in". `why` is shown on **both** pages, so it names both studies by number
+  and never says "here". The "Related case studies" box (`related_studies`) appears after
+  "What this doesn't tell us" on both pages; tests check every link.
+- **Never rewrite published findings.** If newer data changes what an earlier study found,
+  the earlier page keeps its text and numbers and gains a short dated note at the top
+  ("Update, D Mon YYYY: newer data to YYYY is in case study NN"). Its findings still describe
+  the data it was built on. (When the first such note is needed, add an `updated:` front
+  matter field for the header, so `date` keeps meaning "first published" for sorting.)
+- **Start follow-ups from `data/clean/`.** The earlier study's cleaned tables and their
+  `.meta.json` show exactly what was used; compare the new edition with them and record any
+  revisions in DATA_SOURCES.md "Known issues", as in 04 and 06.
 
 ## What goes where
 

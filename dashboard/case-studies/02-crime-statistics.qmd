@@ -12,7 +12,14 @@ date: 2026-10-16
 import sys
 
 from shared.glossary import glossary_popovers
-from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.components import (
+    chart_card,
+    method_and_sources,
+    prev_next,
+    related_studies,
+    stat_tile,
+    stat_tiles,
+)
 from shared.outputs import read_output
 from shared.paths import CASE_STUDIES, REPO_URL, ROOT
 
@@ -228,6 +235,10 @@ With only two years, these are changes between two single years, not trends.
 - **Missing values.** Some cells are "-" in the source, which isn't explained. They are
   treated as missing, so solved counts for the Labour Act and "Other Acts" are incomplete.
 :::
+
+```{python}
+related_studies("02-crime-statistics.qmd", ROOT / "dashboard" / "case-studies")
+```
 
 ```{python}
 method_and_sources(

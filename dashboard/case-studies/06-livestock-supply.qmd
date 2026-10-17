@@ -6,12 +6,23 @@ topic: "Sectoral"
 data-period: "1992–2020"
 read-time: "5-minute read"
 date: 2026-10-16
+related:
+  - study: "05"
+    kind: same-topic
+    why: "Both look at Brunei's agrifood sector: livestock production in 06, food processing in 05."
 ---
 
 ```{python}
 import sys
 
-from shared.components import chart_card, method_and_sources, prev_next, stat_tile, stat_tiles
+from shared.components import (
+    chart_card,
+    method_and_sources,
+    prev_next,
+    related_studies,
+    stat_tile,
+    stat_tiles,
+)
 from shared.context import load_context
 from shared.glossary import glossary_popovers
 from shared.outputs import read_output
@@ -253,6 +264,10 @@ counted as imports, not local production.
   too high.
 - **After `{python} LAST`.** The Department's tables end in `{python} LAST`.
 :::
+
+```{python}
+related_studies("06-livestock-supply.qmd", ROOT / "dashboard" / "case-studies")
+```
 
 ```{python}
 r15 = rev.iloc[0]

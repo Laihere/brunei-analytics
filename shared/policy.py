@@ -6,9 +6,9 @@ SOP, open questions for EGNC, code notes) stay in the full policy on GitHub.
 
 import re
 
-# free for all? · must do · accept · approved · context · privacy
-PUBLIC_SECTIONS = [1, 2, 3, 6, 7, 8]
-INTERNAL_SUBSECTIONS = ["### How the code applies this policy"]
+# free for all? · must do · accept · approved · context · privacy · requests
+PUBLIC_SECTIONS = [1, 2, 3, 6, 7, 8, 9]
+INTERNAL_SUBSECTIONS = ["### How the code applies this policy", "### Request log"]
 INTERNAL_REFS = [  # point to notes that aren't on the site
     " (§4)",
     " See the review notes from 14 Oct 2026.",

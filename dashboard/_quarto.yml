@@ -34,7 +34,8 @@ website:
     center: >
       Independent analysis by Muhd Lai Razi, built with AI assistance (Claude by Anthropic).
       Not an official publication of the Government of Brunei Darussalam.
-      [Data use policy](/data-policy.qmd) · [How AI was used](/about.qmd#how-ai-was-used)
+      [Data use policy](/data-policy.qmd) · [Privacy](/data-policy.qmd#privacy-and-security) ·
+      [How AI was used](/about.qmd#how-ai-was-used) · [Contact](/about.qmd#contact)
 
 format:
   html:

@@ -211,6 +211,10 @@ that sends anything anywhere (the site search runs in the browser).
    for security, as described in the
    [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
    If analytics are ever added, a privacy notice comes first (Personal Data Protection Order 2025).
+   **No cookies are set.** Quarto, which builds the site, can save a display setting in the
+   browser's local storage, but only for features this site doesn't use (reader mode, tabs,
+   announcement bars), so in practice nothing is stored, and nothing would ever be used for
+   tracking. That is why there is no cookie banner.
 2. **No scripts from other sites.** Every script, style and font is served from this site
    (Plotly is a copy of the official file, checked by its SHA-256 hash), so no other server
    learns who reads which page, and a compromised CDN cannot change the pages.
@@ -220,6 +224,28 @@ that sends anything anywhere (the site search runs in the browser).
    shown as "5 or fewer". Totals for the whole country are not affected. Zero is shown as zero.
 4. **No personal data from any source.** We use published aggregates only, never try to
    re-identify anyone, and never name or point to individuals (§7, rule 2).
+5. **No pop-ups or dark patterns.** No sign-ups, consent walls, ads or prompts. The "not
+   official, not peer-reviewed" notice is a line under every case study title, always visible,
+   so it is seen even by readers who arrive from a shared link.
+
+### Software and licences
+
+Everything the site sends to a visitor's browser, checked 17 Oct 2026. All are permissive
+open-source licences. The site uses the visitor's own system fonts and has no images.
+
+| Component | Used for | Licence |
+|---|---|---|
+| [Plotly.js](https://github.com/plotly/plotly.js) 4.1.1 (basic bundle) | charts | MIT |
+| [Quarto](https://quarto.org) 1.10 page scripts | navigation, search, contents | MIT |
+| [Bootstrap](https://getbootstrap.com) 5.3 | layout and styles | MIT |
+| [Bootstrap Icons](https://icons.getbootstrap.com) 1.13 (icon font) | GitHub, profile and search icons | MIT |
+| [Popper](https://popper.js.org) 2.11 and [Tippy.js](https://github.com/atomiks/tippyjs) | glossary and footnote pop-ups | MIT |
+| [Fuse.js](https://www.fusejs.io) 6.6 and [Algolia Autocomplete](https://github.com/algolia/autocomplete) 1.19 | site search (runs in the browser) | Apache 2.0 / MIT |
+| [List.js](https://github.com/javve/list.js), [Headroom.js](https://github.com/WickyNilliams/headroom.js) 0.12, [clipboard.js](https://clipboardjs.com) 2.0 | case study list, header, copy buttons | MIT |
+
+The Python packages used to build the site (pandas, Plotly, pandera and others in
+`pyproject.toml`) run only on the author's computer and in GitHub Actions; they are checked
+for known vulnerabilities with `pip-audit`, and Dependabot proposes updates.
 
 ### How the code applies this policy
 
@@ -232,3 +258,36 @@ that sends anything anywhere (the site search runs in the browser).
 - Raw downloads (`data/raw/`) and full cleaned tables (`data/clean/`) stay local and are
   gitignored. Keep a private backup of `data/` (an encrypted drive or private cloud folder,
   not a GitHub repository).
+
+---
+
+## 9. Corrections and removal requests
+
+Agreed 17 Oct 2026. Contact: **laihere281@gmail.com**.
+
+1. **Corrections.** Anyone can report a mistake. Each report is checked against the source
+   data; if it is right, the page is corrected and gains a dated note saying what changed.
+   Findings are not silently rewritten.
+2. **Removal at the request of the Government or a data owner** (e.g. EGNC or the agency that
+   owns a dataset) is always honoured, as the data.gov.bn terms require. Before acting, the
+   request is confirmed as genuine: it must come from an official government email address
+   (ending in `.gov.bn`), or be confirmed through contact details on the agency's own
+   official website. A request from a personal email address, or one that can't be confirmed,
+   is answered by asking for that confirmation, not acted on.
+3. **A person who believes a page identifies them** is taken seriously even though only
+   published aggregates are used: the page is reviewed, and anything that could point to a
+   person is merged or removed (§8, rule 3). Nobody is asked for identity documents.
+4. **The author** may remove any case study at any time.
+5. **What removal involves.** The page, its outputs and its reference entries are deleted
+   from the site and the repository. If the content must also leave the public Git history,
+   the history is rewritten and GitHub is asked to clear cached copies; the requester is told
+   when that is done.
+
+### Request log
+
+Record each request here: date received, who (organisation, not personal details), how it
+was confirmed, what was asked, what was done and when.
+
+| Received | From | Confirmed by | Request | Action and date |
+|---|---|---|---|---|
+| | | | | |

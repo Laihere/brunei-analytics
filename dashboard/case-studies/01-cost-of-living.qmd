@@ -238,8 +238,8 @@ rose and `{python} n_down` fell, and none moved by more than about 1%. Food and 
 
 ::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
 <!-- Side note: required on every case study (DESIGN.md §4.1). -->
-- **Why prices moved.** The 2020–2022 rises line up in time with the pandemic and with
-  worldwide price rises in 2022, but this data can't separate causes.
+- **Why prices moved.** The data shows when and by how much prices rose, not what caused
+  the rises.
 - **What households paid.** These are national annual averages. They don't show differences
   between districts, households or months.
 - **Two published values were repaired.** The source CPI table had its 2023 categories shifted

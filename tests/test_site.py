@@ -175,12 +175,15 @@ def test_public_policy_hides_internal_sections():
     assert "How the code applies this policy" not in text
     assert "(§4)" not in text
     headings = re.findall(r"(?m)^## (\d+)\.", text)
-    assert headings == ["1", "2", "3", "4", "5", "6"]
+    assert headings == ["1", "2", "3", "4", "5", "6", "7"]
     assert "Context sources" in text
     assert "## 6. Privacy and security" in text
+    assert "## 7. Corrections and removal requests" in text
+    assert "Request log" not in text  # internal
+    assert "### Software and licences" in text
     # cross-references follow the renumbering: §6 → §4, §7 → §5; none point to hidden sections
     assert "not data sources: §4 still decides" in " ".join(text.split())
-    assert {int(n) for n in re.findall(r"§(\d+)", text)} <= set(range(1, 7))
+    assert {int(n) for n in re.findall(r"§(\d+)", text)} <= set(range(1, 8))
     assert "Approved sources" in text
     assert "[full policy](https://example.org/repo/blob/main/DATA_USE_POLICY.md)" in text
     assert "[DATA_SOURCES.md](https://example.org/repo/blob/main/DATA_SOURCES.md)" in text
@@ -207,3 +210,19 @@ def test_case_study_filters_match_card_attributes():
     for attr in re.findall(r"dataset\.(\w+)", script):
         kebab = re.sub(r"([A-Z])", lambda m: "-" + m.group(1).lower(), attr)
         assert f"data-{kebab}" in cards or attr == "listingDateSort", attr
+
+
+def test_every_case_study_shows_the_not_official_notice():
+    """Always visible under the title, not a pop-up (DATA_USE_POLICY.md §8, rule 5)."""
+    partial = (ROOT / "dashboard" / "_partials" / "title-block.html").read_text()
+    study_header = partial.split("$else$")[0]
+    assert 'class="study-notice"' in study_header
+    assert "not official and not peer-reviewed" in study_header
+
+
+def test_about_says_what_changed_not_why():
+    about = (ROOT / "dashboard" / "about.qmd").read_text()
+    assert "{#what-these-case-studies-are}" in about
+    assert "**What changed, not why.**" in about
+    assert "Why, and how sure?" not in about
+    assert "mailto:laihere281@gmail.com" in about

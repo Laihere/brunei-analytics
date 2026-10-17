@@ -76,6 +76,11 @@ main p, main li { max-width: 70ch; }
 
 // Case study title block (partial: _partials/title-block.html)
 .study-header { margin-bottom: $s6; }
+// Notice under every case study title (always visible; no pop-up, nothing stored)
+.study-notice {
+  margin: $s4 0 0; padding: $s2 $s3; font-size: 0.875rem; color: $ink-2;
+  background: $caution-bg; border-left: 3px solid $caution; border-radius: $radius;
+}
 .study-breadcrumb { font-size: 0.875rem; color: $muted; margin-bottom: $s2; }
 .study-breadcrumb a { color: $muted; }
 .study-header .subtitle { color: $ink-2; margin: $s3 0 0; font-size: 1.05rem; }

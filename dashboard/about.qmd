@@ -6,13 +6,29 @@ Brunei Analytics is a personal, non-commercial project by **Muhd Lai Razi**, a C
 Science graduate with an interest in data analytics. Each case study asks one question about Brunei and answers it
 with published open data.
 
+## What these case studies are, and aren't {#what-these-case-studies-are}
+
+- **Built only on published data.** Every number in a chart, table or key figure is
+  calculated from datasets published by Brunei government agencies on data.gov.bn, or by the
+  World Bank, FAO and ILO (see [Data sources](sources.qmd)).
+- **Background, not evidence.** Some pages cite peer-reviewed studies, official publications
+  and newspaper articles to describe what was reported at the time. They are kept in separate
+  notes, and their numbers are never charted.
+- **What changed, not why.** The case studies describe what changed, by how much and when,
+  and what the data can and can't support. They never say why something happened: I am not in
+  a position to investigate causes, and the data alone can't show them.
+- **Independent, not official, not peer-reviewed.** This is a personal project. It is not
+  endorsed by the Government of Brunei Darussalam or any data owner, and it has not been
+  peer-reviewed. Figures may contain errors, so check the original dataset before relying on
+  them.
+
 ## How the pages are designed
 
 Every case study reads from the answer down to the detail:
 
 1. **What happened?** The finding, key numbers and main chart.
 2. **Where, when, for whom?** Breakdowns.
-3. **Why, and how sure?** Explanations and caveats.
+3. **How sure?** Caveats, and what the data can't tell us.
 4. **How do we know?** Method, sources and code.
 
 You can stop reading at any layer and still leave with a complete, correct takeaway.
@@ -38,4 +54,7 @@ source data. I am responsible for what is published, including any errors.
 
 ## Contact
 
-See my [portfolio](https://laihere.github.io/laihere281-portfolio/).
+For corrections, questions or removal requests, email
+[laihere281@gmail.com](mailto:laihere281@gmail.com). How removal requests are handled is set
+out in the [data use policy](data-policy.qmd#corrections-and-removal-requests). More about me
+is on my [portfolio](https://laihere.github.io/laihere281-portfolio/).

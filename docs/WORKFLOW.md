@@ -66,6 +66,10 @@ back to inspection (we misunderstood the data), not forward with a workaround.
 - [ ] Every chart has the source + retrieval date line; APA references in the method section (SOP 5)
 - [ ] "Not an official publication" disclaimer and AI-assistance byline (SOP 6, 10)
 - [ ] Neutral wording: what changed and when, not judgements on performance (SOP 8)
+- [ ] No causes claimed: search the page for "because", "due to", "led to", "caused", "as a
+      result", "thanks to", "driven by", "probably". Keep them only for arithmetic or the
+      method ("because single years swing a lot"), or where the page says the data can't show
+      causes. Every factual statement either comes from the data or is cited (About page, policy §7)
 - [ ] Context sources (if any): in their own callout, reported not concluded, logged in `CONTEXT_SOURCES.md` (policy §7)
 - [ ] Data year/period on the title and every card
 - [ ] Terms readers may confuse are marked once as glossary terms, and are in `dashboard/glossary.yml`

@@ -260,8 +260,8 @@ counted as imports, not local production.
   per bird.
 - **Other inputs.** Feed, medicines and breeding stock aren't covered.
 - **Beef before `{python} cf_first`.** Chilled and frozen beef imports are 0 until
-  `{python} cf_first`, probably because they weren't recorded, so earlier local shares may be
-  too high.
+  the year `{python} cf_first`. The data doesn't say whether none were imported or none were
+  recorded, so earlier local shares may be too high.
 - **After `{python} LAST`.** The Department's tables end in `{python} LAST`.
 :::
 

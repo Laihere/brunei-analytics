@@ -12,7 +12,8 @@
       "coverage": "2015–2025",
       "sha256": "9adcdb8bb81ef371522e48a91440d3f78f32dc05b67e259cfeb8891661c76c80",
       "original_source": "",
-      "published": "2026-07-13"
+      "published": "2026-07-13",
+      "title_translation": ""
     },
     {
       "source": "datagovbn",
@@ -26,7 +27,8 @@
       "coverage": "2016–2025",
       "sha256": "20e2bc1005f78d338d3bdb010fe254ede2b473fc2c3e81bb136af97e1cdbc0d6",
       "original_source": "",
-      "published": "2026-07-11"
+      "published": "2026-07-11",
+      "title_translation": ""
     }
   ],
   "notes": "Annual CPI by category, 2015–2025. Column 'Weight' renamed to 'index'. 2023 categories and 2022 overall rebuilt as previous year × (1 + published % change) to fix a one-row shift in the source (flagged 'repaired'). 'index_vs_base' rebased to 2019 = 100."

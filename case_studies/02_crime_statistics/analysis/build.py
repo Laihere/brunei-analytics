@@ -12,8 +12,9 @@ import pandas as pd
 import pandera.pandas as pa
 
 sys.path.insert(0, str(Path(__file__).parent))
-from clean import COUNTS, MIN_CASES, OTHER_ACTS, load  # noqa: E402
+from clean import COUNTS, MIN_CASES, OTHER_ACTS, load, load_unmerged  # noqa: E402
 
+from shared.clean_data import write_clean  # noqa: E402
 from shared.fetch import download  # noqa: E402
 from shared.outputs import write_output  # noqa: E402
 from shared.provenance import read_meta  # noqa: E402
@@ -119,6 +120,26 @@ def main():
             f"Published total rows, {period}, as stored in the source (these count '-' as "
             "zero). Solved % and change on the previous year computed by the author."
         ),
+    )
+    # Full cleaned tables, local only (data/clean/, policy §4 rule 3). The unmerged rows
+    # include Acts with small counts, which the published table merges into "Other Acts".
+    unmerged, published_totals = load_unmerged(paths)
+    write_clean(
+        unmerged,
+        __file__,
+        "crime_offences_unmerged",
+        sources,
+        notes=(
+            f"Every offence row as published, {period}, before small Acts are merged; checked "
+            "against the published totals. '-' cells read as missing."
+        ),
+    )
+    write_clean(
+        published_totals,
+        __file__,
+        "crime_totals",
+        sources,
+        notes="Published total rows as stored ('-' counted as zero).",
     )
     report(rows, totals)
 

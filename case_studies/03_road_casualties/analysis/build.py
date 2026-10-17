@@ -12,6 +12,7 @@ import pandera.pandas as pa
 sys.path.insert(0, str(Path(__file__).parent))
 from clean import PERIOD_YEARS, add_ratios, load_fire_rescue, load_police, periods  # noqa: E402
 
+from shared.clean_data import write_clean  # noqa: E402
 from shared.fetch import download  # noqa: E402
 from shared.outputs import write_output  # noqa: E402
 from shared.provenance import read_meta  # noqa: E402
@@ -108,6 +109,21 @@ def main():
             "both call types summed), for the overlapping years. Fire and Rescue's counts are a "
             "subset, so they must not exceed the police totals."
         ),
+    )
+    # Full cleaned tables, local only (data/clean/, policy §4 rule 3).
+    write_clean(
+        roads,
+        __file__,
+        "road_casualties",
+        prov(police_path),
+        notes="Police accidents, injuries and deaths by year, one column per measure; ratios.",
+    )
+    write_clean(
+        fr,
+        __file__,
+        "fire_rescue_road_casualties",
+        prov(fr_path),
+        notes="Fire and Rescue deaths and injuries at road accidents attended, call types summed.",
     )
     report(roads, avg, check)
 

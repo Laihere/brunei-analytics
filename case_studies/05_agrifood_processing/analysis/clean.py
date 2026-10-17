@@ -80,6 +80,36 @@ def load_trend(path: Path) -> pd.DataFrame:
     return df.astype({"year": int})
 
 
+def _read_cross_tab(path: Path) -> pd.DataFrame:
+    """Category × district table, columns trimmed, "Jumlah" (total) rows dropped."""
+    xt = pd.read_excel(path)
+    xt.columns = [c.strip() for c in xt.columns]
+    return _with_names(xt[xt.District.str.strip() != "Jumlah"], "Category")
+
+
+def load_cross_tab(path: Path) -> pd.DataFrame:
+    """2013 category × district cells → category, district, businesses, employees, value_bnd.
+
+    Many cells rest on fewer than 5 businesses (one is a single business), so this table is
+    kept locally only (data/clean/) and never published (policy §8).
+    """
+    xt = _read_cross_tab(path)
+    key = xt["District"].str.strip().str.lower()
+    if not set(key) <= set(DISTRICTS):
+        raise ValueError(f"Unknown districts: {sorted(set(key) - set(DISTRICTS))}")
+    return pd.DataFrame(
+        {
+            "year": 2013,
+            "category_ms": xt["category_ms"],
+            "category": xt["category"],
+            "district": key.map(DISTRICTS),
+            "businesses": xt["No. of Entrepreneur"].astype(int),
+            "employees": xt["No. of Employees"].astype(int),
+            "value_bnd": xt["Market Value (B$)"].astype(float),
+        }
+    ).reset_index(drop=True)
+
+
 def load_categories_2013(path: Path, cross_tab: Path) -> pd.DataFrame:
     """2013 market value by category, with the number of businesses making each product.
 
@@ -92,9 +122,7 @@ def load_categories_2013(path: Path, cross_tab: Path) -> pd.DataFrame:
     value = _with_names(value[["Category", "Market Value (B$)"]], "Category")
     value = value.groupby(["category_ms", "category"], as_index=False)["Market Value (B$)"].sum()
 
-    xt = pd.read_excel(cross_tab)
-    xt.columns = [c.strip() for c in xt.columns]
-    xt = _with_names(xt[xt.District.str.strip() != "Jumlah"], "Category")
+    xt = _read_cross_tab(cross_tab)
     counts = xt.groupby("category", as_index=False).agg(
         businesses=("No. of Entrepreneur", "sum"), value_check=("Market Value (B$)", "sum")
     )

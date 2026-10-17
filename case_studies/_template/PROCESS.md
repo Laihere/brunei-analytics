@@ -81,6 +81,7 @@ Listed in `context.yml` and logged in `CONTEXT_SOURCES.md` (policy §7). Backgro
 ## 7. Post-process
 
 - [ ] Small counts (1 to 5) merged or suppressed, count columns in `tests/test_privacy.py`: {where, or "not applicable: national totals only"}
+- [ ] Full cleaned tables saved locally with `write_clean` (`data/clean/`): {names}
 - [ ] Source + retrieval date on every chart; APA references in method
 - [ ] Disclaimer and AI-assistance byline
 - [ ] Neutral wording checked

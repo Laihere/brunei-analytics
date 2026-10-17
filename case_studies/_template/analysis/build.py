@@ -5,6 +5,7 @@ Run from the repo root:  uv run python case_studies/{NN_name}/analysis/build.py
 
 from pathlib import Path
 
+from shared.clean_data import write_clean
 from shared.fetch import download
 from shared.outputs import write_output
 from shared.provenance import read_meta
@@ -24,7 +25,13 @@ def main():
     )
     provenance, _ = read_meta(raw)
 
-    df = ...  # read, clean and analyse
+    df = ...  # read and clean (clean.py), then validate
+
+    # Full cleaned table, local only (data/clean/, policy §4 rule 3): before any merging,
+    # suppressing or rounding for publication.
+    write_clean(df, __file__, "{name}", provenance, notes="{what was done to the data}")
+
+    ...  # derive the small published tables
 
     write_output(df, OUT / "{name}.csv", provenance, notes="{what was done to the data}")
 

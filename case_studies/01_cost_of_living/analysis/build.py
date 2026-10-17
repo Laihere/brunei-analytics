@@ -12,6 +12,7 @@ import pandera.pandas as pa
 sys.path.insert(0, str(Path(__file__).parent))
 from clean import OVERALL, load_cpi, load_items, repair_cpi  # noqa: E402
 
+from shared.clean_data import write_clean  # noqa: E402
 from shared.outputs import write_output  # noqa: E402
 from shared.paths import RAW  # noqa: E402
 from shared.provenance import read_meta  # noqa: E402
@@ -134,6 +135,25 @@ def main():
             "Overall CPI from data.gov.bn (repaired) beside World Bank CPI and inflation "
             "(original source: IMF International Financial Statistics). Values unaltered."
         ),
+    )
+    # Full cleaned tables, local only (data/clean/, policy §4 rule 3).
+    write_clean(
+        cpi,
+        __file__,
+        "cpi_index",
+        cpi_sources,
+        notes=(
+            "Annual CPI by category, 2015–2025, full precision, with the 2022–2023 repair "
+            "flagged ('repaired') and rebased to 2019 = 100."
+        ),
+    )
+    write_clean(pct, __file__, "cpi_change", prov(PCT), notes="Published annual % change.")
+    write_clean(
+        items,
+        __file__,
+        "subsidised_prices",
+        prov(ITEMS),
+        notes="Average retail prices (BND), long format; saloon car excluded.",
     )
     report(summary, items, check)
 

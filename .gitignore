@@ -2,6 +2,10 @@
 data/raw/*
 !data/raw/.gitkeep
 
+# Full cleaned tables stay local too (DATA_USE_POLICY.md §4 rule 3); only the README is shared
+data/clean/*
+!data/clean/README.md
+
 # Local cache used by catalogue/build_catalogue.py
 .cache/
 

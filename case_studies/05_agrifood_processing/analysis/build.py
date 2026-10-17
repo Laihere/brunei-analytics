@@ -13,12 +13,14 @@ sys.path.insert(0, str(Path(__file__).parent))
 from clean import (  # noqa: E402
     NEW_IN_2013,
     load_categories_2013,
+    load_cross_tab,
     load_districts,
     load_series,
     load_trend,
 )
 
 from shared.charts import item_status  # noqa: E402
+from shared.clean_data import write_clean  # noqa: E402
 from shared.fetch import download  # noqa: E402
 from shared.outputs import write_output  # noqa: E402
 from shared.provenance import read_meta  # noqa: E402
@@ -165,6 +167,39 @@ def main():
             "2013 businesses, employees and market value by district, from the district table "
             "('Brunei/Muara' written as Brunei-Muara). Shares computed by the author."
         ),
+    )
+    # Full cleaned tables, local only (data/clean/, policy §4 rule 3). The category ×
+    # district cells include very small business counts and are never published.
+    write_clean(
+        series,
+        __file__,
+        "agrifood_series",
+        prov(f["series"], f["trend"]),
+        notes="Market value of processed agrifood products by year, with comparable totals.",
+    )
+    write_clean(
+        trend,
+        __file__,
+        "agrifood_categories_2010_2013",
+        prov(f["trend"]),
+        notes="Market value by category, 2010–2013, in B$, names translated, with status.",
+    )
+    write_clean(
+        load_cross_tab(f["cross_tab"]),
+        __file__,
+        "agrifood_category_by_district_2013",
+        prov(f["cross_tab"]),
+        notes=(
+            "2013 businesses, employees and market value by category and district; total rows "
+            "dropped. Contains cells with 1–4 businesses: local reference only."
+        ),
+    )
+    write_clean(
+        districts,
+        __file__,
+        "agrifood_districts_2013",
+        prov(f["districts"]),
+        notes="2013 businesses, employees and market value by district, with shares.",
     )
     report(series, cats, districts)
 

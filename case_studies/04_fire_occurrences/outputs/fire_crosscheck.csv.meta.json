@@ -12,7 +12,8 @@
       "coverage": "2009–2020, annual",
       "sha256": "0fab54b82efe6ec07036853e36c8b079695a64e6fc611479bf97dc84b5526ac2",
       "original_source": "",
-      "published": "2025-12-03"
+      "published": "2025-12-03",
+      "title_translation": ""
     },
     {
       "source": "datagovbn",
@@ -26,7 +27,8 @@
       "coverage": "2009–2013, annual",
       "sha256": "c4dd8b52c6dc5861dfd1d20fcf0c21699a7e1e3a6ed3f9ff001f7c2ef87a6207",
       "original_source": "",
-      "published": "2025-12-17"
+      "published": "2025-12-17",
+      "title_translation": ""
     }
   ],
   "notes": "Yearly totals in the two published editions for the years they share. Identical by district in 2009–2012; 2013 differs (see DATA_SOURCES.md), and the longer edition is used."

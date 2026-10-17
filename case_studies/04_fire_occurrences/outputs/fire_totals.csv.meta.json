@@ -12,7 +12,8 @@
       "coverage": "2009–2020, annual",
       "sha256": "0fab54b82efe6ec07036853e36c8b079695a64e6fc611479bf97dc84b5526ac2",
       "original_source": "",
-      "published": "2025-12-03"
+      "published": "2025-12-03",
+      "title_translation": ""
     },
     {
       "source": "datagovbn",
@@ -26,7 +27,8 @@
       "coverage": "2012–2021, annual",
       "sha256": "476929852fd9d402ab620673638e0b976841f14ef1455d567b24ecf745c3feb8",
       "original_source": "",
-      "published": "2025-12-09"
+      "published": "2025-12-09",
+      "title_translation": ""
     }
   ],
   "notes": "Yearly fire occurrences (sum of districts) and each year ÷ the median year. Area of forest and grass/peat burned (hectares, 2012 onwards) from a separate Fire and Rescue table, shown beside the counts; the two measures are never added."

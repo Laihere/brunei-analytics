@@ -26,6 +26,7 @@ case_studies/NN_*/    one folder per study: analysis/, outputs/ and PROCESS.md
 docs/WORKFLOW.md      the standard pipeline every case study follows
 dashboard/            Quarto site, built from case study outputs only
 data/raw/             local downloads (gitignored): <source>/<edition>/<dataset-slug>/
+data/clean/           full cleaned tables per case study (gitignored, never published)
 ```
 
 ## Setup
@@ -46,7 +47,8 @@ Each study records how it followed it in its `PROCESS.md` (repo only, not on the
    to `dashboard/case-studies/NN-name.qmd`. Fill in the front matter (`number`, `topic`, `read-time`…).
 2. Find datasets in `catalogue/datagovbn_catalogue.csv`.
 3. Run the study's build script locally: `uv run python case_studies/NN_name/analysis/build.py`.
-   It downloads to `data/raw/` once and writes small CSVs with `.meta.json` provenance to `outputs/`.
+   It downloads to `data/raw/` once, keeps the full cleaned tables in `data/clean/` (local only),
+   and writes small CSVs with `.meta.json` provenance to `outputs/`.
 4. Build the page with the components in `shared/components.py` (stat tiles, chart cards,
    method and sources, prev/next) and `shared/charts.highlight`.
 5. Log the downloads in `DATA_SOURCES.md`, and fill in the study's `PROCESS.md` as you go.

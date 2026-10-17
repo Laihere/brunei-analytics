@@ -11,8 +11,9 @@ import pandas as pd
 import pandera.pandas as pa
 
 sys.path.insert(0, str(Path(__file__).parent))
-from clean import PRODUCTS, compare_editions, slaughter_check, supply  # noqa: E402
+from clean import PRODUCTS, compare_editions, read_table, slaughter_check, supply  # noqa: E402
 
+from shared.clean_data import write_clean  # noqa: E402
 from shared.fetch import download  # noqa: E402
 from shared.outputs import write_output  # noqa: E402
 from shared.provenance import read_meta  # noqa: E402
@@ -183,6 +184,21 @@ def main():
         OUT / "edition_revisions.csv",
         prov(*new.values(), *old.values()),
         notes="Values that differ between the 2020 and 2015 editions for the years both cover.",
+    )
+    # Full cleaned tables, local only (data/clean/, policy §4 rule 3).
+    write_clean(
+        data,
+        __file__,
+        "livestock_supply",
+        prov(*new.values()),
+        notes="Local production, imports and local share by year and product (2020 editions).",
+    )
+    write_clean(
+        read_table(slaughter).rename_axis("year").reset_index(),
+        __file__,
+        "broilers_slaughtered_monthly",
+        prov(slaughter),
+        notes="Birds slaughtered by month and the published yearly total, 2011–2020.",
     )
     report(data, check, revisions)
 

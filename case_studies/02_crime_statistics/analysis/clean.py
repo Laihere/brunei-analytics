@@ -101,10 +101,19 @@ def merge_small(rows: pd.DataFrame, min_cases: int = MIN_CASES) -> pd.DataFrame:
     return out
 
 
-def load(paths: list[Path]) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """All editions → (rows with small Acts merged, published totals)."""
+def load_unmerged(paths: list[Path]) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """All editions → (every row as published, checked against the totals; published totals).
+
+    These rows include small counts, so they are kept locally only (data/clean/).
+    """
     parts = [read_table(p) for p in paths]
     rows = pd.concat([r for r, _ in parts], ignore_index=True)
     totals = pd.concat([t for _, t in parts], ignore_index=True)
     check_totals(rows, totals)
+    return rows, totals
+
+
+def load(paths: list[Path]) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """All editions → (rows with small Acts merged, published totals)."""
+    rows, totals = load_unmerged(paths)
     return merge_small(rows), totals

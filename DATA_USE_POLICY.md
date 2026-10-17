@@ -61,7 +61,7 @@ Each dataset page names its owner under **Data Source Owner**. That owner is the
 
 1. **Read the terms first.** Before downloading, re-check the Terms of Use page for changes.
 2. **Log every download** in `DATA_SOURCES.md`: dataset title, URL, Data Source Owner, edition, coverage, file name, download date, and where it is used. Files are stored as `data/raw/<source>/<edition>/<dataset-slug>/` with a `.meta.json` record. Problems found in source data go in its "Known issues" section before any correction.
-3. **Raw data stays local.** `data/raw/` is gitignored. The public repo holds code, the catalogue and our own outputs, and links back to the original dataset pages. *(Redistributing raw files is not addressed by the terms; this rule stands until EGNC confirms otherwise.)*
+3. **Raw data stays local.** `data/raw/` is gitignored. So is `data/clean/`, our full cleaned tables (kept for follow-ups and new editions; they are neither the published datasets nor our findings, and may hold small counts). The public repo holds code, the catalogue and our own outputs, and links back to the original dataset pages. *(Redistributing raw files is not addressed by the terms; this rule stands until EGNC confirms otherwise.)*
 4. **Mark every transformation.** Steps live in code, with a plain-language summary in each output.
 5. **Attribute every output** using the template below.
 6. **Add the disclaimer to every output**, including dashboards, the portfolio case studies and the README.

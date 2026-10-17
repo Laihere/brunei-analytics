@@ -18,6 +18,7 @@ flowchart TD
         S2["2 · Inspect<br/>profile raw file<br/>→ Known issues"]
         S3["3 · Clean<br/>clean.py<br/>tidy, rename, repair, flag"]
         S4{"4 · Validate<br/>schemas + cross-checks"}
+        S4b["4b · Keep<br/>write_clean → data/clean/<br/>local only"]
         S5["5 · Process<br/>build.py<br/>derived tables → outputs/*.csv"]
     end
     subgraph F["Front end · dashboard/"]
@@ -28,6 +29,7 @@ flowchart TD
 
     S0 --> S1 --> S2 --> S3 --> S4
     S4 -- pass --> S5 --> S6 --> S7
+    S4 -- pass --> S4b
     S4 -- fail --> S2
     S7 -- pass --> S8
     S7 -- fail --> S6
@@ -36,6 +38,7 @@ flowchart TD
     S2 -. log .-> L1
     S3 -. record .-> L2[("PROCESS.md")]
     S5 -. notes .-> L3[("outputs/*.meta.json")]
+    S4b -. notes .-> L4[("data/clean/*.meta.json")]
 ```
 
 The diamonds are gates: work doesn't move on until the checks pass. A failed validation goes
@@ -50,6 +53,7 @@ back to inspection (we misunderstood the data), not forward with a workaround.
 | 2 | Inspect | raw file → notes on its shape and quirks | PROCESS.md §2 | Problems go into DATA_SOURCES.md "Known issues" **before** any fix. List items that are new, discontinued or renamed between years (item status) |
 | 3 | Clean | raw → tidy long table (one row per observation) | `analysis/clean.py` | Every step has a *why* in PROCESS.md §3. Doubtful values are flagged, not silently dropped |
 | 4 | Validate | tidy table → pass / fail | pandera schemas in `build.py`, unit tests in `tests/` | Ranges, uniqueness, totals, cross-check with a second table or approved source |
+| 4b | Keep | validated tidy tables → full cleaned CSVs | `shared.clean_data.write_clean` in `build.py` → `data/clean/NN_name/` | Full precision, before merging, suppressing or rounding. Gitignored, never published (SOP 3); `.meta.json` records sources, notes, code version and `clean.py` hash. Follow-ups and new editions start here |
 | 5 | Process | tidy table → small derived CSVs | `analysis/build.py` → `outputs/` | `write_output(notes=…)` states what changed (SOP 4). Only `outputs/` reaches CI |
 | 6b | Context (optional) | news, journals, official sources → "What was reported at the time" | `case_studies/NN/context.yml`, `CONTEXT_SOURCES.md` | Policy §7: opened and checked, archived if news, no numbers charted, no individuals named |
 | 6 | Visualise | outputs → charts, each with its data table | `analysis/figures.py`, `shared/charts.py` | One message per chart. Data period in every title |

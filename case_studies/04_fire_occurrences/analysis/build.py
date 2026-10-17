@@ -12,6 +12,7 @@ import pandera.pandas as pa
 sys.path.insert(0, str(Path(__file__).parent))
 from clean import DISTRICTS, compare_editions, load_area, load_fires  # noqa: E402
 
+from shared.clean_data import write_clean  # noqa: E402
 from shared.fetch import download  # noqa: E402
 from shared.outputs import write_output  # noqa: E402
 from shared.provenance import read_meta  # noqa: E402
@@ -123,6 +124,24 @@ def main():
             "district in 2009–2012; 2013 differs (see DATA_SOURCES.md), and the longer edition "
             "is used."
         ),
+    )
+    # Full cleaned tables, local only (data/clean/, policy §4 rule 3).
+    write_clean(
+        fires,
+        __file__,
+        "fire_by_district",
+        prov(main_path),
+        notes="Fire occurrences by district and year (2009–2020 edition), with district share.",
+    )
+    write_clean(
+        load_fires(other_path),
+        __file__,
+        "fire_by_district_other_edition",
+        prov(other_path),
+        notes="Fire occurrences by district, Fire and Rescue 2009–2013 edition (cross-check).",
+    )
+    write_clean(
+        area, __file__, "area_burned", prov(area_path), notes="Hectares burned by year and type."
     )
     report(fires, totals, check)
 

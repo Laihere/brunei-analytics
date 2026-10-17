@@ -12,13 +12,10 @@ glossary_page()
 
 ## Where the definitions come from
 
-Each term says what its definition is based on. **Official and statistical terms** follow the
-publisher's own definition where it has one (for example the Department of Economic Planning
-and Statistics), otherwise an international standard or a statistics reference. **Publisher
-terms** are used as they appear in the source tables. Terms **defined for this site** are
-measures worked out for these case studies; each case study's method explains them. The
-definitions are written in plain words, so check the source for the exact wording. These
-sources are used for definitions only, never for numbers.
+Each term says what its definition is **based on**: an official or statistical source (the
+publisher's own definition first), the source table it comes from, or **defined for this
+site** for measures worked out in these case studies. Definitions are in plain words and are
+used for meaning only, never for numbers.
 
 ```{python}
 glossary_references()

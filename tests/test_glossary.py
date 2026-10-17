@@ -81,3 +81,36 @@ def test_unknown_or_missing_sources_stop_the_build(tmp_path):
     bad.write_text("- key: x\n  term: X\n  basis: guess\n  definition: A long enough text.\n")
     with pytest.raises(ValueError, match="basis"):
         load_glossary(bad)
+
+
+def test_glossary_page_has_search_chips_and_used_in_lines(tmp_path):
+    from shared.glossary import study_name
+
+    (tmp_path / "01-cost-of-living.qmd").write_text('[CPI]{.term term="cpi"}')
+    (tmp_path / "07-trade.qmd").write_text(
+        '[CPI]{.term term="cpi"} [re-exports]{.term term="re-exports"}'
+    )
+    (tmp_path / "_template.qmd").write_text('[x]{.term term="median"}')  # not a study
+    html = str(glossary_page(tmp_path).data)
+    assert 'id="term-search"' in html and 'class="filter-count glossary-count"' in html
+    assert 'data-study="07"' in html and ">07 Trade</button>" in html
+    assert 'data-study="01"' in html and 'data-study=""' in html  # "All terms"
+    entry = html[: html.index('<dt id="cpi">')].rsplit('<div class="term-entry"', 1)[1]
+    assert entry.startswith(' data-studies="01 07"')
+    assert 'Used in: <a href="case-studies/01-cost-of-living.html">01 Cost of living</a>' in html
+    assert study_name("05-agrifood-processing") == ("05", "Agrifood processing")
+    assert "history.replaceState" in html  # filter kept in the address
+
+
+def test_popups_link_to_this_studys_terms(tmp_path):
+    (tmp_path / "07-trade.qmd").write_text('[re-exports]{.term term="re-exports"}')
+    html = str(glossary_popovers("07-trade.qmd", tmp_path).data)
+    assert 'href="../glossary.html?study=07#re-exports"' in html
+
+
+def test_glossary_references_are_collapsed():
+    from shared.glossary import glossary_references
+
+    html = str(glossary_references().data)
+    assert html.startswith('<section class="detail-group"')
+    assert "<details><summary>Sources of the definitions (APA)</summary>" in html

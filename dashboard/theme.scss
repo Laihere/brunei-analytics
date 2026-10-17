@@ -208,7 +208,14 @@ button.term:focus-visible { outline: 2px solid $teal-500; outline-offset: 2px; }
 .term-pop ul { padding-left: 1.1em; margin: 0 0 $s2; }
 .term-pop li { margin-bottom: $s1; }
 .term-pop a { font-size: 0.875rem; }
-.term-pop .term-basis, dl.glossary .term-basis { font-size: 0.8rem; color: $muted; margin: $s2 0; }
+.term-pop .term-basis, dl.glossary .term-basis, dl.glossary .term-used { font-size: 0.8rem; color: $muted; margin: $s2 0; }
+// Glossary page: search and case-study chips (shared/glossary.py)
+.term-entry[hidden] { display: none; }
+.glossary-filters .chips { margin-top: $s3; }
+@media (max-width: 720px) {  // one scrollable row of chips on phones, not five rows
+  .glossary-filters .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: $s2; scrollbar-width: thin; }
+  .glossary-filters .chip { flex: none; }
+}
 dl.glossary dt { font-weight: 700; margin-top: $s5; scroll-margin-top: 80px; }
 dl.glossary dd { margin: $s1 0 0; }
 dl.glossary dd p { margin-bottom: $s1; }

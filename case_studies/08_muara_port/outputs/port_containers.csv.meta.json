@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "MUARA CONTAINER TERMINAL, MUARA PORT 2004-2015",
+      "page_url": "https://www.data.gov.bn/muara-container-terminal-muara-port-2004-2015/",
+      "accessed": "2026-10-17",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/2.-MUARA-CONTAINER-TERMINAL_MUARA-PORT-2004-2015.xlsx",
+      "owner": "Berthing Section and Statistic Unit, Ports Department",
+      "licence": "",
+      "edition": "2015",
+      "coverage": "2004–2015, annual",
+      "sha256": "a8b286abe8cfe435f10118e0d940b4f78400e90e16bcd20b2f7a7596118d6cb4",
+      "original_source": "",
+      "published": "2025-12-11",
+      "title_translation": ""
+    }
+  ],
+  "notes": "Containers handled at Muara Container Terminal, 2004–2015, in TEUs, as published: local (bound for or from Brunei) and transhipment (transiting). 'total_teu' is local + transhipment, as the Ports Department's data definition describes; the published total ('total_published_teu') differs from it in most years ('gap_teu', at most 2.4%). Two values are published with a half TEU. Transhipment share computed by the author."
+}

@@ -3,6 +3,7 @@
 title: "{Finding as one sentence: what changed, by how much, over when — include the data year, e.g. 2025}"
 description: "{The question this study answers}"
 number: "NN"
+# short-title: "{Optional short name for Glossary chips, if the file name loses capitals, e.g. Muara Port}"
 topic: "{Economy | Population | Social | Sectoral | International}"
 data-period: "{Year(s) the data covers, e.g. 2025 or 2020–2025. Shown on cards and the page header}"
 read-time: "{4}-minute read"

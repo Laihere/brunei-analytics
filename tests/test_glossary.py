@@ -99,6 +99,8 @@ def test_glossary_page_has_search_chips_and_used_in_lines(tmp_path):
     assert entry.startswith(' data-studies="01 07"')
     assert 'Used in: <a href="case-studies/01-cost-of-living.html">01 Cost of living</a>' in html
     assert study_name("05-agrifood-processing") == ("05", "Agrifood processing")
+    (tmp_path / "08-muara-port.qmd").write_text('---\nshort-title: "Muara Port"\n---\n')
+    assert study_name("08-muara-port", tmp_path) == ("08", "Muara Port")  # proper noun kept
     assert "history.replaceState" in html  # filter kept in the address
 
 

@@ -1,0 +1,227 @@
+---
+title: "Muara Port handled about as many containers in 2015 as in 2004: local containers grew 38% while transhipment almost stopped"
+description: "How many containers and how much loose cargo did Muara Port handle from 2004 to 2015?"
+number: "08"
+short-title: "Muara Port"  # shown on Glossary chips and "Used in" links
+topic: "International"
+data-period: "2004–2015"
+read-time: "4-minute read"
+date: 2026-10-17
+related:
+  - study: "07"
+    kind: same-topic
+    why: "Both look at Brunei's trade in goods: what it was worth in 07, containers and cargo handled at Muara Port in 08."
+---
+
+```{python}
+import sys
+
+from shared.components import (
+    chart_card,
+    method_and_sources,
+    prev_next,
+    related_studies,
+    stat_tile,
+    stat_tiles,
+)
+from shared.glossary import glossary_popovers
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+STUDY = CASE_STUDIES / "08_muara_port"
+sys.path.insert(0, str(STUDY / "analysis"))
+import figures as F  # noqa: E402
+
+boxes, prov_boxes, notes_boxes = read_output(STUDY / "outputs" / "port_containers.csv")
+cargo, prov_cargo, notes_cargo = read_output(STUDY / "outputs" / "port_cargo.csv")
+
+b = boxes.set_index("year")
+c = cargo.set_index("year")
+FIRST, LAST = int(b.index.min()), int(b.index.max())
+
+
+def k(x):
+    return f"{x / 1000:.1f}k"
+
+
+def num(x):
+    return f"{x:,.0f}"
+
+
+def pct(x):
+    return f"{x:.0f}%" if abs(x) >= 10 else f"{x:.1f}%"
+
+
+local_growth = (b.loc[LAST, "local_teu"] / b.loc[FIRST, "local_teu"] - 1) * 100
+total_change = (b.loc[LAST, "total_teu"] / b.loc[FIRST, "total_teu"] - 1) * 100
+local_peak = int(b.local_teu.idxmax())
+tran_peak = int(b.transhipment_teu.idxmax())
+tran_zero = int(b[b.transhipment_teu == 0].index.min())
+after = b.loc[tran_zero + 1 :, "transhipment_teu"]
+gap_max = (b.gap_teu / b.total_published_teu * 100).abs().max()
+assert (b.gap_teu.abs() >= 1).all()  # "differ in every year"
+cargo_low = int(c.cargo_tonnes.idxmin())
+cargo_jump = c.loc[LAST, "change_pct"]
+
+# Stated in the text below; stop the build rather than publish them if the data changes.
+assert abs(total_change) < 3, "Total containers no longer about the same as in the first year."
+assert local_peak == 2012 and tran_peak == 2005 and tran_zero == 2009
+assert after.max() < 3500 and (b.loc[: tran_zero - 1, "transhipment_teu"] > 3000).all()
+assert c.cargo_tonnes.idxmax() == LAST and cargo_jump > 100
+assert cargo_low == LAST - 1 and gap_max < 2.5
+middle = c.loc[FIRST + 2 : LAST - 1, "cargo_tonnes"] / 1e6
+assert 0.84 <= middle.min() and middle.max() <= 1.22  # "about 0.85 to 1.2 million"
+assert (c.loc[FIRST : FIRST + 1, "cargo_tonnes"] / 1e6).between(1.75, 1.95).all()
+assert 20 <= b.loc[FIRST, "transhipment_share_pct"] <= 30  # "about a quarter"
+```
+
+::: {.study-intro}
+This case study looks at **how much cargo passed through Muara Port** from 2004 to 2015, using the Ports Department's yearly figures for its two terminals: containers at
+the container terminal, counted in [TEU]{.term term="teu"}, and
+[loose cargo]{.term term="uncontainerised-cargo"} at the conventional terminal, counted in
+tonnes. The data ends in 2015, although it was published in 2025. It shows **what changed, not
+why**.
+
+It asks two questions, answered in the conclusion:
+
+1. **How many containers did Muara Port handle from 2004 to 2015, and how many were for Brunei
+   rather than passing through?**
+2. **How much loose cargo did the conventional terminal handle?**
+:::
+
+```{python}
+stat_tiles(
+    stat_tile(f"Local containers, {LAST}", f"{k(b.loc[LAST, 'local_teu'])} TEU", "", f"(+{pct(local_growth)} on {FIRST})"),
+    stat_tile(f"Transhipment containers, {LAST}", f"{num(b.loc[LAST, 'transhipment_teu'])} TEU", "", f"({FIRST}: {num(b.loc[FIRST, 'transhipment_teu'])} TEU)"),
+    stat_tile(f"Loose cargo, {LAST} (tonnes)", f"{c.loc[LAST, 'cargo_tonnes'] / 1e6:.2f}m", "", f"({LAST - 1}: {c.loc[LAST - 1, 'cargo_tonnes'] / 1e6:.2f}m)"),
+)
+```
+
+```{python}
+fig, table = F.containers(boxes)
+chart_card(
+    fig,
+    title=f"Local containers grew while transhipment almost stopped after {tran_zero - 1}",
+    subtitle=f"Containers handled at Muara Container Terminal, thousand TEU · {FIRST}–{LAST}",
+    alt=(
+        f"Stacked bars. Local containers rise from {k(b.loc[FIRST, 'local_teu'])} TEU in {FIRST} "
+        f"to {k(b.loc[local_peak, 'local_teu'])} in {local_peak} and are "
+        f"{k(b.loc[LAST, 'local_teu'])} in {LAST}. Transhipment is "
+        f"{k(b.loc[FIRST, 'transhipment_teu'])} in {FIRST}, peaks at "
+        f"{k(b.loc[tran_peak, 'transhipment_teu'])} in {tran_peak}, is zero in {tran_zero} and stays "
+        f"under {k(after.max())} after. The two together are {k(b.loc[FIRST, 'total_teu'])} in "
+        f"{FIRST} and {k(b.loc[LAST, 'total_teu'])} in {LAST}."
+    ),
+    provenance=prov_boxes,
+    table=table,
+)
+```
+
+## Containers, 2004–2015
+
+In `{python} FIRST`, Muara Container Terminal handled `{python} num(b.loc[FIRST, "total_teu"])`
+TEU. About a quarter (`{python} pct(b.loc[FIRST, "transhipment_share_pct"])`) were
+[transhipment containers]{.term term="transhipment-containers"}, passing through Muara rather
+than coming to or leaving Brunei. Transhipment peaked at
+`{python} num(b.loc[tran_peak, "transhipment_teu"])` TEU in `{python} tran_peak`, then fell
+quickly: it was zero in `{python} tran_zero` and no more than
+`{python} num(after.max())` TEU in any later year.
+
+Over the same years, [local containers]{.term term="local-containers"} grew from
+`{python} num(b.loc[FIRST, "local_teu"])` to a peak of
+`{python} num(b.loc[local_peak, "local_teu"])` TEU in `{python} local_peak`, and were
+`{python} num(b.loc[LAST, "local_teu"])` in `{python} LAST`. **The two changes almost cancelled
+out**: in `{python} LAST` the port handled `{python} num(b.loc[LAST, "total_teu"])` TEU,
+`{python} pct(abs(total_change))` more than in `{python} FIRST`, but nearly all of it was now
+local.
+
+## Loose cargo, 2004–2015
+
+The conventional terminal handled `{python} f"{c.loc[FIRST, 'cargo_tonnes'] / 1e6:.2f}"`
+million tonnes of loose cargo in `{python} FIRST`. From `{python} FIRST + 2` to
+`{python} LAST - 1` it handled about 0.85 to 1.2 million tonnes a year, with the lowest
+amount in `{python} cargo_low`
+(`{python} f"{c.loc[cargo_low, 'cargo_tonnes'] / 1e6:.2f}"` million).
+
+**In `{python} LAST` it more than doubled, to
+`{python} f"{c.loc[LAST, 'cargo_tonnes'] / 1e6:.2f}"` million tonnes**
+(`{python} f"+{cargo_jump:.0f}%"`), the most in the period. The table doesn't say what made up
+the increase, and nothing else in these data can check it.
+
+```{python}
+fig, table = F.cargo(cargo)
+chart_card(
+    fig,
+    title=f"Loose cargo more than doubled in {LAST}",
+    subtitle=f"Uncontainerised cargo handled at Muara Conventional Terminal, million tonnes · {FIRST}–{LAST}",
+    alt=(
+        f"Bar chart. Loose cargo is {c.loc[FIRST, 'cargo_tonnes'] / 1e6:.2f} million tonnes in "
+        f"{FIRST}, between about 0.85 and 1.2 million from {FIRST + 2} to {LAST - 1}, and "
+        f"{c.loc[LAST, 'cargo_tonnes'] / 1e6:.2f} million in {LAST}."
+    ),
+    provenance=prov_cargo,
+    table=table,
+    height=300,
+)
+```
+
+## Conclusion
+
+- **How many containers did Muara Port handle from 2004 to 2015, and how many were for Brunei
+  rather than passing through?** About the same number at the end as at the start
+  (`{python} num(b.loc[FIRST, "total_teu"])` and `{python} num(b.loc[LAST, "total_teu"])`
+  TEU), but the mix changed: local containers grew `{python} pct(local_growth)`, while
+  transhipment fell from about a quarter of the total to almost none from the year
+  `{python} tran_zero` on.
+- **How much loose cargo did the conventional terminal handle?** About 0.85 to 1.2 million
+  tonnes a year from `{python} FIRST + 2` to `{python} LAST - 1`, after about 1.8 to 1.9 million
+  in `{python} FIRST`–`{python} FIRST + 1`, and
+  `{python} f"{c.loc[LAST, 'cargo_tonnes'] / 1e6:.2f}"` million in `{python} LAST`.
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+- **Why it changed.** The data shows when and by how much the amounts changed, not what caused
+  the changes, including the fall in transhipment.
+- **The 2015 cargo jump.** The table doesn't say what made it up, and no other table here can
+  check it.
+- **Weight or value.** TEU counts containers by size, not how full or heavy they are or what
+  is in them. The tables don't say whether empty containers are included.
+- **The published totals.** The data definition says total containers = local +
+  transhipment, but the published totals differ from that sum in every year, by
+  `{python} num(b.gap_teu.abs().min())` to `{python} num(b.gap_teu.abs().max())` TEU (up to
+  `{python} f"{gap_max:.1f}%"`). The charts use
+  local and transhipment as published; both totals are in the data table.
+- **Other ports and later years.** These figures are for Muara Port only, and they end in the
+  year `{python} LAST`; data.gov.bn has nothing later. The Ports Department's vessel tables were
+  not used: they also count Belait
+  and Temburong ports, and their counts can't be matched with the vessel calls at Muara.
+:::
+
+```{python}
+related_studies("08-muara-port.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+method_and_sources(
+    prov_boxes + prov_cargo,
+    notes=f"{notes_boxes} {notes_cargo}",
+    steps=[
+        "Downloaded the Ports Department's tables for Muara Container Terminal and Muara "
+        "Conventional Terminal, 2004–2015, and the data definition published with each, from "
+        "data.gov.bn.",
+        "Checked each table covers every year once, and compared the published container "
+        "totals with local + transhipment (the definition of the total).",
+        "Computed the transhipment share of containers and the yearly change in loose cargo.",
+        "Read the vessel tables (vessel calls, import and export vessels) and left them out: "
+        "they cover different ports and can't be matched with each other.",
+    ],
+    code_url=f"{REPO_URL}/tree/main/case_studies/08_muara_port",
+)
+```
+
+```{python}
+prev_next("08-muara-port.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+glossary_popovers("08-muara-port.qmd", ROOT / "dashboard" / "case-studies")
+```

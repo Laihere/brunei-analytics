@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "MUARA CONVENTIONAL TERMINAL, MUARA PORT 2004-2015",
+      "page_url": "https://www.data.gov.bn/muara-conventional-terminal-muara-port-2004-2015/",
+      "accessed": "2026-10-17",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/1.-MUARA-CONVENTIONAL-TERMINAL_MUARA-PORT-2004-2015.xlsx",
+      "owner": "Berthing Section and Statistic Unit, Ports Department",
+      "licence": "",
+      "edition": "2015",
+      "coverage": "2004–2015, annual",
+      "sha256": "d57b97608aaf8d1dfaef9bc24e57e5b4b2355dbc7bb51850ca28256050fb89d8",
+      "original_source": "",
+      "published": "2025-12-11",
+      "title_translation": ""
+    }
+  ],
+  "notes": "Uncontainerised (loose) cargo handled at Muara Conventional Terminal, 2004–2015, tonnes, as published. Change on the previous year computed by the author."
+}

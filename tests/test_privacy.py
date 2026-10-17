@@ -32,6 +32,13 @@ NOT_COUNTS = {
     "sitc",  # trade commodity section code, 0–9
     "shared_years",  # edition cross-checks
     "differences",
+    # cargo quantities at Muara Port (case study 08): containers and tonnes, not counts of people
+    "local_teu",
+    "transhipment_teu",
+    "total_teu",
+    "total_published_teu",
+    "gap_teu",
+    "cargo_tonnes",
 }
 
 # (output file name, column, row label) → reason a small value is allowed. Keep it short.

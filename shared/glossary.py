@@ -189,10 +189,17 @@ def glossary_popovers(
 STUDY_PAGES = ROOT / "dashboard" / "case-studies"
 
 
-def study_name(stem: str) -> tuple[str, str]:
-    """ "07-trade" → ("07", "Trade"); "01-cost-of-living" → ("01", "Cost of living")."""
+def study_name(stem: str, pages_dir: Path = STUDY_PAGES) -> tuple[str, str]:
+    """ "07-trade" → ("07", "Trade"); "01-cost-of-living" → ("01", "Cost of living").
+
+    A page's `short-title` front matter overrides the name, for proper nouns ("Muara Port").
+    """
     number, slug = stem.split("-", 1)
-    return number, slug.replace("-", " ").capitalize()
+    page = pages_dir / f"{stem}.qmd"
+    text = page.read_text() if page.exists() else ""
+    meta = yaml.safe_load(text.split("---", 2)[1]) if text.startswith("---") else None
+    short = (meta or {}).get("short-title")
+    return number, short or slug.replace("-", " ").capitalize()
 
 
 def terms_by_study(pages_dir: Path = STUDY_PAGES) -> dict[str, list[str]]:
@@ -280,7 +287,7 @@ def glossary_page(pages_dir: Path = STUDY_PAGES, study_link: str = "case-studies
         '<button type="button" class="chip" data-study="" aria-pressed="true">All terms</button>'
     )
     for stem in studies:
-        number, name = study_name(stem)
+        number, name = study_name(stem, pages_dir)
         chips += (
             f'<button type="button" class="chip" data-study="{number}" aria-pressed="false">'
             f"{number} {escape(name)}</button>"
@@ -303,11 +310,12 @@ def glossary_page(pages_dir: Path = STUDY_PAGES, study_link: str = "case-studies
         compare = f'<p class="term-vs-line">Not the same as: {compare}</p>' if compare else ""
         stems = used_in.get(e["key"], [])
         links = ", ".join(
-            f'<a href="{study_link}{stem}.html">{" ".join(study_name(stem))}</a>' for stem in stems
+            f'<a href="{study_link}{stem}.html">{" ".join(study_name(stem, pages_dir))}</a>'
+            for stem in stems
         )
         used = f'<p class="term-used">Used in: {links}</p>' if stems else ""
         text = f"{e['term']} {e['definition']}".lower()
-        numbers = " ".join(study_name(stem)[0] for stem in stems)
+        numbers = " ".join(stem.split("-", 1)[0] for stem in stems)
         items.append(
             f'<div class="term-entry" data-studies="{numbers}" data-text="{escape(text)}">'
             f'<dt id="{e["key"]}">{escape(e["term"])}</dt>'

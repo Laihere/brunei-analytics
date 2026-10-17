@@ -256,3 +256,37 @@
     fall while the value rises, if other sections grow faster.
   compare: [current-prices]
 
+- key: teu
+  basis: publisher
+  sources: [dataset-muara-containers]
+  term: TEU (twenty-foot equivalent unit)
+  definition: >
+    The standard way to count containers by size: a 20-foot container counts as 1 TEU and a
+    40-foot container as 2. A year's TEU total is not the number of containers.
+
+- key: local-containers
+  basis: publisher
+  sources: [dataset-muara-containers]
+  term: Local containers
+  definition: >
+    Containers brought into Brunei or sent out of Brunei through Muara Port, counted in TEU.
+  compare: [transhipment-containers]
+
+- key: transhipment-containers
+  basis: publisher
+  sources: [dataset-muara-containers]
+  term: Transhipment containers
+  definition: >
+    Containers only passing through (transiting at) Muara Container Terminal, not bound for or
+    from Brunei. Counted in TEU.
+  compare: [local-containers]
+
+- key: uncontainerised-cargo
+  basis: publisher
+  sources: [dataset-muara-conventional]
+  term: Uncontainerised (loose) cargo
+  definition: >
+    Cargo not packed in containers, such as steel, pipes, vehicles, livestock and cement,
+    handled at Muara Conventional Terminal and counted by weight in tonnes.
+  compare: [teu]
+

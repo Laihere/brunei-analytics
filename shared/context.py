@@ -12,15 +12,15 @@ from pathlib import Path
 
 import yaml
 
-KINDS = {"news", "journal", "official"}
+KINDS = {"news", "journal", "official", "book"}  # book: textbooks and handbooks
 
 
 @dataclass(frozen=True)
 class ContextSource:
     key: str  # short id used on the page, e.g. "haque2011"
-    kind: str  # news | journal | official
+    kind: str  # news | journal | official | book
     authors: tuple[str, ...]  # APA form, e.g. ("Haque, M. O.",); an organisation is one entry
-    published: str  # ISO date, or a year for journals
+    published: str  # ISO date, or a year; "" for undated documents (APA "n.d.")
     title: str  # as APA prints it: sentence case, proper nouns kept (typed by hand)
     container: str  # newspaper, journal or publisher
     url: str
@@ -43,7 +43,7 @@ class ContextSource:
 
     @property
     def year(self) -> str:
-        return self.published[:4]
+        return self.published[:4] or "n.d."
 
     def cite(self) -> str:
         """APA in-text citation, e.g. "Haque & Haque, 2018"."""
@@ -64,6 +64,8 @@ def _authors(names: tuple[str, ...]) -> str:
 
 
 def _date(p: str) -> str:
+    if not p:
+        return "n.d."
     if len(p) == 4:
         return p
     d = date.fromisoformat(p)
@@ -81,7 +83,7 @@ def apa_context_reference(s: ContextSource, html: bool = False) -> str:
         body = f"{title}. {em(s.container)}, {vol}" + (f", {esc(s.pages)}" if s.pages else "") + "."
     elif s.kind == "news":
         body = f"{title}. {em(s.container)}."
-    else:  # official: the publisher is only repeated when it isn't the author
+    else:  # official or book: the publisher is only repeated when it isn't the author
         body = em(s.title) + "." + (f" {esc(s.container)}." if s.container not in s.authors else "")
     link = f"https://doi.org/{s.doi}" if s.doi else s.url
     link = f'<a href="{escape(link)}">{escape(link)}</a>' if html else link

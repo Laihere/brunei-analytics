@@ -195,6 +195,13 @@ Context sources go in the same reference list as the datasets, for example:
 Each source is logged in `CONTEXT_SOURCES.md` with its URL, archive link, access date and the
 case study it supports.
 
+**Glossary sources** (agreed 17 Oct 2026). Every glossary term says where its definition
+comes from: an official or statistical definition (the Brunei publisher's own first, then an
+international standard such as the UN, FAO, ILO, IMF or OECD, then a statistics reference), the
+term as the data's publisher uses it in its tables, or "defined for this site". These sources are
+cited for definitions only, never for numbers, and follow rules 5 to 7 above. They are listed on
+the Glossary page and in `CONTEXT_SOURCES.md`.
+
 **Names.** Author names are written exactly as published, including honorifics such as
 "Hajah", "Haji", "Dato" or "Pengiran" (author's decision, 16 Oct 2026). Malay names usually
 have no family name, so the full name stands in the author position and the in-text citation.

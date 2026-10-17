@@ -1,0 +1,122 @@
+# Where the glossary's definitions come from (DATA_USE_POLICY.md §7, "Glossary sources").
+# Definitions only: no numbers from these are used anywhere on the site. Each entry was opened
+# and checked on its access date (17 Oct 2026); definitions in glossary.yml are our paraphrase.
+#
+# Two forms:
+#   - a document (kind: official | book | journal), same fields as context.yml;
+#   - a dataset already used in a case study (kind: dataset, page_url): its credit and APA
+#     reference come from that study's outputs/*.meta.json, so it is never typed twice.
+
+# Brunei publishers' own definitions (first choice: they match how the data was measured)
+- key: deps-imts-faq
+  kind: official
+  authors: ["Department of Statistics"]
+  published: ""
+  title: "International merchandise trade statistics: Frequently asked questions"
+  container: Department of Economic Planning and Development
+  url: https://deps.mofe.gov.bn/DEPD%20Documents%20Library/DOS/FAQ/FAQ%20-%20IMTS.pdf
+  archive_url: http://web.archive.org/web/20250711043804/https://deps.mofe.gov.bn/DEPD%20Documents%20Library/DOS/FAQ/FAQ%20-%20IMTS.pdf
+  # Where: questions 1 (imports, exports), 3 (balance of trade), 4 (total trade), 8 (SITC revisions)
+  note: "The original link no longer works; read in the archived copy."
+  accessed: "2026-10-17"
+
+- key: deps-cpi-notes
+  kind: official
+  authors: ["Department of Economic Planning and Statistics"]
+  published: "2026"
+  title: "Technical notes: Consumer price index"
+  container: Department of Economic Planning and Statistics
+  url: https://deps.mofe.gov.bn/wp-content/uploads/2026/03/Technical-Notes-2026.pdf
+  # Where: sections 1.1 (what the CPI measures) and 1.2 (current vs constant prices)
+  accessed: "2026-10-17"
+
+# International statistical standards
+- key: un-sitc4
+  kind: official
+  authors: ["United Nations Statistics Division"]
+  published: "2006"
+  title: "Standard international trade classification, revision 4 (Statistical Papers Series M No. 34/Rev. 4)"
+  container: United Nations
+  url: https://unstats.un.org/unsd/publication/SeriesM/SeriesM_34rev4E.pdf
+  # Where: introduction, paragraph 15 (same sections as Rev. 3), and the list of sections
+  accessed: "2026-10-17"
+
+- key: fao-fbs
+  kind: official
+  authors: ["Food and Agriculture Organization of the United Nations"]
+  published: "2001"
+  title: "Food balance sheets: A handbook"
+  container: Food and Agriculture Organization of the United Nations
+  url: https://www.fao.org/4/x9892e/X9892e04.htm
+  # Where: "Self-sufficiency ratio (SSR)", with the formula
+  accessed: "2026-10-17"
+
+- key: ilo-cpi-manual
+  kind: official
+  authors:
+    - International Labour Office
+    - International Monetary Fund
+    - Organisation for Economic Co-operation and Development
+    - Statistical Office of the European Communities
+    - United Nations Economic Commission for Europe
+    - The World Bank
+  published: "2004"
+  title: "Consumer price index manual: Theory and practice"
+  container: International Labour Office
+  url: https://webapps.ilo.org/CPI/doc/gloss.pdf
+  archive_url: http://web.archive.org/web/20251217024826/http://webapps.ilo.org/CPI/doc/gloss.pdf
+  # Where: glossary of main terms: current prices, index reference period, rebasing
+  accessed: "2026-10-17"
+
+- key: fao-agrovoc-broiler-breeders
+  kind: official
+  authors: ["Food and Agriculture Organization of the United Nations"]
+  published: "2021"
+  title: "Broiler breeders (AGROVOC concept c_9676e23b)"
+  container: AGROVOC
+  url: https://agrovoc.fao.org/browse/agrovoc/en/page/c_9676e23b
+  archive_url: http://web.archive.org/web/20230106134154/https://agrovoc.fao.org/browse/agrovoc/en/page/c_9676e23b
+  accessed: "2026-10-17"
+
+# Statistics references
+- key: nist-handbook
+  kind: book
+  authors: ["NIST/SEMATECH"]
+  published: "2022"
+  title: "e-Handbook of statistical methods"
+  container: National Institute of Standards and Technology
+  url: https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm
+  doi: 10.18434/M32189
+  archive_url: http://web.archive.org/web/20261012160526/https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm
+  # Where: section 1.3.5.1, Measures of location (mean, median)
+  accessed: "2026-10-17"
+
+- key: openstax-stats
+  kind: book
+  authors: ["Illowsky, B.", "Dean, S."]
+  published: "2023"
+  title: "Introductory statistics 2e"
+  container: OpenStax
+  url: https://openstax.org/books/introductory-statistics-2e/pages/12-3-the-regression-equation
+  # Where: section 12.3, The regression equation (correlation coefficient)
+  accessed: "2026-10-17"
+
+# Datasets whose own tables define a term (credit and APA from the case study's outputs)
+- key: dataset-crime-2013
+  kind: dataset
+  page_url: https://www.data.gov.bn/crime-statistics/
+- key: dataset-day-old-chicks
+  kind: dataset
+  page_url: https://www.data.gov.bn/day-old-chick-industry-year-2001-2020/
+- key: dataset-fertilized-eggs
+  kind: dataset
+  page_url: https://www.data.gov.bn/fertilized-eggs-industry-year-2011-2020/
+- key: dataset-agrimakanan-status
+  kind: dataset
+  page_url: https://www.data.gov.bn/status-pengeluaran-produck-agrimakanan/
+- key: dataset-agrimakanan-categories
+  kind: dataset
+  page_url: https://www.data.gov.bn/tren-pengeluaran-agrimakanan-mengikut-kategori-produk/
+- key: dataset-agrimakanan-industry
+  kind: dataset
+  page_url: https://www.data.gov.bn/statistik-industri-agrimakanan/

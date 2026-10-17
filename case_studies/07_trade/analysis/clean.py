@@ -1,9 +1,10 @@
 """Cleaning for case study 07 (trade: imports, exports and balance of trade).
 
 The yearly totals and the commodity-section tables are published in several editions with
-different owners and section labels. Sections are keyed by their SITC Rev. 3 code (0–9), as in
-"Classification Of Trade Commodities". Values are BND million at current prices. See
-DATA_SOURCES.md "Trade tables" known issues.
+different owners and section labels. Sections are keyed by their SITC section code (0–9), as in
+"Classification Of Trade Commodities". The tables used SITC Revision 3 to 2012 and Revision 4 from
+2013 (Department of Statistics IMTS FAQ); Revision 4 keeps the same ten sections (UN, 2006).
+Values are BND million at current prices. See DATA_SOURCES.md "Trade tables" known issues.
 """
 
 from pathlib import Path
@@ -120,7 +121,7 @@ def load_sections(path: Path, flow: str) -> pd.DataFrame:
 
 
 def load_classification(path: Path) -> pd.DataFrame:
-    """SITC Rev. 3 section key: sitc, section_official (English), section_ms (Malay), section.
+    """SITC section key: sitc, section_official (English), section_ms (Malay), section.
 
     The sheet lists each section as "( n )  Malay name" followed by its English name.
     """

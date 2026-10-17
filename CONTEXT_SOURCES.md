@@ -58,3 +58,27 @@ reports (tier 2) and says so.
 statement ("poultry and eggs … nearly 100 percent self-sufficiency since 1994") with the
 Department's own figures: true for eggs; chicken meat passed 90% only in 2001. `khut2026` is
 also used in 06 for chicken and eggs above 100% and beef "substantially lower" (p. 2).
+
+## Glossary definition sources
+
+Agreed 17 Oct 2026 (DATA_USE_POLICY.md §7). Definitions only, never numbers. The citable
+details live in `dashboard/glossary_sources.yml`; datasets that define a term in their own
+tables are credited from the case study outputs instead. Order of preference: the Brunei
+publisher's own definition, then an international standard, then a statistics reference.
+
+| Source | Terms | How it was checked | Archived | Accessed |
+|---|---|---|---|---|
+| Department of Statistics. (n.d.). *International merchandise trade statistics: Frequently asked questions* | balance of trade, total trade, domestic exports, re-exports, SITC section | Read in full (archived PDF; the original link now returns 404). Q1 defines imports, exports, domestic and re-exports; Q3 balance of trade; Q4 total trade; Q8 SITC Rev. 3 to 2012, Rev. 4 from 2013 | Yes (11 Jul 2025 snapshot) | 17 Oct 2026 |
+| Department of Economic Planning and Statistics. (2026). *Technical notes: Consumer price index* | CPI, current prices | Read in full. §1.1 CPI = average change over time in prices paid by households for a fixed basket; "not a direct measurement of the general cost of living"; §1.2 current (nominal) vs constant (real) prices | No (worth saving: this department's older files have moved) | 17 Oct 2026 |
+| United Nations Statistics Division. (2006). *Standard international trade classification, revision 4* | SITC section | Section list 0–9; para. 15: Rev. 4 "retains the overall structure of SITC, Revision 3" with the same sections | No | 17 Oct 2026 |
+| Food and Agriculture Organization of the United Nations. (2001). *Food balance sheets: A handbook* | self-sufficiency ratio | SSR = production × 100 ÷ (production + imports − exports). Our old wording added "changes in stocks"; corrected to match | No | 17 Oct 2026 |
+| ILO, IMF, OECD, Eurostat, UNECE & World Bank. (2004). *Consumer price index manual: Theory and practice* (glossary) | current prices, index (2019 = 100) | Glossary: "Current prices: The actual prices prevailing in the period in question"; "Index reference period: The period for which the value of the index is set at 100" | Yes | 17 Oct 2026 |
+| Food and Agriculture Organization of the United Nations. (2021). Broiler breeders. *AGROVOC* | hatching egg | "Parent stock (males and females) kept to produce fertile eggs for broilers production" | Yes | 17 Oct 2026 |
+| NIST/SEMATECH. (2022). *e-Handbook of statistical methods*, §1.3.5.1 | median, average | Mean = sum ÷ number of points; median = half the data below, half above; extreme values distort the mean, not the median | Yes | 17 Oct 2026 |
+| Illowsky, B., & Dean, S. (2023). *Introductory statistics 2e*, §12.3. OpenStax | correlation | r between −1 and +1; 0 = likely no linear correlation; "correlation does not imply causation". Our wording changed from "no link" to "no straight-line link" | No | 17 Oct 2026 |
+
+Looked at, not used: the IMF *Consumer Price Index Manual 2020* (the site blocks downloads and
+the file is too large to read through the fetch tool; the 2004 manual's glossary, hosted by the
+ILO, was used instead); OpenIntro Statistics (mainly found on mirror sites; NIST used instead);
+an FAO definition of "day-old chick" (none found; the term is cited to the publisher's table).
+

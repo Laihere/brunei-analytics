@@ -5,7 +5,21 @@ toc: false
 ---
 
 ```{python}
-from shared.glossary import glossary_page
+from shared.glossary import glossary_page, glossary_references
 
 glossary_page()
+```
+
+## Where the definitions come from
+
+Each term says what its definition is based on. **Official and statistical terms** follow the
+publisher's own definition where it has one (for example the Department of Economic Planning
+and Statistics), otherwise an international standard or a statistics reference. **Publisher
+terms** are used as they appear in the source tables. Terms **defined for this site** are
+measures worked out for these case studies; each case study's method explains them. The
+definitions are written in plain words, so check the source for the exact wording. These
+sources are used for definitions only, never for numbers.
+
+```{python}
+glossary_references()
 ```

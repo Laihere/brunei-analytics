@@ -61,5 +61,5 @@
       "title_translation": ""
     }
   ],
-  "notes": "Exports (2009 onwards) and imports (2000 onwards) by SITC Rev. 3 commodity section, BND million at current prices. Section names differ between editions, so sections are keyed by code and labelled from 'Classification Of Trade Commodities' (short English labels by the author; Malay names as published). Share = section ÷ that year's export or import total, computed by the author."
+  "notes": "Exports (2009 onwards) and imports (2000 onwards) by SITC commodity section (Revision 3 to 2012 and Revision 4 from 2013, which keeps the same ten sections), BND million at current prices. Section names differ between editions, so sections are keyed by code and labelled from 'Classification Of Trade Commodities' (short English labels by the author; Malay names as published). Share = section ÷ that year's export or import total, computed by the author."
 }

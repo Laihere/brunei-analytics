@@ -4,9 +4,17 @@
 #   definition: one or two plain sentences
 #   compare: keys of terms that are easy to confuse with this one; their definitions are shown
 #            beside it in the pop-up ("Not the same as")
+#   basis: where the definition comes from (agreed 17 Oct 2026):
+#            standard  - an official or statistical definition (Brunei publisher first, then
+#                        UN, FAO, ILO, IMF, OECD or a statistics reference; definitions only)
+#            publisher - the term as the data's publisher uses it in its tables
+#            site      - a measure defined for these case studies (no outside source)
+#   sources: keys in glossary_sources.yml (required for standard and publisher). Definitions
+#            are our own words; check the source says the same before citing it.
 # Keep definitions neutral and true for every case study that uses the term.
 
 - key: share-of-businesses
+  basis: site
   term: Share of businesses
   definition: >
     The percentage of all businesses that are in a group (a product category or a district).
@@ -14,6 +22,7 @@
   compare: [share-of-market-value, share-of-employees]
 
 - key: share-of-employees
+  basis: site
   term: Share of employees
   definition: >
     The percentage of all people employed in the industry who work in a group, such as a
@@ -21,6 +30,7 @@
   compare: [share-of-businesses, share-of-market-value]
 
 - key: share-of-market-value
+  basis: site
   term: Share of market value
   definition: >
     The percentage of the industry's total market value that comes from a group. A few large
@@ -28,6 +38,8 @@
   compare: [share-of-businesses, share-of-employees]
 
 - key: market-value
+  basis: publisher
+  sources: [dataset-agrimakanan-status, dataset-agrimakanan-industry]
   term: Market value
   definition: >
     The value of the products made, in Brunei dollars, as reported by the publisher. It is not
@@ -35,13 +47,16 @@
   compare: [current-prices]
 
 - key: current-prices
+  basis: standard
+  sources: [ilo-cpi-manual, deps-cpi-notes]
   term: Current prices
   definition: >
-    Values in the dollars of each year, not adjusted for inflation. A rise in value can come
+    Values at the prices of each year, not adjusted for inflation. A rise in value can come
     from higher prices as well as from larger quantities.
   compare: [market-value]
 
 - key: continued-item
+  basis: site
   term: Continued item
   definition: >
     An item (such as a product category) that appears in both the first and the last year
@@ -49,6 +64,7 @@
   compare: [new-item, discontinued-item]
 
 - key: new-item
+  basis: site
   term: New item
   definition: >
     An item that appears in the later year but not the earlier one, often because the
@@ -57,6 +73,7 @@
   compare: [continued-item, discontinued-item]
 
 - key: discontinued-item
+  basis: site
   term: Discontinued item
   definition: >
     An item that appears in the earlier year but not the later one, because it stopped being
@@ -64,6 +81,8 @@
   compare: [continued-item, new-item]
 
 - key: livestock-based
+  basis: publisher
+  sources: [dataset-agrimakanan-status, dataset-agrimakanan-categories]
   term: Livestock-based products
   definition: >
     The Ministry of Industry and Primary Resources' group for processed foods made from
@@ -71,6 +90,8 @@
   compare: [crop-based]
 
 - key: crop-based
+  basis: publisher
+  sources: [dataset-agrimakanan-status, dataset-agrimakanan-categories]
   term: Crop-based products
   definition: >
     The Ministry of Industry and Primary Resources' group for all other processed foods, such
@@ -78,6 +99,8 @@
   compare: [livestock-based]
 
 - key: median
+  basis: standard
+  sources: [nist-handbook]
   term: Median (typical year)
   definition: >
     The middle value when the years are put in order: half the years are above it and half
@@ -85,12 +108,15 @@
   compare: [average]
 
 - key: average
+  basis: standard
+  sources: [nist-handbook]
   term: Average (mean)
   definition: >
     The total divided by the number of years. One very high or low year can pull it a long way.
   compare: [median, three-year-average]
 
 - key: three-year-average
+  basis: site
   term: Three-year average
   definition: >
     The average of three consecutive years. It smooths out single-year swings, which matter
@@ -98,31 +124,42 @@
   compare: [average]
 
 - key: correlation
+  basis: standard
+  sources: [openstax-stats]
   term: Correlation
   definition: >
-    A number from −1 to 1 showing how closely two measures rise and fall together. 1 means
-    they move perfectly together and 0 means no link. It doesn't show that one causes the other.
+    A number from −1 to 1 showing how closely two measures rise and fall together along a
+    straight line. 1 means they move perfectly together, −1 perfectly opposite, and 0 no
+    straight-line link. It doesn't show that one causes the other.
 
 - key: per-100-accidents
+  basis: site
   term: Per 100 accidents
   definition: >
     A count divided by the number of accidents, times 100. It shows how many people were
     affected for every 100 accidents, so years with more or fewer accidents can be compared.
 
 - key: solved-case
+  basis: publisher
+  sources: [dataset-crime-2013]
   term: Solved case (as published)
   definition: >
     A case the source records as solved. The source doesn't define the term or say when a case
     was counted as solved, so the figures are shown as published.
 
 - key: cpi
+  basis: standard
+  sources: [deps-cpi-notes]
   term: Consumer price index (CPI)
   definition: >
-    A measure of the average price of a fixed basket of goods and services that households
-    buy, compared with a base period. A rise means prices went up on average.
+    A measure of the average change over time in the prices households pay for a fixed basket
+    of goods and services. A rise means prices went up on average. It measures prices, not the
+    full cost of living.
   compare: [index-rebased]
 
 - key: index-rebased
+  basis: standard
+  sources: [ilo-cpi-manual]
   term: Index (2019 = 100)
   definition: >
     Values rescaled so that 2019 equals 100. A value of 107 means 7% above 2019. It changes the
@@ -130,6 +167,7 @@
   compare: [cpi]
 
 - key: local-share-of-supply
+  basis: site
   term: Local share of supply
   definition: >
     Local production divided by local production plus imports. It shows how much of what
@@ -137,26 +175,35 @@
   compare: [self-sufficiency-ratio]
 
 - key: self-sufficiency-ratio
+  basis: standard
+  sources: [fao-fbs]
   term: Self-sufficiency ratio
   definition: >
-    Local production divided by what the country uses (production plus imports, minus exports
-    and changes in stocks). It can go above 100% when a country produces more than it uses.
+    Local production divided by what the country uses: production plus imports, minus exports.
+    It can go above 100% when a country produces more than it uses.
   compare: [local-share-of-supply]
 
 - key: day-old-chick
+  basis: publisher
+  sources: [dataset-day-old-chicks]
   term: Day-old chick
   definition: >
-    A chick sold or moved to a farm on the day it hatches. Broiler farms raise day-old chicks
-    into chickens for meat.
+    A chick on the day it hatches. The Agriculture and Agrifood Department's tables count
+    day-old chicks hatched in Brunei (local production) and imported.
   compare: [hatching-egg]
 
 - key: hatching-egg
+  basis: publisher
+  sources: [dataset-fertilized-eggs, fao-agrovoc-broiler-breeders]
   term: Fertilized (hatching) egg
   definition: >
-    An egg laid by a breeding hen to be hatched into a chick, not sold for eating.
+    A fertile egg laid by breeding hens (parent stock) to be hatched into a chick for broiler
+    (meat chicken) production, not sold for eating.
   compare: [day-old-chick]
 
 - key: balance-of-trade
+  basis: standard
+  sources: [deps-imts-faq]
   term: Balance of trade
   definition: >
     The value of a country's exports minus the value of its imports in a year. Positive means
@@ -165,6 +212,8 @@
   compare: [total-trade]
 
 - key: total-trade
+  basis: standard
+  sources: [deps-imts-faq]
   term: Total trade
   definition: >
     The value of exports plus the value of imports: how much trade there was in both
@@ -172,12 +221,17 @@
   compare: [balance-of-trade]
 
 - key: domestic-exports
+  basis: standard
+  sources: [deps-imts-faq]
   term: Domestic exports
   definition: >
-    Goods produced or processed in the country and then sold abroad.
+    Goods grown, produced, manufactured, assembled or processed in the country and then
+    exported.
   compare: [re-exports]
 
 - key: re-exports
+  basis: standard
+  sources: [deps-imts-faq]
   term: Re-exports
   definition: >
     Goods that were imported and then exported again without being changed in the country.
@@ -185,13 +239,17 @@
   compare: [domestic-exports]
 
 - key: commodity-section
+  basis: standard
+  sources: [un-sitc4, deps-imts-faq]
   term: Commodity section (SITC)
   definition: >
     One of the ten broad groups of goods in the United Nations' Standard International Trade
     Classification (SITC), numbered 0 to 9, e.g. 3 for mineral fuels and 7 for machinery and
-    transport equipment. Each section mixes many products.
+    transport equipment. Each section mixes many products. Brunei's tables used Revision 3 to
+    2012 and Revision 4 from 2013, which keeps the same ten sections.
 
 - key: share-of-imports
+  basis: site
   term: Share of imports (or exports)
   definition: >
     A section's value as a percentage of that year's total imports (or exports). A share can

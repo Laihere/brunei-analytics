@@ -127,7 +127,8 @@ def main():
         OUT / "trade_sections.csv",
         prov(*main_files[1:], p["classification"]) + prov(p[f"trade_{MAIN}"]),
         notes=(
-            "Exports (2009 onwards) and imports (2000 onwards) by SITC Rev. 3 commodity section, "
+            "Exports (2009 onwards) and imports (2000 onwards) by SITC commodity section (Revision "
+            "3 to 2012 and Revision 4 from 2013, which keeps the same ten sections), "
             "BND million at current prices. Section names differ between editions, so sections "
             "are keyed by code and labelled from 'Classification Of Trade Commodities' (short "
             "English labels by the author; Malay names as published). Share = section ÷ that "
@@ -165,7 +166,7 @@ def main():
         __file__,
         "sitc_sections",
         prov(p["classification"]),
-        notes="SITC Rev. 3 section key: official English and Malay names, short labels.",
+        notes="SITC section key: official English and Malay names, short labels.",
     )
     report(trade, sections, crosscheck)
 

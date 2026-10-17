@@ -41,3 +41,43 @@ def test_item_status_continued_new_discontinued():
     assert "line" in status_marker("discontinued")
     assert status_label("B", "new", 2013) == "B (new in 2013)"
     assert status_label("A", "continued", 2013) == "A"
+
+
+def test_every_term_says_where_its_definition_comes_from():
+    """Standard and publisher terms cite a source; site terms say so (agreed 17 Oct 2026)."""
+    from shared.glossary import BASIS, load_sources
+
+    g = load_glossary()
+    for key, e in g.items():
+        assert e["basis"] in BASIS, key
+        if e["basis"] != "site":
+            assert e["source_refs"], key
+    used = {s.key for e in g.values() for s in e["source_refs"]}
+    assert used == set(load_sources()), "every glossary source is cited by some term"
+
+
+def test_basis_line_in_popups_and_on_the_glossary_page(tmp_path):
+    from shared.glossary import glossary_references
+
+    page = tmp_path / "x.qmd"
+    page.write_text(
+        '[Re-exports]{.term term="re-exports"} and [share]{.term term="share-of-imports"}'
+    )
+    html = str(glossary_popovers("x.qmd", tmp_path).data)
+    assert "Based on: <a" in html and "Department of Statistics (n.d.)" in html
+    assert "Defined for this site" in html
+    assert "As used by the publisher" in str(glossary_page().data)
+    refs = str(glossary_references().data)
+    assert "[Data set]" in refs and "archived copy" in refs and "n.d." in refs
+
+
+def test_unknown_or_missing_sources_stop_the_build(tmp_path):
+    import pytest
+
+    bad = tmp_path / "g.yml"
+    bad.write_text("- key: x\n  term: X\n  basis: standard\n  definition: A long enough text.\n")
+    with pytest.raises(ValueError, match="needs a source"):
+        load_glossary(bad)
+    bad.write_text("- key: x\n  term: X\n  basis: guess\n  definition: A long enough text.\n")
+    with pytest.raises(ValueError, match="basis"):
+        load_glossary(bad)

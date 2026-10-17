@@ -195,4 +195,5 @@ every shared year, within rounding.
 | 5 | DEPD edition has no "Exports" or "Total Trade" rows | Lists domestic exports, re-exports, imports and balance | Exports and total trade added from the parts for the cross-check only |
 | 6 | Same file name in two editions | `Import-Export-and-Balance-of-Trade.xlsx` in the 2025/11 and 2025/12 uploads (different files) | Stored in separate folders with `variant` (shared/fetch.py) |
 | 7 | Exports by section start in 2009, imports by section in 2000 | Section tables | Export composition shown from 2009 only |
+| 8 | Two SITC revisions in one series | Department of Statistics IMTS FAQ (Q8): SITC Rev. 3 to 2012, Rev. 4 from 2013; the classification table says Rev. 3 | Section-level comparisons hold: Rev. 4 keeps the same ten sections (UN, 2006, para. 15). Noted in the outputs and the glossary |
 

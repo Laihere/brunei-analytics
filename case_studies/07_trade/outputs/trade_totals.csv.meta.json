@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Import, Export and Balance of Trade",
+      "page_url": "https://www.data.gov.bn/import-export-and-balance-of-trade/",
+      "accessed": "2026-10-17",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/11/Import-Export-and-Balance-of-Trade.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2000–2020, annual",
+      "sha256": "19fa67464741a21378016d9d75dea78b1b6b76eb0a24ea591d5e72f660733733",
+      "original_source": "",
+      "published": "2025-11-15",
+      "title_translation": ""
+    }
+  ],
+  "notes": "Exports (domestic and re-exports), imports, total trade and balance of trade, 2000–2021, BND million at current prices, from the Department of Statistics, JPES edition (it runs to 2021 although its page says 2020). Reshaped to one column per measure; published values unchanged (some are rounded to 0.1 million)."
+}

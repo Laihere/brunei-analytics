@@ -1,0 +1,289 @@
+---
+title: "Brunei had a trade surplus every year from 2000 to 2021, while mineral fuels grew from under 1% to 60% of its imports"
+description: "What did Brunei export and import from 2000 to 2021, and how did the balance of trade change?"
+number: "07"
+topic: "International"
+data-period: "2000–2021"
+read-time: "5-minute read"
+date: 2026-10-17
+related:
+  - study: "01"
+    kind: same-source
+    why: "Both use Department of Statistics, JPES tables: trade values in 07, consumer prices in 01."
+  - study: "06"
+    kind: same-topic
+    why: "Both look at imports: all goods by section in 07, chicken, eggs and beef in 06."
+---
+
+```{python}
+import sys
+
+from shared.components import (
+    chart_card,
+    method_and_sources,
+    prev_next,
+    related_studies,
+    stat_tile,
+    stat_tiles,
+)
+from shared.glossary import glossary_popovers
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+STUDY = CASE_STUDIES / "07_trade"
+sys.path.insert(0, str(STUDY / "analysis"))
+import figures as F  # noqa: E402
+
+trade, prov_trade, notes_trade = read_output(STUDY / "outputs" / "trade_totals.csv")
+sections, prov_sec, notes_sec = read_output(STUDY / "outputs" / "trade_sections.csv")
+check, prov_check, notes_check = read_output(STUDY / "outputs" / "trade_crosscheck.csv")
+
+t = trade.set_index("year")
+FIRST, LAST = int(t.index.min()), int(t.index.max())
+share = sections.pivot_table(index="year", columns=["flow", "sitc"], values="share_pct")
+value = sections.pivot_table(index="year", columns=["flow", "sitc"], values="value_bnd_m")
+E0 = int(sections[sections.flow == "exports"].year.min())  # exports by section start later
+
+
+def bn(x):
+    return f"B${x / 1000:.1f} bn"
+
+
+def pct(x):
+    return f"{x:.0f}%" if x >= 10 else f"{x:.1f}%"
+
+
+low_year, high_year = int(t.balance.idxmin()), int(t.balance.idxmax())
+peak_exports = int(t.exports.idxmax())
+trough_after = int(t.loc[peak_exports:, "exports"].idxmin())
+imports_x = t.loc[LAST, "imports"] / t.loc[FIRST, "imports"]
+re_share = t.re_exports / t.exports * 100
+fuel_x, chem_x = share[("exports", 3)], share[("exports", 5)]
+fuel_m, mach_m = share[("imports", 3)], share[("imports", 7)]
+fuel_jump = 2019  # first year mineral fuels pass 20% of imports (asserted below)
+largest = value["imports"].idxmax(axis=1)  # largest import section each year
+not_mach = [int(y) for y in largest.loc[: fuel_jump - 1].index if largest[y] != 7]
+import_falls = int((t.imports.diff() < 0).sum())
+
+# Stated in the text below; stop the build rather than publish them if the data changes.
+assert (t.balance > 0).all(), "Not a surplus every year any more."
+assert low_year == LAST - 1 and peak_exports == 2012 and trough_after == 2016
+assert int(fuel_m[fuel_m > 20].index.min()) == fuel_jump and fuel_m.loc[: fuel_jump - 1].max() < 11
+assert (largest.loc[fuel_jump:] == 3).all() and (largest.loc[: fuel_jump - 1] != 3).all()
+assert not_mach == [2001] and largest[2001] == 6  # machinery led every year but one before
+assert fuel_x.loc[E0:].min() == fuel_x.loc[LAST] and chem_x.idxmax() == LAST
+assert value[("imports", 7)].loc[LAST] > value[("imports", 7)].loc[FIRST]  # share fell, value rose
+assert re_share.max() < 10
+assert chem_x.loc[: LAST - 2].max() < 5  # "under 5% until 2019" (chart description)
+assert check.differences.sum() == 0
+```
+
+::: {.study-intro}
+This case study looks at **what Brunei sold to and bought from other countries from 2000 to
+2021**, using the yearly trade tables of the Department of Statistics, JPES: the value of
+exports and imports, the [balance of trade]{.term term="balance-of-trade"}, and the broad
+[commodity sections]{.term term="commodity-section"} the goods belong to. All values are in
+Brunei dollars at [current prices]{.term term="current-prices"}. It shows **what changed, not
+why**.
+
+It asks three questions, answered in the conclusion:
+
+1. **Did Brunei export more than it imported every year, and how did the gap change?**
+2. **What does Brunei export, and how did that change from 2009 to 2021?**
+3. **What does Brunei import, and how did that change from 2000 to 2021?**
+:::
+
+```{python}
+stat_tiles(
+    stat_tile(f"Trade surplus, {LAST}", bn(t.loc[LAST, "balance"]), "", f"(smallest: {bn(t.loc[low_year, 'balance'])} in {low_year})"),
+    stat_tile(f"Imports, {LAST}", bn(t.loc[LAST, "imports"]), "", f"{imports_x:.1f}× the {FIRST} value ({bn(t.loc[FIRST, 'imports'])})"),
+    stat_tile(f"Mineral fuels' share of imports, {LAST}", pct(fuel_m.loc[LAST]), "", f"({FIRST}: {pct(fuel_m.loc[FIRST])})"),
+)
+```
+
+```{python}
+fig, table = F.flows(trade)
+chart_card(
+    fig,
+    title=f"Exports stayed above imports every year, but imports grew {imports_x:.0f}-fold",
+    subtitle=f"Exports and imports of goods, B$ billion at current prices · {FIRST}–{LAST}",
+    alt=(
+        f"Two lines. Exports start at {bn(t.loc[FIRST, 'exports'])} in {FIRST}, peak at "
+        f"{bn(t.loc[peak_exports, 'exports'])} in {peak_exports}, fall to "
+        f"{bn(t.loc[trough_after, 'exports'])} in {trough_after} and reach "
+        f"{bn(t.loc[LAST, 'exports'])} in {LAST}. Imports rise from {bn(t.loc[FIRST, 'imports'])} "
+        f"to {bn(t.loc[LAST, 'imports'])} and stay below exports in every year."
+    ),
+    provenance=prov_trade,
+    table=table,
+    mobile_fig=F.flows(trade, compact=True)[0],
+)
+```
+
+## Exports, imports and the balance, 2000–2021
+
+Exports were worth `{python} bn(t.loc[FIRST, "exports"])` in `{python} FIRST`. They rose to a
+peak of `{python} bn(t.loc[peak_exports, "exports"])` in `{python} peak_exports`, fell to
+`{python} bn(t.loc[trough_after, "exports"])` in `{python} trough_after`, and were back at
+`{python} bn(t.loc[LAST, "exports"])` in `{python} LAST`. Almost all were
+[domestic exports]{.term term="domestic-exports"}:
+[re-exports]{.term term="re-exports"} were never more than `{python} pct(re_share.max())` of the
+total.
+
+Imports rose from `{python} bn(t.loc[FIRST, "imports"])` to
+`{python} bn(t.loc[LAST, "imports"])`, falling from one year to the next only
+`{python} import_falls` times. **Brunei exported more than it imported in every year**,
+but the surplus changed a lot: from `{python} bn(t.loc[high_year, "balance"])` in
+`{python} high_year` to `{python} bn(t.loc[low_year, "balance"])` in `{python} low_year`, the
+smallest in the period, before widening again to `{python} bn(t.loc[LAST, "balance"])` in
+`{python} LAST`.
+
+```{python}
+fig, table = F.balance(trade)
+chart_card(
+    fig,
+    title=f"The surplus was largest in {high_year} and smallest in {low_year}",
+    subtitle=f"Balance of trade (exports − imports), B$ billion at current prices · {FIRST}–{LAST}",
+    alt=(
+        f"Bar chart. The surplus is positive in every year, largest at "
+        f"{bn(t.loc[high_year, 'balance'])} in {high_year} and smallest at "
+        f"{bn(t.loc[low_year, 'balance'])} in {low_year}, then {bn(t.loc[LAST, 'balance'])} in {LAST}."
+    ),
+    provenance=prov_trade,
+    table=table,
+    height=300,
+    mobile_fig=F.balance(trade, compact=True)[0],
+)
+```
+
+## What Brunei exports, 2009–2021
+
+The section tables for exports start in `{python} E0`. In that year, **mineral fuels (SITC
+section 3, "mineral fuels, lubricants and related materials") were
+`{python} pct(fuel_x.loc[E0])` of exports**. Their [share]{.term term="share-of-imports"}
+stayed between `{python} pct(fuel_x.loc[: LAST - 2].min())` and
+`{python} pct(fuel_x.loc[: LAST - 2].max())` until `{python} LAST - 2`, and was
+`{python} pct(fuel_x.loc[LAST])` in `{python} LAST`, the lowest in the period.
+
+Chemicals grew the most: from `{python} pct(chem_x.loc[E0])` of exports in `{python} E0` to
+`{python} pct(chem_x.loc[LAST - 2])` in `{python} LAST - 2`,
+`{python} pct(chem_x.loc[LAST - 1])` in `{python} LAST - 1` and
+**`{python} pct(chem_x.loc[LAST])` in `{python} LAST`**
+(`{python} bn(value[("exports", 5)].loc[LAST])`). The other eight sections together were never
+more than `{python} pct((100 - fuel_x - chem_x).max())` of exports.
+
+```{python}
+fig, table = F.export_mix(sections)
+chart_card(
+    fig,
+    title=f"Mineral fuels fell to {pct(fuel_x.loc[LAST])} of exports as chemicals rose to {pct(chem_x.loc[LAST])}",
+    subtitle=f"Share of exports by commodity section, % · {E0}–{LAST}",
+    alt=(
+        f"Three lines. Mineral fuels stay between {pct(fuel_x.min())} and {pct(fuel_x.max())} of "
+        f"exports, ending at {pct(fuel_x.loc[LAST])} in {LAST}. Chemicals stay under 5% until "
+        f"{LAST - 2}, then rise to {pct(chem_x.loc[LAST])}. All other sections stay low."
+    ),
+    provenance=prov_sec,
+    table=table,
+    mobile_fig=F.export_mix(sections, compact=True)[0],
+)
+```
+
+## What Brunei imports, 2000–2021
+
+Until `{python} fuel_jump - 1`, **machinery and transport equipment was the largest import
+section in every year but one** (`{python} not_mach[0]`, when it was manufactured goods). It
+was `{python} pct(mach_m.loc[FIRST])` of imports in `{python} FIRST`. Mineral fuels were
+`{python} pct(fuel_m.loc[FIRST])` in `{python} FIRST` and no more than
+`{python} pct(fuel_m.loc[: fuel_jump - 1].max())` in any year to `{python} fuel_jump - 1`.
+
+That changed in `{python} fuel_jump`: **mineral fuel imports rose from
+`{python} bn(value[("imports", 3)].loc[fuel_jump - 1])` to
+`{python} bn(value[("imports", 3)].loc[fuel_jump])`**, or `{python} pct(fuel_m.loc[fuel_jump])`
+of imports, and they were the largest section in every year after. By `{python} LAST` they
+were `{python} bn(value[("imports", 3)].loc[LAST])`, `{python} pct(fuel_m.loc[LAST])` of all
+imports. Machinery and transport fell to `{python} pct(mach_m.loc[LAST])` of imports, although
+its value still grew, from `{python} bn(value[("imports", 7)].loc[FIRST])` to
+`{python} bn(value[("imports", 7)].loc[LAST])`.
+
+```{python}
+fig, table = F.import_mix(sections)
+chart_card(
+    fig,
+    title=f"From {fuel_jump}, mineral fuels became Brunei's largest import",
+    subtitle=f"Share of imports by commodity section, % · {FIRST}–{LAST}",
+    alt=(
+        f"Four lines. Mineral fuels stay under {pct(fuel_m.loc[: fuel_jump - 1].max())} of imports "
+        f"until {fuel_jump - 1}, jump to {pct(fuel_m.loc[fuel_jump])} in {fuel_jump} and reach "
+        f"{pct(fuel_m.loc[LAST])} in {LAST}. Machinery and transport falls from "
+        f"{pct(mach_m.loc[FIRST])} to {pct(mach_m.loc[LAST])}. Manufactured goods and all other "
+        f"sections stay lower."
+    ),
+    provenance=prov_sec,
+    table=table,
+    mobile_fig=F.import_mix(sections, compact=True)[0],
+)
+```
+
+## Conclusion
+
+- **Did Brunei export more than it imported every year, and how did the gap change?** Yes:
+  there was a surplus in every year from `{python} FIRST` to `{python} LAST`. It was largest
+  in `{python} high_year` (`{python} bn(t.loc[high_year, "balance"])`) and smallest in
+  `{python} low_year` (`{python} bn(t.loc[low_year, "balance"])`), as imports grew
+  `{python} f"{imports_x:.1f}"`-fold over the period.
+- **What does Brunei export, and how did that change from 2009 to 2021?** Mostly mineral
+  fuels, but less so by the end: from `{python} pct(fuel_x.loc[E0])` of exports in
+  `{python} E0` to `{python} pct(fuel_x.loc[LAST])` in `{python} LAST`, while chemicals rose
+  from `{python} pct(chem_x.loc[E0])` to `{python} pct(chem_x.loc[LAST])`.
+- **What does Brunei import, and how did that change from 2000 to 2021?** Machinery and
+  transport equipment was the largest section until `{python} fuel_jump - 1` (in every year
+  but one). From `{python} fuel_jump`, mineral fuels were the largest import section, reaching
+  `{python} pct(fuel_m.loc[LAST])` of imports in `{python} LAST`.
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+- **Why trade changed.** The data shows when and by how much values changed, not what caused
+  the changes.
+- **Prices or quantities.** These are values at current prices. A rise or fall can come from
+  prices, from the amounts traded, or both, and the tables don't separate them.
+- **Which products.** Each section mixes many goods, and the published tables don't break
+  them down, so they can't show which mineral fuels or chemicals were traded.
+- **Trading partners and services.** Countries are in separate tables not used here, and
+  services (such as tourism or transport) are not part of these figures.
+- **After `{python} LAST`.** The latest year published is `{python} LAST`. The edition used
+  says 2000–2020 on its dataset page, but its table includes `{python} LAST`.
+:::
+
+```{python}
+related_studies("07-trade.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+n_editions = len(check)
+method_and_sources(
+    prov_trade + prov_sec + prov_check,
+    notes=f"{notes_trade} {notes_sec} {notes_check}",
+    steps=[
+        "Downloaded the Department of Statistics, JPES tables of imports, exports and balance "
+        "of trade, and of exports and imports by commodity section, from data.gov.bn, with the "
+        "Classification Of Trade Commodities as the key to the section codes.",
+        "Checked that each table adds up: exports = domestic exports + re-exports, total trade "
+        "= exports + imports, balance = exports − imports, and the sections sum to each year's "
+        "export and import totals, allowing for values rounded to 0.1 million.",
+        f"Compared the {n_editions} other published editions (JPES, the Department of Economic "
+        "Planning and Statistics and the Department of Economic Planning and Development) "
+        "value by value for the years they share: no differences beyond rounding.",
+        "Matched section names that differ between editions to their SITC code, and computed "
+        "each section's share of that year's exports or imports.",
+    ],
+    code_url=f"{REPO_URL}/tree/main/case_studies/07_trade",
+)
+```
+
+```{python}
+prev_next("07-trade.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+glossary_popovers("07-trade.qmd", ROOT / "dashboard" / "case-studies")
+```

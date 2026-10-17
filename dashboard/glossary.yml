@@ -38,7 +38,7 @@
   term: Current prices
   definition: >
     Values in the dollars of each year, not adjusted for inflation. A rise in value can come
-    from higher prices as well as from making more.
+    from higher prices as well as from larger quantities.
   compare: [market-value]
 
 - key: continued-item
@@ -155,3 +155,46 @@
   definition: >
     An egg laid by a breeding hen to be hatched into a chick, not sold for eating.
   compare: [day-old-chick]
+
+- key: balance-of-trade
+  term: Balance of trade
+  definition: >
+    The value of a country's exports minus the value of its imports in a year. Positive means
+    a surplus (more sold abroad than bought), negative a deficit. It covers goods only, not
+    services.
+  compare: [total-trade]
+
+- key: total-trade
+  term: Total trade
+  definition: >
+    The value of exports plus the value of imports: how much trade there was in both
+    directions, not whether more was sold or bought.
+  compare: [balance-of-trade]
+
+- key: domestic-exports
+  term: Domestic exports
+  definition: >
+    Goods produced or processed in the country and then sold abroad.
+  compare: [re-exports]
+
+- key: re-exports
+  term: Re-exports
+  definition: >
+    Goods that were imported and then exported again without being changed in the country.
+    They count in exports, but they were not made there.
+  compare: [domestic-exports]
+
+- key: commodity-section
+  term: Commodity section (SITC)
+  definition: >
+    One of the ten broad groups of goods in the United Nations' Standard International Trade
+    Classification (SITC), numbered 0 to 9, e.g. 3 for mineral fuels and 7 for machinery and
+    transport equipment. Each section mixes many products.
+
+- key: share-of-imports
+  term: Share of imports (or exports)
+  definition: >
+    A section's value as a percentage of that year's total imports (or exports). A share can
+    fall while the value rises, if other sections grow faster.
+  compare: [current-prices]
+

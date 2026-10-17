@@ -1,0 +1,65 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Total Export By Commodity Section",
+      "page_url": "https://www.data.gov.bn/total-export-by-commodity-section/",
+      "accessed": "2026-10-17",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/11/Total-Export-By-Commodity-Section.xls.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2009–2021, annual",
+      "sha256": "6161c7647e37fe8c6c8b0fb28f04a560c8197a6d54e56f855cdf9a14532edec0",
+      "original_source": "",
+      "published": "2025-11-15",
+      "title_translation": ""
+    },
+    {
+      "source": "datagovbn",
+      "title": "Total Import by Commodity Section",
+      "page_url": "https://www.data.gov.bn/total-import-by-commodity-section/",
+      "accessed": "2026-10-17",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/11/Total-Import-by-Commodity-Section.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2000–2021, annual",
+      "sha256": "db357472ee147307628fa0ba8afd653c49b0373445f5a2ca9e2603f1f347a4a7",
+      "original_source": "",
+      "published": "2025-11-15",
+      "title_translation": ""
+    },
+    {
+      "source": "datagovbn",
+      "title": "Classification Of Trade Commodities",
+      "page_url": "https://www.data.gov.bn/classification-of-trade-commodities/",
+      "accessed": "2026-10-17",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/1-Classification-Of-Trade-Commodities.xlsx",
+      "owner": "Department of Economic Planning and Development",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2009–2013",
+      "sha256": "bcea3a71a7e386a5ce1af2ce4f970c28315118dc6da3927e812b902691c0e231",
+      "original_source": "",
+      "published": "2025-12-18",
+      "title_translation": ""
+    },
+    {
+      "source": "datagovbn",
+      "title": "Import, Export and Balance of Trade",
+      "page_url": "https://www.data.gov.bn/import-export-and-balance-of-trade/",
+      "accessed": "2026-10-17",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/11/Import-Export-and-Balance-of-Trade.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2000–2020, annual",
+      "sha256": "19fa67464741a21378016d9d75dea78b1b6b76eb0a24ea591d5e72f660733733",
+      "original_source": "",
+      "published": "2025-11-15",
+      "title_translation": ""
+    }
+  ],
+  "notes": "Exports (2009 onwards) and imports (2000 onwards) by SITC Rev. 3 commodity section, BND million at current prices. Section names differ between editions, so sections are keyed by code and labelled from 'Classification Of Trade Commodities' (short English labels by the author; Malay names as published). Share = section ÷ that year's export or import total, computed by the author."
+}

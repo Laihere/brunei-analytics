@@ -3,7 +3,7 @@
 Our working reference for using datasets from [data.gov.bn](https://www.data.gov.bn/) in this project.
 Every analysis, chart, dashboard and write-up in `brunei_analytics` follows this note.
 
-- **Terms reviewed:** 14 Oct 2026
+- **Terms reviewed:** 14 Oct 2026 (re-checked 17 Oct 2026 before case study 07: key clauses unchanged)
 - **Governing document:** [Data Policy: Terms of Use](https://www.data.gov.bn/data-policy-terms-of-use/)
 - **Supporting pages:** [FAQ](https://www.data.gov.bn/frequentlyaskedquestion/), [Principles](https://www.data.gov.bn/principles/), [About](https://www.data.gov.bn/about-us/)
 - **Contact:** E-Government National Centre (EGNC), Simpang 69-18, Jalan E-Kerajaan, Gadong, BE1110 — data@egnc.gov.bn

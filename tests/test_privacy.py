@@ -26,7 +26,13 @@ COUNTS = {
     "solved",
 }
 # Whole-number columns that are not counts of people, incidents or businesses.
-NOT_COUNTS = {"year", "years"}
+NOT_COUNTS = {
+    "year",
+    "years",
+    "sitc",  # trade commodity section code, 0–9
+    "shared_years",  # edition cross-checks
+    "differences",
+}
 
 # (output file name, column, row label) → reason a small value is allowed. Keep it short.
 ALLOWED: dict[tuple[str, str, str], str] = {}

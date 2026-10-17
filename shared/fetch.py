@@ -7,6 +7,10 @@
 it was published when the title has none. It is not the period the data covers: "CPI 2025"
 covers 2015–2025, so that goes in `coverage`. `published` is the date the publisher released it
 (the APA citation year). Each file is fetched once (SOP rule 9).
+
+`variant` separates copies of one table that share a title and edition but come from different
+owners (e.g. the trade tables published by DEPS, JPES and the Department of Statistics, JPES):
+the folder becomes <dataset-slug>--<variant>.
 """
 
 import hashlib
@@ -46,11 +50,14 @@ def slug_of(title: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text).strip("-")
 
 
-def dataset_dir(source: str, edition: str, title: str, raw_dir: Path = RAW) -> Path:
+def dataset_dir(
+    source: str, edition: str, title: str, raw_dir: Path = RAW, variant: str = ""
+) -> Path:
     get_source(source)
     if not re.fullmatch(r"\d{4}", edition):
         raise ValueError(f"Edition must be a year, got '{edition}'.")
-    return raw_dir / source / edition / slug_of(title)
+    slug = slug_of(title) + (f"--{slug_of(variant)}" if variant else "")
+    return raw_dir / source / edition / slug
 
 
 def sha256_of(path: Path) -> str:
@@ -69,9 +76,10 @@ def download(
     published: str = "",
     raw_dir: Path = RAW,
     title_translation: str = "",
+    variant: str = "",
 ) -> Path:
     """Download a file once and record where it came from."""
-    folder = dataset_dir(source, edition, title, raw_dir)
+    folder = dataset_dir(source, edition, title, raw_dir, variant)
     dest = folder / unquote(Path(urlparse(file_url).path).name)
     if dest.exists() and meta_path(dest).exists():
         return dest

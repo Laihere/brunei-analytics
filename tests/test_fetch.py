@@ -25,6 +25,9 @@ def test_slug_drops_year_so_editions_line_up():
 def test_dataset_dir_layout(tmp_path):
     folder = dataset_dir("datagovbn", "2025", "Consumer Price Index 2025", tmp_path)
     assert folder == tmp_path / "datagovbn" / "2025" / "consumer-price-index"
+    # Same title and edition from different owners: kept apart by variant
+    deps = dataset_dir("datagovbn", "2025", "Import, Export and Balance of Trade", tmp_path, "DEPS")
+    assert deps.name == "import-export-and-balance-of-trade--deps"
     with pytest.raises(ValueError):
         dataset_dir("datagovbn", "latest", "x", tmp_path)
     with pytest.raises(ValueError):

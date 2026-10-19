@@ -4,6 +4,22 @@ Repo-only notes (not rendered on the site), started 19 Oct 2026. Bar and line ch
 default. The less common types below are used **only when the data has the shape they need**;
 otherwise they mislead. The general chart rules are in `DESIGN.md` §8.
 
+## Chart toolkit built so far (19 Oct 2026)
+
+Ready to reuse in new case studies. Static SVG helpers are in `shared/svg.py`; each one gives
+every mark a hover tooltip and works with `chart_card` (pass the SVG string as `fig`, and a
+compact version as `mobile_fig`).
+
+| Chart | Helper | First used | Use it for |
+|---|---|---|---|
+| Treemap, same scale across panels | `svg.treemap_panel` + `svg.legend` / `svg.heading` | 07 chart 5 (imports 2018 vs 2021) | Values that add up, compared between two years |
+| District map (stepped teal, labelled shares) | `svg.district_map`, shapes from `case_studies/_shared/outputs/brunei_districts.csv` | 05 chart 5 (agrifood by district) | Shares by district; link geoBoundaries and say "not an official map" |
+| Hierarchy tree (group → item, diverging chips) | `svg.tree`, `svg.change_colour` | 09 charts 1 and 3 (retail prices) | Changes in prices or indexes that don't add up, kept in their published groups |
+| Range chart (lowest–highest bar + end dot) | Plotly bars with `base` (see `09_retail_prices/analysis/figures.py:food_ranges`) | 09 chart 2 (price swings) | When the path between two years matters |
+
+Checked and not used (data didn't fit): treemap for 02, Sankey for 06, map for 04, tree for 01
+(reasons in the last table below).
+
 ## Which shape each chart needs
 
 | Chart | Data shape it needs | Don't use it when |

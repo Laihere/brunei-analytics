@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "source": "geoboundaries",
+      "title": "Brunei Darussalam ADM1 (districts) boundaries, simplified",
+      "page_url": "https://www.geoboundaries.org/countryDownloads.html",
+      "accessed": "2026-10-19",
+      "file_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1_simplified.geojson",
+      "owner": "",
+      "licence": "",
+      "edition": "2023",
+      "coverage": "4 districts",
+      "sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b",
+      "original_source": "Wikimedia Commons (user Tachymetre)",
+      "published": "2023-05-03",
+      "title_translation": ""
+    }
+  ],
+  "notes": "District boundaries from geoBoundaries (simplified Brunei ADM1 file), projected (equirectangular, longitude scaled by cos of the mid-latitude) to SVG paths in a 1000-unit-wide box; label at the centroid of each district's largest polygon. Boundaries are approximate and for illustration only; not an official map."
+}

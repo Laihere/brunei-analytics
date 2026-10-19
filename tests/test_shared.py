@@ -222,3 +222,35 @@ def test_treemap_labels_only_blocks_they_fit_and_every_block_has_a_tooltip():
     )
     assert out.count("<title>") == 2
     assert ">Large block</text>" in out and ">Tiny block</text>" not in out
+
+
+def test_district_shapes_cover_the_four_districts_and_credit_geoboundaries():
+    from shared.paths import CASE_STUDIES
+
+    shapes, prov, notes = read_output(CASE_STUDIES / "_shared" / "outputs" / "brunei_districts.csv")
+    assert set(shapes.district) == {"Belait", "Brunei-Muara", "Temburong", "Tutong"}
+    assert [p.source for p in prov] == ["geoboundaries"]
+    assert "not an official map" in notes
+    assert "geoBoundaries" in short_credit(prov)
+
+
+def test_district_map_needs_every_district_and_labels_each():
+    from shared.paths import CASE_STUDIES
+    from shared.svg import STEPS, Area, district_map
+
+    shapes = pd.read_csv(CASE_STUDIES / "_shared" / "outputs" / "brunei_districts.csv")
+    areas = [Area(d, STEPS[0], "1%", f"{d}: 1%") for d in shapes.district]
+    out = district_map(shapes, areas, 0, 0, 300)
+    assert out.count("<title>") == 4 and out.count("1%</tspan>") == 4
+    with pytest.raises(AssertionError):
+        district_map(shapes, areas[:3], 0, 0, 300)
+
+
+def test_pages_with_maps_link_geoboundaries_and_say_not_official():
+    from shared.paths import ROOT
+
+    for page in (ROOT / "dashboard" / "case-studies").glob("[0-9]*.qmd"):
+        text = page.read_text()
+        if "districts_maps(" in text or "district_map(" in text:
+            assert "https://www.geoboundaries.org/" in text, page.name
+            assert "not an official map" in text, page.name

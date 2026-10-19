@@ -56,6 +56,15 @@ SOURCES = {
             apa_author="International Labour Organization",
             apa_publisher="ILOSTAT",
         ),
+        Source(
+            key="geoboundaries",
+            name="geoBoundaries (William & Mary geoLab)",
+            licence="CC BY 4.0",
+            licence_url="https://creativecommons.org/licenses/by/4.0/",
+            terms_url="https://www.geoboundaries.org/",
+            apa_author="geoBoundaries",
+            apa_publisher="William & Mary geoLab",
+        ),
     ]
 }
 

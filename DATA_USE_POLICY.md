@@ -129,11 +129,11 @@ credit anything else. Adding a source means updating this table first.
 | World Bank, World Development Indicators | CC BY 4.0 | [Summary Terms of Use](https://data.worldbank.org/summary-terms-of-use) | Some indicators come from other organisations and carry their own licence. Check each indicator's page and record any exception in the `licence` field. No World Bank logo, and no implied endorsement. **Indicators originally from the IMF** (e.g. CPI and inflation, from IMF International Financial Statistics) are allowed when the World Bank metadata states CC BY 4.0: credit "original source: IMF International Financial Statistics" and show values unaltered (decided 15 Oct 2026). |
 | FAO, FAOSTAT | CC BY 4.0 (FAO Open Data Licensing policy, 2025) | [Database Terms of Use](https://www.fao.org/contact-us/terms/db-terms-of-use) | Cite FAO, the database, the access date and the URL. No attempts to de-anonymise data. Show FAO's estimate/imputed flags, since many Brunei values are estimates. |
 | ILO, ILOSTAT | CC BY 4.0 (datasets from 3 May 2023) | [Rights and permissions](https://www.ilo.org/node/9321) | Use national survey series rather than ILO modelled estimates where both exist. Microdata is not covered. |
+| geoBoundaries (William & Mary geoLab), district boundaries only | CC BY 4.0 (site licence; the Brunei file's own metadata says public domain, so the stricter terms are followed) | [geoboundaries.org](https://www.geoboundaries.org/) | Added 19 Oct 2026 for district maps. Name "geoBoundaries" with a link on every page with a map, and cite Runfola et al. (2020), *PLoS ONE* 15(4), e0231866. The Brunei shapes are drawn from Wikimedia Commons, not an official survey: every map says the boundaries are approximate and for illustration only, not an official map. Draw only Brunei's four districts (no neighbouring countries or boundary lines between them). The simplified file is stored on the site; no map tiles or map services. |
 
 Not approved for now: IMF directly (only via World Bank, above), WHO, BDCB, UN Comtrade, ASEANstats, Our World in Data,
-OpenStreetMap, ADB, Open-Meteo and geoBoundaries. See the review notes from 14 Oct 2026.
-Open-Meteo and geoBoundaries (Brunei boundaries are public domain) are the first
-candidates to add if a case study needs weather history or maps.
+OpenStreetMap, ADB and Open-Meteo. See the review notes from 14 Oct 2026.
+Open-Meteo is the first candidate to add if a case study needs weather history.
 
 ### How the code applies this policy
 

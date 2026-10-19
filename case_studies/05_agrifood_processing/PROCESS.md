@@ -128,6 +128,7 @@ total is treated as "categories counted every year".
 | 2 · Categories, 2012 vs 2013 | categories 2010–2013 | Grouped horizontal bars (2012 grey, 2013 teal) | Same form as case study 02; long Malay-to-English names read best horizontally |
 | 3 · Businesses vs value | categories 2013 | Two share panels side by side (stacked on phones), traditional foods teal | The gap between "how many make it" and "how much it's worth" |
 | 4 · Districts | districts 2013 | Three share panels (businesses, employees, value), Brunei-Muara teal | The same district concentrates more at each step |
+| 5 · District maps (added 19 Oct 2026) | districts 2013 + `_shared/outputs/brunei_districts.csv` | Three small maps, stepped teal fills (under 5%, 5–20%, 20–50%, 50%+), each district labelled with its share; static SVG (`shared.svg.district_map`) | Shows *where* the industry was, which bars can't. Shares are of one industry, not of people, so no per-person rate is needed. Brunei-Muara's label sits outside with a leader line on small maps |
 
 QA fixes (16 Oct 2026, second pass): striped bars rendered transparent until Plotly's
 `fillmode="overlay"` was set; the 2013 legend swatch took the first bar's stripes, so the legend
@@ -169,6 +170,7 @@ author's preference, 16 Oct 2026). Malay names have no family name, so APA uses 
 | Date | Decision | Options considered | Reason |
 |---|---|---|---|
 | 16 Oct 2026 | Split agrimakanan into (a) these tables and (b) the livestock series | One study of ~190 datasets | Author agreed; keeps each study answerable |
+| 19 Oct 2026 | Add chart 5, district maps, with a dated Update note | Plotly choropleth; one map of value only | Author approved geoBoundaries as a source (policy §6). Plotly's basic bundle has no maps and the full one breaks the page budget, so static SVG. Three maps keep chart 4's "concentrates more at each step" message |
 | 16 Oct 2026 | Treat Makanan Segera as a coverage change and compare without it | Report 2013 as +37% growth | It is 0 in 2010–2012 and 40% of 2013; calling it growth would mislead (Terms of Use) |
 | 16 Oct 2026 | Start in 2004 and ignore the published change column | Use 2003 and the column | 2003's crop value is missing; the column treats it as zero |
 | 16 Oct 2026 | Head-counts from the district table | Category table | The category table counts a business once per product type |

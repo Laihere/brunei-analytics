@@ -45,7 +45,8 @@ newly counted category"* (`dashboard/case-studies/05-agrifood-processing.qmd`).
 - 2013: B$86.2m, of which B$34.5m (40%) is fast or instant food, first counted that year.
   Without it: B$51.7m, −18% on 2012; biscuits & bakery B$30.0m → B$23.0m.
 - 2013: traditional foods had the most businesses (125) but 2.4% of value.
-- 2013: Brunei-Muara had 71% of businesses, 89% of employees, 97% of value.
+- 2013: Brunei-Muara had 71% of businesses, 89% of employees, 97% of value (charts 4 and 5;
+  the district maps were added 19 Oct 2026, with boundaries from geoBoundaries).
 
 ## Limitations
 

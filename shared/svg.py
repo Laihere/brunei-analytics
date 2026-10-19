@@ -182,3 +182,67 @@ def legend(
         )
         cx += item_w + 20
     return "".join(parts), y
+
+
+# District maps (choropleth). Shapes come from case_studies/_shared/outputs/brunei_districts.csv
+# (geoBoundaries, approximate; DATA_USE_POLICY.md §6). Fills come from a stepped teal ramp, light
+# to dark, and every district is labelled with its value, so colour is never the only signal.
+STEPS = ["#ccefea", "#5ec4b8", "#0f766e", "#134e4a"]  # teal-100, -300, -700, -900
+OUTLINE = "#8f8c85"  # district edges, visible against the lightest step and the surface
+
+
+def step_colour(value: float, breaks: list[float]) -> str:
+    """Fill for `value`: STEPS[i] for the i-th interval of `breaks` (len(STEPS) - 1 cut points)."""
+    assert len(breaks) == len(STEPS) - 1
+    return STEPS[sum(value >= b for b in breaks)]
+
+
+@dataclass(frozen=True)
+class Area:
+    """One district on a map: `fill` colour, a short `value` label and a hover `tooltip`."""
+
+    name: str
+    fill: str
+    value: str
+    tooltip: str
+
+
+def district_map(
+    shapes, areas: list[Area], x: float, y: float, w: float, label_offsets: dict | None = None
+) -> str:
+    """Brunei's four districts scaled to width `w` at (x, y), each filled and labelled. `shapes`
+    is the brunei_districts table; `label_offsets` nudges a label (district → (dx, dy), in px)
+    when a district is too small to hold it, e.g. Brunei-Muara on small maps."""
+    k = w / shapes.box_w.iloc[0]
+    by_name = {a.name: a for a in areas}
+    assert set(by_name) == set(shapes.district), "Every district needs a value."
+    paths, labels = [], []
+    for s in shapes.itertuples():
+        a = by_name[s.district]
+        paths.append(
+            f'<g><title>{escape(a.tooltip)}</title><path d="{s.path}" fill="{a.fill}" '
+            f'stroke="{OUTLINE}" stroke-width="{1 / k:.2f}" stroke-linejoin="round"/></g>'
+        )
+        dx, dy = (label_offsets or {}).get(s.district, (0, 0))
+        lx, ly = x + s.label_x * k + dx, y + s.label_y * k + dy
+        inside = (dx, dy) == (0, 0)
+        ink = text_colour(a.fill) if inside else INK
+        if not inside:  # leader line from the label's right edge to the district
+            ex = lx + len(s.district) * 12 * CHAR_W / 2 + 4
+            labels.append(
+                f'<line x1="{ex:.1f}" y1="{ly - 4:.1f}" x2="{x + s.label_x * k:.1f}" '
+                f'y2="{y + s.label_y * k:.1f}" stroke="{MUTED}" stroke-width="1"/>'
+            )
+        labels.append(
+            f'<text x="{lx:.1f}" y="{ly:.1f}" text-anchor="middle" font-size="12" fill="{ink}" '
+            f'pointer-events="none"><tspan x="{lx:.1f}" font-weight="600">{escape(s.district)}'
+            f'</tspan><tspan x="{lx:.1f}" dy="15">{escape(a.value)}</tspan></text>'
+        )
+    return (
+        f'<g transform="translate({x:.1f},{y:.1f}) scale({k:.4f})">{"".join(paths)}</g>'
+        + "".join(labels)
+    )
+
+
+def map_height(shapes, w: float) -> float:
+    return shapes.box_h.iloc[0] * w / shapes.box_w.iloc[0]

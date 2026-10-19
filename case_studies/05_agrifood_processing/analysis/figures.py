@@ -9,6 +9,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+from shared import svg
 from shared.charts import (
     CONTEXT,
     INK,
@@ -198,3 +199,48 @@ def districts_chart(districts: pd.DataFrame, cols: int = 3) -> tuple[go.Figure, 
     fig = _share_panels(districts, "district", panels, cols, highlight="Brunei-Muara")
     out = ["district", "businesses", "employees", "value_bnd"] + [c for c, _ in panels]
     return fig, districts[out].round(1).rename(columns=COLUMNS)
+
+
+MAP_BREAKS = [5, 20, 50]  # % cut points for the stepped teal fills
+MAP_LEGEND = ["Under 5%", "5–20%", "20–50%", "50% or more"]
+
+
+def districts_maps(
+    districts: pd.DataFrame, shapes: pd.DataFrame, compact: bool = False
+) -> tuple[str, pd.DataFrame]:
+    """Chart 5 (added 19 Oct 2026): chart 4's shares drawn as three district maps. Static SVG
+    (shared.svg); shapes from geoBoundaries, approximate. Each district is labelled with its
+    share, so the stepped fills are never the only signal. `compact` (phones) stacks the maps."""
+    panels = [
+        ("businesses_share_pct", "Businesses", "businesses"),
+        ("employees_share_pct", "Employees", "employees"),
+        ("value_bnd_share_pct", "Market value", "value_bnd"),
+    ]
+    d = districts.set_index("district")
+    width = 340 if compact else 720
+    gap = 24
+    w = width if compact else (width - 2 * gap) / 3
+    h = svg.map_height(shapes, w)
+    body, legend_y = svg.legend(0, 14, list(zip(MAP_LEGEND, svg.STEPS, strict=True)), width)
+    offsets = {"Brunei-Muara": (-0.33 * w, -0.06 * w)}  # into the sea to its west: too small
+    y0 = legend_y + 44
+    for i, (col, name, raw) in enumerate(panels):
+        x = 0 if compact else i * (w + gap)
+        y = y0 + i * (h + 40) if compact else y0
+        areas = []
+        for district, r in d.iterrows():
+            share = r[col]
+            amount = f"B${r[raw]:,.0f}" if raw == "value_bnd" else f"{int(r[raw]):,}"
+            areas.append(
+                svg.Area(
+                    name=district,
+                    fill=svg.step_colour(share, MAP_BREAKS),
+                    value=f"{share:.1f}%" if share < 1 else f"{share:.0f}%",
+                    tooltip=f"{district}, {name.lower()}: {share:.1f}% ({amount})",
+                )
+            )
+        body += svg.heading(x, y - 12, name, "share by district")
+        body += svg.district_map(shapes, areas, x, y, w, offsets)
+    height = (y0 + 3 * (h + 40) - 30) if compact else (y0 + h + 6)
+    out = ["district", "businesses", "employees", "value_bnd"] + [c for c, _, _ in panels]
+    return svg.svg(width, height, body), districts[out].round(1).rename(columns=COLUMNS)

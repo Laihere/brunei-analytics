@@ -24,6 +24,11 @@ Quick test for any dataset:
 
 ### Map rules
 
+Boundaries: geoBoundaries district file, approved 19 Oct 2026 (policy §6). Shapes are built once
+by `case_studies/_shared/build_maps.py` into `_shared/outputs/brunei_districts.csv`; draw with
+`shared.svg.district_map`. Each page with a map links geoBoundaries, cites Runfola et al.
+(2020) and says the boundaries are approximate and not an official map.
+
 - Boundary files must come from a source with clear reuse terms. Add it to `DATA_USE_POLICY.md`
   §6 (approved sources) and `shared/sources.py` first, and credit it.
 - Self-host the boundary file (GeoJSON in the repo). No third-party map tiles or map scripts,
@@ -60,11 +65,11 @@ diseases, hospital morbidity, passenger movement, arrivals by air/sea/land.
 
 | Study | Data | Possible extra view |
 |---|---|---|
-| 04 Fire occurrences | fires by district by year | District map (share of fires) |
-| 05 Agrifood processing | businesses, employees, value by district, 2013 | District map; infographic ("97% of value in Brunei-Muara") |
-| 06 Livestock supply | local vs imported; day-old chick → broiler → slaughter | Sankey of the chicken chain (check the stages conserve quantity) |
+| 04 Fire occurrences | fires by district by year | District map (share of fires): **on hold**. Shares of fires mostly follow where people live, so a map would need fires per person, which needs a population series for 2009–2020 |
+| 05 Agrifood processing | businesses, employees, value by district, 2013 | **Done 19 Oct 2026:** three district maps (chart 5). Infographic still possible |
+| 06 Livestock supply | local vs imported; day-old chick → broiler → slaughter | **Not suitable (checked 19 Oct 2026):** the stages don't conserve quantity (2020: 19.5M hatching eggs, 19.4M chicks, 17.6M birds slaughtered; meat in tonnes) and the tables don't say what fills the gaps, so a Sankey would invent flows |
 | 07 Trade | trade by SITC section, BND (adds up) | **Done 19 Oct 2026:** import treemaps, 2018 vs 2021, same scale (chart 5) |
-| 02 Crime statistics | cases by offence group (counts add up) | Treemap of offence groups (keep the no-case-detail rule) |
+| 02 Crime statistics | cases by offence group (counts add up) | **Not suitable (checked 19 Oct 2026):** police and other-agency tables count different kinds of cases, so one treemap would imply an "all crime" total the source doesn't give; police-only would repeat chart 1 |
 | 01 Cost of living | CPI by group (indexes, don't add up) | Hierarchy tree coloured by % change only; no sunburst |
 
 New chart types are drawn as static SVG with `shared/svg.py` (DESIGN.md §8). Any extra view

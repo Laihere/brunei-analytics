@@ -1,6 +1,6 @@
 # Brunei Analytics
 
-Case studies and dashboards on Brunei Darussalam's public data, by Muhd Lai Razi,
+Case studies and dashboards on Brunei Darussalam's public data, by Muhd Lai Razi Muhd Silmi,
 built with AI assistance (Claude by Anthropic). See [DATA_USE_POLICY.md](DATA_USE_POLICY.md) rule 10.
 
 Every dataset is used under its published terms. See [DATA_USE_POLICY.md](DATA_USE_POLICY.md).

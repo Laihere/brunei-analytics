@@ -90,11 +90,11 @@ retrieved {date}. Analysis by … with AI assistance (Claude); not an official g
 
 > **Source:** {Data Source Owner}, "{Dataset title}", Brunei Open Data (data.gov.bn), {dataset URL}, accessed {DD Mon YYYY}.
 > **Notes:** {transformations, e.g. "Annual totals aggregated from monthly figures; 2020–2021 rebased by the author."}
-> Analysis by Muhd Lai Razi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
+> Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
 
 Short form for chart footers:
 
-> Source: {Data Source Owner} via data.gov.bn (accessed {DD Mon YYYY}). Analysis by Muhd Lai Razi with AI assistance (Claude); not an official government publication.
+> Source: {Data Source Owner} via data.gov.bn (accessed {DD Mon YYYY}). Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude); not an official government publication.
 
 ---
 

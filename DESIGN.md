@@ -237,7 +237,7 @@ Each component is built once (Quarto shortcode, Python helper or SCSS class) and
 - **Always say when the data is from.** Headlines include the data year ("…in 2025"), and every
   study card and page header shows `Data: {period}` next to the publish date, so a reader never
   mistakes the publish date for the data date.
-- **Byline with AI disclosure:** "Muhd Lai Razi with AI assistance (Claude)" in credit lines, and the
+- **Byline with AI disclosure:** "Muhd Lai Razi Muhd Silmi with AI assistance (Claude)" in credit lines, and the
   fuller version in the footer, linking to "How AI was used" on the About page (policy rule 10).
 - **Numbers:** always with unit and period, e.g. "BND 4.20 per kg (Mar 2025)" or "+3.1% year on year".
   Round to what the data supports: one decimal place for percentages, and no false precision.

@@ -53,4 +53,4 @@ of its beef"* (`dashboard/case-studies/06-livestock-supply.qmd`).
 - Ends in 2020; feed and other inputs not covered.
 
 ---
-Analysis by Muhd Lai Razi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
+Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.

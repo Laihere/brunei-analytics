@@ -2,7 +2,7 @@
 title: "About this site"
 ---
 
-Brunei Analytics is a personal, non-commercial project by **Muhd Lai Razi**, a Computer
+Brunei Analytics is a personal, non-commercial project by **Muhd Lai Razi Muhd Silmi**, a Computer
 Science graduate with an interest in data analytics. Each case study asks one question about Brunei and answers it
 with published open data.
 

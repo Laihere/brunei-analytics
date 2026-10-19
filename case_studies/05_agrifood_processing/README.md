@@ -54,4 +54,4 @@ newly counted category"* (`dashboard/case-studies/05-agrifood-processing.qmd`).
 - Processed food only, not farm production.
 
 ---
-Analysis by Muhd Lai Razi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
+Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.

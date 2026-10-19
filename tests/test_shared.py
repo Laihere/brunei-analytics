@@ -115,7 +115,7 @@ def test_short_credit_has_year_retrieval_date_and_disclaimer():
     assert "Department of Statistics, JPES (2026), via data.gov.bn, retrieved 14 Oct 2026" in text
     assert "data.gov.bn (owner not stated) (n.d.), retrieved 2 Oct 2026" in text
     assert "World Bank (n.d.), World Development Indicators, retrieved 9 Oct 2026" in text
-    assert "Analysis by Muhd Lai Razi with AI assistance (Claude)" in text
+    assert "Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude)" in text
     assert text.endswith("not an official government publication.")
 
 

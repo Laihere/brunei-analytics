@@ -46,4 +46,4 @@ The full record (each step, why it was done, and the decision log) is in [PROCES
 - The page shows what changed, not why.
 
 ---
-Analysis by Muhd Lai Razi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
+Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.

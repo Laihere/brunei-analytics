@@ -1,6 +1,6 @@
 ---
 title: "Brunei, explained with public data"
-subtitle: "Independent case studies built from Brunei's open data, with every number credited to its source. By Muhd Lai Razi, with AI assistance."
+subtitle: "Independent case studies built from Brunei's open data, with every number credited to its source. By Muhd Lai Razi Muhd Silmi, with AI assistance."
 toc: false
 listing:
   # Home shows the 5 newest studies: the first as a large card, the next 4 as small cards

@@ -50,4 +50,4 @@ not as causes.
 - Miscellaneous goods and services fell 12.5% in 2017 and rose 13.6% in 2018; both source tables agree, but the cause isn't stated.
 
 ---
-Analysis by Muhd Lai Razi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
+Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.

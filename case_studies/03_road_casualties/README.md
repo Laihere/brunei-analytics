@@ -50,4 +50,4 @@ Scope: what changed and when, not why.
 - Counts only, not adjusted for population or vehicle numbers.
 
 ---
-Analysis by Muhd Lai Razi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
+Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.

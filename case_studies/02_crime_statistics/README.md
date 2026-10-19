@@ -52,4 +52,4 @@ Scope: what was recorded, not why. Changes between two single years are not desc
 - "Solved" isn't defined in the source.
 
 ---
-Analysis by Muhd Lai Razi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
+Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.

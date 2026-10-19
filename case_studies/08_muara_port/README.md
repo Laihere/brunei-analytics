@@ -35,4 +35,4 @@ The full record is in [PROCESS.md](PROCESS.md).
   unexplained; Muara only, to 2015. The page shows what changed, not why.
 
 ---
-Analysis by Muhd Lai Razi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
+Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.

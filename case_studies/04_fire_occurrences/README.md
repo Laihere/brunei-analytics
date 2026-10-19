@@ -46,4 +46,4 @@ Published as *"Brunei's fire peaks in 2009–2020 hit all four districts in the 
 - The two editions disagree for 2013 (791 vs 265); the longer edition is used.
 
 ---
-Analysis by Muhd Lai Razi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.
+Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude). Not an official publication of the Government of Brunei Darussalam.

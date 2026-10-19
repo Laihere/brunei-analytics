@@ -8,7 +8,7 @@ from pathlib import Path
 
 from shared.sources import get_source
 
-AUTHOR = "Muhd Lai Razi"
+AUTHOR = "Muhd Lai Razi Muhd Silmi"
 # AI-assistance disclosure (DATA_USE_POLICY.md §4, rule 10). The author is accountable for the
 # work; the disclosure says plainly that an AI assistant helped build it.
 BYLINE = f"{AUTHOR} with AI assistance (Claude)"

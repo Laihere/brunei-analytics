@@ -100,17 +100,20 @@ Short form for chart footers:
 
 ## 5. Open questions for EGNC
 
-Questions for the enquiry email to data@egnc.gov.bn:
+Questions asked in the enquiry email to data@egnc.gov.bn (sent 19 Oct 2026, draft v7):
 
-1. May cleaned or raw copies of datasets be published in a public GitHub repository, or should we only link to data.gov.bn?
-2. Does our attribution template meet the "proper attribution" requirement, or is there a preferred format?
+1. Is it acceptable that the public repository holds only links to the downloaded files, plus the processed tables behind our charts (also shown as data tables under each chart)?
+2. Does our APA 7 reference format meet the "proper attribution" requirement?
 3. Do the owning agency's own website terms (e.g. DEPS: www.deps.gov.bn/terms-of-use) also apply to files downloaded from data.gov.bn?
-4. Is a personal, non-commercial portfolio with public dashboards within the intended use? (The FAQ suggests yes.)
-5. For datasets marked "Dataset owner not available" (e.g. the GDP series), who should be credited?
+4. When the same dataset is listed under different owners across editions, should we credit the owner as shown on each dataset page or the current department name? For datasets marked "Dataset owner not available" (e.g. the GDP series), who should be credited?
+5. Is there a way to be notified when a dataset we use is revised or corrected, and may EGNC or a data owner report errors in our case studies to laihere281@gmail.com?
+
+The email also listed the conditions we follow: credit with access dates, documented changes, independence and AI disclosure, neutral presentation, removal on request, no identification with small counts hidden, and dated corrections. Until a reply arrives, the rules in this policy stand as written.
 
 | Date | Status |
 |---|---|
 | 14 Oct 2026 | Draft prepared; not yet sent |
+| 19 Oct 2026 | Sent to data@egnc.gov.bn; awaiting reply |
 
 ---
 

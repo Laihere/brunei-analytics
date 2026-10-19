@@ -319,6 +319,11 @@ on white and can't carry text or thin marks:
   Pattern plus label, never colour alone. New items are never counted as growth, nor
   discontinued items as decline: compare the continued items like for like. Patterned bars
   need Plotly's `fillmode="overlay"` (`NEW_PATTERN`), or they render transparent.
+- **Chart types beyond line and bar** (treemap, Sankey, map) only when the data has the shape
+  they need (`docs/CHART_TYPES.md`). They are drawn as static SVG by `shared/svg.py`, because
+  the Plotly basic bundle doesn't include them and the full bundle breaks the page budget (§9).
+  Each block gets a `<title>` tooltip; labels use ink or white by contrast, never the series
+  colour; the table view carries every value.
 
 ---
 

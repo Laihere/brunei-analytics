@@ -6,6 +6,7 @@ topic: "International"
 data-period: "2000–2021"
 read-time: "5-minute read"
 date: 2026-10-17
+updated: "19 Oct 2026"
 related:
   - study: "01"
     kind: same-source
@@ -76,7 +77,16 @@ assert value[("imports", 7)].loc[LAST] > value[("imports", 7)].loc[FIRST]  # sha
 assert re_share.max() < 10
 assert chem_x.loc[: LAST - 2].max() < 5  # "under 5% until 2019" (chart description)
 assert check.differences.sum() == 0
+TM = (fuel_jump - 1, LAST)  # treemap years: the last year before the jump, and the latest
+tm_total = value["imports"].sum(axis=1)
+assert tm_total.loc[TM[1]] > tm_total.loc[TM[0]]  # "a larger import bill" (chart 5 title)
+assert largest[TM[0]] == 7  # machinery the largest block in the first treemap (alt text)
 ```
+
+::: {.callout-note appearance="simple" title="Update, 19 Oct 2026"}
+Added a treemap comparing imports by section in `{python} TM[0]` and `{python} TM[1]`
+(chart 5). It uses the same data, and the findings are unchanged.
+:::
 
 ::: {.study-intro}
 This case study looks at **what Brunei sold to and bought from other countries from 2000 to
@@ -222,6 +232,34 @@ chart_card(
     provenance=prov_sec,
     table=table,
     mobile_fig=F.import_mix(sections, compact=True)[0],
+)
+```
+
+Drawn to the same scale, the two years show both changes at once: the import bill grew, and
+mineral fuels went from one of the smaller sections to most of it.
+
+```{python}
+fig, table = F.import_treemaps(sections, TM)
+chart_card(
+    fig,
+    title=(
+        f"Mineral fuels went from {pct(fuel_m.loc[TM[0]])} of imports in {TM[0]} to "
+        f"{pct(fuel_m.loc[TM[1]])} of a larger import bill in {TM[1]}"
+    ),
+    subtitle=(
+        f"Imports by commodity section, B$ at current prices; each block's area is its value, "
+        f"on the same scale in both years · {TM[0]} and {TM[1]}"
+    ),
+    alt=(
+        f"Two treemaps. In {TM[0]}, imports total {bn(tm_total.loc[TM[0]])}; machinery and "
+        f"transport is the largest block at {pct(mach_m.loc[TM[0]])} and mineral fuels a small "
+        f"one at {pct(fuel_m.loc[TM[0]])}. In {TM[1]}, imports total {bn(tm_total.loc[TM[1]])}; "
+        f"mineral fuels fill {pct(fuel_m.loc[TM[1]])} of the area and machinery and transport "
+        f"{pct(mach_m.loc[TM[1]])}."
+    ),
+    provenance=prov_sec,
+    table=table,
+    mobile_fig=F.import_treemaps(sections, TM, compact=True)[0],
 )
 ```
 

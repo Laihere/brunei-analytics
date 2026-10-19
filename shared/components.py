@@ -58,26 +58,30 @@ def stat_tiles(*tiles: str) -> HTML:
 
 
 def chart_card(
-    fig: go.Figure,
+    fig: go.Figure | str,
     title: str,
     subtitle: str,
     alt: str,
     provenance: list[Provenance],
     table: pd.DataFrame,
     height: int = 360,
-    mobile_fig: go.Figure | None = None,
+    mobile_fig: go.Figure | str | None = None,
     mobile_height: int | None = None,
 ) -> HTML:
     """Chart with its takeaway heading, credit line and table view in one card
     (Common Region, Proximity; policy M1–M3).
 
     `mobile_fig` is an optional phone layout of the same data (e.g. fewer columns of small
-    multiples); CSS shows one or the other at the 720px breakpoint.
+    multiples); CSS shows one or the other at the 720px breakpoint. `fig` may also be a static
+    SVG string from shared.svg (treemaps etc.); `height` then doesn't apply, as the SVG keeps
+    its own shape.
     """
     if not alt.strip():
         raise ValueError("Charts need a one-sentence text summary for screen readers.")
 
-    def render(f: go.Figure, h: int) -> str:
+    def render(f: go.Figure | str, h: int) -> str:
+        if isinstance(f, str):
+            return f
         # The subtitle carries the measure and unit, so axis titles would only repeat it.
         f.update_layout(height=h, dragmode=False)
         f.update_xaxes(title=None, fixedrange=True)  # every subplot axis: no zoom or pan

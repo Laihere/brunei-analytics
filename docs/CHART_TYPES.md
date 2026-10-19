@@ -63,9 +63,10 @@ diseases, hospital morbidity, passenger movement, arrivals by air/sea/land.
 | 04 Fire occurrences | fires by district by year | District map (share of fires) |
 | 05 Agrifood processing | businesses, employees, value by district, 2013 | District map; infographic ("97% of value in Brunei-Muara") |
 | 06 Livestock supply | local vs imported; day-old chick → broiler → slaughter | Sankey of the chicken chain (check the stages conserve quantity) |
-| 07 Trade | trade by SITC section, BND (adds up) | Treemap of sections per year |
+| 07 Trade | trade by SITC section, BND (adds up) | **Done 19 Oct 2026:** import treemaps, 2018 vs 2021, same scale (chart 5) |
 | 02 Crime statistics | cases by offence group (counts add up) | Treemap of offence groups (keep the no-case-detail rule) |
 | 01 Cost of living | CPI by group (indexes, don't add up) | Hierarchy tree coloured by % change only; no sunburst |
 
-Any extra view is added with a dated "Update" note (see `docs/WORKFLOW.md`); the original
+New chart types are drawn as static SVG with `shared/svg.py` (DESIGN.md §8). Any extra view
+is added with a dated "Update" note and an `updated:` date in the front matter (see `docs/WORKFLOW.md`); the original
 findings are not rewritten.

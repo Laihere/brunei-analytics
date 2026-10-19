@@ -37,7 +37,9 @@ The full record (each step, why it was done, and the decision log) is in [PROCES
 - Mineral fuels were 96% of exports in 2009 and 78% in 2021; chemicals rose from 0.1% to 18%
   (chart 3).
 - Machinery and transport was the largest import section in every year but one to 2018. From 2019
-  mineral fuels were the largest, reaching 60% of imports in 2021 (chart 4).
+  mineral fuels were the largest, reaching 60% of imports in 2021 (chart 4). Drawn to the same
+  scale, imports grew from B$5.6 bn in 2018 to B$9.7 bn in 2021, with mineral fuels going from
+  6.6% to 60% (chart 5, added 19 Oct 2026).
 
 ## Limitations
 

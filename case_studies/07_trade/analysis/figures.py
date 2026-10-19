@@ -8,6 +8,7 @@ one violet, and the rest context grey, each with a legend and an end label.
 import pandas as pd
 import plotly.graph_objects as go
 
+from shared import svg
 from shared.charts import CATEGORICAL, CONTEXT, INK, SURFACE, TEAL_500
 
 VIOLET = CATEGORICAL[1]
@@ -18,6 +19,11 @@ FLOW_LABEL = {"exports": "Exports", "imports": "Imports"}
 def _bn(v: float) -> str:
     """BND million → "B$9.7 bn"."""
     return f"B${v / 1000:.1f} bn"
+
+
+def _money(v: float) -> str:
+    """BND million → "B$2.2 bn", or "B$52 million" below a billion (tooltips)."""
+    return _bn(v) if v >= 1000 else f"B${v:,.0f} million"
 
 
 def _ticks(years: pd.Series) -> list[int]:
@@ -174,3 +180,72 @@ def import_mix(sections: pd.DataFrame, compact: bool = False) -> tuple[go.Figure
     """Chart 4: share of imports by the largest sections, mineral fuels (teal) and machinery
     and transport (violet), 2000 onwards."""
     return _section_lines(sections, "imports", [3, 7, 6], focus=3, second=7, compact=compact)
+
+
+def import_treemaps(
+    sections: pd.DataFrame, years: tuple[int, int], compact: bool = False
+) -> tuple[str, pd.DataFrame]:
+    """Chart 5 (added 19 Oct 2026): imports by section in two years as treemaps drawn to the
+    same scale, so each panel's area is that year's total. Static SVG (shared.svg): the Plotly
+    basic bundle has no treemap. Mineral fuels teal and machinery and transport violet, as in
+    chart 4; the other sections grey. `compact` (phones) stacks the panels."""
+    d = sections[(sections.flow == "imports") & sections.year.isin(years)]
+    totals = d.groupby("year").value_bnd_m.sum()
+    colour = {3: TEAL_500, 7: VIOLET}
+
+    def blocks(year: int) -> list[svg.Block]:
+        rows = d[d.year == year]
+        return [
+            svg.Block(
+                label=r.section,
+                value=r.value_bnd_m,
+                colour=colour.get(r.sitc, CONTEXT),
+                note=f"{r.share_pct:.0f}% · {_bn(r.value_bnd_m)}",
+                tooltip=(
+                    f"{year}, {r.section}: {_money(r.value_bnd_m)} ({r.share_pct:.1f}% of imports)"
+                ),
+            )
+            for r in rows.itertuples()
+        ]
+
+    a, b = years
+    width = 340 if compact else 720
+    body, legend_y = svg.legend(
+        0,
+        14,
+        [
+            ("Mineral fuels", TEAL_500),
+            ("Machinery and transport", VIOLET),
+            ("Other sections", CONTEXT),
+        ],
+        width,
+    )
+    top = legend_y + 30  # panel headings below the legend
+    if compact:
+        full_h = 360  # the larger year's panel
+        y = top
+        for year in years:
+            h = full_h * totals[year] / totals.max()
+            body += svg.heading(0, y, str(year), f"{_bn(totals[year])} of imports")
+            body += svg.treemap_panel(blocks(year), 0, y + 8, width, h)
+            y += h + 8 + 36
+        height = y - 26
+    else:
+        h, gap = 320, 24
+        wa = (width - gap) * totals[a] / totals.sum()
+        body += svg.heading(0, top, str(a), f"{_bn(totals[a])} of imports")
+        body += svg.heading(wa + gap, top, str(b), f"{_bn(totals[b])} of imports")
+        body += svg.treemap_panel(blocks(a), 0, top + 8, wa, h)
+        body += svg.treemap_panel(blocks(b), wa + gap, top + 8, width - gap - wa, h)
+        height = top + 8 + h
+    table = d.pivot_table(
+        index=["sitc", "section"], columns="year", values=["value_bnd_m", "share_pct"]
+    )
+    table = pd.DataFrame(
+        {
+            "Commodity section": table.index.get_level_values("section"),
+            **{f"{y} (B$ million)": table[("value_bnd_m", y)].round(1).values for y in years},
+            **{f"{y} (% of imports)": table[("share_pct", y)].round(1).values for y in years},
+        }
+    ).sort_values(f"{b} (B$ million)", ascending=False)
+    return svg.svg(width, height, body), table

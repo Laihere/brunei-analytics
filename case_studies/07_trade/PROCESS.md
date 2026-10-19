@@ -115,9 +115,13 @@ Local only (`data/clean/07_trade/`): `trade_totals`, `trade_sections`, `sitc_sec
 | 2 | trade_totals | bars, smallest year teal | The balance itself, one value per year; highlights the minimum named in the title |
 | 3 | trade_sections | lines: mineral fuels, chemicals, all other | Share over time; two sections carry the change, the rest summed so lines add to 100% |
 | 4 | trade_sections | lines: mineral fuels, machinery, manufactured goods, all other | Same form as chart 3; second grey dotted so identity isn't colour alone |
+| 5 (added 19 Oct 2026) | trade_sections | two treemaps, 2018 and 2021, same scale (static SVG, `shared.svg`) | Import values add up, so area can show them; the same scale shows the bill growing and mineral fuels taking most of it in one view. 2018 = last year before the jump |
 
 Teal and violet were validated as a pair (dataviz validator, light surface `#fcfcfb`: all checks
 pass, CVD ΔE 19.4). Phones get compact versions: value-only end labels, no in-chart annotation.
+Chart 5's labels use ink on teal (5.3:1) and grey, white on violet (5.8:1), picked by
+`shared.svg.text_colour`; blocks too small for a label keep their hover tooltip and the table
+view. On phones the two treemaps stack.
 
 ## Context sources (optional)
 
@@ -146,6 +150,7 @@ None in this version. Background on events around 2019–2021 could be added lat
 | 17 Oct 2026 | Main edition: Department of Statistics, JPES | JPES (to 2020), DEPS (to 2018), DEPD (2009–2013) | Longest (to 2021); all editions agree within rounding |
 | 17 Oct 2026 | Classification table used as the label key, not a separate chart | Separate section on classification | Agreed earlier: it is the key to the sections, not a finding |
 | 17 Oct 2026 | Keep edition = year published; add `variant` for same-title copies | Edition = last year covered | Keeps the documented convention (fetch.py, DATA_SOURCES.md); variant only changes the folder |
+| 19 Oct 2026 | Add chart 5, import treemaps for 2018 and 2021, with a dated Update note | Sunburst; treemap for every year; Plotly treemap | Values add up, so a treemap is honest (docs/CHART_TYPES.md). Two years tell the change; more would repeat chart 4. Plotly's basic bundle has no treemap and the full one breaks the 1.5 MB page budget, so static SVG |
 | 17 Oct 2026 | Show shares, with values in the text where share and value move differently | Values only | Totals changed a lot; shares compare composition across years. Machinery's share fell while its value rose, so both are stated |
 | 17 Oct 2026 | No "why" for the 2019–2021 shifts | Mention reported events | About page and policy: what changed, not why. Context could be added later as reported background only |
 | 17 Oct 2026 | Related: 07 → 01 (same source), 07 → 06 (same topic: imports) | 07 → 05 | 01 shares the owner; 06 is about imports of specific foods |

@@ -187,3 +187,38 @@ def test_non_english_title_gets_bracketed_translation():
     assert "<em>Statistik industri agrimakanan</em> [Agrifood industry statistics]" in attribution(
         p, html=True
     )
+
+
+def test_squarify_fills_the_box_with_areas_in_proportion():
+    from shared.svg import squarify
+
+    values = [50, 30, 12, 5, 2, 1]
+    rects = squarify(values, 0, 0, 300, 200)
+    areas = [w * h for _, _, w, h in rects]
+    assert sum(areas) == pytest.approx(300 * 200)
+    for v, a in zip(values, areas, strict=True):
+        assert a == pytest.approx(v / sum(values) * 300 * 200)
+    for x, y, w, h in rects:  # every block inside the box
+        assert x >= -1e-9 and y >= -1e-9 and x + w <= 300 + 1e-9 and y + h <= 200 + 1e-9
+
+
+def test_svg_labels_use_readable_ink_never_the_series_colour():
+    from shared.charts import CATEGORICAL, CONTEXT, TEAL_500
+    from shared.svg import contrast, text_colour
+
+    for fill in [TEAL_500, CATEGORICAL[1], CONTEXT]:
+        assert contrast(text_colour(fill), fill) >= 4.5
+
+
+def test_treemap_labels_only_blocks_they_fit_and_every_block_has_a_tooltip():
+    from shared.svg import Block, treemap_panel
+
+    out = treemap_panel(
+        [Block("Large block", 90, "#c3c2b7", "90%"), Block("Tiny block", 1, "#c3c2b7", "1%")],
+        0,
+        0,
+        300,
+        200,
+    )
+    assert out.count("<title>") == 2
+    assert ">Large block</text>" in out and ">Tiny block</text>" not in out

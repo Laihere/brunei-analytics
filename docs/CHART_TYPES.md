@@ -14,6 +14,7 @@ otherwise they mislead. The general chart rules are in `DESIGN.md` §8.
 | Sankey | Quantities **flowing** through stages or from source to destination | Stages don't conserve quantity and the gap isn't explained |
 | Radial / polar time chart | **Monthly** (or finer) data with a yearly cycle, several years | Data is annual only |
 | Map (choropleth) | Values by **district** (4) or mukim | Only one area, or counts that should be rates (shade by share or per person, not raw totals of unlike areas) |
+| Range chart (lowest–highest bar + a dot) | One value per item per year, where the path between two years matters | Only two years exist |
 | Infographic (icons, waffles, big numbers) | One or two plain facts, e.g. "7 in 10 businesses are in Brunei-Muara" | It would replace the chart and table; it is an extra, never the only view |
 
 Quick test for any dataset:
@@ -70,7 +71,8 @@ diseases, hospital morbidity, passenger movement, arrivals by air/sea/land.
 | 06 Livestock supply | local vs imported; day-old chick → broiler → slaughter | **Not suitable (checked 19 Oct 2026):** the stages don't conserve quantity (2020: 19.5M hatching eggs, 19.4M chicks, 17.6M birds slaughtered; meat in tonnes) and the tables don't say what fills the gaps, so a Sankey would invent flows |
 | 07 Trade | trade by SITC section, BND (adds up) | **Done 19 Oct 2026:** import treemaps, 2018 vs 2021, same scale (chart 5) |
 | 02 Crime statistics | cases by offence group (counts add up) | **Not suitable (checked 19 Oct 2026):** police and other-agency tables count different kinds of cases, so one treemap would imply an "all crime" total the source doesn't give; police-only would repeat chart 1 |
-| 01 Cost of living | CPI by group (indexes, don't add up) | Hierarchy tree coloured by % change only; no sunburst |
+| 01 Cost of living | CPI by group (indexes, don't add up) | **Not suitable (checked 19 Oct 2026):** only one level (overall → 11 groups), so a tree would repeat the bar chart |
+| 09 Retail prices | prices by group → item | **Built 19 Oct 2026:** hierarchy trees (`shared.svg.tree`) for food and non-food, plus a range chart |
 
 New chart types are drawn as static SVG with `shared/svg.py` (DESIGN.md §8). Any extra view
 is added with a dated "Update" note and an `updated:` date in the front matter (see `docs/WORKFLOW.md`); the original

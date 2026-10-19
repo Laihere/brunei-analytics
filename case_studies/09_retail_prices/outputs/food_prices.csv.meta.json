@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Average Retail Price Of Selected Food Items",
+      "page_url": "https://www.data.gov.bn/average-retail-price-of-selected-food-items/",
+      "accessed": "2026-10-19",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/Average-Retail-Price-of-Selected-Food-Item.xlsx",
+      "owner": "Department of Economic Planning and Statistics",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2010–2018, annual",
+      "sha256": "9d81a673d733d260565f6d0ea6ce8034d1e148887ee26283d7b7c7b11ae4bdb7",
+      "original_source": "",
+      "published": "2025-12-18",
+      "title_translation": ""
+    }
+  ],
+  "notes": "Average retail prices of 24 food items, 2010–2018, B$, as published. Group header rows, which hold the sum of their items' prices in unlike units, were dropped; the group is kept as a column. Rice and bread have no published prices ('-') and are left out. 2013 is listed twice in the file; the second listing was kept (it differs only for salted anchovies, B$11.80 against B$11.81, and matches the 'Continued' edition). 'repeated_2010_2012' marks the 18 items whose price is identical in 2010, 2011 and 2012. Index (2013 = 100) and short labels by the author."
+}

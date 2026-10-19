@@ -1,0 +1,122 @@
+year,group,item,label,unit,set_price,price_bnd
+2025,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.23
+2025,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2025,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2025,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2025,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2025,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2025,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2025,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2025,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2025,Passports,International Biometric Passport,International passport,each,True,60.0
+2025,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2024,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.23
+2024,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2024,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2024,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2024,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2024,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2024,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2024,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2024,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2024,Passports,International Biometric Passport,International passport,each,True,60.0
+2024,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2023,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.3
+2023,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2023,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2023,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2023,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2023,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2023,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2023,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2023,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2023,Passports,International Biometric Passport,International passport,each,True,60.0
+2023,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2022,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.09
+2022,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2022,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2022,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2022,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2022,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2022,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2022,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2022,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2022,Passports,International Biometric Passport,International passport,each,True,60.0
+2022,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2021,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.03
+2021,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2021,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2021,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2021,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2021,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2021,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2021,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2021,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2021,Passports,International Biometric Passport,International passport,each,True,60.0
+2021,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2020,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.57
+2020,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2020,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2020,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2020,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2020,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2020,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2020,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2020,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2020,Passports,International Biometric Passport,International passport,each,True,60.0
+2020,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2019,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.6
+2019,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2019,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2019,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2019,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2019,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2019,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2019,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2019,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2019,Passports,International Biometric Passport,International passport,each,True,60.0
+2019,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2018,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.71
+2018,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2018,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2018,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2018,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2018,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2018,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2018,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2018,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2018,Passports,International Biometric Passport,International passport,each,True,60.0
+2018,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2017,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.95
+2017,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2017,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2017,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2017,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2017,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2017,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2017,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2017,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2017,Passports,International Biometric Passport,International passport,each,True,60.0
+2017,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2016,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.67
+2016,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2016,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2016,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2016,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2016,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2016,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2016,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2016,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2016,Passports,International Biometric Passport,International passport,each,True,60.0
+2016,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0
+2015,"Housing, water, electricity and gas",Cement (10 Kilogramme Bag),Cement,10 kg bag,False,9.5
+2015,"Housing, water, electricity and gas",Water Supply (0 - 54.53 Unit),"Water, first 54.53 units",per unit,True,0.11
+2015,"Housing, water, electricity and gas",Water Supply (54.54 Unit and Above),"Water, above 54.54 units",per unit,True,0.44
+2015,"Housing, water, electricity and gas",Prepaid Electricity (1 - 600 KWh),"Electricity, 1–600 kWh",per kWh,True,0.01
+2015,"Housing, water, electricity and gas","Prepaid Electricity (601 - 2,000 KWh)","Electricity, 601–2,000 kWh",per kWh,True,0.08
+2015,"Housing, water, electricity and gas","Prepaid Electricity (2,001 - 4,000 KWh)","Electricity, 2,001–4,000 kWh",per kWh,True,0.1
+2015,"Housing, water, electricity and gas","Prepaid Electricity (4,001 KWh and Above)","Electricity, 4,001 kWh and above",per kWh,True,0.12
+2015,"Housing, water, electricity and gas",Piped Gas,Piped gas,unit not stated,True,5.0
+2015,"Housing, water, electricity and gas",Cylinder Gas (LPG),Cylinder gas (LPG),unit not stated,True,10.0
+2015,Passports,International Biometric Passport,International passport,each,True,60.0
+2015,Passports,Borneo Biometric Passport,Borneo passport,each,True,35.0

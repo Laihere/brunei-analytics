@@ -1,0 +1,50 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Average Retail Price Of Selected Food Items (Continued)",
+      "page_url": "https://www.data.gov.bn/average-retail-price-of-selected-food-items-continued/",
+      "accessed": "2026-10-19",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/7-Average-Retail-Price-Of-Selected-Food-Items-Continued.xlsx",
+      "owner": "Department of Economic Planning and Development",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2010–2013, annual",
+      "sha256": "b584bae18c608f9050053c3775e17d77731afbbbef8de55dc8af055ba1a91595",
+      "original_source": "",
+      "published": "2025-12-18",
+      "title_translation": ""
+    },
+    {
+      "source": "datagovbn",
+      "title": "Average Retail Price of Selected Non-Food Items",
+      "page_url": "https://www.data.gov.bn/average-retail-price-of-selected-non-food-items/",
+      "accessed": "2026-10-19",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/Average-Retail-Price-of-Selected-Non-Food-Items.xlsx",
+      "owner": "Department of Statistics, JPES",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2015–2021, annual",
+      "sha256": "2f024e2b45fe23d1c186d552395b85429f482bd370b58f39e336087687ee2177",
+      "original_source": "",
+      "published": "2025-12-03",
+      "title_translation": ""
+    },
+    {
+      "source": "datagovbn",
+      "title": "Average Retail Price of Selected Non-Food Items",
+      "page_url": "https://www.data.gov.bn/average-retail-price-of-selected-non-food-items-2/",
+      "accessed": "2026-10-19",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/Average-Retail-Price-of-Selected-Non-Food-Items-1.xlsx",
+      "owner": "Department of Economic Planning and Statistics",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2015–2018, annual",
+      "sha256": "37645d5329e5c9aabc9c31419523351a39c4c94db741ae282938eba4fef2ff8b",
+      "original_source": "",
+      "published": "2025-12-09",
+      "title_translation": ""
+    }
+  ],
+  "notes": "Each other edition compared value by value with the main table for the years they share; a difference is anything above half a cent. Food names matched to the main table ('Sawi Putih' = Pak Choy)."
+}

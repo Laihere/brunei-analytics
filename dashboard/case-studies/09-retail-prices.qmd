@@ -1,0 +1,281 @@
+---
+title: "13 of 24 everyday food items cost more in 2018 than in 2013, while 10 of 11 Government-set prices were unchanged from 2015 to 2025"
+description: "How did the average retail prices of selected food and non-food items change, item by item?"
+number: "09"
+short-title: "Retail prices"  # shown on Glossary chips and "Used in" links
+topic: "Economy"
+data-period: "2013–2018 (food), 2015–2025 (non-food)"
+read-time: "4-minute read"
+date: 2026-10-19
+related:
+  - study: "01"
+    kind: same-source
+    why: "Both use average retail price tables: subsidised and price-controlled items in 01, selected food and non-food items in 09."
+---
+
+```{python}
+import sys
+
+from shared.components import (
+    chart_card,
+    method_and_sources,
+    prev_next,
+    related_studies,
+    stat_tile,
+    stat_tiles,
+)
+from shared.glossary import glossary_popovers
+from shared.outputs import read_output
+from shared.paths import CASE_STUDIES, REPO_URL, ROOT
+
+STUDY = CASE_STUDIES / "09_retail_prices"
+sys.path.insert(0, str(STUDY / "analysis"))
+import figures as F  # noqa: E402
+
+food, prov_food, notes_food = read_output(STUDY / "outputs" / "food_prices.csv")
+fc, prov_fc, notes_fc = read_output(STUDY / "outputs" / "food_change.csv")
+nonfood, prov_nf, notes_nf = read_output(STUDY / "outputs" / "nonfood_prices.csv")
+nc, prov_nc, notes_nc = read_output(STUDY / "outputs" / "nonfood_change.csv")
+check, prov_check, notes_check = read_output(STUDY / "outputs" / "retail_crosscheck.csv")
+
+F0, F1 = 2013, int(food.year.max())  # food base agreed 19 Oct 2026 (2010–2012 repeat)
+N0, N1 = int(nonfood.year.min()), int(nonfood.year.max())
+FLAT = 0.5  # % either way counted as "little change", as in the chart legend
+
+
+def pct(v):
+    return F.signed(v)
+
+
+def money(v):
+    return F.money(v)
+
+
+f = fc.set_index("label")
+n = nc.set_index("label")
+rose, fell = int((fc.change_pct >= FLAT).sum()), int((fc.change_pct <= -FLAT).sum())
+flat = len(fc) - rose - fell
+top, bottom = f.change_pct.idxmax(), f.change_pct.idxmin()
+by_group = fc.groupby("group").change_pct
+fish = fc[fc.group == "Fish and prawns"]
+dairy = fc[fc.group == "Milk, eggs and fats"]
+dairy_up = dairy[dairy.change_pct >= FLAT]
+unchanged = nc[nc.change_pct.abs() < 0.05]
+set_unchanged = unchanged[unchanged.set_price]
+moved = nc[nc.change_pct.abs() >= 0.05]
+repeat = int(food[food.year == F0].repeated_2010_2012.sum())
+d = food[food.year.between(F0, F1)]
+span = d.groupby("label").index_2013.agg(["min", "max"])
+span["width"] = span["max"] - span["min"]
+widest = span.width.sort_values(ascending=False).index[:2].tolist()
+within_10 = ((span["min"] >= 90) & (span["max"] <= 110)).sum()
+
+# Stated in the text below; stop the build rather than publish them if the data changes.
+assert (len(fc), rose, fell, flat) == (24, 13, 9, 2)
+assert top == "Shallot" and bottom == "Chicken eggs"
+assert (fish.change_pct > -FLAT).all() and (fish.change_pct >= 5).sum() == 5
+assert len(dairy) - len(dairy_up) == 4 and dairy_up.label.tolist() == ["Butter"]
+assert len(nc) == 11 and len(unchanged) == 10 and len(set_unchanged) == 10
+assert moved.label.tolist() == ["Cement"] and not moved.set_price.any()
+assert widest == ["Garlic", "Shallot"] and span.loc["Garlic", "max"] > 130
+assert within_10 > len(fc) / 2  # "most items stay within 10 points" (chart 2 alt text)
+assert repeat == 18 and check.differences.iloc[1:].sum() == 0
+assert check.max_difference_bnd.max() <= 0.05
+```
+
+::: {.study-intro}
+This case study looks at the **[average retail prices]{.term term="average-retail-price"} of
+selected everyday items** published on data.gov.bn, item by item: 24 food items in five groups
+from `{python} F0` to `{python} F1`, and 11 non-food items, most of them
+[Government-set prices]{.term term="set-price"}, from `{python} N0` to `{python} N1`. Prices
+are in Brunei dollars, as published. It shows **what changed, not why**.
+
+It asks two questions, answered in the conclusion:
+
+1. **Which food items cost more in `{python} F1` than in `{python} F0`, and which cost less?**
+2. **Did the non-food prices change from `{python} N0` to `{python} N1`?**
+:::
+
+```{python}
+stat_tiles(
+    stat_tile(f"Food items that cost more, {F1}", f"{rose} of {len(fc)}", "", f"than in {F0} ({fell} cost less)"),
+    stat_tile(f"Largest rise, {F0}–{F1}", pct(f.loc[top, "change_pct"]), "", f"{top.lower()}s, per kg"),
+    stat_tile(f"Non-food prices unchanged, {N0}–{N1}", f"{len(unchanged)} of {len(nc)}", "", "all of them Government-set"),
+)
+```
+
+## Food prices, 2013–2018
+
+The food table groups its items the way the price list is published: rice and cereals, meat,
+milk, eggs and fats, fish and prawns, and vegetables and fruits. The tree below keeps that
+grouping and gives every item the same row, because prices per kilogramme, per tin and per
+tray can't be added together.
+
+**`{python} rose` of the `{python} len(fc)` items cost more in `{python} F1` than in
+`{python} F0`**, `{python} fell` cost less and `{python} flat` changed by under
+`{python} f"{FLAT}%"`. Shallots rose the most (`{python} pct(f.loc["Shallot", "change_pct"])`,
+from `{python} money(f.loc["Shallot", "price_2013"])` to
+`{python} money(f.loc["Shallot", "price_2018"])` per kg). Chicken eggs fell the most
+(`{python} pct(f.loc["Chicken eggs", "change_pct"])` a tray).
+
+```{python}
+fig, table = F.food_tree(fc, F0, F1)
+chart_card(
+    fig,
+    title=f"{rose} of {len(fc)} food items cost more in {F1} than in {F0}; shallots rose the most",
+    subtitle=f"Change in average retail price by item, grouped as published, % · {F0} to {F1}",
+    alt=(
+        f"A tree of five food groups and their {len(fc)} items, each with its price change. "
+        f"Largest rises: shallot {pct(f.loc['Shallot', 'change_pct'])}, butter "
+        f"{pct(f.loc['Butter', 'change_pct'])}, watermelon {pct(f.loc['Watermelon', 'change_pct'])}. "
+        f"Largest falls: chicken eggs {pct(f.loc['Chicken eggs', 'change_pct'])}, papaya "
+        f"{pct(f.loc['Papaya', 'change_pct'])}, garlic {pct(f.loc['Garlic', 'change_pct'])}. "
+        f"Every fish and prawn item rose or stayed level."
+    ),
+    provenance=prov_fc,
+    table=table,
+    mobile_fig=F.food_tree(fc, F0, F1, compact=True)[0],
+)
+```
+
+Within the groups, the picture differs. **Every fish and prawn item cost more or about the
+same**: five of the six rose by 5% or more, led by salted anchovies
+(`{python} pct(f.loc["Salted anchovies", "change_pct"])`). In milk, eggs and fats, four of the
+five items cost less, and butter rose (`{python} pct(f.loc["Butter", "change_pct"])`). Meat
+changed little apart from beef (`{python} pct(f.loc["Beef", "change_pct"])`).
+
+### Start and end years don't show the swings
+
+Comparing two years hides what happened in between. Garlic, for example, was
+`{python} f"{span.loc['Garlic', 'min']:.0f}"` in its lowest year and
+`{python} f"{span.loc['Garlic', 'max']:.0f}"` in its highest (`{python} F0` = 100), then ended
+at `{python} f"{d[(d.label == 'Garlic') & (d.year == F1)].index_2013.iloc[0]:.0f}"`. The chart
+shows each item's lowest-to-highest range from `{python} F0` to `{python} F1`, with a dot for
+`{python} F1`.
+
+```{python}
+fig, table = F.food_ranges(food, F0, F1, widest)
+chart_card(
+    fig,
+    title=f"Garlic and shallot prices swung the most between {F0} and {F1}",
+    subtitle=f"Lowest to highest yearly price, index ({F0} = 100), and the {F1} value (dot) · {F0}–{F1}",
+    alt=(
+        f"Range bars for {len(fc)} food items. Garlic ranges from "
+        f"{span.loc['Garlic', 'min']:.0f} to {span.loc['Garlic', 'max']:.0f} and shallot from "
+        f"{span.loc['Shallot', 'min']:.0f} to {span.loc['Shallot', 'max']:.0f}; most items stay "
+        f"within 10 points of {F0}."
+    ),
+    provenance=prov_food,
+    table=table,
+    height=620,
+)
+```
+
+## Non-food prices, 2015–2025
+
+The non-food table lists 11 items. Ten of them are **[Government-set prices]{.term
+term="set-price"}**: water and electricity charged in bands, piped and cylinder gas, and two
+passport fees. **All ten were the same in `{python} N1` as in `{python} N0`.** The only item
+whose price changed was cement, a shop price, from
+`{python} money(n.loc["Cement", "price_2015"])` to
+`{python} money(n.loc["Cement", "price_2025"])` a 10 kg bag
+(`{python} pct(n.loc["Cement", "change_pct"])`).
+
+```{python}
+fig, table = F.nonfood_tree(nc, N0, N1)
+chart_card(
+    fig,
+    title=f"{len(set_unchanged)} of {len(nc)} non-food prices were the same in {N1} as in {N0}; only cement changed",
+    subtitle=f"Change in price by item, grouped as published, % · {N0} to {N1}",
+    alt=(
+        f"A tree of two groups and {len(nc)} items. Water, electricity, piped gas, cylinder gas "
+        f"and both passport fees show no change. Cement fell {abs(n.loc['Cement', 'change_pct']):.1f}%."
+    ),
+    provenance=prov_nc,
+    table=table,
+    mobile_fig=F.nonfood_tree(nc, N0, N1, compact=True)[0],
+)
+```
+
+::: {.callout-note appearance="simple" title="About the Government-set prices"}
+- **Which items.** Water supply, prepaid electricity, piped gas, cylinder gas (LPG) and the
+  International and Borneo passports. The table doesn't label them; this page marks them as
+  set prices because they are tariffs and fees rather than shop prices.
+- **Bands.** Water and electricity are each listed in bands of use, with a price per unit or
+  per kWh for each band. The table doesn't say what a water "unit" is, and gives no unit for
+  piped or cylinder gas.
+- **What the data shows.** Each price was the same in every year from `{python} N0` to the
+  latest, `{python} N1`. The data doesn't say how these prices are set or when they last
+  changed.
+:::
+
+## Conclusion
+
+- **Which food items cost more in `{python} F1` than in `{python} F0`, and which cost less?**
+  `{python} rose` of `{python} len(fc)` cost more and `{python} fell` cost less. Shallots rose
+  the most (`{python} pct(f.loc["Shallot", "change_pct"])`) and chicken eggs fell the most
+  (`{python} pct(f.loc["Chicken eggs", "change_pct"])`). Every fish and prawn item rose or
+  stayed level, while most milk, egg and fat items cost less.
+- **Did the non-food prices change from `{python} N0` to `{python} N1`?** Not the
+  Government-set ones: all ten were the same in every year. Cement, the one shop price, was
+  `{python} pct(n.loc["Cement", "change_pct"])` lower.
+
+::: {.callout-caution appearance="simple" title="Notes on the data"}
+- **Why food starts in `{python} F0`.** The food table covers 2010–2018, but
+  `{python} repeat` of the 24 items have exactly the same price in 2010, 2011 and 2012, often
+  to several decimals. That looks like values carried forward rather than new prices, and it
+  changes the results: chicken eggs were
+  `{python} money(food[(food.label == "Chicken eggs") & (food.year == 2010)].price_bnd.iloc[0])`
+  a tray in 2010, so from 2010 they would show a rise. All years are in the data tables.
+- **Group totals left out.** The food table gives each group a value that is the sum of its
+  items' prices, mixing kilogrammes, tins and trays. It has no meaning, so it isn't used. The
+  table's unit header says "BND Million"; the prices are in Brunei dollars.
+- **Items without prices.** Rice and bread are listed with "-" in every year, and the "Milk,
+  Egg and Oil" group lists no oils. Cooking oils and rice are in the subsidised items table
+  used in case study 01.
+- **2013 listed twice.** The food file lists 2013 twice; the two lists differ only for salted
+  anchovies (B$11.81 and B$11.80). This page uses B$11.80, which matches the older
+  "Continued" edition.
+:::
+
+::: {.callout-caution appearance="simple" title="What this doesn't tell us"}
+- **Why prices changed.** The data shows how much prices moved, not what moved them.
+- **How the averages were made.** The tables don't say how many shops, brands or months each
+  average covers, or whether the items stayed exactly the same over the years.
+- **The cost of living.** These are single items, not a weighted basket. For prices overall,
+  see the consumer price index in case study 01.
+- **Food after `{python} F1`.** The latest food table ends in `{python} F1`.
+:::
+
+```{python}
+related_studies("09-retail-prices.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+method_and_sources(
+    prov_food + prov_fc + prov_nf + prov_nc + prov_check,
+    notes=f"{notes_food} {notes_fc} {notes_nf} {notes_nc} {notes_check}",
+    steps=[
+        "Downloaded the average retail price tables of selected food items (Department of "
+        "Economic Planning and Statistics) and non-food items (Department of Statistics, "
+        "JPES) from data.gov.bn, with older editions of each as cross-checks.",
+        "Split each table's group header rows from its items, checked that each header holds "
+        "the sum of its items' prices, and dropped the headers, keeping the group as a column.",
+        f"Compared the other editions value by value for the years they share: food within "
+        f"B${check.max_difference_bnd.max():.2f}, non-food identical.",
+        f"Computed each item's change from {F0} to {F1} (food) and {N0} to {N1} (non-food) from "
+        f"unrounded prices, and each food item's yearly index with {F0} = 100.",
+        "Marked water, electricity, gas and passport fees as Government-set prices; the "
+        "tables don't label them.",
+    ],
+    code_url=f"{REPO_URL}/tree/main/case_studies/09_retail_prices",
+)
+```
+
+```{python}
+prev_next("09-retail-prices.qmd", ROOT / "dashboard" / "case-studies")
+```
+
+```{python}
+glossary_popovers("09-retail-prices.qmd", ROOT / "dashboard" / "case-studies")
+```

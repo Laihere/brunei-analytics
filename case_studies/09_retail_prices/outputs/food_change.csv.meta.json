@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "source": "datagovbn",
+      "title": "Average Retail Price Of Selected Food Items",
+      "page_url": "https://www.data.gov.bn/average-retail-price-of-selected-food-items/",
+      "accessed": "2026-10-19",
+      "file_url": "https://www.data.gov.bn/wp-content/uploads/2025/12/Average-Retail-Price-of-Selected-Food-Item.xlsx",
+      "owner": "Department of Economic Planning and Statistics",
+      "licence": "",
+      "edition": "2025",
+      "coverage": "2010–2018, annual",
+      "sha256": "9d81a673d733d260565f6d0ea6ce8034d1e148887ee26283d7b7c7b11ae4bdb7",
+      "original_source": "",
+      "published": "2025-12-18",
+      "title_translation": ""
+    }
+  ],
+  "notes": "Change in each food item's average retail price from 2013 to 2018, %, computed by the author from unrounded prices. 2013 is the base because most items repeat the same price in 2010–2012."
+}

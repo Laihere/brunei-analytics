@@ -246,3 +246,118 @@ def district_map(
 
 def map_height(shapes, w: float) -> float:
     return shapes.box_h.iloc[0] * w / shapes.box_w.iloc[0]
+
+
+# Hierarchy tree (group → items), for changes in prices or indexes that don't add up: every
+# item gets the same row, so nothing is sized by value. A chip beside each item is coloured
+# by a diverging ramp (falls blue, rises red, little change grey); the signed change is
+# always written next to it, so colour is never the only signal.
+FALL_STRONG, FALL, NEUTRAL, RISE, RISE_STRONG = (
+    "#2a78d6",
+    "#a9c9f0",
+    "#f0efec",
+    "#f2a9a8",
+    "#e34948",
+)
+DIVERGING = [FALL_STRONG, FALL, NEUTRAL, RISE, RISE_STRONG]
+
+
+def change_colour(pct: float, flat: float = 0.5, strong: float = 10) -> str:
+    """Diverging step for a % change: |change| < `flat` is grey, >= `strong` the darker step."""
+    if pct <= -strong:
+        return FALL_STRONG
+    if pct <= -flat:
+        return FALL
+    if pct < flat:
+        return NEUTRAL
+    return RISE if pct < strong else RISE_STRONG
+
+
+@dataclass(frozen=True)
+class Leaf:
+    """One item row: `change` is the signed text shown (e.g. "+28%"), `detail` the muted
+    text after it (e.g. "B$2.67 → B$3.42 per kg", wide layout only)."""
+
+    label: str
+    colour: str
+    change: str
+    detail: str
+    tooltip: str
+
+
+ROW = 22
+GROUP_GAP = 14
+
+
+def tree(
+    groups: list[tuple[str, list[Leaf]]], width: float, y0: float, compact: bool
+) -> tuple[str, float]:
+    """Groups and their items as a tree. Wide: group names on the left, linked by curves to
+    their items. Compact (phones): an indented list with connector lines. Returns the markup
+    and the y below the last row."""
+    parts, y = [], y0
+    longest_label = max(len(leaf.label) for _, leaves in groups for leaf in leaves)
+    longest_change = max(len(leaf.change) for _, leaves in groups for leaf in leaves)
+    # wide: group names' right edge; long names wrap onto two lines rather than widen the column
+    gx = min(max(len(name) for name, _ in groups) * 13 * CHAR_W, 150) + 4
+    ix = 18 if compact else gx + 46  # left edge of the item chips
+    # right edge of the change text: after the longest label (wide), or the card edge (phones)
+    change_x = (
+        width - 4 if compact else ix + 18 + (longest_label + longest_change) * 13 * CHAR_W + 16
+    )
+    for name, leaves in groups:
+        if compact:
+            parts.append(
+                f'<text x="0" y="{y + 14:.1f}" font-size="13" font-weight="600" '
+                f'fill="{INK_2}">{escape(name)}</text>'
+            )
+            top = y + ROW
+            rows_y = [top + i * ROW for i in range(len(leaves))]
+            parts.append(
+                f'<line x1="5" y1="{y + 19:.1f}" x2="5" y2="{rows_y[-1] + 11:.1f}" '
+                f'stroke="{OUTLINE}" stroke-width="1"/>'
+            )
+        else:
+            rows_y = [y + i * ROW for i in range(len(leaves))]
+            mid = (rows_y[0] + rows_y[-1]) / 2 + 11
+            lines = _wrap(name, 13, gx, max_lines=3) or [name]
+            ty = mid + 4 - (len(lines) - 1) * 8
+            for i, line in enumerate(lines):
+                parts.append(
+                    f'<text x="{gx:.1f}" y="{ty + i * 16:.1f}" text-anchor="end" font-size="13" '
+                    f'font-weight="600" fill="{INK_2}">{escape(line)}</text>'
+                )
+            parts.append(f'<circle cx="{gx + 8:.1f}" cy="{mid:.1f}" r="3" fill="{OUTLINE}"/>')
+        for leaf, ry in zip(leaves, rows_y, strict=True):
+            cy = ry + 11
+            if compact:
+                parts.append(
+                    f'<line x1="5" y1="{cy:.1f}" x2="{ix - 4:.1f}" y2="{cy:.1f}" '
+                    f'stroke="{OUTLINE}" stroke-width="1"/>'
+                )
+            else:
+                sx, ex = gx + 11, ix - 6
+                parts.append(
+                    f'<path d="M{sx:.1f},{mid:.1f} C{(sx + ex) / 2:.1f},{mid:.1f} '
+                    f'{(sx + ex) / 2:.1f},{cy:.1f} {ex:.1f},{cy:.1f}" fill="none" '
+                    f'stroke="{OUTLINE}" stroke-width="1"/>'
+                )
+            detail = (
+                ""
+                if compact
+                else f'<text x="{change_x + 16:.1f}" y="{cy + 4:.1f}" font-size="12" '
+                f'fill="{MUTED}">{escape(leaf.detail)}</text>'
+            )
+            parts.append(
+                f"<g><title>{escape(leaf.tooltip)}</title>"
+                f'<rect x="{ix - 6:.1f}" y="{ry:.1f}" width="{width - ix + 6:.1f}" height="{ROW}" '
+                f'fill="{SURFACE}" fill-opacity="0"/>'
+                f'<rect x="{ix:.1f}" y="{cy - 6:.1f}" width="12" height="12" rx="2" '
+                f'fill="{leaf.colour}" stroke="{OUTLINE}" stroke-width="0.75"/>'
+                f'<text x="{ix + 18:.1f}" y="{cy + 4:.1f}" font-size="13" fill="{INK}">'
+                f"{escape(leaf.label)}</text>"
+                f'<text x="{change_x:.1f}" y="{cy + 4:.1f}" text-anchor="end" font-size="13" '
+                f'font-weight="600" fill="{INK}">{escape(leaf.change)}</text>{detail}</g>'
+            )
+        y = rows_y[-1] + ROW + GROUP_GAP
+    return "".join(parts), y - GROUP_GAP

@@ -128,3 +128,9 @@
   kind: dataset
   page_url: https://www.data.gov.bn/muara-conventional-terminal-muara-port-2004-2015/
   # Where: the dataset's data definition file (1.1-DATA-DEFINITION-…): uncontainerized cargo
+- key: dataset-retail-food
+  kind: dataset
+  page_url: https://www.data.gov.bn/average-retail-price-of-selected-food-items/
+- key: dataset-retail-nonfood
+  kind: dataset
+  page_url: https://www.data.gov.bn/average-retail-price-of-selected-non-food-items-2025/

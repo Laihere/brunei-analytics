@@ -1,0 +1,217 @@
+year,group,label,item,unit,price_bnd,repeated_2010_2012,index_2013
+2018,Rice and cereals,Wheat flour,Wheat Flour,per kg,1.79,True,96.8
+2018,Fresh meat and poultry,Buffalo meat,Buffalo Meat,per kg,9.09,True,100.2
+2018,Fresh meat and poultry,Beef,Beef,per kg,13.21,True,106.3
+2018,Fresh meat and poultry,Chicken,Chicken,per kg,4.4,True,99.3
+2018,"Milk, eggs and fats",Condensed milk,Condensed Milk (388g Per Tin),388 g tin,0.92,True,93.9
+2018,"Milk, eggs and fats",Evaporated milk,Evaporated Milk (400g Per Tin),400 g tin,1.14,True,94.2
+2018,"Milk, eggs and fats",Chicken eggs,Chicken Eggs (Per Tray),tray,4.94,False,82.0
+2018,"Milk, eggs and fats",Butter,Butter (340g Per Tin),340 g tin,5.92,True,122.3
+2018,"Milk, eggs and fats",Margarine,Margerine (1 Kg Tin),1 kg tin,4.54,True,94.0
+2018,Fish and prawns,Spanish mackerel,Spanish Mackerel,per kg,10.46,False,111.3
+2018,Fish and prawns,Indian mackerel,Indian Mackerel,per kg,5.21,False,105.7
+2018,Fish and prawns,Ponyfish,Ponyfish,per kg,3.23,False,100.2
+2018,Fish and prawns,Salted anchovies,Salted Anchovies,per kg,14.02,True,118.8
+2018,Fish and prawns,Large fresh prawns,Fresh Prawns - Large,per kg,14.64,True,112.1
+2018,Fish and prawns,Dried prawns,Dried Prawn,per kg,26.99,True,115.9
+2018,Vegetables and fruits,Pak choy,Pak Choy,per kg,2.74,False,104.2
+2018,Vegetables and fruits,Long beans,Long Bean,per kg,2.94,True,111.4
+2018,Vegetables and fruits,Cucumber,Cucumber,per kg,1.47,False,104.3
+2018,Vegetables and fruits,Shallot,Shallot,per kg,3.42,True,128.1
+2018,Vegetables and fruits,Garlic,Garlic,per kg,2.61,True,90.6
+2018,Vegetables and fruits,Fresh chillies,Fresh Chillies,per kg,7.95,True,118.1
+2018,Vegetables and fruits,Banana,Banana,per kg,1.86,True,97.9
+2018,Vegetables and fruits,Papaya,Papaya,per kg,1.27,True,90.1
+2018,Vegetables and fruits,Watermelon,Watermelon,per kg,1.43,True,122.2
+2017,Rice and cereals,Wheat flour,Wheat Flour,per kg,1.78,True,96.2
+2017,Fresh meat and poultry,Buffalo meat,Buffalo Meat,per kg,8.83,True,97.4
+2017,Fresh meat and poultry,Beef,Beef,per kg,13.14,True,105.7
+2017,Fresh meat and poultry,Chicken,Chicken,per kg,4.4,True,99.3
+2017,"Milk, eggs and fats",Condensed milk,Condensed Milk (388g Per Tin),388 g tin,0.94,True,95.9
+2017,"Milk, eggs and fats",Evaporated milk,Evaporated Milk (400g Per Tin),400 g tin,1.14,True,94.2
+2017,"Milk, eggs and fats",Chicken eggs,Chicken Eggs (Per Tray),tray,4.7,False,78.0
+2017,"Milk, eggs and fats",Butter,Butter (340g Per Tin),340 g tin,5.36,True,110.7
+2017,"Milk, eggs and fats",Margarine,Margerine (1 Kg Tin),1 kg tin,4.6,True,95.2
+2017,Fish and prawns,Spanish mackerel,Spanish Mackerel,per kg,9.73,False,103.5
+2017,Fish and prawns,Indian mackerel,Indian Mackerel,per kg,5.03,False,102.0
+2017,Fish and prawns,Ponyfish,Ponyfish,per kg,3.06,False,94.9
+2017,Fish and prawns,Salted anchovies,Salted Anchovies,per kg,13.98,True,118.5
+2017,Fish and prawns,Large fresh prawns,Fresh Prawns - Large,per kg,13.17,True,100.8
+2017,Fish and prawns,Dried prawns,Dried Prawn,per kg,26.15,True,112.3
+2017,Vegetables and fruits,Pak choy,Pak Choy,per kg,2.69,False,102.3
+2017,Vegetables and fruits,Long beans,Long Bean,per kg,2.84,True,107.6
+2017,Vegetables and fruits,Cucumber,Cucumber,per kg,1.39,False,98.6
+2017,Vegetables and fruits,Shallot,Shallot,per kg,2.45,True,91.8
+2017,Vegetables and fruits,Garlic,Garlic,per kg,3.8,True,131.9
+2017,Vegetables and fruits,Fresh chillies,Fresh Chillies,per kg,7.49,True,111.3
+2017,Vegetables and fruits,Banana,Banana,per kg,1.85,True,97.4
+2017,Vegetables and fruits,Papaya,Papaya,per kg,1.29,True,91.5
+2017,Vegetables and fruits,Watermelon,Watermelon,per kg,1.34,True,114.5
+2016,Rice and cereals,Wheat flour,Wheat Flour,per kg,1.81,True,97.8
+2016,Fresh meat and poultry,Buffalo meat,Buffalo Meat,per kg,9.4,True,103.6
+2016,Fresh meat and poultry,Beef,Beef,per kg,12.94,True,104.1
+2016,Fresh meat and poultry,Chicken,Chicken,per kg,4.41,True,99.5
+2016,"Milk, eggs and fats",Condensed milk,Condensed Milk (388g Per Tin),388 g tin,0.95,True,96.9
+2016,"Milk, eggs and fats",Evaporated milk,Evaporated Milk (400g Per Tin),400 g tin,1.16,True,95.9
+2016,"Milk, eggs and fats",Chicken eggs,Chicken Eggs (Per Tray),tray,5.56,False,92.3
+2016,"Milk, eggs and fats",Butter,Butter (340g Per Tin),340 g tin,4.95,True,102.3
+2016,"Milk, eggs and fats",Margarine,Margerine (1 Kg Tin),1 kg tin,4.59,True,95.0
+2016,Fish and prawns,Spanish mackerel,Spanish Mackerel,per kg,9.62,False,102.3
+2016,Fish and prawns,Indian mackerel,Indian Mackerel,per kg,4.88,False,99.0
+2016,Fish and prawns,Ponyfish,Ponyfish,per kg,2.97,False,92.1
+2016,Fish and prawns,Salted anchovies,Salted Anchovies,per kg,13.64,True,115.6
+2016,Fish and prawns,Large fresh prawns,Fresh Prawns - Large,per kg,13.03,True,99.8
+2016,Fish and prawns,Dried prawns,Dried Prawn,per kg,25.11,True,107.8
+2016,Vegetables and fruits,Pak choy,Pak Choy,per kg,2.64,False,100.4
+2016,Vegetables and fruits,Long beans,Long Bean,per kg,2.88,True,109.1
+2016,Vegetables and fruits,Cucumber,Cucumber,per kg,1.45,False,102.8
+2016,Vegetables and fruits,Shallot,Shallot,per kg,2.75,True,103.0
+2016,Vegetables and fruits,Garlic,Garlic,per kg,3.65,True,126.7
+2016,Vegetables and fruits,Fresh chillies,Fresh Chillies,per kg,7.28,True,108.2
+2016,Vegetables and fruits,Banana,Banana,per kg,1.9,True,100.0
+2016,Vegetables and fruits,Papaya,Papaya,per kg,1.4,True,99.3
+2016,Vegetables and fruits,Watermelon,Watermelon,per kg,1.4,True,120.0
+2015,Rice and cereals,Wheat flour,Wheat Flour,per kg,1.83,True,98.9
+2015,Fresh meat and poultry,Buffalo meat,Buffalo Meat,per kg,9.4,True,103.6
+2015,Fresh meat and poultry,Beef,Beef,per kg,12.75,True,102.6
+2015,Fresh meat and poultry,Chicken,Chicken,per kg,4.48,True,101.1
+2015,"Milk, eggs and fats",Condensed milk,Condensed Milk (388g Per Tin),388 g tin,0.96,True,98.0
+2015,"Milk, eggs and fats",Evaporated milk,Evaporated Milk (400g Per Tin),400 g tin,1.13,True,93.4
+2015,"Milk, eggs and fats",Chicken eggs,Chicken Eggs (Per Tray),tray,5.84,False,96.9
+2015,"Milk, eggs and fats",Butter,Butter (340g Per Tin),340 g tin,4.85,True,100.2
+2015,"Milk, eggs and fats",Margarine,Margerine (1 Kg Tin),1 kg tin,4.59,True,95.0
+2015,Fish and prawns,Spanish mackerel,Spanish Mackerel,per kg,9.65,False,102.7
+2015,Fish and prawns,Indian mackerel,Indian Mackerel,per kg,4.96,False,100.6
+2015,Fish and prawns,Ponyfish,Ponyfish,per kg,3.06,False,94.9
+2015,Fish and prawns,Salted anchovies,Salted Anchovies,per kg,13.13,True,111.3
+2015,Fish and prawns,Large fresh prawns,Fresh Prawns - Large,per kg,13.43,True,102.8
+2015,Fish and prawns,Dried prawns,Dried Prawn,per kg,25.89,True,111.2
+2015,Vegetables and fruits,Pak choy,Pak Choy,per kg,2.57,False,97.7
+2015,Vegetables and fruits,Long beans,Long Bean,per kg,2.88,True,109.1
+2015,Vegetables and fruits,Cucumber,Cucumber,per kg,1.47,False,104.3
+2015,Vegetables and fruits,Shallot,Shallot,per kg,2.82,True,105.6
+2015,Vegetables and fruits,Garlic,Garlic,per kg,2.69,True,93.4
+2015,Vegetables and fruits,Fresh chillies,Fresh Chillies,per kg,7.32,True,108.8
+2015,Vegetables and fruits,Banana,Banana,per kg,1.86,True,97.9
+2015,Vegetables and fruits,Papaya,Papaya,per kg,1.35,True,95.7
+2015,Vegetables and fruits,Watermelon,Watermelon,per kg,1.29,True,110.3
+2014,Rice and cereals,Wheat flour,Wheat Flour,per kg,1.81,True,97.8
+2014,Fresh meat and poultry,Buffalo meat,Buffalo Meat,per kg,9.11,True,100.4
+2014,Fresh meat and poultry,Beef,Beef,per kg,12.44,True,100.1
+2014,Fresh meat and poultry,Chicken,Chicken,per kg,4.43,True,100.0
+2014,"Milk, eggs and fats",Condensed milk,Condensed Milk (388g Per Tin),388 g tin,0.97,True,99.0
+2014,"Milk, eggs and fats",Evaporated milk,Evaporated Milk (400g Per Tin),400 g tin,1.15,True,95.0
+2014,"Milk, eggs and fats",Chicken eggs,Chicken Eggs (Per Tray),tray,5.83,False,96.7
+2014,"Milk, eggs and fats",Butter,Butter (340g Per Tin),340 g tin,4.76,True,98.3
+2014,"Milk, eggs and fats",Margarine,Margerine (1 Kg Tin),1 kg tin,4.71,True,97.5
+2014,Fish and prawns,Spanish mackerel,Spanish Mackerel,per kg,9.17,False,97.5
+2014,Fish and prawns,Indian mackerel,Indian Mackerel,per kg,4.95,False,100.4
+2014,Fish and prawns,Ponyfish,Ponyfish,per kg,3.06,False,94.9
+2014,Fish and prawns,Salted anchovies,Salted Anchovies,per kg,13.65,True,115.7
+2014,Fish and prawns,Large fresh prawns,Fresh Prawns - Large,per kg,12.89,True,98.7
+2014,Fish and prawns,Dried prawns,Dried Prawn,per kg,25.21,True,108.2
+2014,Vegetables and fruits,Pak choy,Pak Choy,per kg,2.58,False,98.1
+2014,Vegetables and fruits,Long beans,Long Bean,per kg,2.88,True,109.1
+2014,Vegetables and fruits,Cucumber,Cucumber,per kg,1.41,False,100.0
+2014,Vegetables and fruits,Shallot,Shallot,per kg,2.27,True,85.0
+2014,Vegetables and fruits,Garlic,Garlic,per kg,2.31,True,80.2
+2014,Vegetables and fruits,Fresh chillies,Fresh Chillies,per kg,7.32,True,108.8
+2014,Vegetables and fruits,Banana,Banana,per kg,1.87,True,98.4
+2014,Vegetables and fruits,Papaya,Papaya,per kg,1.39,True,98.6
+2014,Vegetables and fruits,Watermelon,Watermelon,per kg,1.28,True,109.4
+2013,Rice and cereals,Wheat flour,Wheat Flour,per kg,1.85,True,100.0
+2013,Fresh meat and poultry,Buffalo meat,Buffalo Meat,per kg,9.07,True,100.0
+2013,Fresh meat and poultry,Beef,Beef,per kg,12.43,True,100.0
+2013,Fresh meat and poultry,Chicken,Chicken,per kg,4.43,True,100.0
+2013,"Milk, eggs and fats",Condensed milk,Condensed Milk (388g Per Tin),388 g tin,0.98,True,100.0
+2013,"Milk, eggs and fats",Evaporated milk,Evaporated Milk (400g Per Tin),400 g tin,1.21,True,100.0
+2013,"Milk, eggs and fats",Chicken eggs,Chicken Eggs (Per Tray),tray,6.03,False,100.0
+2013,"Milk, eggs and fats",Butter,Butter (340g Per Tin),340 g tin,4.84,True,100.0
+2013,"Milk, eggs and fats",Margarine,Margerine (1 Kg Tin),1 kg tin,4.83,True,100.0
+2013,Fish and prawns,Spanish mackerel,Spanish Mackerel,per kg,9.4,False,100.0
+2013,Fish and prawns,Indian mackerel,Indian Mackerel,per kg,4.93,False,100.0
+2013,Fish and prawns,Ponyfish,Ponyfish,per kg,3.22,False,100.0
+2013,Fish and prawns,Salted anchovies,Salted Anchovies,per kg,11.8,True,100.0
+2013,Fish and prawns,Large fresh prawns,Fresh Prawns - Large,per kg,13.06,True,100.0
+2013,Fish and prawns,Dried prawns,Dried Prawn,per kg,23.29,True,100.0
+2013,Vegetables and fruits,Pak choy,Pak Choy,per kg,2.63,False,100.0
+2013,Vegetables and fruits,Long beans,Long Bean,per kg,2.64,True,100.0
+2013,Vegetables and fruits,Cucumber,Cucumber,per kg,1.41,False,100.0
+2013,Vegetables and fruits,Shallot,Shallot,per kg,2.67,True,100.0
+2013,Vegetables and fruits,Garlic,Garlic,per kg,2.88,True,100.0
+2013,Vegetables and fruits,Fresh chillies,Fresh Chillies,per kg,6.73,True,100.0
+2013,Vegetables and fruits,Banana,Banana,per kg,1.9,True,100.0
+2013,Vegetables and fruits,Papaya,Papaya,per kg,1.41,True,100.0
+2013,Vegetables and fruits,Watermelon,Watermelon,per kg,1.17,True,100.0
+2012,Rice and cereals,Wheat flour,Wheat Flour,per kg,1.88,True,101.6
+2012,Fresh meat and poultry,Buffalo meat,Buffalo Meat,per kg,8.98,True,99.0
+2012,Fresh meat and poultry,Beef,Beef,per kg,12.55,True,101.0
+2012,Fresh meat and poultry,Chicken,Chicken,per kg,4.45,True,100.5
+2012,"Milk, eggs and fats",Condensed milk,Condensed Milk (388g Per Tin),388 g tin,0.99,True,101.0
+2012,"Milk, eggs and fats",Evaporated milk,Evaporated Milk (400g Per Tin),400 g tin,1.22,True,100.8
+2012,"Milk, eggs and fats",Chicken eggs,Chicken Eggs (Per Tray),tray,5.96,False,98.9
+2012,"Milk, eggs and fats",Butter,Butter (340g Per Tin),340 g tin,4.88,True,100.8
+2012,"Milk, eggs and fats",Margarine,Margerine (1 Kg Tin),1 kg tin,5.06,True,104.8
+2012,Fish and prawns,Spanish mackerel,Spanish Mackerel,per kg,9.39,False,99.9
+2012,Fish and prawns,Indian mackerel,Indian Mackerel,per kg,4.99,False,101.2
+2012,Fish and prawns,Ponyfish,Ponyfish,per kg,3.11,False,96.4
+2012,Fish and prawns,Salted anchovies,Salted Anchovies,per kg,10.98,True,93.1
+2012,Fish and prawns,Large fresh prawns,Fresh Prawns - Large,per kg,12.76,True,97.7
+2012,Fish and prawns,Dried prawns,Dried Prawn,per kg,22.99,True,98.7
+2012,Vegetables and fruits,Pak choy,Pak Choy,per kg,2.64,False,100.4
+2012,Vegetables and fruits,Long beans,Long Bean,per kg,2.65,True,100.4
+2012,Vegetables and fruits,Cucumber,Cucumber,per kg,1.41,False,100.0
+2012,Vegetables and fruits,Shallot,Shallot,per kg,2.7,True,101.1
+2012,Vegetables and fruits,Garlic,Garlic,per kg,3.05,True,105.9
+2012,Vegetables and fruits,Fresh chillies,Fresh Chillies,per kg,6.4,True,95.1
+2012,Vegetables and fruits,Banana,Banana,per kg,1.85,True,97.4
+2012,Vegetables and fruits,Papaya,Papaya,per kg,1.41,True,100.0
+2012,Vegetables and fruits,Watermelon,Watermelon,per kg,1.17,True,100.0
+2011,Rice and cereals,Wheat flour,Wheat Flour,per kg,1.88,True,101.6
+2011,Fresh meat and poultry,Buffalo meat,Buffalo Meat,per kg,8.98,True,99.0
+2011,Fresh meat and poultry,Beef,Beef,per kg,12.55,True,101.0
+2011,Fresh meat and poultry,Chicken,Chicken,per kg,4.45,True,100.5
+2011,"Milk, eggs and fats",Condensed milk,Condensed Milk (388g Per Tin),388 g tin,0.99,True,101.0
+2011,"Milk, eggs and fats",Evaporated milk,Evaporated Milk (400g Per Tin),400 g tin,1.22,True,100.8
+2011,"Milk, eggs and fats",Chicken eggs,Chicken Eggs (Per Tray),tray,5.96,False,98.9
+2011,"Milk, eggs and fats",Butter,Butter (340g Per Tin),340 g tin,4.88,True,100.8
+2011,"Milk, eggs and fats",Margarine,Margerine (1 Kg Tin),1 kg tin,5.06,True,104.8
+2011,Fish and prawns,Spanish mackerel,Spanish Mackerel,per kg,9.39,False,99.9
+2011,Fish and prawns,Indian mackerel,Indian Mackerel,per kg,4.99,False,101.2
+2011,Fish and prawns,Ponyfish,Ponyfish,per kg,3.11,False,96.5
+2011,Fish and prawns,Salted anchovies,Salted Anchovies,per kg,10.98,True,93.1
+2011,Fish and prawns,Large fresh prawns,Fresh Prawns - Large,per kg,12.76,True,97.7
+2011,Fish and prawns,Dried prawns,Dried Prawn,per kg,22.99,True,98.7
+2011,Vegetables and fruits,Pak choy,Pak Choy,per kg,2.64,False,100.4
+2011,Vegetables and fruits,Long beans,Long Bean,per kg,2.65,True,100.4
+2011,Vegetables and fruits,Cucumber,Cucumber,per kg,1.41,False,100.0
+2011,Vegetables and fruits,Shallot,Shallot,per kg,2.7,True,101.1
+2011,Vegetables and fruits,Garlic,Garlic,per kg,3.05,True,105.9
+2011,Vegetables and fruits,Fresh chillies,Fresh Chillies,per kg,6.4,True,95.1
+2011,Vegetables and fruits,Banana,Banana,per kg,1.85,True,97.4
+2011,Vegetables and fruits,Papaya,Papaya,per kg,1.41,True,100.0
+2011,Vegetables and fruits,Watermelon,Watermelon,per kg,1.17,True,100.0
+2010,Rice and cereals,Wheat flour,Wheat Flour,per kg,1.88,True,101.6
+2010,Fresh meat and poultry,Buffalo meat,Buffalo Meat,per kg,8.98,True,99.0
+2010,Fresh meat and poultry,Beef,Beef,per kg,12.55,True,101.0
+2010,Fresh meat and poultry,Chicken,Chicken,per kg,4.45,True,100.5
+2010,"Milk, eggs and fats",Condensed milk,Condensed Milk (388g Per Tin),388 g tin,0.99,True,101.0
+2010,"Milk, eggs and fats",Evaporated milk,Evaporated Milk (400g Per Tin),400 g tin,1.22,True,100.8
+2010,"Milk, eggs and fats",Chicken eggs,Chicken Eggs (Per Tray),tray,4.45,False,73.8
+2010,"Milk, eggs and fats",Butter,Butter (340g Per Tin),340 g tin,4.88,True,100.8
+2010,"Milk, eggs and fats",Margarine,Margerine (1 Kg Tin),1 kg tin,5.06,True,104.8
+2010,Fish and prawns,Spanish mackerel,Spanish Mackerel,per kg,9.39,False,99.9
+2010,Fish and prawns,Indian mackerel,Indian Mackerel,per kg,4.99,False,101.2
+2010,Fish and prawns,Ponyfish,Ponyfish,per kg,3.1,False,96.1
+2010,Fish and prawns,Salted anchovies,Salted Anchovies,per kg,10.98,True,93.1
+2010,Fish and prawns,Large fresh prawns,Fresh Prawns - Large,per kg,12.76,True,97.7
+2010,Fish and prawns,Dried prawns,Dried Prawn,per kg,22.99,True,98.7
+2010,Vegetables and fruits,Pak choy,Pak Choy,per kg,2.63,False,100.0
+2010,Vegetables and fruits,Long beans,Long Bean,per kg,2.65,True,100.4
+2010,Vegetables and fruits,Cucumber,Cucumber,per kg,1.4,False,99.3
+2010,Vegetables and fruits,Shallot,Shallot,per kg,2.7,True,101.1
+2010,Vegetables and fruits,Garlic,Garlic,per kg,3.05,True,105.9
+2010,Vegetables and fruits,Fresh chillies,Fresh Chillies,per kg,6.4,True,95.1
+2010,Vegetables and fruits,Banana,Banana,per kg,1.85,True,97.4
+2010,Vegetables and fruits,Papaya,Papaya,per kg,1.41,True,100.0
+2010,Vegetables and fruits,Watermelon,Watermelon,per kg,1.17,True,100.0

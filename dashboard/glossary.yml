@@ -290,3 +290,19 @@
     handled at Muara Conventional Terminal and counted by weight in tonnes.
   compare: [teu]
 
+- key: average-retail-price
+  basis: publisher
+  sources: [dataset-retail-food, dataset-retail-nonfood]
+  term: Average retail price (as published)
+  definition: >
+    The price the source gives for an item in a year, in Brunei dollars. The tables don't say
+    how many shops, brands or months each average covers, so the prices are shown as published.
+
+- key: set-price
+  basis: site
+  term: Government-set price
+  definition: >
+    A tariff or fee fixed by the Government, such as an electricity or water charge or a
+    passport fee, rather than a price set by shops. The source tables don't label these; the
+    case study marks them.
+  compare: [average-retail-price]

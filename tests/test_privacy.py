@@ -32,6 +32,7 @@ NOT_COUNTS = {
     "sitc",  # trade commodity section code, 0–9
     "shared_years",  # edition cross-checks
     "differences",
+    "values_compared",  # edition cross-checks (case study 09): prices compared, not people
     # cargo quantities at Muara Port (case study 08): containers and tonnes, not counts of people
     "local_teu",
     "transhipment_teu",

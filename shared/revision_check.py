@@ -9,8 +9,8 @@ For every data.gov.bn file credited in case_studies/*/outputs/*.meta.json:
 
 Files are hashed in memory and not saved. One request at a time, with a delay (SOP rule 9).
 
-    uv run python -m shared.revision_check            # print the report
-    uv run python -m shared.revision_check --log      # also append a summary to docs/REVISION_CHECKS.md
+    uv run python -m shared.revision_check        # print the report
+    uv run python -m shared.revision_check --log  # also log a summary in docs/REVISION_CHECKS.md
 """
 
 import hashlib
@@ -96,7 +96,8 @@ def main(log: bool = False) -> int:
         print(f"- {r['title']} ({r['studies']}; page modified {r['modified']}): {status}")
     if log:
         today = date.today().isoformat()
-        lines = [f"\n## {today}\n", f"{len(rows)} files checked, {len(changed)} with differences.\n"]
+        summary = f"{len(rows)} files checked, {len(changed)} with differences.\n"
+        lines = [f"\n## {today}\n", summary]
         lines += [f"- {r['title']} ({r['studies']}): {'; '.join(r['issues'])}" for r in changed]
         if not LOG.exists():
             LOG.write_text(

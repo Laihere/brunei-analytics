@@ -14,6 +14,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 data.gov.bn, World Bank WDI, FAOSTAT and ILOSTAT only (policy §6). Raw files are not
 included in this repo. Each case study links to the original datasets.
 
+## Processed tables
+
+The CSV files in `case_studies/*/outputs/` are **processed tables made by the author** (with AI
+assistance) from the datasets credited in each file's `.meta.json`. They are not the original
+datasets and **not official publications of the Government of Brunei Darussalam**. Each sidecar
+lists the source datasets with retrieval dates (`sources`) and says what was changed (`notes`).
+For the official figures, use the dataset pages linked in each case study.
+
 ## Layout
 
 ```

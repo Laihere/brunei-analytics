@@ -29,8 +29,9 @@ No registration is required. The terms do not name a standard licence (e.g. Crea
 **Ownership:** "all datasets uploaded onto the portal are still owned by the respective agency and not EGNC or DEPS" (FAQ).
 Each dataset page names its owner under **Data Source Owner**. That owner is the one we credit.
 
-- Copy the owner exactly as shown on the page. Spellings vary across datasets (e.g. "JPES" vs "Department of Statistics, JPES"), so don't normalise them.
-- 37 datasets (mostly GDP series) show "Dataset owner not available". Credit those as *"Brunei Open Data (data.gov.bn); data source owner not stated"*.
+- Copy the owner exactly as shown on the page. Spellings vary across datasets (e.g. "JPES" vs "Department of Statistics, JPES"), so don't normalise them. When editions of one dataset name different owners, credit each edition as its own page shows it, not the current department name (confirmed by EGNC, 16 Nov 2026).
+- 37 datasets (mostly GDP series) show "Dataset owner not available". Credit **Data.gov.bn** as the source and say the owner was not stated (EGNC advice, 16 Nov 2026): *Data.gov.bn. (n.d.). Title [Data set; data source owner not stated]. Retrieved …*
+- **Owner conditions.** The data.gov.bn Terms of Use govern files downloaded from the portal. Because each agency still owns its data, EGNC recommends checking with the owner if a dataset carries extra conditions. Before using a new owner's data, read that agency's website terms (DEPS: reviewed 14 Oct 2026) and note any extra condition in `DATA_SOURCES.md`.
 
 ---
 
@@ -61,7 +62,7 @@ Each dataset page names its owner under **Data Source Owner**. That owner is the
 
 1. **Read the terms first.** Before downloading, re-check the Terms of Use page for changes.
 2. **Log every download** in `DATA_SOURCES.md`: dataset title, URL, Data Source Owner, edition, coverage, file name, download date, and where it is used. Files are stored as `data/raw/<source>/<edition>/<dataset-slug>/` with a `.meta.json` record. Problems found in source data go in its "Known issues" section before any correction.
-3. **Raw data stays local.** `data/raw/` is gitignored. So is `data/clean/`, our full cleaned tables (kept for follow-ups and new editions; they are neither the published datasets nor our findings, and may hold small counts). The public repo holds code, the catalogue and our own outputs, and links back to the original dataset pages. *(Redistributing raw files is not addressed by the terms; this rule stands until EGNC confirms otherwise.)*
+3. **Raw data stays local.** `data/raw/` is gitignored. So is `data/clean/`, our full cleaned tables (kept for follow-ups and new editions; they are neither the published datasets nor our findings, and may hold small counts). The public repo holds code, the catalogue and our own outputs, and links back to the original dataset pages. *(EGNC confirmed in 16 Nov 2026 that sharing processed tables is acceptable when changes are clearly indicated and the source is credited, and asked that the repository say the processed tables are our own work and not official Government publications: see the README and the `status` line in every `outputs/*.meta.json`. Redistributing the raw files was not raised, so they stay local.)*
 4. **Mark every transformation.** Steps live in code, with a plain-language summary in each output.
 5. **Attribute every output** using the template below.
 6. **Add the disclaimer to every output**, including dashboards, the portfolio case studies and the README.
@@ -71,6 +72,10 @@ Each dataset page names its owner under **Data Source Owner**. That owner is the
 10. **Disclose AI assistance.** This project is built with an AI assistant (Claude, by Anthropic).
     Every byline and credit line says so, and the site's About page explains what the AI did and
     what the author did. The author reviews every finding and is responsible for what is published.
+11. **Check for revisions.** data.gov.bn has no change log or update notifications (EGNC, 16 Nov 2026).
+    Before each new case study, and at least every three months, re-open the dataset pages behind
+    the published studies and compare the file and its `sha256` with `DATA_SOURCES.md`. A revised
+    file is handled like a correction (§9): re-run the study, then add a dated Update note.
 
 ### Attribution template (APA 7)
 
@@ -108,12 +113,23 @@ Questions asked in the enquiry email to data@egnc.gov.bn (sent 19 Oct 2026, draf
 4. When the same dataset is listed under different owners across editions, should we credit the owner as shown on each dataset page or the current department name? For datasets marked "Dataset owner not available" (e.g. the GDP series), who should be credited?
 5. Is there a way to be notified when a dataset we use is revised or corrected, and may EGNC or a data owner report errors in our case studies to laihere281@gmail.com?
 
-The email also listed the conditions we follow: credit with access dates, documented changes, independence and AI disclosure, neutral presentation, removal on request, no identification with small counts hidden, and dated corrections. Until a reply arrives, the rules in this policy stand as written.
+The email also listed the conditions we follow: credit with access dates, documented changes, independence and AI disclosure, neutral presentation, removal on request, no identification with small counts hidden, and dated corrections.
+
+**EGNC reply (received 16 Nov 2026).** Overall, our approach is acceptable. Answers and what changed:
+
+| # | EGNC answer | What we changed |
+|---|---|---|
+| 1 | Generally acceptable. Processed or modified datasets may be shared if changes are clearly indicated and the source is credited. Recommends saying in the repository that the processed tables are our own work, not official Government publications | README "Processed tables" section; every `outputs/*.meta.json` gains a `status` line (checked by a test); §4 rule 3 note updated |
+| 2 | The APA format is acceptable | None |
+| 3 | The data.gov.bn Terms of Use apply to portal downloads. Datasets stay the agencies' property, so check with the owner if a dataset has extra conditions | §1 "Owner conditions" |
+| 4 | Use the agency name as stated on the dataset page. Where no owner is listed, credit Data.gov.bn and say the owner was not stated | §1 updated; `shared.provenance` now credits "Data.gov.bn … [Data set; data source owner not stated]" (no published study uses such a dataset yet) |
+| 5 | No notification service; check the portal periodically. EGNC will contact us if they find errors in the case studies | §4 rule 11; §9 note |
 
 | Date | Status |
 |---|---|
 | 14 Oct 2026 | Draft prepared; not yet sent |
 | 19 Oct 2026 | Sent to data@egnc.gov.bn; awaiting reply |
+| 16 Nov 2026 | Reply received: generally acceptable, with recommendations (table above); email saved by the author. Rules updated 17 16 Nov 2026 |
 
 ---
 
@@ -273,7 +289,7 @@ for known vulnerabilities with `pip-audit`, and Dependabot proposes updates.
 
 ## 9. Corrections and removal requests
 
-Agreed 17 Oct 2026. Contact: **laihere281@gmail.com**.
+Agreed 17 Oct 2026. Contact: **laihere281@gmail.com**. EGNC has said it will contact us if it finds an error in a case study (16 Nov 2026).
 
 1. **Corrections.** Anyone can report a mistake. Each report is checked against the source
    data; if it is right, the page is corrected and gains a dated note saying what changed.

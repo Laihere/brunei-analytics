@@ -1,4 +1,5 @@
 {
+  "status": "Processed table derived by Muhd Lai Razi Muhd Silmi (with AI assistance, Claude) from the datasets listed in 'sources'; changes are described in 'notes'. Not an official publication of the Government of Brunei Darussalam, and not the original dataset.",
   "sources": [
     {
       "source": "geoboundaries",

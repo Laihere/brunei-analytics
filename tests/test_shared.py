@@ -61,10 +61,12 @@ def test_apa_html_italicises_title_and_links_url():
     assert '<a href="https://www.data.gov.bn/consumer-price-index-2025/">' in html
 
 
-def test_missing_owner_moves_title_to_author_position():
+def test_missing_owner_credits_datagovbn_and_says_owner_not_stated():
+    # EGNC advice (16 Nov 2026): credit Data.gov.bn and indicate the owner was not stated.
     text = attribution(GDP)
     assert text.startswith(
-        "Gross domestic product per capita at current prices [Data set]. (n.d.)."
+        "Data.gov.bn. (n.d.). Gross domestic product per capita at current prices "
+        "[Data set; data source owner not stated]. Retrieved"
     )
     assert OWNER_MISSING not in text
     assert "Retrieved October 2, 2026" in text
@@ -113,7 +115,7 @@ def test_identical_titles_are_ordered_by_edition_and_undated_get_hyphen():
 def test_short_credit_has_year_retrieval_date_and_disclaimer():
     text = short_credit([CPI, GDP, WDI])
     assert "Department of Statistics, JPES (2026), via data.gov.bn, retrieved 14 Oct 2026" in text
-    assert "data.gov.bn (owner not stated) (n.d.), retrieved 2 Oct 2026" in text
+    assert "Data.gov.bn (n.d.; data source owner not stated), retrieved 2 Oct 2026" in text
     assert "World Bank (n.d.), World Development Indicators, retrieved 9 Oct 2026" in text
     assert "Analysis by Muhd Lai Razi Muhd Silmi with AI assistance (Claude)" in text
     assert text.endswith("not an official government publication.")
@@ -254,3 +256,16 @@ def test_pages_with_maps_link_geoboundaries_and_say_not_official():
         if "districts_maps(" in text or "district_map(" in text:
             assert "https://www.geoboundaries.org/" in text, page.name
             assert "not an official map" in text, page.name
+
+
+def test_every_output_says_it_is_our_processed_table_not_official():
+    # EGNC (16 Nov 2026): processed tables in the repo must be marked as our own work.
+    import json
+    from pathlib import Path
+
+    from shared.provenance import OUTPUT_STATUS
+
+    metas = list(Path(__file__).parents[1].glob("case_studies/*/outputs/*.meta.json"))
+    assert metas
+    for m in metas:
+        assert json.loads(m.read_text()).get("status") == OUTPUT_STATUS, m

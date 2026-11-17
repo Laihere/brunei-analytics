@@ -56,8 +56,16 @@ def meta_path(path: Path) -> Path:
     return path.with_name(path.name + ".meta.json")
 
 
+# EGNC (reply of 16 Nov 2026) asked that shared processed tables say they are our own work.
+OUTPUT_STATUS = (
+    "Processed table derived by Muhd Lai Razi Muhd Silmi (with AI assistance, Claude) from the "
+    "datasets listed in 'sources'; changes are described in 'notes'. Not an official publication "
+    "of the Government of Brunei Darussalam, and not the original dataset."
+)
+
+
 def write_meta(path: Path, provenance: list[Provenance], notes: str = "") -> None:
-    meta = {"sources": [p.to_dict() for p in provenance], "notes": notes}
+    meta = {"status": OUTPUT_STATUS, "sources": [p.to_dict() for p in provenance], "notes": notes}
     meta_path(path).write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n")
 
 
@@ -99,8 +107,17 @@ def apa_year(p: Provenance) -> str:
     return p.published[:4] if p.published else "n.d."
 
 
+# No owner on the dataset page: EGNC advised crediting Data.gov.bn and saying the owner
+# was not stated (DATA_USE_POLICY §1).
+DATAGOVBN_AUTHOR = "Data.gov.bn"
+
+
 def _apa_author(p: Provenance) -> str:
-    return p.owner if p.has_owner else get_source(p.source).apa_author
+    if p.has_owner:
+        return p.owner
+    if p.source == "datagovbn":
+        return DATAGOVBN_AUTHOR
+    return get_source(p.source).apa_author
 
 
 def apa_year_labels(provenance: list[Provenance]) -> dict[Provenance, str]:
@@ -139,13 +156,18 @@ def apa_reference(p: Provenance, html: bool = False, year: str = "") -> str:
         if author
         else f"{title} [Data set]. {year}"
     )
+    publisher = f" {src.apa_publisher}."
+    if p.source == "datagovbn" and not p.has_owner:
+        # APA 7 drops the publisher when it is the author; the bracket notes the missing owner.
+        head = head.replace("[Data set].", "[Data set; data source owner not stated].")
+        publisher = ""
     extra = ""
     if p.original_source:
         extra += f" Original data from {p.original_source}."
     if p.source != "datagovbn":
         extra += f" Licensed under {p.licence_name}."
     url = f'<a href="{escape(p.page_url)}">{escape(p.page_url)}</a>' if html else p.page_url
-    return f"{head} {src.apa_publisher}.{extra} Retrieved {_apa_date(p.accessed)}, from {url}"
+    return f"{head}{publisher}{extra} Retrieved {_apa_date(p.accessed)}, from {url}"
 
 
 attribution = apa_reference  # full credit for one dataset (DATA_USE_POLICY.md §4)
@@ -154,8 +176,9 @@ attribution = apa_reference  # full credit for one dataset (DATA_USE_POLICY.md �
 def _short_label(p: Provenance) -> str:
     year = apa_year(p)
     if p.source == "datagovbn":
-        who = p.owner if p.has_owner else "data.gov.bn (owner not stated)"
-        return f"{who} ({year}), via data.gov.bn" if p.has_owner else f"{who} ({year})"
+        if p.has_owner:
+            return f"{p.owner} ({year}), via data.gov.bn"
+        return f"{DATAGOVBN_AUTHOR} ({year}; data source owner not stated)"
     src = get_source(p.source)
     origin = f", original data from {p.original_source}" if p.original_source else ""
     return f"{src.apa_author} ({year}), {src.apa_publisher}{origin}"

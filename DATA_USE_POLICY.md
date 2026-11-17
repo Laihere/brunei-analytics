@@ -76,6 +76,8 @@ Each dataset page names its owner under **Data Source Owner**. That owner is the
     Before each new case study, and at least every three months, re-open the dataset pages behind
     the published studies and compare the file and its `sha256` with `DATA_SOURCES.md`. A revised
     file is handled like a correction (§9): re-run the study, then add a dated Update note.
+    Run `uv run python -m shared.revision_check --log` (hashes files in memory, one request at a
+    time; results in `docs/REVISION_CHECKS.md`). Next check due by 17 Feb 2027.
 
 ### Attribution template (APA 7)
 
